@@ -1,6 +1,6 @@
 # 灰烬齿轮：裂界之心
 
-Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0.4.0 · 灰闸囚厂与锈脊齿轮井**（2026-10-10）。
+Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0.4.1 · 灰闸囚厂与锈脊齿轮井**（2026-10-10）。
 
 ## 游戏截图
 
@@ -16,13 +16,20 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 
 ## 运行与发布
 
-发布目录：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.0\`。
+发布目录：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.1\`。
 
-压缩包：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.0-Windows.zip`。
+压缩包：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.1-Windows.zip`。
 
-双击 `AshenGears.exe`，保持同目录 `AshenGears.pck`。开发时用 Godot 打开 `project.godot`。从标题选择“开始新的旅程”体验新布局；0.4 使用独立存档 `ashen_save_v04.json`，旧版本存档保留。
+双击 `AshenGears.exe`，保持同目录 `AshenGears.pck`。开发时用 Godot 打开 `project.godot`。从标题选择“开始新的旅程”体验新布局；0.4 系列使用独立存档 `ashen_save_v04.json`，旧版本存档保留。
 
-## 0.4.0 可玩内容
+## 0.4.1 声音更新
+
+- 补齐打斗、命中、弓箭、弹反、突进、起跳、落地、脚步、攀梯、钩索和机械碰撞音效，共 53 个原创音频资产。
+- 20 路音效可同时播放，脚步不会打断攻击命中。探索/战斗/Boss 三种配乐随遭遇切换，环境底噪随房间淡入。
+- Esc → **声音设置**，分别调整总音量、音效、音乐、环境；提供试听与默认恢复，自动保存设置。
+- 可继续 0.4.0 存档。详细修复与验证见 `docs/06_0.4.1音效修复.md`。
+
+## 0.4 可玩内容
 
 - **18 个连接房间**：R01 八房、R02 八房、维修所与可选矿牢。分别布置煤堆、输送带、三层压料台、囚门斜梯、断桥钩索、升降吊台、四层配速井、壁抓台、远程火力廊、轴承台与 Boss 场地。工业部件共享，平台、路径、机关、敌人和目标逐房配置。
 - **明确的通行方向**：门上标注目的地；向右走过金色前进门自动换房，也可 E 交互。返回、捷径和回环标为独立出口。死亡或坠落在当前房间重试。
@@ -56,7 +63,7 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 
 沿用参考 demo 的 **Godot 4.7.rc.custom_build.df6235838**、匹配 Windows 模板和 **Blender 4.2.9 LTS**。Forward+ / Vulkan；当前验证设备为 RTX 5070 Laptop GPU。
 
-`source/build_v04.py` 重建 0.4 的共享部件、三名角色、12 个新增骨骼动作和新敌人；`source/rooms_v04.py` 生成 18 房布局。可编辑 `.blend` 在 `source/`，嵌入 PBR 贴图的 GLB 在 `assets/models/`。原有 demo 源文件与三个设计文档保留。
+`source/build_v04.py` 重建 0.4 的共享部件、三名角色、12 个新增骨骼动作和新敌人；`source/rooms_v04.py` 生成 18 房布局。可编辑 `.blend` 在 `source/`，嵌入 PBR 贴图的 GLB 在 `assets/models/`。原有 demo 源文件与三个设计文档保留。`source/build_audio.py` 用 NumPy 生成原创音频，有 ffmpeg 时生成循环 OGG。
 
 ```powershell
 & 'D:\Blender\blender-4.2.9-windows-x64\blender.exe' -b --python source/build_v04.py
@@ -65,7 +72,7 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 pwsh -File source/package.ps1
 ```
 
-模板路径见 `export_presets.cfg`；其他电脑需调整。QA 使用独立存档；检查结果在 `qa/runtime_tests.json`。测试组合使用 Godot 输入、物理运行和局部状态设置，覆盖路线、身法、战斗、奖励与保存；不是完整人工通关或实体手柄验收。打包脚本校验 EXE、PCK、文档、截图及 ZIP 内文件的 SHA256。
+模板路径见 `export_presets.cfg`；其他电脑需调整。QA 使用独立存档；检查结果在 `qa/runtime_tests.json`（81 项）；音频实际混音与事件记录在 `qa/audio_runtime.json`。测试组合使用 Godot 输入、物理运行和局部状态设置，覆盖路线、身法、战斗、奖励与保存；不是完整人工通关或实体手柄验收。打包脚本校验 EXE、PCK、文档、截图及 ZIP 内文件的 SHA256。
 
 ## 实现范围
 

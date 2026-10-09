@@ -128,12 +128,13 @@ func run(g: Node3D,path: String) -> int:
 	await enter(0);await clear_enemies();place(Vector3(-18,0,0));await settle(.2);use("save");await settle(.3);var saved_p: Vector3=game.player.position;game.load_game();check(game.player.position.distance_to(saved_p)<.01,"休息灯与继续游戏保持已保存的位置")
 	game.set_screen("skills");await settle(.2);check(is_instance_valid(game.ui.preview) and game.ui.preview.get_child(0).world_3d!=game.get_world_3d(),"招式预览使用隔离的三维世界");await capture("08_skills")
 	await enter(11);game.overview=false;await settle(.5);await capture("09_hub")
+	checks.append_array(await preload("res://scripts/qa_audio.gd").new().run(game,directory))
 	var failures:=0
 	for item in checks:
 		if not item.pass:failures+=1
 	var executable: String=OS.get_executable_path()
 	var pack: String=executable.get_basename()+".pck"
-	var report: Dictionary={"version":"0.4.0","checks":checks,"failures":failures,"engine":Engine.get_version_info().string,"executable":executable,"executable_sha256":FileAccess.get_sha256(executable),"pack_sha256":FileAccess.get_sha256(pack) if FileAccess.file_exists(pack) else "","input":"Godot input actions and isolated physics acceptance; no physical controller or full human playthrough"}
+	var report: Dictionary={"version":"0.4.1","checks":checks,"failures":failures,"engine":Engine.get_version_info().string,"executable":executable,"executable_sha256":FileAccess.get_sha256(executable),"pack_sha256":FileAccess.get_sha256(pack) if FileAccess.file_exists(pack) else "","input":"Godot input actions and isolated physics acceptance; no physical controller or full human playthrough"}
 	var report_path: String=directory.get_base_dir().path_join("runtime_tests.json") if not directory.is_empty() else "user://runtime_tests.json"
 	var out:=FileAccess.open(report_path,FileAccess.WRITE);out.store_string(JSON.stringify(report,"  "));out.close()
 	print("QA_FINISHED ",checks.size()," checks, ",failures," failures");return failures

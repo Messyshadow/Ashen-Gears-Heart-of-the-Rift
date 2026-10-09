@@ -38,7 +38,7 @@ func _physics_process(dt: float) -> void:
 	if game.paused or hp<=0 or game.hitstop>0:return
 	clock+=dt;cooldown=maxf(0,cooldown-dt);hit_flash=maxf(0,hit_flash-dt)
 	var p: CharacterBody3D=game.player;var diff:=p.position-position;var same:=absf(diff.y)<1.6
-	if boss() and hp<max_hp*.5 and not phase_two:phase_two=true;game.toast("督工进入狂暴 · 连续冲锋" if kind=="minotaur" else "典刑机过载 · 链钩与冲击波",3)
+	if boss() and hp<max_hp*.5 and not phase_two:phase_two=true;game.sound("boss_roar",position);game.toast("督工进入狂暴 · 连续冲锋" if kind=="minotaur" else "典刑机过载 · 链钩与冲击波",3)
 	if kind=="drone":position.y=lerpf(position.y,origin.y+sin(clock*1.5)*.3,dt*4);velocity.y=0
 	else:velocity.y-=30*dt
 	var query:=PhysicsRayQueryParameters3D.create(position+Vector3(0,1,0),p.position+Vector3(0,1,0),1)
@@ -50,17 +50,19 @@ func _physics_process(dt: float) -> void:
 		if clock>.45:state="chase";clock=0
 	elif state=="windup":
 		velocity.x=0;visual.rotation.z=-.12*facing*minf(clock/windup,1)
-		if clock>=windup:state="strike";clock=0;attack_done=false
+		if clock>=windup:state="strike";clock=0;attack_done=false;game.sound("boss_charge" if pattern=="冲锋" else "enemy_fire" if ranged() else "whoosh_heavy",position)
 	elif state=="strike":
 		velocity.x=facing*(10 if pattern=="冲锋" else 7 if kind=="hound" else 0)
 		visual.rotation.z=facing*.22*sin(minf(clock/.35,1)*PI)
 		if not attack_done and clock>.1:
 			attack_done=true
-			if ranged() or pattern=="链钩":game.fire_projectile(position+Vector3(facing*.65,1.0,0),facing,18 if boss() else 12,false,self);game.sound("arc")
+			if ranged() or pattern=="链钩":game.fire_projectile(position+Vector3(facing*.65,1.0,0),facing,18 if boss() else 12,false,self);game.sound("grapple_launch" if pattern=="链钩" else "enemy_fire",position)
 			elif pattern=="震地":
 				for direction in [-1.0,1.0]:game.fire_projectile(position+Vector3(direction*.8,.32,0),direction,22,false,self)
-				game.spawn_dust(position,2.5);game.camera_impact=.2
-			elif same and absf(diff.x)<(3.0 if boss() else 1.8):game.damage_player(26 if boss() else 14,facing,self)
+				game.sound("shockwave",position);game.spawn_dust(position,2.5);game.camera_impact=.2
+			else:
+				if boss():game.sound("boss_smash",position)
+				if same and absf(diff.x)<(3.0 if boss() else 1.8):game.damage_player(26 if boss() else 14,facing,self)
 		if pattern=="冲锋" and same and absf(diff.x)<1.9:game.damage_player(24,facing,self)
 		if clock>(.75 if pattern=="冲锋" else .35):state="recover";clock=0
 	elif state=="recover":
@@ -75,7 +77,7 @@ func _physics_process(dt: float) -> void:
 				attacks+=1;pattern="弩射" if ranged() else "落锤" if boss() else "近击"
 				if boss():pattern=["冲锋","落锤","震地"][attacks%3] if kind=="minotaur" else ["落锤","链钩","震地" if phase_two else "落锤"][attacks%3]
 				if kind=="minotaur" and phase_two and attacks%2==0:pattern="冲锋"
-				windup=.9 if boss() else .65 if ranged() else .45;state="windup";clock=0
+				windup=.9 if boss() else .65 if ranged() else .45;state="windup";clock=0;game.sound("enemy_windup",position)
 		else:velocity.x=0
 	else:
 		if absf(position.x-origin.x)>2:facing=-signf(position.x-origin.x)
@@ -103,7 +105,7 @@ func can_assassinate() -> bool:
 
 func hurt(amount: float,force: float,break_power: float=10) -> void:
 	if hp<=0:return
-	hp=maxf(0,hp-amount);posture+=break_power;hit_flash=.15;game.spawn_sparks(position+Vector3(0,1,0),kind not in ["human","ranged"]);game.sound("metal");game.camera_impact=.10
+	hp=maxf(0,hp-amount);posture+=break_power;hit_flash=.15;game.spawn_sparks(position+Vector3(0,1,0),kind not in ["human","ranged"]);game.sound("hit_metal_%d"%randi_range(1,2) if kind not in ["human","ranged"] else "hit_flesh_%d"%randi_range(1,2),position);game.camera_impact=.10
 	if hp<=0:
 		if not game.defeated.has(uid):game.scrap+=60 if boss() else 8
 		game.defeated[uid]=true

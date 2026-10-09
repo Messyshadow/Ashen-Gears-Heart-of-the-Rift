@@ -1,3 +1,11 @@
+# v0.4.1 音频验证
+
+2026-10-10。独立 Windows EXE 验收通过：玩法/物理 65 项，加音频 16 项，共 81 项，失败 0。使用 WASAPI 默认输出，48 kHz 混音。`scripts/qa_audio.gd` 在实际游戏混音总线上截取 PCM：背景非静音、三路打斗/命中/突进重叠不削波，真实跳跃/空冲/落地/翻滚有声音，战斗/Boss/换房的音乐与环境床切换正确，设置保存可恢复。
+
+资源、测量和事件记录见 `audio_assets.json`、`audio_runtime.json`、`runtime_tests.json`。`audio_mix_preview.wav` 为游戏内部混音抓取，不是麦克风或系统全局录音。没有做人工听音和实体扬声器验证。音效生成源、混音总线、音量默认值与修复原因见 `docs/06_0.4.1音效修复.md`。下方保留 0.4.0 历史记录。
+
+---
+
 # v0.4.0 运行与画面验证
 
 2026-10-10。Godot 4.7.rc.custom_build.df6235838 / Forward+ Vulkan / NVIDIA RTX 5070 Laptop GPU。

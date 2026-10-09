@@ -4,6 +4,7 @@ var buttons: Array[Button]=[]
 var font: Font
 var preview: SubViewportContainer
 var preview_slot := 0
+var audio_controls: Array[Control]=[]
 const GOLD=Color(.88,.68,.36)
 const TEXT=Color(.89,.87,.81)
 const MUTED=Color(.58,.67,.71)
@@ -32,7 +33,7 @@ func _draw() -> void:
 	bar(Vector2(42,118),308,game.magic,100,Color(.16,.48,.67))
 	draw_rect(Rect2(w-390,22,366,108),DARK)
 	text_at(Vector2(w-368,53),game.rooms[game.room].name,24,GOLD)
-	text_at(Vector2(w-368,80),game.rooms[game.room].id+"  /  v0.4.0",16,MUTED)
+	text_at(Vector2(w-368,80),game.rooms[game.room].id+"  /  v0.4.1",16,MUTED)
 	text_at(Vector2(w-368,107),"铁屑 %d    药剂 %d    技能点 %d"%[game.scrap,game.potion,game.skill_points],17)
 	if game.flags.get("rescued",false):
 		text_at(Vector2(42,170),"1 凯恩  2 洛铆"+("  3 伊瑟" if game.flags.get("ranger",false) else "")+"  /  F 切换",17,MUTED)
@@ -73,7 +74,7 @@ func _draw() -> void:
 		text_at(Vector2(w*.13,h*.37),"裂界之心",38,TEXT)
 		text_at(Vector2(w*.13,h*.43),"ASHEN GEARS  /  HEART OF THE RIFT",18,MUTED)
 		text_at(Vector2(w*.13,h*.51),"一座以记忆为燃料的城。一份被伪造的名字。",23,TEXT)
-		text_at(Vector2(w*.13,h*.89),"灰闸囚厂 × 锈脊齿轮井   /   18 房间 · v0.4.0",17,MUTED)
+		text_at(Vector2(w*.13,h*.89),"灰闸囚厂 × 锈脊齿轮井   /   18 房间 · v0.4.1",17,MUTED)
 	elif game.screen=="story":
 		var lines: PackedStringArray=game.story.split("\n")
 		var top := h*.35
@@ -83,6 +84,11 @@ func _draw() -> void:
 	elif game.screen=="pause":
 		text_at(Vector2(w*.35,h*.30),"回声暂歇",42,GOLD)
 		text_at(Vector2(w*.35,h*.38),"进度在休息灯保存；独特奖励即时记录。",20,MUTED)
+	elif game.screen=="audio":
+		text_at(Vector2(w*.23,h*.20),"声音设置",40,GOLD)
+		text_at(Vector2(w*.23,h*.28),"总音量、动作音效、环境与音乐分别调整，自动保存。",20,MUTED)
+		for i in range(4):text_at(Vector2(w*.23,h*(.38+i*.09)),["总音量","动作 / 战斗音效","背景音乐","环境 / 机械底噪"][i],21,TEXT)
+		text_at(Vector2(w*.23,h*.91),"试听：攻击、命中、突进、跳跃落地与机关声音。",18,MUTED)
 	elif game.screen=="skills":
 		text_at(Vector2(w*.18,h*.22),"招式工坊",40,GOLD)
 		text_at(Vector2(w*.18,h*.29),["凯恩 · 匕首","洛铆 · 机械重击","伊瑟 · 弓箭"][game.active_slot],24,TEXT)
@@ -109,9 +115,11 @@ func add_button(value: String, pos: Vector2, action: Callable, width: float = 30
 	var s := StyleBoxFlat.new();s.bg_color=Color(.075,.105,.12);s.border_color=Color(.36,.39,.36);s.set_border_width_all(1);s.content_margin_left=18
 	b.add_theme_stylebox_override("normal",s)
 	var hover := s.duplicate();hover.bg_color=Color(.20,.16,.10);hover.border_color=GOLD;b.add_theme_stylebox_override("hover",hover);b.add_theme_stylebox_override("focus",hover)
-	b.pressed.connect(action)
+	b.pressed.connect(func():game.sound("ui"));b.pressed.connect(action)
 
 func rebuild_buttons() -> void:
+	for control in audio_controls:remove_child(control);control.queue_free()
+	audio_controls.clear()
 	if is_instance_valid(preview):remove_child(preview);preview.queue_free()
 	for b in buttons:remove_child(b);b.queue_free()
 	buttons.clear()
@@ -124,7 +132,17 @@ func rebuild_buttons() -> void:
 		add_button("继续",Vector2(w*.35,h*.46),func():game.set_screen("play"))
 		add_button("查看地图",Vector2(w*.35,h*.54),func():game.set_screen("map"))
 		add_button("招式工坊",Vector2(w*.35,h*.62),func():game.set_screen("skills"))
-		add_button("返回标题",Vector2(w*.35,h*.70),func():game.set_screen("title"))
+		add_button("声音设置",Vector2(w*.35,h*.70),func():game.set_screen("audio"))
+		add_button("返回标题",Vector2(w*.35,h*.78),func():game.set_screen("title"))
+	if game.screen=="audio":
+		for i in range(4):
+			var bus: String=["Master","SFX","Music","Ambient"][i]
+			var slider:=HSlider.new();add_child(slider);audio_controls.append(slider);slider.position=Vector2(w*.46,h*(.36+i*.09));slider.size=Vector2(w*.26,30);slider.min_value=0;slider.max_value=100;slider.step=1;slider.value=game.audio_system.settings[bus]*100
+			var label:=Label.new();add_child(label);audio_controls.append(label);label.position=Vector2(w*.74,h*(.36+i*.09));label.text="%d%%"%slider.value;label.add_theme_font_size_override("font_size",21)
+			slider.value_changed.connect(func(value):game.audio_system.set_volume(bus,value/100);label.text="%d%%"%value)
+		add_button("试听音效",Vector2(w*.23,h*.76),game.preview_audio,200)
+		add_button("恢复默认",Vector2(w*.41,h*.76),func():game.audio_system.reset_defaults();rebuild_buttons(),200)
+		add_button("返回",Vector2(w*.59,h*.76),func():game.set_screen("pause"),200)
 	if game.screen=="skills":
 		for i in range(3):
 			var learned: bool=game.learned.has("%d_%d"%[game.active_slot,i])

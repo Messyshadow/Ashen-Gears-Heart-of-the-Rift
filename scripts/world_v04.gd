@@ -93,7 +93,7 @@ func build(g: Node3D, spec: Dictionary) -> void:
 		part("Pipe",Vector3(deck.x+2.5,deck.low,-1.5),Vector3(1,(deck.high-deck.low+2)/4,1))
 		moving.append({"body":body,"low":float(deck.low)-.18,"high":float(deck.high)-.18,"target":float(deck.low)-.18,"width":float(deck.width)})
 	for hazard in spec.get("hazards",[]):
-		var press:=part("Platform",game.vector(hazard.p)+Vector3(0,5,0),Vector3(.7,1.8,1));hazards.append({"node":press,"p":game.vector(hazard.p),"period":float(hazard.period),"damage_clock":0.0})
+		var press:=part("Platform",game.vector(hazard.p)+Vector3(0,5,0),Vector3(.7,1.8,1));hazards.append({"node":press,"p":game.vector(hazard.p),"period":float(hazard.period),"damage_clock":0.0,"last_phase":0.0})
 		part("Pipe",game.vector(hazard.p)+Vector3(0,5,-.8),Vector3(1,1.5,1))
 	conveyors=spec.get("conveyors",[])
 	for conveyor in conveyors:
@@ -124,11 +124,15 @@ func tick(dt: float) -> void:
 		var on_deck: bool=absf(p.position.x-body.position.x)<m.width*.5 and absf(p.position.y-(body.position.y+.18))<.2 and p.velocity.y<=.1
 		var before: float=body.position.y
 		body.position.y=move_toward(before,m.target,2.8*dt)
+		if absf(body.position.y-m.target)<.01 and absf(before-m.target)>.01:game.sound("elevator_stop",body.position)
 		if on_deck:p.position.y+=body.position.y-before
 	for g in mechanisms:g.node.rotation.z+=dt*.35*(1 if game.flags.get("gear",false) else .2)
 	for h in hazards:
 		h.damage_clock=maxf(0,h.damage_clock-dt)
 		var phase: float=fmod(clock,h.period)
+		if phase>=2.25 and h.last_phase<2.25:game.sound("press_warning",h.p)
+		if phase>=2.65 and h.last_phase<2.65:game.sound("press_hit",h.p)
+		h.last_phase=phase
 		h.node.position.y=h.p.y+(5 if phase<2.4 else lerpf(5,.25,clampf((phase-2.4)/.25,0,1)) if phase<2.65 else .25 if phase<3.2 else lerpf(.25,5,(phase-3.2)/.8))
 		if phase>=2.65 and phase<3.2 and h.damage_clock<=0 and absf(p.position.x-h.p.x)<1.45 and p.position.y<h.p.y+1.4:
 			h.damage_clock=1;game.environment_damage(18);game.toast("压锤命中 · 观察橙色预警")
@@ -136,7 +140,7 @@ func tick(dt: float) -> void:
 func activate_deck() -> bool:
 	for m in moving:
 		if absf(game.player.position.x-m.body.position.x)<m.width*.5+1 and absf(game.player.position.y-m.body.position.y)<1.4:
-			m.target=m.high if absf(m.target-m.low)<.1 else m.low;game.toast("吊运台上行" if m.target==m.high else "吊运台下行");return true
+			game.sound("elevator_start",m.body.position);m.target=m.high if absf(m.target-m.low)<.1 else m.low;game.toast("吊运台上行" if m.target==m.high else "吊运台下行");return true
 	return false
 
 func conveyor_speed(pos: Vector3) -> float:

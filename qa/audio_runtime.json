@@ -1,0 +1,149 @@
+{
+  "checks": [
+    {
+      "check": "53 个声音资源加载，20 路并发播放器",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "探索音乐与环境实际混音非静音",
+      "detail": {
+        "frames": 17408,
+        "peak": 0.145524188876152,
+        "rms": 0.045703176610975
+      },
+      "pass": true
+    },
+    {
+      "check": "攻击命中突进同时播放，有混音信号且不削波",
+      "detail": {
+        "frames": 10240,
+        "peak": 0.912010848522186,
+        "rms": 0.184452051460134
+      },
+      "pass": true
+    },
+    {
+      "check": "实际跳跃输入触发可测起跳音效",
+      "detail": {
+        "frames": 9216,
+        "peak": 0.720044612884521,
+        "rms": 0.138791923243546
+      },
+      "pass": true
+    },
+    {
+      "check": "实际空冲输入触发可测突进音效",
+      "detail": {
+        "frames": 6656,
+        "peak": 0.399970471858978,
+        "rms": 0.0756958511167065
+      },
+      "pass": true
+    },
+    {
+      "check": "跳跃及突进后的接地触发物理落地音效",
+      "detail": {
+        "frames": 38400,
+        "peak": 0.727207899093628,
+        "rms": 0.109015609202379
+      },
+      "pass": true
+    },
+    {
+      "check": "实际翻滚输入触发身法音效",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "主线真实输入触发脚步攀梯钩索声音",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "战斗有效事件触发挥击命中弹反与弓弦声音",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "升降起停与齿轮操作触发机械音效",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "附近战斗切入战斗音乐",
+      "detail": {
+        "frames": 39424,
+        "peak": 0.791695177555084,
+        "rms": 0.101615294753989
+      },
+      "pass": true
+    },
+    {
+      "check": "Boss 遭遇切入 Boss 音乐",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "周期压锤真实运动触发预警与碰撞音效",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "换房交叉淡入对应机械环境底噪",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "独立音量设置保存并恢复",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "声音菜单显示四组音量滑杆和数值",
+      "detail": {},
+      "pass": true
+    }
+  ],
+  "driver": "WASAPI",
+  "events": {
+    "boss_roar": 2,
+    "bow_fire": 1,
+    "dash": 3,
+    "door": 19,
+    "elevator_start": 1,
+    "elevator_stop": 1,
+    "enemy_windup": 2,
+    "foot_metal_1": 29,
+    "foot_metal_2": 30,
+    "foot_metal_3": 30,
+    "foot_stone_1": 9,
+    "foot_stone_2": 3,
+    "foot_stone_3": 8,
+    "gear_latch": 4,
+    "gear_start": 1,
+    "grapple_attach": 4,
+    "grapple_launch": 3,
+    "hit_flesh_1": 17,
+    "hit_flesh_2": 15,
+    "hit_metal_1": 16,
+    "hit_metal_2": 16,
+    "jump": 7,
+    "ladder_1": 22,
+    "ladder_2": 15,
+    "land_heavy": 1,
+    "land_soft": 8,
+    "parry": 1,
+    "press_hit": 1,
+    "press_warning": 1,
+    "roll": 1,
+    "save": 1,
+    "switch": 2,
+    "vault": 1,
+    "wall_jump": 1,
+    "whoosh_heavy": 2
+  },
+  "notes": "Captured game mixer PCM; physical speaker listening and Windows per-app mixer were not verified.",
+  "output_device": "Default",
+  "sample_rate": 48000.0
+}

@@ -5,7 +5,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$version = '0.4.0'
+$version = '0.4.1'
 $folderName = '灰烬齿轮-裂界之心-' + $version
 $stage = Join-Path $projectRoot ('build\package-' + $version)
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -33,6 +33,7 @@ foreach ($file in @('AshenGears.exe','AshenGears.pck')) {
 Copy-Item -LiteralPath (Join-Path $projectRoot 'README.md') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'licenses\Godot-LICENSE.txt'),(Join-Path $projectRoot 'licenses\Godot-COPYRIGHT.txt') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json') -Destination $stage
+Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\audio_runtime.json'),(Join-Path $projectRoot 'qa\audio_assets.json') -Destination $stage
 $images = Join-Path $stage 'qa\v04_screenshots'
 New-Item -ItemType Directory -Path $images -Force | Out-Null
 foreach ($name in @('05_gears.png','10_combat.png')) {

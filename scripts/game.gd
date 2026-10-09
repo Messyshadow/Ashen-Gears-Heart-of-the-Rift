@@ -23,8 +23,7 @@ var hatch_collision: StaticBody3D
 var dusts: Array[Dictionary] = []
 var enemies: Array = []
 var props: Array = []
-var audio: AudioStreamPlayer
-var music: AudioStreamPlayer
+var audio_system: Node
 var ui: Control
 var flags: Dictionary = {}
 var visited: Dictionary = {}
@@ -100,17 +99,7 @@ func setup_environment() -> void:
 	var fill := DirectionalLight3D.new();add_child(fill);fill.rotation_degrees=Vector3(-20,145,0);fill.light_color=Color(.52,.68,.87);fill.light_energy=.65
 	rig=Node3D.new();add_child(rig);camera=Camera3D.new();rig.add_child(camera)
 	camera.projection=Camera3D.PROJECTION_ORTHOGONAL;camera.size=12.5;camera.position=Vector3(0,2,30);camera.rotation_degrees.x=-3.8;camera.far=110;camera.current=true
-	audio=AudioStreamPlayer.new();add_child(audio);audio.volume_db=-16
-	music=AudioStreamPlayer.new();add_child(music);music.volume_db=-25
-	var wav := AudioStreamWAV.new();wav.format=AudioStreamWAV.FORMAT_16_BITS;wav.mix_rate=22050
-	var bytes := PackedByteArray();bytes.resize(22050*8*2)
-	for i in range(22050*8):
-		var t := float(i)/22050
-		var tone := sin(TAU*55*t)*.18+sin(TAU*82.5*t)*.10+sin(TAU*110*t)*.07
-		tone*=.65+.25*sin(TAU*t/8)
-		bytes.encode_s16(i*2,int(tone*13000))
-	wav.data=bytes;wav.loop_mode=AudioStreamWAV.LOOP_FORWARD;wav.loop_end=22050*8
-	music.stream=wav;music.play()
+	audio_system=preload("res://scripts/audio_manager.gd").new();audio_system.game=self;add_child(audio_system)
 
 func vector(a: Array) -> Vector3:return Vector3(float(a[0]),float(a[1]),float(a[2]))
 
@@ -140,6 +129,7 @@ func load_room(number: int, spawn_override: Variant = null) -> void:
 	if room>0 and room!=11:add_prop("back",vector(rooms[room].back),"← 返回前室","")
 	apply_atmosphere()
 	player=Player.new();player.game=self;add_child(player);player.position=vector(rooms[room].spawn) if spawn_override==null else spawn_override
+	audio_system.set_room(rooms[room].style)
 	visited[rooms[room].id]=true
 	checkpoint_room=room;checkpoint_pos=player.position
 	target=player.position+Vector3(0,1.4,0);rig.position=target
@@ -226,7 +216,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("interact") or event.is_action_pressed("ui_accept") or event.is_action_pressed("pause"):set_screen("play")
 		return
 	if event.is_action_pressed("pause"):
-		set_screen("pause" if screen=="play" else "play" if screen in ["pause","map","skills"] else "title");return
+		set_screen("pause" if screen=="play" else "play" if screen in ["pause","map","skills","audio"] else "title");return
 	if screen in ["play","map","skills"]:
 		if event.is_action_pressed("map"):set_screen("play" if screen=="map" else "map");return
 		if event.is_action_pressed("skills"):set_screen("play" if screen=="skills" else "skills");return
@@ -239,6 +229,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func set_screen(value: String) -> void:
 	screen=value;paused=screen!="play"
+	if audio_system:audio_system.update_targets()
 	if is_instance_valid(player):player.set_animation_paused(paused)
 	ui.rebuild_buttons()
 
@@ -254,14 +245,14 @@ func interact() -> void:
 	if nearest.is_empty():return
 	var kind: String=nearest.kind
 	if kind=="assassinate":
-		nearest.enemy.hurt(999,player.facing);player.attack_clock=.8;player.attack_total=.8;player.attack_hit=true;player.attack_clip="Dagger3";player.invulnerable=.5;toast("暗杀成功 · 机械与 Boss 不能暗杀");return
+		nearest.enemy.hurt(999,player.facing);player.attack_clock=.8;player.attack_total=.8;player.attack_hit=true;player.attack_clip="Dagger3";player.invulnerable=.5;sound("hit_flesh_1");toast("暗杀成功 · 机械与 Boss 不能暗杀");return
 	if kind in ["exit","back","loop","hub","shortcut","side","rust_loop","rust_shortcut"]:
 		if kind=="exit":
 			var gate: String=rooms[room].get("gate","")
 			if not gate.is_empty() and not flags.get(gate,false):toast("尚未完成本室目标 · "+rooms[room].hint,3);return
 			var next := int(rooms[room].next)
 			if room==16 and not flags.get("slice_complete",false):flags.slice_complete=true;save_game();show_story("总井的回流系统重新启动。\n洛铆：维修所接住了第一批幸存者。\n凯恩：米菈，我会继续往下找你。\n\n0.4.0 当前章节完成。维修所与两片区域回环开放。",false)
-			call_deferred("load_room",next);return
+			sound("door");call_deferred("load_room",next);return
 		if kind=="back":
 			var previous := int(rooms[room].previous)
 			call_deferred("load_room",previous,vector(rooms[previous].exit)+Vector3(-2,.1,0));return
@@ -272,6 +263,7 @@ func interact() -> void:
 		if kind=="rust_loop":call_deferred("load_room",8);return
 		if kind=="rust_shortcut":call_deferred("load_room",9);return
 	if kind=="save":
+		sound("save")
 		checkpoint_room=room;checkpoint_pos=player.position
 		party_hp=[100.0,110.0,95.0];magic=100;player.stamina=100;potion=3;save_game();toast("休息灯已保存 · 全队恢复，普通敌人刷新");call_deferred("load_room",room,player.position);return
 	if kind=="wall":flags.wall=true;show_story("壁抓与壁跳已学会。\n跳向蓝色标记墙，按住朝墙方向抓壁；Space 蹬墙。\n抓壁最多 0.65 秒，空中切人不会刷新次数。");save_game();return
@@ -285,7 +277,7 @@ func interact() -> void:
 	if kind=="completion":
 		if opened.has(nearest.uid):return
 		flags.slice_complete=true;skill_points+=1;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("总井图纸交付。灰闸囚厂与锈脊齿轮井回环开放。\n接下来要修复雾肺水务区，寻找米菈的真实去向。\n0.4.0 当前章节结束，可以继续回访、训练与救援。");save_game();return
-	if kind=="chest":scrap+=20;toast(nearest.text)
+	if kind=="chest":scrap+=20;toast(nearest.text);sound("chest")
 	if kind=="rescue":
 		for enemy in enemies:
 			if is_instance_valid(enemy) and enemy.hp>0:toast("先击退囚门守卫");return
@@ -300,7 +292,7 @@ func interact() -> void:
 	if kind.begins_with("gear"):
 		if flags.get("gear",false):toast("齿轮联动已完成");return
 		if kind=="gear_reset":gear=[true,false,false];toast("齿轮已复位 · 先拔锁销");return
-		var n := int(kind.trim_prefix("gear"))
+		sound("gear_latch");var n := int(kind.trim_prefix("gear"))
 		if n==0:
 			if gear[2]:toast("先断开离合器");return
 			gear[0]=not gear[0];toast("锁销已固定" if gear[0] else "锁销已拔出")
@@ -309,7 +301,7 @@ func interact() -> void:
 			gear[1]=not gear[1];toast("惰轮已接入 A 与 C" if gear[1] else "惰轮已移开")
 		if n==2:
 			gear[2]=not gear[2]
-			if gear[1] and not gear[0] and gear[2]:flags.gear=true;skill_points+=1;save_game();toast("P01 完成 · 输出顺时针，升降带接通")
+			if gear[1] and not gear[0] and gear[2]:flags.gear=true;sound("gear_start");skill_points+=1;save_game();toast("P01 完成 · 输出顺时针，升降带接通")
 			else:toast("输出停摆 · 检查锁销与惰轮")
 		return
 	if kind in ["water","steam","confirm","steam_reset"]:
@@ -335,7 +327,7 @@ func switch_actor(slot: int = -1) -> void:
 	if switch_cooldown>0 or player.hurt_clock>0 or player.attack_clock>0 or player.motion=="vault":return
 	var next: int=slots[(slots.find(active_slot)+1)%slots.size()] if slot<0 else slot
 	if not next in slots or party_hp[next]<=0 or next==active_slot:return
-	active_slot=next;switch_cooldown=1;player.set_actor(next);toast(["凯恩 · 匕首","洛铆 · 机械重击","伊瑟 · 弓箭"][next])
+	sound("switch");active_slot=next;switch_cooldown=1;player.set_actor(next);toast(["凯恩 · 匕首","洛铆 · 机械重击","伊瑟 · 弓箭"][next])
 
 func menu_actor(slot: int) -> void:
 	if slot in available_slots():active_slot=slot;player.set_actor(slot);ui.rebuild_buttons()
@@ -399,16 +391,20 @@ func load_game() -> bool:
 	flags=saved.flags;visited=saved.visited;defeated=saved.defeated;opened=saved.opened;party_hp=saved.party_hp;active_slot=int(saved.active);magic=float(saved.magic);scrap=int(saved.scrap);weapon_rank=int(saved.weapon_rank);skill_points=int(saved.skill_points);learned=saved.learned;potion=int(saved.potion);gear=saved.gear;water=saved.water
 	checkpoint_room=int(saved.room);checkpoint_pos=vector(saved.p);set_screen("play");load_room(checkpoint_room,checkpoint_pos);return true
 
-func sound(kind: String) -> void:
-	var wav := AudioStreamWAV.new();wav.format=AudioStreamWAV.FORMAT_16_BITS;wav.mix_rate=22050
-	var bytes := PackedByteArray();bytes.resize(6600)
-	for i in range(3300):
-		var t := float(i)/22050;var f := 130 if kind in ["step","hammer"] else 480 if kind=="arc" else 240
-		var sample := (randf_range(-1,1)*(.5 if kind in ["hit","metal","swing"] else .2)+sin(t*TAU*f)*.35)*exp(-t*(35 if kind=="hammer" else 50))
-		bytes.encode_s16(i*2,int(sample*14000))
-	wav.data=bytes;audio.stream=wav;audio.play()
+func sound(kind: String,pos: Vector3=Vector3.INF) -> void:
+	var aliases: Dictionary={"step":"foot_metal_1","hammer":"boss_smash","metal":"hit_metal_1","hit":"player_hurt","swing":"whoosh_light_1","arc":"skill"}
+	audio_system.play_event(aliases.get(kind,kind),pos)
 
-func footstep() -> void:sound("step")
+func footstep() -> void:
+	var material: String="stone" if player.position.y<.3 and rooms[room].style in ["coal","prison","hub","mine","stock"] else "metal"
+	sound("foot_%s_%d"%[material,randi_range(1,3)],player.position)
+
+func preview_audio() -> void:
+	for cue in ["whoosh_light_1","hit_metal_1","dash","jump","land_heavy","gear_start"]:
+		if screen!="audio":return
+		sound(cue)
+		await get_tree().create_timer(.5).timeout
+
 func spawn_dust(pos: Vector3, force: float) -> void:particles(pos,force,Color(.43,.37,.29,.24))
 func spawn_sparks(pos: Vector3, metal: bool) -> void:particles(pos,2,Color(1,.43,.05) if metal else Color(.8,.14,.07))
 func particles(pos: Vector3, force: float, col: Color) -> void:
@@ -421,7 +417,8 @@ func run_qa() -> void:
 	var suite: RefCounted=preload("res://scripts/qa_v04.gd").new()
 	var failures: int=await suite.run(self,capture_dir)
 	suite=null
-	await get_tree().process_frame
+	audio_system.halt()
+	await get_tree().create_timer(.15).timeout
 	get_tree().quit(1 if failures>0 else 0)
 
 func check_auto_exit() -> void:

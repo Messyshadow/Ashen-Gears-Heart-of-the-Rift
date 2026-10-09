@@ -107,13 +107,13 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -11.2733182907104,
-          -0.00917779002338648,
+          -11.2383184432983,
+          -0.00917780864983797,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          1.80000019073486,
+          0.800000190734863,
           0.0,
           0.0
         ],
@@ -251,8 +251,8 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          0.293333321809769,
-          -0.00917833112180233,
+          0.340000003576279,
+          -0.00920176133513451,
           0.0
         ],
         "vaults": 1,
@@ -563,8 +563,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          16.475004196167,
-          4.67341566085815,
+          16.2416706085205,
+          4.44437408447266,
           0.0
         ],
         "vaults": 0,
@@ -587,8 +587,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          16.475004196167,
-          3.99092864990234,
+          16.2416706085205,
+          3.99033761024475,
           0.0
         ],
         "vaults": 0,
@@ -804,7 +804,7 @@
         "motion": "ground",
         "p": [
           -2.0,
-          5.99009227752686,
+          5.99008560180664,
           0.0
         ],
         "vaults": 0,
@@ -1062,19 +1062,19 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
-        "clip": "StairDown",
-        "floor": true,
+        "clip": "PassageFall",
+        "floor": false,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          0.385047197341919,
-          6.91300296783447,
+          0.494179904460907,
+          6.91130924224854,
           0.0
         ],
         "vaults": 0,
         "velocity": [
           4.05000019073486,
-          0.0,
+          -1.22416663169861,
           0.0
         ],
         "wall_jumps": 1
@@ -1091,13 +1091,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          6.05785799026489,
-          6.9908275604248,
+          6.07118988037109,
+          6.99082803726196,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          1.30000019073486,
+          0.800000190734863,
           0.0,
           0.0
         ],
@@ -1559,13 +1559,117 @@
         ],
         "wall_jumps": 0
       }
+    },
+    {
+      "check": "53 个声音资源加载，20 路并发播放器",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "探索音乐与环境实际混音非静音",
+      "detail": {
+        "frames": 17408,
+        "peak": 0.145524188876152,
+        "rms": 0.045703176610975
+      },
+      "pass": true
+    },
+    {
+      "check": "攻击命中突进同时播放，有混音信号且不削波",
+      "detail": {
+        "frames": 10240,
+        "peak": 0.912010848522186,
+        "rms": 0.184452051460134
+      },
+      "pass": true
+    },
+    {
+      "check": "实际跳跃输入触发可测起跳音效",
+      "detail": {
+        "frames": 9216,
+        "peak": 0.720044612884521,
+        "rms": 0.138791923243546
+      },
+      "pass": true
+    },
+    {
+      "check": "实际空冲输入触发可测突进音效",
+      "detail": {
+        "frames": 6656,
+        "peak": 0.399970471858978,
+        "rms": 0.0756958511167065
+      },
+      "pass": true
+    },
+    {
+      "check": "跳跃及突进后的接地触发物理落地音效",
+      "detail": {
+        "frames": 38400,
+        "peak": 0.727207899093628,
+        "rms": 0.109015609202379
+      },
+      "pass": true
+    },
+    {
+      "check": "实际翻滚输入触发身法音效",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "主线真实输入触发脚步攀梯钩索声音",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "战斗有效事件触发挥击命中弹反与弓弦声音",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "升降起停与齿轮操作触发机械音效",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "附近战斗切入战斗音乐",
+      "detail": {
+        "frames": 39424,
+        "peak": 0.791695177555084,
+        "rms": 0.101615294753989
+      },
+      "pass": true
+    },
+    {
+      "check": "Boss 遭遇切入 Boss 音乐",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "周期压锤真实运动触发预警与碰撞音效",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "换房交叉淡入对应机械环境底噪",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "独立音量设置保存并恢复",
+      "detail": {},
+      "pass": true
+    },
+    {
+      "check": "声音菜单显示四组音量滑杆和数值",
+      "detail": {},
+      "pass": true
     }
   ],
   "engine": "4.7-rc (custom_build)",
   "executable": "E:/Godot/test-project/Ashen-Gears-Heart-of-the-Rift/build/AshenGears.exe",
-  "executable_sha256": "1c399011025115b21f96538b3e095b7e7215921cf2d775cf7168d8e777ce6958",
+  "executable_sha256": "b3378fb11024da61b5d55801508c59096c16135e1c55d86955cb3927e87e3d6b",
   "failures": 0,
   "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
-  "pack_sha256": "6578b830d0190674fff7ad38cb1ceb9068f4256be681654e4b9732964271c3a3",
-  "version": "0.4.0"
+  "pack_sha256": "4af14db41bccace9971fdf48ac5bd11a75f6a7dc45492656a5c6f89ea2fae411",
+  "version": "0.4.1"
 }

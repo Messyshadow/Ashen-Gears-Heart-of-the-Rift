@@ -20,5 +20,6 @@ func _physics_process(dt: float) -> void:
 		var target: Object=hit.collider
 		if friendly and target.has_method("hurt"):target.hurt(damage,direction,14)
 		elif not friendly and target==game.player:game.damage_player(damage,direction,source if is_instance_valid(source) else null)
+		else:game.sound("hit_metal_1",hit.position)
 		game.spawn_sparks(hit.position,true);queue_free();return
 	global_position=next
