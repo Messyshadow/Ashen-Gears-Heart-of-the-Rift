@@ -2,6 +2,18 @@
 
 Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。2026-10-09 首次实现，版本 **0.1.0 序章原型**。
 
+## 游戏截图
+
+以下画面来自 Windows 游戏 EXE 的实际运行。
+
+**压料车间 · 折返楼梯**
+
+![压料车间实机截图：凯恩沿折返楼梯抵达下层，背景为石拱、管线和熔炉](qa/exe_screenshots/03_stairs.png)
+
+**刑柱竖井 · 钩索高台**
+
+![刑柱竖井实机截图：洛铆通过钩索抵达上方平台，蓝色锚点与暖色熔炉清晰可见](qa/exe_screenshots/04_grapple.png)
+
 ## 运行
 
 Windows 发布目录：`E:\Godot\release\灰烬齿轮-裂界之心-0.1.0\`。双击 `AshenGears.exe`，保持同目录 `AshenGears.pck`。开发时用 Godot 打开本仓库 `project.godot`。
