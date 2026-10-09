@@ -1,0 +1,29 @@
+{
+  "blender": "4.2.9",
+  "clips": [
+    "StairUp",
+    "StairDown",
+    "LadderUp",
+    "LadderDown",
+    "LadderIdle",
+    "LadderEnter",
+    "LadderExit",
+    "HatchEnter",
+    "HatchExit",
+    "PassageIdle",
+    "PassageWalk",
+    "PassageLand",
+    "PassageFall",
+    "PassageJump",
+    "Dagger1",
+    "Dagger2",
+    "Dagger3",
+    "Heavy",
+    "Guard",
+    "Dodge",
+    "Hurt",
+    "Skill"
+  ],
+  "reference": "hero_passages.blend",
+  "new_combat_clips": 8
+}

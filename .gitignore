@@ -21,5 +21,15 @@ mono_crash.*.json
 
 # Export outputs
 *.exe
+.godot-user*/
+build/
+*.blend1
+*.blend2
+*.log
+# Extracted from embedded GLB images by Godot; regenerate on import.
+assets/models/*.png
+assets/models/*.png.import
+*.import
+qa/screenshots/
 # Uncomment if your project does not version PCK files as runtime dependencies.
 # *.pck

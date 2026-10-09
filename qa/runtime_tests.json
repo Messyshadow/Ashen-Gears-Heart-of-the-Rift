@@ -1,0 +1,700 @@
+{
+  "checks": [
+    {
+      "check": "煤仓起点支撑",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -12.0,
+          6.98016166687012,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "实际输入向右行走",
+      "pass": true,
+      "state": {
+        "clip": "PassageWalk",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -7.91333055496216,
+          6.98041677474976,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          5.80000019073486,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "起跳离地",
+      "pass": true,
+      "state": {
+        "clip": "PassageJump",
+        "floor": false,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -7.08940839767456,
+          8.9080057144165,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          2.48333311080933,
+          6.77083539962769,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "落地接地",
+      "pass": true,
+      "state": {
+        "clip": "PassageLand",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -6.87246417999268,
+          6.98027896881104,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "开井盖并攀下",
+      "pass": true,
+      "state": {
+        "clip": "LadderDown",
+        "floor": true,
+        "lane": 0,
+        "motion": "ladder",
+        "p": [
+          0.0,
+          5.15251159667969,
+          0.219999998807907
+        ],
+        "transition_max": 0.0408084131777287,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "井盖开启且解除碰撞",
+      "pass": true,
+      "state": {
+        "clip": "LadderDown",
+        "floor": true,
+        "lane": 0,
+        "motion": "ladder",
+        "p": [
+          0.0,
+          5.15251159667969,
+          0.219999998807907
+        ],
+        "transition_max": 0.0408084131777287,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "井口到下层无卡死",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -1.32000005245209,
+          -0.0192578118294477,
+          -0.0399999916553497
+        ],
+        "transition_max": 0.0800996348261833,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "背向未警觉人类允许暗杀",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -4.64583158493042,
+          0.000827506941277534,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "暗杀一次记录击败旗标",
+      "pass": true,
+      "state": {
+        "clip": "Dagger3",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -4.64583158493042,
+          -0.0194263979792595,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "竖梯从下层返回上层",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -1.32000005245209,
+          6.98074197769165,
+          -0.149999991059303
+        ],
+        "transition_max": 0.0801147222518921,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "机械犬禁止暗杀",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -15.0,
+          7.9800820350647,
+          -0.600000023841858
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "折返平台改变深度轨道",
+      "pass": true,
+      "state": {
+        "clip": "PassageWalk",
+        "floor": true,
+        "lane": 1,
+        "motion": "ground",
+        "p": [
+          3.03244042396545,
+          3.98083472251892,
+          1.04999995231628
+        ],
+        "transition_max": 0.0858988165855408,
+        "velocity": [
+          -5.40000009536743,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "双段楼梯抵达底层",
+      "pass": true,
+      "state": {
+        "clip": "StairDown",
+        "floor": true,
+        "lane": 1,
+        "motion": "ground",
+        "p": [
+          -11.1286478042603,
+          0.25984400510788,
+          1.04999995231628
+        ],
+        "transition_max": 0.0858988165855408,
+        "velocity": [
+          -4.40000009536743,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "救援受守卫阻挡",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          4.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "战后洛铆加入",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          4.0,
+          -0.0192578118294477,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "空中切换保留位置速度",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          5.0,
+          3.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          3.0,
+          -2.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "维修台发放钩索",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -6.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "标记锚点范围和遮挡选择",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          3.0,
+          6.98074197769165,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "钩索实际输入抵达高台",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          9.81227111816406,
+          9.98081207275391,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "Boss 禁止暗杀",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -14.0,
+          -0.0199180245399475,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "重击有效帧造成真实伤害",
+      "pass": true,
+      "state": {
+        "clip": "Heavy",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          4.09999990463257,
+          -0.0192578118294477,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "完美弹反不掉血且破势",
+      "pass": true,
+      "state": {
+        "clip": "Heavy",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          4.09999990463257,
+          -0.0192578118294477,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "闪避无敌窗口拒绝伤害",
+      "pass": true,
+      "state": {
+        "clip": "Heavy",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          4.09999990463257,
+          -0.0192578118294477,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "击败典刑机提交唯一核心旗标",
+      "pass": true,
+      "state": {
+        "clip": "Heavy",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          4.09999990463257,
+          -0.0192578118294477,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "转运表揭示伪造签名",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -5.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "P01 先拔锁销接惰轮合离合，错序可恢复",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -15.0,
+          7.9800820350647,
+          -0.600000023841858
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "简化 P02 中水位稳定旁路排水解锁",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -14.0,
+          -0.0199180245399475,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "技能点学习招式",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -14.0,
+          -0.0199180245399475,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "原子存档读取恢复奖励与机关",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": false,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -12.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "11 个前进门在实体楼层可达且连接正确",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": false,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -10.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "能力门在未取得钩索时拒绝通行",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": true,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          14.0,
+          6.98074197769165,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "中断损坏主存档后恢复有效备份",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": false,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -12.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "check": "地图暂停运动与敌人逻辑",
+      "pass": true,
+      "state": {
+        "clip": "PassageIdle",
+        "floor": false,
+        "lane": 0,
+        "motion": "ground",
+        "p": [
+          -12.0,
+          0.0,
+          0.0
+        ],
+        "transition_max": 0.0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "engine": "4.7-rc (custom_build)",
+  "failures": 0,
+  "input": "Godot Input actions and physics; no physical controller or full human playthrough"
+}
