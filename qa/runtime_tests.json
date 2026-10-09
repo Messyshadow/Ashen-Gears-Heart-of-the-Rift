@@ -1,700 +1,1571 @@
 {
   "checks": [
     {
-      "check": "煤仓起点支撑",
+      "check": "煤仓安全入口接地",
       "pass": true,
+      "room": 0,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -12.0,
-          6.98016166687012,
+          -19.0,
+          -0.0100752767175436,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "实际输入向右行走",
+      "check": "首室有真实巡逻敌人",
       "pass": true,
+      "room": 0,
       "state": {
-        "clip": "PassageWalk",
+        "air_dash_used": false,
+        "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -7.91333055496216,
-          6.98041677474976,
+          -19.0,
+          -0.0100752767175436,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "实际行走输入推进",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageWalk",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.0333213806152,
+          -0.00916592124849558,
+          0.0
+        ],
+        "vaults": 0,
         "velocity": [
           5.80000019073486,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "起跳离地",
+      "check": "Alt 冲跑速度",
       "pass": true,
+      "room": 0,
       "state": {
-        "clip": "PassageJump",
+        "air_dash_used": false,
+        "clip": "Run",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -12.1833181381226,
+          -0.00917760189622641,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          7.80000019073486,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "蹲行改变碰撞高度",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
+        "clip": "Crouch",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -11.2733182907104,
+          -0.00917779002338648,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          1.80000019073486,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "跳跃实际离地",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageFall",
         "floor": false,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -7.08940839767456,
-          8.9080057144165,
+          -4.0,
+          1.46008217334747,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
-          2.48333311080933,
-          6.77083539962769,
+          0.0,
+          -1.22416663169861,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "落地接地",
+      "check": "跳跃落地",
       "pass": true,
+      "room": 0,
       "state": {
-        "clip": "PassageLand",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          -6.87246417999268,
-          6.98027896881104,
-          0.0
-        ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "开井盖并攀下",
-      "pass": true,
-      "state": {
-        "clip": "LadderDown",
-        "floor": true,
-        "lane": 0,
-        "motion": "ladder",
-        "p": [
-          0.0,
-          5.15251159667969,
-          0.219999998807907
-        ],
-        "transition_max": 0.0408084131777287,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "井盖开启且解除碰撞",
-      "pass": true,
-      "state": {
-        "clip": "LadderDown",
-        "floor": true,
-        "lane": 0,
-        "motion": "ladder",
-        "p": [
-          0.0,
-          5.15251159667969,
-          0.219999998807907
-        ],
-        "transition_max": 0.0408084131777287,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "井口到下层无卡死",
-      "pass": true,
-      "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -1.32000005245209,
-          -0.0192578118294477,
-          -0.0399999916553497
+          -4.0,
+          -0.00998232048004866,
+          0.0
         ],
-        "transition_max": 0.0800996348261833,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
-      }
-    },
-    {
-      "check": "背向未警觉人类允许暗杀",
-      "pass": true,
-      "state": {
-        "clip": "PassageIdle",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          -4.64583158493042,
-          0.000827506941277534,
-          0.0
         ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
+        "wall_jumps": 0
       }
     },
     {
-      "check": "暗杀一次记录击败旗标",
+      "check": "右门实际步行自动进入下一房，不返回煤仓",
       "pass": true,
+      "room": 1,
       "state": {
-        "clip": "Dagger3",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          -4.64583158493042,
-          -0.0194263979792595,
-          0.0
-        ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "竖梯从下层返回上层",
-      "pass": true,
-      "state": {
-        "clip": "PassageIdle",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          -1.32000005245209,
-          6.98074197769165,
-          -0.149999991059303
-        ],
-        "transition_max": 0.0801147222518921,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "机械犬禁止暗杀",
-      "pass": true,
-      "state": {
-        "clip": "PassageIdle",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          -15.0,
-          7.9800820350647,
-          -0.600000023841858
-        ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "折返平台改变深度轨道",
-      "pass": true,
-      "state": {
+        "air_dash_used": false,
         "clip": "PassageWalk",
         "floor": true,
-        "lane": 1,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          3.03244042396545,
-          3.98083472251892,
-          1.04999995231628
+          -17.4675006866455,
+          -0.00917737372219563,
+          0.0
         ],
-        "transition_max": 0.0858988165855408,
+        "vaults": 0,
         "velocity": [
-          -5.40000009536743,
+          1.30000019073486,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "双段楼梯抵达底层",
+      "check": "换房同步当前重试入口",
       "pass": true,
+      "room": 1,
       "state": {
-        "clip": "StairDown",
+        "air_dash_used": false,
+        "clip": "PassageWalk",
         "floor": true,
-        "lane": 1,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -11.1286478042603,
-          0.25984400510788,
-          1.04999995231628
+          -17.4675006866455,
+          -0.00917737372219563,
+          0.0
         ],
-        "transition_max": 0.0858988165855408,
+        "vaults": 0,
         "velocity": [
-          -4.40000009536743,
+          1.30000019073486,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "救援受守卫阻挡",
+      "check": "巡逻廊竖梯真实输入登顶",
       "pass": true,
+      "room": 1,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          4.0,
-          0.0,
+          -13.0500001907349,
+          3.99091792106628,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "战后洛铆加入",
+      "check": "低障碍触发翻越动作并越过",
       "pass": true,
+      "room": 1,
       "state": {
-        "clip": "PassageIdle",
+        "air_dash_used": false,
+        "clip": "PassageWalk",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          4.0,
-          -0.0192578118294477,
+          0.293333321809769,
+          -0.00917833112180233,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 1,
+        "velocity": [
+          1.39999997615814,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "压料车间独立三层及压锤",
+      "pass": true,
+      "room": 2,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "空中切换保留位置速度",
+      "check": "救援受活守卫阻挡",
       "pass": true,
+      "room": 3,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          5.0,
+          14.0,
+          0.0,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "击退守卫后救出洛铆",
+      "pass": true,
+      "room": 3,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          14.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "囚门整段斜梯实际步行抵达监视廊",
+      "pass": true,
+      "room": 3,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          3.36976027488708,
+          4.99081659317017,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "空中切换保留位置和速度",
+      "pass": true,
+      "room": 3,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          0.0,
           3.0,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           3.0,
           -2.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "维修台发放钩索",
+      "check": "维修台解锁钩索",
       "pass": true,
+      "room": 4,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -6.0,
-          0.0,
+          -19.0,
+          -0.0100752767175436,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "标记锚点范围和遮挡选择",
+      "check": "身法训练解锁角色空冲",
       "pass": true,
+      "room": 4,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          3.0,
-          6.98074197769165,
+          -19.0,
+          -0.0100752767175436,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "钩索实际输入抵达高台",
+      "check": "断桥锚点可选且未被平台遮挡",
       "pass": true,
+      "room": 5,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          9.81227111816406,
-          9.98081207275391,
+          -8.0,
+          -0.00908203143626451,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "Boss 禁止暗杀",
+      "check": "钩索实际跨越首段断桥",
       "pass": true,
+      "room": 5,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -14.0,
-          -0.0199180245399475,
+          -3.29299306869507,
+          1.99023973941803,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
-      }
-    },
-    {
-      "check": "重击有效帧造成真实伤害",
-      "pass": true,
-      "state": {
-        "clip": "Heavy",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          4.09999990463257,
-          -0.0192578118294477,
-          0.0
         ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
+        "wall_jumps": 0
       }
     },
     {
-      "check": "完美弹反不掉血且破势",
+      "check": "钩索连续抵达第二高台",
       "pass": true,
+      "room": 5,
       "state": {
-        "clip": "Heavy",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          4.09999990463257,
-          -0.0192578118294477,
-          0.0
-        ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "闪避无敌窗口拒绝伤害",
-      "pass": true,
-      "state": {
-        "clip": "Heavy",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          4.09999990463257,
-          -0.0192578118294477,
-          0.0
-        ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "击败典刑机提交唯一核心旗标",
-      "pass": true,
-      "state": {
-        "clip": "Heavy",
-        "floor": true,
-        "lane": 0,
-        "motion": "ground",
-        "p": [
-          4.09999990463257,
-          -0.0192578118294477,
-          0.0
-        ],
-        "transition_max": 0.0,
-        "velocity": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      }
-    },
-    {
-      "check": "转运表揭示伪造签名",
-      "pass": true,
-      "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -5.0,
-          0.0,
+          3.78034281730652,
+          3.99082970619202,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "P01 先拔锁销接惰轮合离合，错序可恢复",
+      "check": "连续钩索第三段接入右侧通行平台",
       "pass": true,
+      "room": 5,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -15.0,
-          7.9800820350647,
-          -0.600000023841858
+          12.6614761352539,
+          3.99008369445801,
+          0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "简化 P02 中水位稳定旁路排水解锁",
+      "check": "空中冲刺一次性实际输入",
       "pass": true,
+      "room": 5,
       "state": {
+        "air_dash_used": true,
+        "clip": "AirDash",
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.5666675567627,
+          5.91791582107544,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          17.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "空中重击触发下砸",
+      "pass": true,
+      "room": 5,
+      "state": {
+        "air_dash_used": true,
+        "clip": "Slam",
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          16.475004196167,
+          4.67341566085815,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          -22.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "下砸接地结束",
+      "pass": true,
+      "room": 5,
+      "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -14.0,
-          -0.0199180245399475,
+          16.475004196167,
+          3.99092864990234,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "技能点学习招式",
+      "check": "典刑机禁止暗杀",
       "pass": true,
+      "room": 6,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -14.0,
-          -0.0199180245399475,
+          -19.0,
+          -0.0100752767175436,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "原子存档读取恢复奖励与机关",
+      "check": "机械师重击有效帧命中 Boss",
       "pass": true,
+      "room": 6,
       "state": {
+        "air_dash_used": false,
+        "clip": "MechHeavy",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          2.79999995231628,
+          -0.010839844122529,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "完美弹反无伤并中断 Boss",
+      "pass": true,
+      "room": 6,
+      "state": {
+        "air_dash_used": false,
+        "clip": "MechHeavy",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          2.79999995231628,
+          -0.010839844122529,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "翻滚有效无敌窗口",
+      "pass": true,
+      "room": 6,
+      "state": {
+        "air_dash_used": false,
+        "clip": "MechHeavy",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          2.79999995231628,
+          -0.010839844122529,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "典刑机半血切换过载阶段",
+      "pass": true,
+      "room": 6,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          2.79999995231628,
+          -0.010839844122529,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "击败典刑机解锁主线门",
+      "pass": true,
+      "room": 6,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          2.79999995231628,
+          -0.010839844122529,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "唯一 Boss 重访不重生",
+      "pass": true,
+      "room": 6,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "出货门转运表唯一奖励",
+      "pass": true,
+      "room": 7,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "吊运台实际携带角色上行",
+      "pass": true,
+      "room": 8,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -2.0,
+          5.99009227752686,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "锁销未拔错序不会启动惰轮",
+      "pass": true,
+      "room": 9,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "四层井第一段梯子",
+      "pass": true,
+      "room": 9,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 4.01333333333334,
+        "motion": "ground",
+        "p": [
+          -13.0500001907349,
+          3.98982381820679,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "四层井第二段梯子",
+      "pass": true,
+      "room": 9,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 8.02666666666669,
+        "motion": "ground",
+        "p": [
+          8.94999980926514,
+          7.98968887329102,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "齿轮锁销惰轮离合三层联动",
+      "pass": true,
+      "room": 9,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 8.02666666666669,
+        "motion": "ground",
+        "p": [
+          8.94999980926514,
+          7.98968887329102,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "四层井第三段梯子登顶",
+      "pass": true,
+      "room": 9,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 12.04,
+        "motion": "ground",
+        "p": [
+          -4.05000019073486,
+          11.9900388717651,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "壁抓能力解锁",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "蓝纹墙真实碰撞抓壁",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "WallHold",
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -5.47093152999878,
+          2.33501553535461,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          2.31250143051147,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "抓壁后 Space 蹬墙",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageFall",
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -6.0542688369751,
+          2.38404417037964,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          -7.0,
+          -2.63083338737488,
+          0.0
+        ],
+        "wall_jumps": 1
+      }
+    },
+    {
+      "check": "壁抓井左侧梯子进入壁抓路线",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 4.01333333333334,
+        "motion": "ground",
+        "p": [
+          -13.0500001907349,
+          3.99003911018372,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 1
+      }
+    },
+    {
+      "check": "壁抓井第一跳抵达左壁顶支撑台",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageWalk",
+        "floor": true,
+        "ladder_travel": 4.01333333333334,
+        "motion": "ground",
+        "p": [
+          -4.65499496459961,
+          4.99083614349365,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          6.05000019073486,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 1
+      }
+    },
+    {
+      "check": "壁抓井第二跳抵达高壁顶",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "StairDown",
+        "floor": true,
+        "ladder_travel": 4.01333333333334,
+        "motion": "ground",
+        "p": [
+          0.385047197341919,
+          6.91300296783447,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          4.05000019073486,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 1
+      }
+    },
+    {
+      "check": "壁抓井越过高壁接入右侧出口层",
+      "pass": true,
+      "room": 10,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageWalk",
+        "floor": true,
+        "ladder_travel": 4.01333333333334,
+        "motion": "ground",
+        "p": [
+          6.05785799026489,
+          6.9908275604248,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          1.30000019073486,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 1
+      }
+    },
+    {
+      "check": "伊瑟救援受矿牢守卫阻挡",
+      "pass": true,
+      "room": 17,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          18.0,
+          5.0,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "伊瑟加入第三槽且奖励不重复",
+      "pass": true,
+      "room": 17,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          18.0,
+          4.99003887176514,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "第三槽切换游侠",
+      "pass": true,
+      "room": 14,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "伊瑟弓箭真实飞行命中敌人",
+      "pass": true,
+      "room": 14,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -9.20000076293945,
+          -0.0100122159346938,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "牛头督工半血狂暴阶段",
+      "pass": true,
+      "room": 15,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "牛头督工击败开启维修桥",
+      "pass": true,
+      "room": 15,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          2.0,
+          -0.0107693001627922,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "图纸交付奖励不重复",
+      "pass": true,
+      "room": 16,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "18 个房间布局身份独立且所有出口有实体楼层支撑",
+      "pass": true,
+      "room": 16,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "18 个前门实际步行触发并连接正确目标",
+      "pass": true,
+      "room": 13,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageWalk",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -18.1875019073486,
+          -0.00915966555476189,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          1.5,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "未取得钩索时能力门拒绝通行",
+      "pass": true,
+      "room": 4,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          20.0,
+          5.99003887176514,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "坠落在当前房间重试，不退回首室",
+      "pass": true,
+      "room": 12,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.00989595614373684,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "普通守卫重访刷新",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "刷新普通敌人不重复领取铁屑",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "损坏主存档恢复备份与关键 Boss 进度",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": false,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -12.0,
+          -19.0,
           0.0,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "11 个前进门在实体楼层可达且连接正确",
+      "check": "地图暂停运动",
       "pass": true,
+      "room": 0,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": false,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -10.0,
+          -19.0,
           0.0,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "能力门在未取得钩索时拒绝通行",
+      "check": "轴承台整段楼梯抵达升降台层",
       "pass": true,
+      "room": 13,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": true,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          14.0,
-          6.98074197769165,
+          0.00693757552653551,
+          5.99084043502808,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "中断损坏主存档后恢复有效备份",
+      "check": "维修桥斜梯抵达图纸交付层",
       "pass": true,
+      "room": 16,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
-        "floor": false,
-        "lane": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -12.0,
-          0.0,
+          2.59152030944824,
+          3.99083423614502,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
       }
     },
     {
-      "check": "地图暂停运动与敌人逻辑",
+      "check": "休息灯与继续游戏保持已保存的位置",
       "pass": true,
+      "room": 0,
       "state": {
+        "air_dash_used": false,
         "clip": "PassageIdle",
         "floor": false,
-        "lane": 0,
+        "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -12.0,
-          0.0,
+          -18.0,
+          -0.00996093824505806,
           0.0
         ],
-        "transition_max": 0.0,
+        "vaults": 0,
         "velocity": [
           0.0,
           0.0,
           0.0
-        ]
+        ],
+        "wall_jumps": 0
+      }
+    },
+    {
+      "check": "招式预览使用隔离的三维世界",
+      "pass": true,
+      "room": 0,
+      "state": {
+        "air_dash_used": false,
+        "clip": "PassageIdle",
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -18.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0
       }
     }
   ],
   "engine": "4.7-rc (custom_build)",
+  "executable": "E:/Godot/test-project/Ashen-Gears-Heart-of-the-Rift/build/AshenGears.exe",
+  "executable_sha256": "1c399011025115b21f96538b3e095b7e7215921cf2d775cf7168d8e777ce6958",
   "failures": 0,
-  "input": "Godot Input actions and physics; no physical controller or full human playthrough"
+  "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
+  "pack_sha256": "6578b830d0190674fff7ad38cb1ceb9068f4256be681654e4b9732964271c3a3",
+  "version": "0.4.0"
 }

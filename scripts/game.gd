@@ -1,6 +1,6 @@
 extends Node3D
-const Player = preload("res://scripts/player.gd")
-const Enemy = preload("res://scripts/enemy.gd")
+const Player = preload("res://scripts/player_v04.gd")
+const Enemy = preload("res://scripts/enemy_v04.gd")
 var rooms: Array
 var room := 0
 var index := 4
@@ -30,7 +30,7 @@ var flags: Dictionary = {}
 var visited: Dictionary = {}
 var defeated: Dictionary = {}
 var opened: Dictionary = {}
-var party_hp: Array = [100.0,110.0]
+var party_hp: Array = [100.0,110.0,95.0]
 var active_slot := 0
 var magic := 100.0
 var scrap := 0
@@ -47,10 +47,14 @@ var story := ""
 var story_origin := ""
 var gear := [true,false,false]
 var water := [false,false,0,false]
-var save_path := "user://ashen_save.json"
+var save_path := "user://ashen_save_v04.json"
 var qa_mode := false
 var capture_dir := ""
 var main_clock := 0.0
+var world_builder: RefCounted
+var hitstop := 0.0
+var overview := false
+var transition_pending := false
 
 func _ready() -> void:
 	rooms=JSON.parse_string(FileAccess.get_file_as_string("res://data/rooms.json"))
@@ -67,7 +71,7 @@ func _ready() -> void:
 	if qa_mode:call_deferred("run_qa")
 
 func setup_input() -> void:
-	var actions := {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"light":[KEY_J],"heavy":[KEY_K],"dodge":[KEY_SHIFT],"guard":[KEY_L],"modifier":[KEY_CTRL],"grapple":[KEY_Q],"interact":[KEY_E],"switch":[KEY_F],"item":[KEY_R],"map":[KEY_M],"skills":[KEY_T],"pause":[KEY_ESCAPE]}
+	var actions := {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"light":[KEY_J],"heavy":[KEY_K],"dodge":[KEY_SHIFT],"guard":[KEY_L],"modifier":[KEY_CTRL],"grapple":[KEY_Q],"interact":[KEY_E],"switch":[KEY_F],"item":[KEY_R],"map":[KEY_M],"skills":[KEY_T],"pause":[KEY_ESCAPE],"run":[KEY_ALT],"overview":[KEY_TAB]}
 	for action in actions:
 		InputMap.add_action(action)
 		for code in actions[action]:
@@ -116,61 +120,42 @@ func load_room(number: int, spawn_override: Variant = null) -> void:
 	if is_instance_valid(player):remove_child(player);player.queue_free()
 	enemies.clear();props.clear();dusts.clear();hatch=null;hatch_collision=null;hatch_target=0
 	world=Node3D.new();add_child(world)
-	data=JSON.parse_string(FileAccess.get_file_as_string("res://assets/models/passage_%02d.json"%index))
-	world.add_child(load("res://assets/models/passage_%02d.glb"%index).instantiate())
-	apply_atmosphere()
-	for box in data.boxes:
-		var shape := BoxShape3D.new();shape.size=vector(box.size);body(shape,vector(box.p))
-	for ramp in data.slopes:
-		var pts := PackedVector3Array()
-		for end in [ramp.a,ramp.b]:
-			for z in [-float(ramp.width)*.5,float(ramp.width)*.5]:
-				for depth in [0,-float(ramp.thick)]:pts.append(Vector3(float(end[0]),float(end[1])+depth,float(ramp.z)+z))
-		var shape := ConvexPolygonShape3D.new();shape.points=pts;body(shape,Vector3.ZERO)
-	for spec in data.lights:
-		var light := OmniLight3D.new();world.add_child(light);light.position=vector(spec.p)
-		light.light_color=Color(spec.color[0],spec.color[1],spec.color[2]);light.light_energy=spec.energy;light.omni_range=spec.range;light.shadow_enabled=true;light.shadow_bias=.06
-	if data.has("hatch"):
-		hatch=Node3D.new();world.add_child(hatch);hatch.position=Vector3(0,7,-.8);hatch.add_child(load("res://assets/models/hatch_lid.glb").instantiate())
-		var cover := CylinderShape3D.new();cover.radius=.76;cover.height=.08;hatch_collision=body(cover,Vector3(0,6.96,0))
-	if rooms[room].get("ledge",false):
-		var shape := BoxShape3D.new();shape.size=Vector3(9,.5,3);body(shape,Vector3(12,9.75,0))
-		var slab := MeshInstance3D.new();var mesh := BoxMesh.new();mesh.size=shape.size;slab.mesh=mesh;slab.position=Vector3(12,9.75,0)
-		var mat := StandardMaterial3D.new();mat.albedo_color=Color(.20,.24,.28);mat.metallic=.7;slab.material_override=mat;world.add_child(slab)
-	if room in [2,5,6,9]:
-		var furnace: Node3D = load("res://assets/models/furnace_assembly.glb").instantiate();world.add_child(furnace);furnace.position=Vector3(3,0,-4)
-		var fire := OmniLight3D.new();world.add_child(fire);fire.position=Vector3(3,4,-6);fire.light_color=Color(1,.22,.04);fire.light_energy=4;fire.omni_range=17
-	var lava := MeshInstance3D.new();var plane := PlaneMesh.new();plane.size=Vector2(36,10);lava.mesh=plane;lava.position=Vector3(0,-1.5,-2)
-	var lm := ShaderMaterial.new();lm.shader=preload("res://scripts/lava.gdshader");lava.material_override=lm;world.add_child(lava)
+	data=rooms[room]
+	world_builder=preload("res://scripts/world_v04.gd").new()
+	world_builder.build(self,rooms[room])
+	transition_pending=false
 	for anchor in rooms[room].get("anchors",[]):
 		var n := marker("◇  钩索锚点",Color(.18,.68,1));world.add_child(n);n.position=vector(anchor)+Vector3(0,.55,0)
 	for i in range(rooms[room].enemies.size()):
 		var spec: Dictionary=rooms[room].enemies[i];var uid := "%s:%d"%[rooms[room].id,i]
-		if defeated.has(uid):continue
+		if spec.kind=="boss" and flags.get("boss",false):continue
+		if spec.kind=="minotaur" and flags.get("boss2",false):continue
 		var enemy := Enemy.new();enemy.game=self;enemy.kind=spec.kind;enemy.uid=uid;enemy.position=vector(spec.p);enemy.facing=spec.face;world.add_child(enemy);enemies.append(enemy)
 	for spec in rooms[room].props:
 		var uid: String = rooms[room].id+":"+spec.kind
-		if opened.has(uid) and spec.kind in ["chest","rescue","grapple","manifest"]:continue
+		if opened.has(uid) and spec.kind in ["chest","rescue","grapple","manifest","recruit","completion"]:continue
 		add_prop(spec.kind,vector(spec.p),spec.text,uid)
 	if rooms[room].has("checkpoint"):add_prop("save",vector(rooms[room].checkpoint),"休息灯 · 保存并恢复","")
 	add_prop("exit",vector(rooms[room].exit),"通道 → "+rooms[int(rooms[room].next)].name,"")
 	if room>0 and room!=11:add_prop("back",vector(rooms[room].back),"← 返回前室","")
+	apply_atmosphere()
 	player=Player.new();player.game=self;add_child(player);player.position=vector(rooms[room].spawn) if spawn_override==null else spawn_override
-	player.last_floor=true;visited[rooms[room].id]=true
+	visited[rooms[room].id]=true
+	checkpoint_room=room;checkpoint_pos=player.position
 	target=player.position+Vector3(0,1.4,0);rig.position=target
 	nearest={}
 	if screen=="play" and rooms[room].has("story") and not flags.get("story_"+rooms[room].id,false):
 		flags["story_"+rooms[room].id]=true;show_story(rooms[room].story,false)
+	if screen!="title":save_game()
 	ui.queue_redraw()
 
 func add_prop(kind: String, pos: Vector3, text_value: String, uid: String) -> void:
-	var label := marker("✦" if kind in ["save","grapple","rescue"] else "◇",Color(.22,.68,1) if kind in ["save","grapple"] else Color(.97,.64,.27))
-	world.add_child(label);label.position=pos+Vector3(0,2.1,0)
-	var prop := MeshInstance3D.new();var mesh := BoxMesh.new();mesh.size=Vector3(.6,.9,.55);prop.mesh=mesh
-	var m := StandardMaterial3D.new();m.albedo_color=Color(.22,.16,.09);m.metallic=.6;m.emission_enabled=true;m.emission=Color(.02,.13,.2) if kind=="save" else Color(.12,.055,.01)
-	prop.material_override=m;world.add_child(prop);prop.position=pos+Vector3(0,.45,-.8)
+	var label := marker(("→  " if kind=="exit" else "←  " if kind=="back" else "✦  ")+text_value,Color(.22,.68,1) if kind in ["save","grapple","wall"] else Color(.97,.64,.27))
+	world.add_child(label);label.position=pos+Vector3(0,3.6 if kind in ["exit","back"] else 2.1,0);label.font_size=26;label.pixel_size=.01
+	var prop: MeshInstance3D=world_builder.part("Gate" if kind in ["exit","back","side","hub"] else "Coil" if kind in ["save","grapple","wall"] else "Crate",pos+Vector3(0,0,-.65),Vector3.ONE if kind in ["exit","back","side","hub"] else Vector3(.6,.6,.6))
+	if kind in ["exit","back"]:prop.rotation.y=PI/2
 	if kind=="rescue":
-		var friend: Node3D=load("res://assets/models/ashen_actor.glb").instantiate();world.add_child(friend);friend.position=pos+Vector3(0,0,-.7);friend.rotation.y=-PI/2
+		var friend: Node3D=load("res://assets/models/luomao_v04.glb").instantiate();world.add_child(friend);friend.position=pos+Vector3(0,0,-.7);friend.rotation.y=-PI/2
 		friend.find_child("AnimationPlayer",true,false).play("PassageIdle")
 	props.append({"kind":kind,"p":pos,"text":text_value,"uid":uid,"label":label,"mesh":prop})
 
@@ -197,9 +182,12 @@ func _process(dt: float) -> void:
 	main_clock+=dt
 	if not is_instance_valid(player):return
 	if not paused:
+		hitstop=maxf(0,hitstop-dt)
+		world_builder.tick(dt)
 		toast_clock=maxf(0,toast_clock-dt);switch_cooldown=maxf(0,switch_cooldown-dt);skill_cooldown=maxf(0,skill_cooldown-dt);magic=minf(100,magic+dt*3)
 		if hatch:hatch.rotation.x=lerpf(hatch.rotation.x,hatch_target,1-exp(-dt*5))
 		update_nearest()
+		check_auto_exit()
 		if water[0] and not water[1]:water[2]=minf(2,water[2]+dt*.5)
 		if water[1]:water[2]=maxf(0,water[2]-dt*.6)
 		if water[3] and water[2]<=.03 and flags.get("water_stable",false) and not flags.get("steam",false):flags.steam=true;toast("压力联锁完成 · 出口已开启");save_game()
@@ -210,8 +198,11 @@ func _process(dt: float) -> void:
 		var desired: Vector3=player.position+Vector3(clampf(player.velocity.x*.25,-1.5,1.5),1.8,0)
 		if player.velocity.y < -3:desired.y-=clampf(-player.velocity.y*.10,0,1.4)
 		var half := camera.size*get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y*.5
-		desired.x=clampf(desired.x,-18+half,18-half)
-		desired.y=clampf(desired.y,3.0,10)
+		desired.x=clampf(desired.x,-22+half,22-half)
+		desired.y=clampf(desired.y,3.0,float(rooms[room].bounds[3])-1)
+		if overview:desired=Vector3(0,(float(rooms[room].bounds[3])-5)*.5+1,0)
+		var view_aspect: float=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y
+		camera.size=lerpf(camera.size,maxf(46.0/view_aspect,float(rooms[room].bounds[3])+4) if overview else 12.5,1-exp(-dt*4))
 		target=target.lerp(desired,1-exp(-dt*6));rig.position=target+Vector3(0,-camera_impact,0)
 		camera_impact=move_toward(camera_impact,0,dt*.8)
 	ui.queue_redraw()
@@ -228,6 +219,7 @@ func update_nearest() -> void:
 			distance=d;nearest=prop
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("overview") and screen=="play":overview=not overview
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_F11:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if DisplayServer.window_get_mode()==DisplayServer.WINDOW_MODE_FULLSCREEN else DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if screen=="story":
@@ -243,41 +235,56 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch"):switch_actor()
 	if event.is_action_pressed("item"):
 		if potion>0 and party_hp[active_slot]<max_hp():potion-=1;party_hp[active_slot]=minf(max_hp(),party_hp[active_slot]+45);toast("使用冷却药剂 · 恢复 45 生命")
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_1,KEY_2]:switch_actor(event.keycode-KEY_1)
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_1,KEY_2,KEY_3]:switch_actor(event.keycode-KEY_1)
 
 func set_screen(value: String) -> void:
 	screen=value;paused=screen!="play"
-	if is_instance_valid(player):player.tree.active=not paused
+	if is_instance_valid(player):player.set_animation_paused(paused)
 	ui.rebuild_buttons()
 
 func new_game() -> void:
-	flags={};visited={};defeated={};opened={};party_hp=[100.0,110.0];active_slot=0;magic=100;scrap=0;skill_points=3;learned={};potion=3;weapon_rank=0
-	gear=[true,false,false];water=[false,false,0,false];checkpoint_room=0;checkpoint_pos=Vector3(-10,7,0)
+	flags={};visited={};defeated={};opened={};party_hp=[100.0,110.0,95.0];active_slot=0;magic=100;scrap=0;skill_points=3;learned={};potion=3;weapon_rank=0
+	gear=[true,false,false];water=[false,false,0,false];checkpoint_room=0;checkpoint_pos=Vector3(-19,0,0)
 	set_screen("play");load_room(0);save_game()
 
-func max_hp() -> float:return 110 if active_slot==1 else 100
+func max_hp() -> float:return [100.0,110.0,95.0][active_slot]
 
 func interact() -> void:
+	if world_builder.activate_deck():return
 	if nearest.is_empty():return
 	var kind: String=nearest.kind
 	if kind=="assassinate":
 		nearest.enemy.hurt(999,player.facing);player.attack_clock=.8;player.attack_total=.8;player.attack_hit=true;player.attack_clip="Dagger3";player.invulnerable=.5;toast("暗杀成功 · 机械与 Boss 不能暗杀");return
-	if kind in ["exit","back","loop","hub","shortcut"]:
+	if kind in ["exit","back","loop","hub","shortcut","side","rust_loop","rust_shortcut"]:
 		if kind=="exit":
 			var gate: String=rooms[room].get("gate","")
 			if not gate.is_empty() and not flags.get(gate,false):toast("尚未完成本室目标 · "+rooms[room].hint,3);return
 			var next := int(rooms[room].next)
-			if room==10:flags.slice_complete=true;save_game();show_story("总井的回流系统重新启动。\n洛铆：维修所接住了第一批幸存者。\n凯恩：米菈，我会继续往下找你。\n\n序章样片完成。你可以回到维修所，继续探索已开放的房间。",false)
+			if room==16 and not flags.get("slice_complete",false):flags.slice_complete=true;save_game();show_story("总井的回流系统重新启动。\n洛铆：维修所接住了第一批幸存者。\n凯恩：米菈，我会继续往下找你。\n\n0.4.0 当前章节完成。维修所与两片区域回环开放。",false)
 			call_deferred("load_room",next);return
 		if kind=="back":
-			var previous := room-1
+			var previous := int(rooms[room].previous)
 			call_deferred("load_room",previous,vector(rooms[previous].exit)+Vector3(-2,.1,0));return
 		if kind=="loop":call_deferred("load_room",0);return
 		if kind=="hub":call_deferred("load_room",11);return
-		if kind=="shortcut":flags.shortcut=true;call_deferred("load_room",1,Vector3(10,7,0));return
+		if kind=="shortcut":flags.shortcut=true;call_deferred("load_room",1);return
+		if kind=="side":call_deferred("load_room",17);return
+		if kind=="rust_loop":call_deferred("load_room",8);return
+		if kind=="rust_shortcut":call_deferred("load_room",9);return
 	if kind=="save":
 		checkpoint_room=room;checkpoint_pos=player.position
-		party_hp=[100.0,110.0];magic=100;player.stamina=100;potion=3;save_game();toast("休息灯已保存 · 全队恢复");return
+		party_hp=[100.0,110.0,95.0];magic=100;player.stamina=100;potion=3;save_game();toast("休息灯已保存 · 全队恢复，普通敌人刷新");call_deferred("load_room",room,player.position);return
+	if kind=="wall":flags.wall=true;show_story("壁抓与壁跳已学会。\n跳向蓝色标记墙，按住朝墙方向抓壁；Space 蹬墙。\n抓壁最多 0.65 秒，空中切人不会刷新次数。");save_game();return
+	if kind in ["mobility","training"]:
+		learned["%d_2"%active_slot]=true;show_story("身法训练：Alt 冲跑，S 蹲行，Shift 翻滚。\n低障碍前 Space 翻越；空中 K 下砸。\nCtrl + Space 空中冲刺，每次腾空一次，消耗 16 魔力。");save_game();return
+	if kind=="recruit":
+		if flags.get("ranger",false):return
+		for enemy in enemies:
+			if is_instance_valid(enemy) and enemy.hp>0:toast("先击退矿牢守卫");return
+		flags.ranger=true;skill_points+=3;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("伊瑟：这份名册，我会带给还活着的人。\n伊瑟自愿加入。3 或 F 切换第三槽，弓箭可以远距支援。");save_game();return
+	if kind=="completion":
+		if opened.has(nearest.uid):return
+		flags.slice_complete=true;skill_points+=1;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("总井图纸交付。灰闸囚厂与锈脊齿轮井回环开放。\n接下来要修复雾肺水务区，寻找米菈的真实去向。\n0.4.0 当前章节结束，可以继续回访、训练与救援。");save_game();return
 	if kind=="chest":scrap+=20;toast(nearest.text)
 	if kind=="rescue":
 		for enemy in enemies:
@@ -319,25 +326,34 @@ func interact() -> void:
 	if kind in ["chest","rescue","grapple","manifest"]:
 		opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;save_game()
 
+func available_slots() -> Array:
+	return [0,1,2] if flags.get("ranger",false) else [0,1] if flags.get("rescued",false) else [0]
+
 func switch_actor(slot: int = -1) -> void:
-	if not flags.get("rescued",false):toast("队伍还没有同伴");return
-	if switch_cooldown>0 or player.hurt_clock>0 or player.attack_clock>0 or player.motion in ["enter","exit","turn"]:return
-	var next := (active_slot+1)%2 if slot<0 else slot
-	if party_hp[next]<=0 or next==active_slot:return
-	active_slot=next;switch_cooldown=1;toast("洛铆 · 机械师" if next==1 else "凯恩 · 裂影匕首")
-	player.visual.scale=Vector3.ONE*(1.1 if next==1 else 1)
+	var slots: Array=available_slots()
+	if slots.size()==1:toast("救援后可以切换同伴");return
+	if switch_cooldown>0 or player.hurt_clock>0 or player.attack_clock>0 or player.motion=="vault":return
+	var next: int=slots[(slots.find(active_slot)+1)%slots.size()] if slot<0 else slot
+	if not next in slots or party_hp[next]<=0 or next==active_slot:return
+	active_slot=next;switch_cooldown=1;player.set_actor(next);toast(["凯恩 · 匕首","洛铆 · 机械重击","伊瑟 · 弓箭"][next])
+
+func menu_actor(slot: int) -> void:
+	if slot in available_slots():active_slot=slot;player.set_actor(slot);ui.rebuild_buttons()
 
 func actor_down() -> void:
-	if flags.get("rescued",false) and party_hp[1-active_slot]>0:
-		active_slot=1-active_slot;toast("接替倒地同伴");return
-	show_story("回声熄灭了。你将在最近的休息灯醒来。",false)
-	party_hp=[100.0,110.0];magic=100;potion=3
-	call_deferred("load_room",checkpoint_room,checkpoint_pos)
+	for slot in available_slots():
+		if party_hp[slot]>0:active_slot=slot;player.set_actor(slot);toast("接替倒地同伴");return
+	party_hp=[100.0,110.0,95.0];magic=100;potion=3
+	show_story("回声暂歇。你将在当前房间安全入口醒来。");call_deferred("load_room",room)
 
 func reset_player() -> void:
-	party_hp[active_slot]=maxf(0,party_hp[active_slot]-25)
+	party_hp[active_slot]=maxf(1,party_hp[active_slot]-10)
+	call_deferred("load_room",room);toast("坠落受伤 · 在本室入口重试，不退回煤仓")
+
+func environment_damage(amount: float) -> void:
+	if player.invulnerable>0:return
+	party_hp[active_slot]=maxf(0,party_hp[active_slot]-amount);player.invulnerable=.8;player.hurt_clock=.25
 	if party_hp[active_slot]<=0:actor_down()
-	else:call_deferred("load_room",checkpoint_room,checkpoint_pos);toast("坠落受伤 · 返回休息灯")
 
 func damage_player(amount: float, facing: float, source: Node) -> void:player.receive_damage(amount,facing,source)
 
@@ -345,7 +361,7 @@ func selected_anchor() -> Variant:
 	var best: Variant=null;var distance := 12.0
 	for a in rooms[room].get("anchors",[]):
 		var p := vector(a);var d := player.position.distance_to(p)
-		if d<distance:
+		if d<distance and (p.x-player.position.x)*player.facing>1.0:
 			var query := PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),p+Vector3(0,.25,0),1)
 			if get_world_3d().direct_space_state.intersect_ray(query).is_empty():best=p;distance=d
 	return best
@@ -402,4 +418,35 @@ func particles(pos: Vector3, force: float, col: Color) -> void:
 		world.add_child(n);n.position=pos;dusts.append({"node":n,"mat":material,"life":.45,"velocity":Vector3(randf_range(-1.5,1.5)*force,randf_range(.5,2),0)})
 
 func run_qa() -> void:
-	await preload("res://scripts/qa.gd").new().run(self,capture_dir)
+	var suite: RefCounted=preload("res://scripts/qa_v04.gd").new()
+	var failures: int=await suite.run(self,capture_dir)
+	suite=null
+	await get_tree().process_frame
+	get_tree().quit(1 if failures>0 else 0)
+
+func check_auto_exit() -> void:
+	if transition_pending or paused:return
+	for prop in props:
+		if prop.kind=="exit" and player.position.distance_to(prop.p)<.8 and player.move_axis()>.2:
+			var gate: String=rooms[room].get("gate","")
+			if gate.is_empty() or flags.get(gate,false):nearest=prop;transition_pending=true;interact()
+
+func melee_hit(amount: float,reach: float,direction: float,area: bool) -> void:
+	for enemy in enemies:
+		if not is_instance_valid(enemy):continue
+		var d: Vector3=enemy.position-player.position
+		if absf(d.x)>reach or absf(d.y)>1.7 or absf(d.z)>1.5 or (not area and direction*d.x<-.3):continue
+		var query:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),enemy.position+Vector3(0,1,0),1)
+		if get_world_3d().direct_space_state.intersect_ray(query).is_empty():enemy.hurt(amount,direction,30 if amount>=35 else 12);hitstop=.045
+
+func fire_projectile(pos: Vector3,direction: float,amount: float,friendly: bool,source: Node) -> void:
+	var shot:=preload("res://scripts/projectile.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=amount;shot.friendly=friendly;shot.source=source
+	shot.travel=Vector3(direction,0,0)
+	if not friendly and is_instance_valid(source) and source.kind in ["drone","ranged","turret"]:shot.travel=(player.position+Vector3(0,.9,0)-pos).normalized()
+	if friendly:
+		var best:=12.0
+		for enemy in enemies:
+			if not is_instance_valid(enemy):continue
+			var diff: Vector3=enemy.position+Vector3(0,.9,0)-pos
+			if diff.x*direction>0 and absf(diff.y)<3 and diff.length()<best:best=diff.length();shot.travel=diff.normalized()
+	world.add_child(shot)

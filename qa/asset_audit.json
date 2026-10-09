@@ -31,12 +31,18 @@
     "sha256": "a0440f9998097e8ab8786ab444361f580515a7a66e38ce08c2054d168ce80c70"
   },
   {
+    "file": "drone_v04.glb",
+    "bytes": 11313804,
+    "mesh_count": 1,
+    "animations": [],
+    "embedded_images": 6,
+    "sha256": "55b46c9e26059e8dca5ae70df0873ac6438e74e3fe4da043fc4e21c02c32f3fa"
+  },
+  {
     "file": "execution_machine.glb",
     "bytes": 160632,
     "mesh_count": 14,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 0,
     "sha256": "a454324f2040e9b0dfcc6e6c8f96ef2910bb63dc3acd42518db3781e88b7f9bb"
   },
@@ -44,9 +50,7 @@
     "file": "furnace_assembly.glb",
     "bytes": 1524244,
     "mesh_count": 163,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 0,
     "sha256": "863e5de7830e2155c41f66ac3aa727fd33ada8325feb1104ff803dc1ded10fb2"
   },
@@ -54,9 +58,7 @@
     "file": "hatch_lid.glb",
     "bytes": 11316116,
     "mesh_count": 16,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 6,
     "sha256": "f374c6c555356061554ac515ec811c8b9a999fce446ebdcf4db2fdd6aef4969c"
   },
@@ -240,22 +242,120 @@
     "sha256": "4784fa931462433c3dad5f0b886e3fc7fc61ff389e99ea1998cf2add729d6c92"
   },
   {
+    "file": "industrial_kit_v04.glb",
+    "bytes": 23857900,
+    "mesh_count": 16,
+    "animations": [],
+    "embedded_images": 12,
+    "sha256": "14ec10f6dd1ca85d1f6e435317693eaf14ca9a75ea7438542550abd85f96fa9f"
+  },
+  {
+    "file": "kain_v04.glb",
+    "bytes": 5315880,
+    "mesh_count": 2,
+    "animations": [
+      "StairUp",
+      "StairDown",
+      "LadderUp",
+      "LadderDown",
+      "LadderIdle",
+      "LadderEnter",
+      "LadderExit",
+      "HatchEnter",
+      "HatchExit",
+      "PassageIdle",
+      "PassageWalk",
+      "PassageLand",
+      "PassageFall",
+      "PassageJump",
+      "Dagger1",
+      "Dagger2",
+      "Dagger3",
+      "Heavy",
+      "Guard",
+      "Dodge",
+      "Hurt",
+      "Skill",
+      "Run",
+      "Crouch",
+      "Roll",
+      "AirDash",
+      "WallHold",
+      "WallKick",
+      "Vault",
+      "Slam",
+      "HookPull",
+      "MechLight",
+      "MechHeavy",
+      "BowShot"
+    ],
+    "embedded_images": 10,
+    "sha256": "a677ae57261dd7b8f42f1b818ac2d0aa0f96eee2b80bb3b1073a8d475ca444fc"
+  },
+  {
+    "file": "luomao_v04.glb",
+    "bytes": 5331880,
+    "mesh_count": 4,
+    "animations": [
+      "StairUp",
+      "StairDown",
+      "LadderUp",
+      "LadderDown",
+      "LadderIdle",
+      "LadderEnter",
+      "LadderExit",
+      "HatchEnter",
+      "HatchExit",
+      "PassageIdle",
+      "PassageWalk",
+      "PassageLand",
+      "PassageFall",
+      "PassageJump",
+      "Dagger1",
+      "Dagger2",
+      "Dagger3",
+      "Heavy",
+      "Guard",
+      "Dodge",
+      "Hurt",
+      "Skill",
+      "Run",
+      "Crouch",
+      "Roll",
+      "AirDash",
+      "WallHold",
+      "WallKick",
+      "Vault",
+      "Slam",
+      "HookPull",
+      "MechLight",
+      "MechHeavy",
+      "BowShot"
+    ],
+    "embedded_images": 10,
+    "sha256": "4eb5f3d2e8972cae8bc07cbabf7dccf35810822a705e9c6d533878448e66687b"
+  },
+  {
     "file": "mechanical_hound.glb",
     "bytes": 113860,
     "mesh_count": 13,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 0,
     "sha256": "84148dfc42666bb70ffc487afc5d46ae4080c66c3aa036c5b9fed673a76b569c"
+  },
+  {
+    "file": "minotaur_v04.glb",
+    "bytes": 11498188,
+    "mesh_count": 1,
+    "animations": [],
+    "embedded_images": 6,
+    "sha256": "1c1466d19c52146523065257f450963291ed67d641250c15f3d7b07467aa8d35"
   },
   {
     "file": "passage_01.glb",
     "bytes": 46305572,
     "mesh_count": 5,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 16,
     "sha256": "58b3d53ee1e0443af10e110806181d97820f019fd5f879b9b657144405fcd377"
   },
@@ -263,9 +363,7 @@
     "file": "passage_02.glb",
     "bytes": 46198728,
     "mesh_count": 5,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 16,
     "sha256": "1bc48a5671f842bab0c965d0c3476f0b600fdd3cc625d8ea492662c2c8d14de9"
   },
@@ -273,9 +371,7 @@
     "file": "passage_03.glb",
     "bytes": 45454604,
     "mesh_count": 5,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 16,
     "sha256": "2dcc56c10cd6067d6b8cff7aca90475f505a6c2b6ba920b5a692617411e96902"
   },
@@ -283,9 +379,7 @@
     "file": "passage_04.glb",
     "bytes": 46347760,
     "mesh_count": 5,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 16,
     "sha256": "7590a5496d5884fbc17e5f3118b0cbc19a0e4c1a4861fd560a54085ef836c2b9"
   },
@@ -293,10 +387,59 @@
     "file": "passage_05.glb",
     "bytes": 45386828,
     "mesh_count": 5,
-    "animations": [
-      null
-    ],
+    "animations": [],
     "embedded_images": 16,
     "sha256": "e3878e06a95d0e9a0444169dd5586aad8a062360d96602cd0bb23930c0baa696"
+  },
+  {
+    "file": "turret_v04.glb",
+    "bytes": 11305744,
+    "mesh_count": 1,
+    "animations": [],
+    "embedded_images": 6,
+    "sha256": "dbecd7cc5824e85442f64272fe2920f13a79475ebe15a7dd6046ffb3d537fe97"
+  },
+  {
+    "file": "yise_v04.glb",
+    "bytes": 5471700,
+    "mesh_count": 2,
+    "animations": [
+      "StairUp",
+      "StairDown",
+      "LadderUp",
+      "LadderDown",
+      "LadderIdle",
+      "LadderEnter",
+      "LadderExit",
+      "HatchEnter",
+      "HatchExit",
+      "PassageIdle",
+      "PassageWalk",
+      "PassageLand",
+      "PassageFall",
+      "PassageJump",
+      "Dagger1",
+      "Dagger2",
+      "Dagger3",
+      "Heavy",
+      "Guard",
+      "Dodge",
+      "Hurt",
+      "Skill",
+      "Run",
+      "Crouch",
+      "Roll",
+      "AirDash",
+      "WallHold",
+      "WallKick",
+      "Vault",
+      "Slam",
+      "HookPull",
+      "MechLight",
+      "MechHeavy",
+      "BowShot"
+    ],
+    "embedded_images": 10,
+    "sha256": "7af8508b67b091afd27d8bb24aece7a128a5dc7f30a447325b31ffeac370852d"
   }
 ]

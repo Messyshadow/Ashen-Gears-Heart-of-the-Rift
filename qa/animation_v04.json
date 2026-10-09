@@ -1,0 +1,23 @@
+{
+  "version": "0.4.0",
+  "new_clips": [
+    "Run",
+    "Crouch",
+    "Roll",
+    "AirDash",
+    "WallHold",
+    "WallKick",
+    "Vault",
+    "Slam",
+    "HookPull",
+    "MechLight",
+    "MechHeavy",
+    "BowShot"
+  ],
+  "actors": [
+    "kain_v04",
+    "luomao_v04",
+    "yise_v04"
+  ],
+  "room_layouts": 18
+}
