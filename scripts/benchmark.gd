@@ -31,6 +31,6 @@ func run() -> void:
 		for value in objects:object_total+=value
 		records.append({"room":room,"mean_frame_ms":total/frames.size(),"p95_frame_ms":frames[int(frames.size()*.95)],"average_fps":1000.0/(total/frames.size()),"draw_calls":draw_total/draws.size(),"visible_objects":object_total/objects.size(),"room_build_ms":load_ms,"texture_memory_bytes":Performance.get_monitor(Performance.RENDER_TEXTURE_MEM_USED),"video_memory_bytes":Performance.get_monitor(Performance.RENDER_VIDEO_MEM_USED)})
 		print("BENCH ",profile," ",records[-1])
-	var report={"version":"0.6.0","profile":profile,"gpu":RenderingServer.get_video_adapter_name(),"renderer":RenderingServer.get_current_rendering_method(),"resolution":"1920x1080","vsync":false,"fps_limit":0,"frames_per_room":240,"records":records,"note":"Measured on this GPU; does not certify GTX 1060 or integrated GPU FPS. Room build includes instantiation, not all driver shader compilation."}
+	var report={"version":game.Content.VERSION,"profile":profile,"gpu":RenderingServer.get_video_adapter_name(),"renderer":RenderingServer.get_current_rendering_method(),"resolution":"1920x1080","vsync":false,"fps_limit":0,"frames_per_room":240,"records":records,"note":"Measured on this GPU; does not certify GTX 1060 or integrated GPU FPS. Room build includes instantiation, not all driver shader compilation."}
 	var file:=FileAccess.open(report_path,FileAccess.WRITE);file.store_string(JSON.stringify(report,"  "));file.close()
 	game.audio_system.halt();await create_timer(.15).timeout;quit()

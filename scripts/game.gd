@@ -31,6 +31,9 @@ var hatch: Node3D
 var hatch_target := 0.0
 var hatch_collision: StaticBody3D
 var dusts: Array[Dictionary] = []
+var particle_pool: Array[MeshInstance3D]=[]
+var feedback: Node
+var base_camera_size := 12.5
 var enemies: Array = []
 var props: Array = []
 var audio_system: Node
@@ -88,6 +91,7 @@ func _ready() -> void:
 		if arg.begins_with("--capture-dir="):capture_dir=arg.trim_prefix("--capture-dir=")
 	get_tree().auto_accept_quit=false;get_window().close_requested.connect(request_quit)
 	setup_input();setup_environment()
+	feedback=preload("res://scripts/action_feedback.gd").new();feedback.game=self;add_child(feedback)
 	controls=preload("res://scripts/controls_settings.gd").new();controls.game=self;add_child(controls)
 	progression=preload("res://scripts/progression_v06.gd").new();progression.game=self
 	graphics=preload("res://scripts/graphics_settings.gd").new();graphics.game=self;add_child(graphics)
@@ -138,6 +142,7 @@ func vector(a: Array) -> Vector3:return Vector3(float(a[0]),float(a[1]),float(a[
 func load_room(number: int, spawn_override: Variant = null) -> void:
 	if number<0 or number>=rooms.size():push_warning("Invalid room target: %d"%number);transition_pending=false;return
 	room=number;index=int(rooms[room].template);doorway_cooldown=.4
+	feedback.reset();particle_pool.clear()
 	if is_instance_valid(world):remove_child(world);world.queue_free()
 	if is_instance_valid(player):remove_child(player);player.queue_free()
 	enemies.clear();props.clear();dusts.clear();hatch=null;hatch_collision=null;hatch_target=0
@@ -237,7 +242,11 @@ func _process(dt: float) -> void:
 			if flags.circuit_time>=2:flags.circuit=true;flags.circuit_pending=false;sound("gear_start");toast("冷却联锁完成 · 实验室门锁开启");save_game()
 		for i in range(dusts.size()-1,-1,-1):
 			var d := dusts[i];d.life-=dt
-			if d.life<=0:d.node.queue_free();dusts.remove_at(i);continue
+			if d.life<=0:
+				d.node.visible=false
+				if particle_pool.size()<96:particle_pool.append(d.node)
+				else:d.node.queue_free()
+				dusts.remove_at(i);continue
 			d.node.position+=d.velocity*dt;d.velocity.y-=dt*3;d.node.scale+=Vector3.ONE*dt*.3
 		var desired: Vector3=player.position+Vector3(clampf(player.velocity.x*.25,-1.5,1.5),1.8,0)
 		if player.velocity.y < -3:desired.y-=clampf(-player.velocity.y*.10,0,1.4)
@@ -246,8 +255,9 @@ func _process(dt: float) -> void:
 		desired.y=clampf(desired.y,3.0,float(rooms[room].bounds[3])-1)
 		if overview:desired=Vector3(0,(float(rooms[room].bounds[3])-5)*.5+1,0)
 		var view_aspect: float=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y
-		camera.size=lerpf(camera.size,maxf(46.0/view_aspect,float(rooms[room].bounds[3])+4) if overview else 12.5,1-exp(-dt*4))
-		target=target.lerp(desired,1-exp(-dt*6));rig.position=target+Vector3(0,-camera_impact,0)
+		base_camera_size=lerpf(base_camera_size,maxf(46.0/view_aspect,float(rooms[room].bounds[3])+4) if overview else 12.5,1-exp(-dt*4))
+		camera.size=base_camera_size*(1 if overview else feedback.zoom_factor())
+		target=target.lerp(desired,1-exp(-dt*6));rig.position=target+Vector3(0,-camera_impact,0)+(Vector3.ZERO if overview else feedback.camera_offset())
 		camera_impact=move_toward(camera_impact,0,dt*.8)
 	hud_clock+=dt
 	if hud_clock>=1.0/30 or screen in ["graphics","graphics_confirm"]:
@@ -299,7 +309,9 @@ func set_screen(value: String) -> void:
 	screen=value;paused=screen!="play"
 	if value=="map":map_region=int(data.get("region",1))
 	if audio_system:audio_system.update_targets()
-	if is_instance_valid(player):player.set_animation_paused(paused)
+	if is_instance_valid(player):
+		if paused:player.clear_action_buffer();player.buffer=0
+		player.set_animation_paused(paused)
 	ui.rebuild_buttons()
 
 func new_game() -> void:
@@ -509,6 +521,7 @@ func menu_actor(slot: int) -> void:
 
 func actor_down() -> void:
 	player.attack_clock=0;player.queued_attack=false;player.slamming=false;player.grappling=false;player.shield_clock=0
+	player.clear_action_buffer();player.buffer=0;player.hit_pause=0
 	for slot in field_slots():
 		if party_hp[slot]>0:active_slot=slot;player.set_actor(slot);toast("接替倒地同伴");return
 	party_hp=full_health();magic=100;potion=3
@@ -522,6 +535,8 @@ func environment_damage(amount: float) -> void:
 	if player.invulnerable>0:return
 	if player.shield_clock>0:amount*=.5
 	party_hp[active_slot]=maxf(0,party_hp[active_slot]-amount);player.invulnerable=.8;player.hurt_clock=.25
+	feedback.impact(player,0,"light")
+	player.interrupt_for_hurt()
 	if party_hp[active_slot]<=0:actor_down()
 
 func damage_player(amount: float, facing: float, source: Node) -> void:player.receive_damage(amount,facing,source)
@@ -590,16 +605,17 @@ func preview_audio() -> void:
 
 func spawn_dust(pos: Vector3, force: float) -> void:particles(pos,force,Color(.43,.37,.29,.24))
 func spawn_sparks(pos: Vector3, metal: bool) -> void:particles(pos,2,Color(1,.43,.05) if metal else Color(.8,.14,.07))
-func particles(pos: Vector3, force: float, col: Color) -> void:
+func particles(pos: Vector3, force: float, col: Color, direction: float=0, count: int=7) -> void:
 	if particle_mesh==null:
 		particle_mesh=SphereMesh.new();particle_mesh.radius=.045;particle_mesh.height=.09;particle_mesh.radial_segments=6;particle_mesh.rings=3
 	var key:=col.to_html()
 	if not particle_materials.has(key):
 		var material:=StandardMaterial3D.new();material.albedo_color=col;material.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;particle_materials[key]=material
-	var count: int=7
 	for i in range(count):
-		var n:=MeshInstance3D.new();n.mesh=particle_mesh;n.material_override=particle_materials[key];n.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		world.add_child(n);n.position=pos;dusts.append({"node":n,"life":.45,"velocity":Vector3(randf_range(-1.5,1.5)*force,randf_range(.5,2),0)})
+		var n: MeshInstance3D=particle_pool.pop_back() if not particle_pool.is_empty() else MeshInstance3D.new()
+		if not n.is_inside_tree():world.add_child(n)
+		n.mesh=particle_mesh;n.material_override=particle_materials[key];n.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;n.visible=true;n.scale=Vector3.ONE
+		n.position=pos;dusts.append({"node":n,"life":.45,"velocity":Vector3(direction*randf_range(.6,2.2)*force if direction!=0 else randf_range(-1.5,1.5)*force,randf_range(.5,2),0)})
 
 func run_qa() -> void:
 	var suite: RefCounted=preload("res://scripts/qa_v04.gd").new()
@@ -618,13 +634,13 @@ func check_auto_exit() -> void:
 			var gate: String=rooms[room].get("gate","")
 			if gate.is_empty() or flags.get(gate,false):nearest=prop;transition_pending=true;interact()
 
-func melee_hit(amount: float,reach: float,direction: float,area: bool) -> void:
+func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: String="") -> void:
 	for enemy in enemies:
 		if not is_instance_valid(enemy):continue
 		var d: Vector3=enemy.position-player.position
 		if absf(d.x)>reach or absf(d.y)>1.7 or absf(d.z)>1.5 or (not area and direction*d.x<-.3):continue
 		var query:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),enemy.position+Vector3(0,1,0),1)
-		if get_world_3d().direct_space_state.intersect_ray(query).is_empty():enemy.hurt(amount,direction,30 if amount>=35 else 12);hitstop=.045
+		if get_world_3d().direct_space_state.intersect_ray(query).is_empty():enemy.hurt(amount,direction,30 if amount>=35 else 12,tier,player)
 
 func fire_projectile(pos: Vector3,direction: float,amount: float,friendly: bool,source: Node) -> void:
 	var shot:=preload("res://scripts/projectile.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=amount;shot.friendly=friendly;shot.source=source

@@ -1,0 +1,217 @@
+{
+  "checks": [
+    {
+      "check": "真实近战命中同时启动双方局部顿帧",
+      "detail": {
+        "attacker": 82208360871,
+        "duration": 0.05,
+        "particles": 7,
+        "tier": "light",
+        "time_usec": 2837600,
+        "victim": 88449485098
+      },
+      "pass": true
+    },
+    {
+      "check": "顿帧同时冻结攻击逻辑与骨骼动画",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "旁观敌人、弹道与全局时间持续推进",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "闪白覆盖材质实际接入，原 PBR 材质保留",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "受击微抖只影响模型，顿帧期间碰撞位置不动",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "闪白结束恢复原材质，无残留覆盖",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重击相对轻击有更长顿帧及更多定向火花",
+      "detail": {
+        "heavy": 0.11,
+        "light": 0.05
+      },
+      "pass": true
+    },
+    {
+      "check": "连续命中缩短顿帧，时长取最大值不累加",
+      "detail": 0.088,
+      "pass": true
+    },
+    {
+      "check": "叠加震屏与缩放受上限约束",
+      "detail": 0.8,
+      "pass": true
+    },
+    {
+      "check": "火花沿实际攻击方向运动且不投影",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "高频火花结束后进入复用池",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "下一次命中复用已有七个粒子实例",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "过早输入超过缓冲有效期，不在重击结束后幽灵出刀",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "顿帧期间的真实轻击输入保留并在连招窗口衔接",
+      "detail": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Dagger2",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -12.0,
+          -0.00993829034268856,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      },
+      "pass": true
+    },
+    {
+      "check": "攻击前摇不能用翻滚取消尚未发生的命中",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "轻击收招允许有限翻滚取消并关闭攻击状态",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "受击硬切动作并清掉旧连招，不补发攻击",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "环境受伤中断冲刺和多段招式，恢复后不会续冲或补发飞刃",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "打开菜单清除待执行动作，恢复游戏不会幽灵出刀",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "短按与长按跳跃产生不同实测高度",
+      "detail": {
+        "held": 2.59500217437744,
+        "short": 1.82937729358673
+      },
+      "pass": true
+    },
+    {
+      "check": "提前落地按跳在接地后起跳，不额外刷新二段跳",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "离开真实支撑台后土狼时间仍可起跳，并保留二段跳",
+      "detail": {
+        "edge": {
+          "air_dash_used": false,
+          "air_jump_used": false,
+          "clip": "PassageFall",
+          "coyote": 0.1,
+          "double_jumps": 0,
+          "floor": false,
+          "ladder_travel": 0.0,
+          "motion": "ground",
+          "p": [
+            -16.7667083740234,
+            3.07913517951965,
+            0.0
+          ],
+          "vaults": 0,
+          "velocity": [
+            4.5,
+            -0.520833313465118,
+            0.0
+          ],
+          "wall_jumps": 0,
+          "weapon": "dagger"
+        },
+        "jump": {
+          "air_dash_used": false,
+          "air_jump_used": false,
+          "clip": "PassageJump",
+          "double_jumps": 0,
+          "floor": false,
+          "ladder_travel": 0.0,
+          "motion": "ground",
+          "p": [
+            -16.6042079925537,
+            3.48712110519409,
+            0.0
+          ],
+          "vaults": 0,
+          "velocity": [
+            5.0,
+            11.9791669845581,
+            0.0
+          ],
+          "wall_jumps": 0,
+          "weapon": "dagger"
+        }
+      },
+      "pass": true
+    },
+    {
+      "check": "首领低破势命中保留霸体与已承诺招式",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "足够破势可以打断首领并开放惩罚窗口",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "完美弹反无伤、中断、蓝色火花与独立反馈同步",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "换房清理反馈引用与粒子池，不持有旧角色",
+      "detail": null,
+      "pass": true
+    }
+  ],
+  "failures": 0,
+  "input": "Real Godot input actions, fixed physics and rendered EXE; no human/controller playtest",
+  "version": "0.6.1"
+}

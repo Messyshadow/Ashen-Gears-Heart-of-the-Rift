@@ -38,7 +38,7 @@ func _draw() -> void:
 	bar(Vector2(42,118),308,game.magic,100,Color(.16,.48,.67))
 	draw_rect(Rect2(w-390,22,366,108),DARK)
 	text_at(Vector2(w-368,53),game.rooms[game.room].name,24,GOLD)
-	text_at(Vector2(w-368,80),game.rooms[game.room].id+"  /  v0.6.0",16,MUTED)
+	text_at(Vector2(w-368,80),game.rooms[game.room].id+"  /  v"+game.Content.VERSION,16,MUTED)
 	text_at(Vector2(w-368,107),"铁屑 %d    药剂 %d    技能点 %d"%[game.scrap,game.potion,game.skill_points],17)
 	var party: Array=game.field_slots();var names: Array=[]
 	for i in party.size():names.append("%d %s"%[i+1,game.Content.ROSTER[party[i]].name])
@@ -84,7 +84,7 @@ func _draw() -> void:
 		text_at(Vector2(w*.13,h*.37),"裂界之心",38,TEXT)
 		text_at(Vector2(w*.13,h*.43),"ASHEN GEARS  /  HEART OF THE RIFT",18,MUTED)
 		text_at(Vector2(w*.13,h*.51),"一座以记忆为燃料的城。一份被伪造的名字。",23,TEXT)
-		text_at(Vector2(w*.13,h*.89),"六个主线区域 × 维修所   /   50 房间 · 七名同伴 · v0.6.0",17,MUTED)
+		text_at(Vector2(w*.13,h*.89),"六个主线区域 × 维修所   /   50 房间 · 七名同伴 · v"+game.Content.VERSION,17,MUTED)
 	elif game.screen=="story":
 		var lines: PackedStringArray=game.story.split("\n")
 		var top := h*.35

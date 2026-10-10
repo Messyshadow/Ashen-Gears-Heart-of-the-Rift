@@ -138,5 +138,5 @@ func run(g: Node3D,path: String) -> Array:
 		if prop.kind=="exit":game.nearest=prop;break
 	game.interact();check(game.screen=="chapter_complete" and game.flags.get("stage_complete",false),"R06 终点保存阶段完成记录，回访入口明确")
 	await capture("24_final")
-	var report:=FileAccess.open(directory.get_base_dir().path_join("v06_runtime.json") if not directory.is_empty() else "user://v06_runtime.json",FileAccess.WRITE);report.store_string(JSON.stringify({"version":"0.6.0","checks":checks},"  "));report.close()
+	var report:=FileAccess.open(directory.get_base_dir().path_join("v06_runtime.json") if not directory.is_empty() else "user://v06_runtime.json",FileAccess.WRITE);report.store_string(JSON.stringify({"version":game.Content.VERSION,"checks":checks},"  "));report.close()
 	game.set_screen("play");return checks

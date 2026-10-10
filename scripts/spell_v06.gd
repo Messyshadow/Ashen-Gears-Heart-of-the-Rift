@@ -11,7 +11,7 @@ func _ready() -> void:
 	var mesh:=MeshInstance3D.new();var box:=BoxMesh.new();box.size=Vector3(.7,.12,.12);mesh.mesh=box
 	var mat:=StandardMaterial3D.new();mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;mat.albedo_color=Color(.85,.8,.55) if kind=="bone" else Color(.9,.08,.2);mat.emission_enabled=true;mat.emission=mat.albedo_color;mesh.material_override=mat;add_child(mesh)
 func _physics_process(dt: float) -> void:
-	if game.paused or game.hitstop>0:return
+	if game.paused:return
 	var previous:=elapsed;elapsed+=dt
 	if elapsed>1.4:queue_free();return
 	if kind=="bone" and elapsed>.7 and previous<=.7:direction=-direction;hit_targets.clear()

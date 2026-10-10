@@ -1,7 +1,7 @@
 {
   "executable_sha256": "e31adce2e36a97f57bfa111c0b81db20b00d47849ed564822d727228dad26c94",
   "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
-  "pack_sha256": "fa682a9586db24d39bd431590afeb1c78d4d5cccd9114450d854cacbadb6c207",
+  "pack_sha256": "ee21d1f6e8cfbe0f90c018e574054d654e00385464420b37db26f320e4f6bcd7",
   "renderer": "gl_compatibility",
   "rooms": [
     {
@@ -47,5 +47,5 @@
       "slot": 3
     }
   ],
-  "version": "0.6.0"
+  "version": "0.6.1"
 }

@@ -132,12 +132,13 @@ func run(g: Node3D,path: String) -> int:
 	checks.append_array(await preload("res://scripts/qa_graphics.gd").new().run(game,directory))
 	checks.append_array(await preload("res://scripts/qa_weapons.gd").new().run(game,directory))
 	checks.append_array(await preload("res://scripts/qa_v06.gd").new().run(game,directory))
+	checks.append_array(await preload("res://scripts/qa_actions.gd").new().run(game,directory.get_base_dir().path_join("action_screenshots") if not directory.is_empty() else ""))
 	var failures:=0
 	for item in checks:
 		if not item.pass:failures+=1
 	var executable: String=OS.get_executable_path()
 	var pack: String=executable.get_basename()+".pck"
-	var report: Dictionary={"version":"0.6.0","checks":checks,"failures":failures,"engine":Engine.get_version_info().string,"executable":executable,"executable_sha256":FileAccess.get_sha256(executable),"pack_sha256":FileAccess.get_sha256(pack) if FileAccess.file_exists(pack) else "","input":"Godot input actions and isolated physics acceptance; no physical controller or full human playthrough"}
+	var report: Dictionary={"version":game.Content.VERSION,"checks":checks,"failures":failures,"engine":Engine.get_version_info().string,"executable":executable,"executable_sha256":FileAccess.get_sha256(executable),"pack_sha256":FileAccess.get_sha256(pack) if FileAccess.file_exists(pack) else "","input":"Godot input actions and isolated physics acceptance; no physical controller or full human playthrough"}
 	var report_path: String=directory.get_base_dir().path_join("runtime_tests.json") if not directory.is_empty() else "user://runtime_tests.json"
 	var out:=FileAccess.open(report_path,FileAccess.WRITE);out.store_string(JSON.stringify(report,"  "));out.close()
 	print("QA_FINISHED ",checks.size()," checks, ",failures," failures");return failures

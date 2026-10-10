@@ -1,0 +1,8 @@
+{
+  "attacker_animation_advance": 0.033335,
+  "attacker_logic_advance": 0.0,
+  "baseline_commit": "e73ba34",
+  "bystander_clock_advance": 0.0,
+  "global_hitstop": 0.0,
+  "scenario": "Melee hit: attacker and victim should pause together while bystander continues"
+}

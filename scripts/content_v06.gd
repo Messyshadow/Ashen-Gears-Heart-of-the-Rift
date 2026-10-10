@@ -1,5 +1,5 @@
 extends RefCounted
-const VERSION="0.6.0"
+const VERSION="0.6.1"
 const REGIONS=["余烬维修所","灰闸囚厂","锈脊齿轮井","雾肺水务区","黑棘迁木园","夜血城堡","神笔实验室"]
 const STARTS=[11,0,8,18,26,34,42]
 const ROSTER=[

@@ -1,5 +1,8 @@
 extends CharacterBody3D
 const Content=preload("res://scripts/content_v06.gd")
+const Tuning=preload("res://scripts/action_tuning.gd")
+var hit_pause := 0.0
+var stun_duration := .45
 var definition: Dictionary
 var sense_clock := 0.0
 var line_clear := true
@@ -36,16 +39,19 @@ func _ready() -> void:
 	visual=game.instantiate_model(definition.model);add_child(visual)
 	animator=visual.find_child("AnimationPlayer",true,false)
 	if animator:
+		animator.callback_mode_process=AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
 		animator.get_animation("PassageWalk").loop_mode=Animation.LOOP_LINEAR;animator.play("PassageWalk")
 	var label: Label3D=game.marker({"human":"守军","ranged":"弩手","wraith":"管魂","thorn":"铁棘爬行兽","blood_guard":"血堡侍卫","scribe":"绘笔守卫","mother":"管喉之母","witch":"迁木女巫","lord":"血契侯爵","editor":"校稿者"}.get(kind,""),Color(.9,.3,.16));add_child(label);label.position.y=4.0 if boss() else 2.1
 	legs=visual.find_children("Leg*","MeshInstance3D",true,false);origin=position
+	game.feedback.prepare(self)
 
 func _physics_process(dt: float) -> void:
-	if animator:animator.speed_scale=0 if game.paused else 1
-	if game.paused or hp<=0 or game.hitstop>0:return
+	if animator:animator.speed_scale=0 if game.paused or hit_pause>0 else 1
+	if game.paused or hp<=0:return
+	if boss() and hp<max_hp*.5 and not phase_two:phase_two=true;game.sound("boss_roar",position);game.toast("督工进入狂暴 · 连续冲锋" if kind=="minotaur" else "典刑机过载 · 链钩与冲击波" if kind=="boss" else "首领过载 · 连射与突进强化",3)
+	if hit_pause>0:hit_pause=maxf(0,hit_pause-dt);return
 	clock+=dt;cooldown=maxf(0,cooldown-dt);hit_flash=maxf(0,hit_flash-dt)
 	var p: CharacterBody3D=game.player;var diff:=p.position-position;var same:=absf(diff.y)<1.6
-	if boss() and hp<max_hp*.5 and not phase_two:phase_two=true;game.sound("boss_roar",position);game.toast("督工进入狂暴 · 连续冲锋" if kind=="minotaur" else "典刑机过载 · 链钩与冲击波" if kind=="boss" else "首领过载 · 连射与突进强化",3)
 	if flying():position.y=lerpf(position.y,origin.y+sin(clock*1.5)*.3,dt*4);velocity.y=0
 	else:velocity.y-=30*dt
 	sense_clock-=dt
@@ -58,7 +64,7 @@ func _physics_process(dt: float) -> void:
 		state="chase";clock=0
 	if state=="stunned":
 		velocity.x=move_toward(velocity.x,0,20*dt)
-		if clock>.45:state="chase";clock=0
+		if clock>stun_duration:state="chase";clock=0
 	elif state=="windup":
 		velocity.x=0;visual.rotation.z=-.12*facing*minf(clock/windup,1)
 		if clock>=windup:state="strike";clock=0;attack_done=false;game.sound("boss_charge" if pattern=="冲锋" else "enemy_fire" if ranged() else "whoosh_heavy",position)
@@ -120,9 +126,11 @@ func can_assassinate() -> bool:
 	var ray:=PhysicsRayQueryParameters3D.create(p.position+Vector3(0,1,0),position+Vector3(0,1,0),1)
 	return get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
 
-func hurt(amount: float,force: float,break_power: float=10) -> void:
+func hurt(amount: float,force: float,break_power: float=10,tier: String="",attacker: Node=null) -> void:
 	if hp<=0:return
-	hp=maxf(0,hp-amount);posture+=break_power;hit_flash=.15;game.spawn_sparks(position+Vector3(0,1,0),not definition.get("human",false));game.sound("hit_metal_%d"%randi_range(1,2) if not definition.get("human",false) else "hit_flesh_%d"%randi_range(1,2),position);game.camera_impact=.10
+	if tier.is_empty():tier=Tuning.tier_for_damage(amount)
+	hp=maxf(0,hp-amount);posture+=break_power;hit_flash=.15
+	var profile: Dictionary=game.feedback.impact(self,force,tier,attacker)
 	if hp<=0:
 		if not game.defeated.has(uid):game.scrap+=60 if boss() else 8
 		game.defeated[uid]=true
@@ -132,7 +140,12 @@ func hurt(amount: float,force: float,break_power: float=10) -> void:
 			game.show_story("牛头督工倒下，总井图纸的转运锁解除了。" if kind=="minotaur" else "典刑机的链条停了。去出货厅找转运表。" if kind=="boss" else "首领已击败，区域联锁解除。
 继续沿右门前进；左门可返回寻找证物与同伴。")
 		game.save_game();queue_free()
-	elif not boss() or posture>=80:posture=0;state="stunned";clock=0;velocity.x=force*2
+	elif not boss() or posture>=80:
+		posture=0;enter_stun(float(profile.get("stun",.45)));velocity.x=force*float(profile.get("knockback",2.0))
+
+func enter_stun(duration: float) -> void:
+	state="stunned";clock=0;stun_duration=duration;velocity.x=0
+	if animator and animator.has_animation("Hurt"):animator.play("Hurt",0);animator.advance(0)
 
 func strike_extended(diff: Vector3, same: bool) -> void:
 	if pattern in ["冲锋","复写突进"]:

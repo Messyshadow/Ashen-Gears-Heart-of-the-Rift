@@ -1,0 +1,101 @@
+{
+  "fps_limit": 0,
+  "frames_per_room": 240,
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "note": "Measured on this GPU; does not certify GTX 1060 or integrated GPU FPS. Room build includes instantiation, not all driver shader compilation.",
+  "profile": "low",
+  "records": [
+    {
+      "average_fps": 1020.68156011176,
+      "draw_calls": 141.804166666667,
+      "mean_frame_ms": 0.9797375,
+      "p95_frame_ms": 1.842,
+      "room": 2,
+      "room_build_ms": 15.522,
+      "texture_memory_bytes": 147807232.0,
+      "video_memory_bytes": 206676112.0,
+      "visible_objects": 268.333333333333
+    },
+    {
+      "average_fps": 1052.27620496587,
+      "draw_calls": 157.158333333333,
+      "mean_frame_ms": 0.950320833333334,
+      "p95_frame_ms": 1.477,
+      "room": 9,
+      "room_build_ms": 11.897,
+      "texture_memory_bytes": 148200448.0,
+      "video_memory_bytes": 207077184.0,
+      "visible_objects": 307.658333333333
+    },
+    {
+      "average_fps": 987.755941969339,
+      "draw_calls": 119.0,
+      "mean_frame_ms": 1.01239583333333,
+      "p95_frame_ms": 1.846,
+      "room": 15,
+      "room_build_ms": 11.513,
+      "texture_memory_bytes": 148331520.0,
+      "video_memory_bytes": 206480416.0,
+      "visible_objects": 244.316666666667
+    },
+    {
+      "average_fps": 903.094226593867,
+      "draw_calls": 142.375,
+      "mean_frame_ms": 1.10730416666667,
+      "p95_frame_ms": 1.76,
+      "room": 19,
+      "room_build_ms": 36.332,
+      "texture_memory_bytes": 148462592.0,
+      "video_memory_bytes": 208550128.0,
+      "visible_objects": 298.375
+    },
+    {
+      "average_fps": 611.882763262559,
+      "draw_calls": 136.958333333333,
+      "mean_frame_ms": 1.6343,
+      "p95_frame_ms": 3.006,
+      "room": 27,
+      "room_build_ms": 23.779,
+      "texture_memory_bytes": 148462592.0,
+      "video_memory_bytes": 208638160.0,
+      "visible_objects": 270.175
+    },
+    {
+      "average_fps": 615.002998139616,
+      "draw_calls": 165.966666666667,
+      "mean_frame_ms": 1.62600833333333,
+      "p95_frame_ms": 3.119,
+      "room": 35,
+      "room_build_ms": 39.66,
+      "texture_memory_bytes": 148855808.0,
+      "video_memory_bytes": 212803440.0,
+      "visible_objects": 290.65
+    },
+    {
+      "average_fps": 699.702334965,
+      "draw_calls": 167.775,
+      "mean_frame_ms": 1.42917916666667,
+      "p95_frame_ms": 2.59,
+      "room": 43,
+      "room_build_ms": 25.568,
+      "texture_memory_bytes": 148986880.0,
+      "video_memory_bytes": 215627056.0,
+      "visible_objects": 302.775
+    },
+    {
+      "average_fps": 644.608521187477,
+      "draw_calls": 140.433333333333,
+      "mean_frame_ms": 1.55132916666667,
+      "p95_frame_ms": 2.789,
+      "room": 48,
+      "room_build_ms": 15.501,
+      "texture_memory_bytes": 149117952.0,
+      "video_memory_bytes": 214975984.0,
+      "visible_objects": 271.65
+    }
+  ],
+  "renderer": "forward_plus",
+  "resolution": "1920x1080",
+  "version": "0.6.1",
+  "vsync": false
+}

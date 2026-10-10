@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$version = '0.6.0'
+$version = '0.6.1'
 $folderName = '灰烬齿轮-裂界之心-' + $version
 $stage = Join-Path $projectRoot ('build\package-' + $version)
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -54,6 +54,9 @@ foreach ($name in @('asset_validation.json','asset_optimization.json','weapon_as
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
 }
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v06.json') -Destination $stage
+foreach ($name in @('action_baseline_v061.json','actions_runtime_v061.json','performance_v061_high.json','performance_v061_medium.json','performance_v061_low.json')) {
+    Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
+}
 $stageQa = Join-Path $stage 'qa'
 New-Item -ItemType Directory -Path $stageQa -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\VERIFICATION.md') -Destination $stageQa
@@ -64,9 +67,12 @@ New-Item -ItemType Directory -Path $images -Force | Out-Null
 foreach ($name in @('05_gears.png','10_combat.png','14_katana.png','15_double_jump.png','16_water.png','17_garden.png','18_castle.png','19_lab.png','20_roster.png','21_settings.png','22_controls.png','23_map.png','24_final.png')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\v04_screenshots\' + $name)) -Destination $images
 }
+$actionImages = Join-Path $stageQa 'action_screenshots'
+New-Item -ItemType Directory -Path $actionImages -Force | Out-Null
+Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\action_screenshots\00_local_hit.png') -Destination $actionImages
 $releaseDocs = Join-Path $stage 'docs'
 New-Item -ItemType Directory -Path $releaseDocs -Force | Out-Null
-foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md','09_0.6.0区域与同伴.md')) {
+foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md','09_0.6.0区域与同伴.md','10_0.6.1动作与打击反馈.md')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $name)) -Destination $releaseDocs
 }
 $records = @()

@@ -10,7 +10,7 @@ var travel := Vector3.RIGHT
 func _ready() -> void:
 	add_child(game.projectile_visual(friendly))
 func _physics_process(dt: float) -> void:
-	if game.paused or game.hitstop>0:return
+	if game.paused:return
 	life-=dt
 	if life<=0:queue_free();return
 	var next:=global_position+travel*speed*dt;var query:=PhysicsRayQueryParameters3D.create(global_position,next,5 if friendly else 3)
