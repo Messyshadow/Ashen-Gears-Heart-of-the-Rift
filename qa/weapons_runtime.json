@@ -729,7 +729,7 @@
       }
     },
     {
-      "check": "旧三人 HP 存档兼容升级到七人名册",
+      "check": "旧三人 HP 存档兼容升级到完整名册",
       "pass": true,
       "state": {
         "air_dash_used": false,

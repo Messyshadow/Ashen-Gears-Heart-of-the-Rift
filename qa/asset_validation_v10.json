@@ -1,0 +1,1062 @@
+{
+  "version": "1.0.0",
+  "checks": [
+    {
+      "passed": true,
+      "check": "Weighted animation coverage leiya",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture leiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage peiqi",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture peiqi",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage ludeng",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture ludeng",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage tiya",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture tiya",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage lizhao",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture lizhao",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage baluo",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture baluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage moen",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture moen",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage selin",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture selin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage yayan",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture yayan",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage xingjin",
+      "detail": [
+        "RoleLight",
+        "RoleHeavy",
+        "RoleSkill",
+        "DoubleJump",
+        "LadderUp",
+        "AirDash",
+        "Roll",
+        "Guard"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Referenced texture xingjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage imp",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights imp",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage skeleton",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights skeleton",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage werewolf",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights werewolf",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage scorpion",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights scorpion",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage mirror_beast",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights mirror_beast",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage shield",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights shield",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage sniper",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights sniper",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage specter",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights specter",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage smelter",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights smelter",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage general",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights general",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage judge",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights judge",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage emperor",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights emperor",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage triphase",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights triphase",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Weighted animation coverage regent",
+      "detail": [
+        "PassageWalk",
+        "Heavy",
+        "BowShot",
+        "Hurt"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Skin weights regent",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Ten original late region landmark parts",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation ashen_actor.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation drone_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation editor_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation execution_machine.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation furnace_assembly.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation hatch_lid.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation hero_passages.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation industrial_kit_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation kain_katana_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation kain_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation lord_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation luomao_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation mechanical_hound.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation minotaur_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation mother_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation passage_01.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation passage_02.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation passage_03.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation passage_04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation passage_05.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation regional_kit_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation shayin_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation shenjin_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation thorn_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation turret_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation weiluo_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation witch_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation wraith_v06.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation yise_v04.glb",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.6.1 model byte preservation zero7_v06.glb",
+      "detail": null
+    }
+  ],
+  "failures": 0,
+  "scope": "Resource and skin/clip presence checks; animation aesthetics and balancing require human acceptance."
+}

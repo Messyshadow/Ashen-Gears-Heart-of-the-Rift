@@ -1,0 +1,1107 @@
+{
+  "0": {
+    "C1": {
+      "name": "裂影刺",
+      "description": "向前刺击，单次高破势。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "齿刃旋舞",
+      "description": "齿刃旋转三次，攻击附近目标。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "锁链断罪",
+      "description": "职业高阶招式「锁链断罪」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "反身残步",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空链折返",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "连锁越障",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "裂界半身",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "熔电之血",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "封界终刺",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "1": {
+    "C1": {
+      "name": "铜核修补",
+      "description": "机械臂前砸，修补少量自身生命。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "齿轮过载",
+      "description": "机械臂重砸附近敌人。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "破甲铆钉",
+      "description": "职业高阶招式「破甲铆钉」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "侧滑维修",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "磁靴落稳",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "紧急回收",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "机甲覆身",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "活塞续压",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "拆城锤",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "2": {
+    "C1": {
+      "name": "影箭",
+      "description": "弓箭远射。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "月幕散射",
+      "description": "快速发射三箭。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "月猎追矢",
+      "description": "职业高阶招式「月猎追矢」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "后撤踏影",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空中瞄准",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "猎径回身",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "夜枭化身",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "夜视猎痕",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "月蚀穿心",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "3": {
+    "C1": {
+      "name": "返刃",
+      "description": "骨剑飞出后返刃，去程与回程分别命中。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "破阵三叠",
+      "description": "三次斩击，打破敌人架势。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "无名归刃",
+      "description": "职业高阶招式「无名归刃」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "踏刃反跃",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空中返剑",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "守势移步",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "白骨剑魂",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "亡名坚骨",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "东渡一线",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "4": {
+    "C1": {
+      "name": "影缚",
+      "description": "丝线束缚附近敌人并切割。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "分身突袭",
+      "description": "安全短位移后近身突袭。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "断影结",
+      "description": "职业高阶招式「断影结」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "烟步撤身",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "绳端换位",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "静息落地",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "烟影躯",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "烟痕缠敌",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "千丝归刃",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "5": {
+    "C1": {
+      "name": "血瓶投掷",
+      "description": "血瓶命中后恢复自身少量生命。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "赤汞爆裂",
+      "description": "赤汞瓶命中后溅射邻近敌人。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "炼血回流",
+      "description": "职业高阶招式「炼血回流」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "雾步回撤",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "瓶跃滑步",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "净汞避毒",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "雾血形态",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "赤雾汲取",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "血月蒸馏",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "6": {
+    "C1": {
+      "name": "电弧拳",
+      "description": "电弧拳控制附近敌人并群体破势。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "链雷束",
+      "description": "三秒绝缘护盾，承受伤害减半。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "超载掌",
+      "description": "职业高阶招式「超载掌」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "导轨侧移",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "落地蓄电",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "断路回避",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "超导态",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "电容回收",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "零界雷心",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "7": {
+    "C1": {
+      "name": "雷步斩",
+      "description": "雷刃两次迅速切割并短时束缚敌人。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "落雷连刃",
+      "description": "三段雷刃连斩。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "断雷双闪",
+      "description": "职业高阶招式「断雷双闪」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "电踏腾挪",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空连借势",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "雷落急停",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "雷兽附体",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "导雷强袭",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "雷牙贯城",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "8": {
+    "C1": {
+      "name": "符墨弹",
+      "description": "符墨弹命中后短时减速敌人。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "绘笔风暴",
+      "description": "强化符墨弹与范围束缚。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "重墨压印",
+      "description": "职业高阶招式「重墨压印」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "笔迹滑行",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "转笔弹步",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "安全撤稿",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "绘体投影",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "图层叠印",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "删改风暴",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "9": {
+    "C1": {
+      "name": "泄压拳",
+      "description": "活塞重拳群体击退。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "锅炉震荡",
+      "description": "锅炉震荡与三秒护盾。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "蒸汽盾锤",
+      "description": "职业高阶招式「蒸汽盾锤」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "喷汽后撤",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "重落缓冲",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "泄压转身",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "高压战躯",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "压差护甲",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "炉灯坠击",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "10": {
+    "C1": {
+      "name": "龙息点燃",
+      "description": "幼龙吐火，命中后扩散周围伤害。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "双翼横扫",
+      "description": "长枪和龙翼两次范围横扫。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "炽鳞刺",
+      "description": "职业高阶招式「炽鳞刺」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "翼助跳步",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "翔落转枪",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "护龙避袭",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "龙铠共生",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "龙息续燃",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "烬翼降临",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "11": {
+    "C1": {
+      "name": "弧光斩",
+      "description": "光刃前斩，高单体伤害。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "十字曜切",
+      "description": "十字两段光刃范围斩。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "破夜贯光",
+      "description": "职业高阶招式「破夜贯光」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "光步后撤",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空中切返",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "折光守势",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "光刃圣装",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "圣装余照",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "黎明拔剑",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "12": {
+    "C1": {
+      "name": "破壳弹",
+      "description": "手炮弹命中后爆炸溅射附近敌人。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "近距炮幕",
+      "description": "连续两发重炮爆炸。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "连膛震爆",
+      "description": "职业高阶招式「连膛震爆」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "后坐跃退",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空炮定姿",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "快速卸膛",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "炮台战装",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "热膛控制",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "零距齐射",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "13": {
+    "C1": {
+      "name": "魂钉",
+      "description": "魂钉束缚敌人，召唤四秒骨仆，最多两个。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "骨牢合围",
+      "description": "骨牢控制周围敌人，魂弹追击。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "葬名潮",
+      "description": "职业高阶招式「葬名潮」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "魂步撤退",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "骨台跃迁",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "散骨脱困",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "冥骨形态",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "契魂守护",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "百骨归葬",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "14": {
+    "C1": {
+      "name": "净祟铃",
+      "description": "圣铃净化攻击，短时护盾。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "守夜圣域",
+      "description": "圣域为三名出战成员恢复少量生命。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "守夜审光",
+      "description": "职业高阶招式「守夜审光」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "烛步闪避",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "祈光缓降",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "净域离身",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "烛翼形态",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "余烛祝福",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "守夜钟鸣",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "15": {
+    "C1": {
+      "name": "标靶贯穿",
+      "description": "符文步枪发射贯穿弹。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "三线狙击",
+      "description": "连续三次贯穿狙击。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "鸦落封喉",
+      "description": "职业高阶招式「鸦落封喉」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "翻身退射",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空中稳枪",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "滑步装填",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "鹰目战姿",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "精准余息",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "无声终点",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  },
+  "16": {
+    "C1": {
+      "name": "星火弹",
+      "description": "三源星弹贯穿敌人。 Ctrl + J 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 18,
+      "cooldown": 4
+    },
+    "C2": {
+      "name": "裂界星雨",
+      "description": "三次星弹贯穿。 Ctrl + K 发动。 升级强化攻击属性。",
+      "branch": "战斗",
+      "resource": 28,
+      "cooldown": 7
+    },
+    "C3": {
+      "name": "星盘连律",
+      "description": "职业高阶招式「星盘连律」。Ctrl + Shift 发动，长前摇后强力范围攻击；每级提高伤害。",
+      "branch": "战斗",
+      "resource": 36,
+      "cooldown": 10
+    },
+    "M1": {
+      "name": "折星侧步",
+      "description": "被动：每级生命上限 +5，耐力回复 +8%。翻滚预览展示起手与落地。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "M2": {
+      "name": "空星反推",
+      "description": "空中 Ctrl + Space，一次短冲刺；每次腾空一次。初始消耗 16 魔力，升级每级减少 2 魔力与 0.5 秒冷却。",
+      "branch": "身法",
+      "resource": 16,
+      "cooldown": 5
+    },
+    "M3": {
+      "name": "镜步回身",
+      "description": "被动：每级受到的伤害降低 2%。保留地形与二段跳次数限制。",
+      "branch": "身法",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T1": {
+      "name": "星灵形态",
+      "description": "B 发动共鸣形态。消耗 100 共鸣，持续 12 秒，伤害 +20%、防护 +10%。",
+      "branch": "共鸣",
+      "resource": 100,
+      "cooldown": 0
+    },
+    "T2": {
+      "name": "三源律动",
+      "description": "共鸣形态内生效：每级再提高 5% 伤害。不会获得环境免疫或新通行资格。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    },
+    "T3": {
+      "name": "裂天星坠",
+      "description": "共鸣期间 Ctrl + Shift 发动终式，消耗剩余形态时间，强力范围攻击后恢复常态。",
+      "branch": "共鸣",
+      "resource": 0,
+      "cooldown": 0
+    }
+  }
+}

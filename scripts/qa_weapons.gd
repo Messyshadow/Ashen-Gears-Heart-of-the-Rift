@@ -78,7 +78,7 @@ func run(app: Node3D,path: String) -> Array:
 		if prop.kind=="katana_chest":found=true
 	check(game.equipped_weapon=="dagger" and game.weapons.get("dagger",false) and game.flags.get("boss2",false) and found,"旧存档默认匕首、保留 Boss 进度并可补领新太刀宝箱")
 	check(game.player.animator.has_animation("DoubleJump"),"旧存档无需重开就具有初始二段跳")
-	check(game.party_hp.size()==7 and game.party==[0,1],"旧三人 HP 存档兼容升级到七人名册")
+	check(game.party_hp.size()==17 and game.party==[0,1],"旧三人 HP 存档兼容升级到完整名册")
 	var clips_ok:=true
 	for clip in ["Katana1","Katana2","Katana3","KatanaHeavy"]:
 		if not game.player.animator.has_animation(clip):clips_ok=false

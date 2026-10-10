@@ -1,5 +1,5 @@
 extends Node
-const CUE_NAMES = ["foot_stone_1", "foot_stone_2", "foot_stone_3", "foot_metal_1", "foot_metal_2", "foot_metal_3", "ladder_1", "hit_metal_1", "hit_flesh_1", "whoosh_light_1", "ladder_2", "hit_metal_2", "hit_flesh_2", "whoosh_light_2", "jump", "dash", "roll", "wall_jump", "vault", "whoosh_heavy", "boss_charge", "land_soft", "land_heavy", "player_hurt", "guard", "grapple_attach", "elevator_stop", "gear_latch", "press_hit", "boss_smash", "shockwave", "bow_fire", "grapple_launch", "skill", "parry", "enemy_fire", "enemy_windup", "press_warning", "boss_roar", "elevator_start", "gear_start", "chest", "save", "switch", "door", "ui", "amb_furnace", "amb_wind", "amb_gears", "amb_workshop", "music_explore", "music_combat", "music_boss","amb_water","amb_garden","amb_castle","amb_lab"]
+const CUE_NAMES = ["foot_stone_1", "foot_stone_2", "foot_stone_3", "foot_metal_1", "foot_metal_2", "foot_metal_3", "ladder_1", "hit_metal_1", "hit_flesh_1", "whoosh_light_1", "ladder_2", "hit_metal_2", "hit_flesh_2", "whoosh_light_2", "jump", "dash", "roll", "wall_jump", "vault", "whoosh_heavy", "boss_charge", "land_soft", "land_heavy", "player_hurt", "guard", "grapple_attach", "elevator_stop", "gear_latch", "press_hit", "boss_smash", "shockwave", "bow_fire", "grapple_launch", "skill", "parry", "enemy_fire", "enemy_windup", "press_warning", "boss_roar", "elevator_start", "gear_start", "chest", "save", "switch", "door", "ui", "amb_furnace", "amb_wind", "amb_gears", "amb_workshop", "music_explore", "music_combat", "music_boss","amb_water","amb_garden","amb_castle","amb_lab","amb_smelter","amb_bonecity","amb_archive","amb_rail","amb_rift","amb_crown"]
 var game: Node3D
 var streams: Dictionary={}
 var voices: Array[AudioStreamPlayer]=[]
@@ -30,7 +30,7 @@ func _ready() -> void:
 		else:push_error("Missing packaged audio resource: "+path)
 	for i in range(20):
 		var voice:=AudioStreamPlayer.new();add_child(voice);voice.bus="SFX";voice.set_meta("priority",0);voice.set_meta("started",0);voices.append(voice)
-	for name in ["amb_furnace","amb_wind","amb_gears","amb_workshop","music_explore","music_combat","music_boss","amb_water","amb_garden","amb_castle","amb_lab"]:
+	for name in ["amb_furnace","amb_wind","amb_gears","amb_workshop","music_explore","music_combat","music_boss","amb_water","amb_garden","amb_castle","amb_lab","amb_smelter","amb_bonecity","amb_archive","amb_rail","amb_rift","amb_crown"]:
 		var voice:=AudioStreamPlayer.new();add_child(voice);voice.bus="Music" if name.begins_with("music") else "Ambient";voice.stream=streams[name]
 		if voice.stream is AudioStreamOggVorbis:voice.stream.loop=true
 		voice.volume_db=-80;voice.play();beds[name]=voice;gains[name]=0.0;targets[name]=0.0
@@ -60,6 +60,8 @@ func set_room(style: String) -> void:
 	ambient_name="amb_gears" if style in ["gears","bearing","lift","conveyor"] else "amb_wind" if style in ["grapple","wall","mine","barrage"] else "amb_workshop" if style in ["hub","workshop"] else "amb_furnace"
 	if style in ["water","garden","castle","lab"]:ambient_name="amb_"+style
 	if style=="laboratory":ambient_name="amb_lab"
+	if style in ["bonecity","archive","rail","rift","crown"]:ambient_name="amb_"+style
+	if style=="furnace":ambient_name="amb_smelter"
 	combat_hold=0;combat_mode="explore";update_targets()
 
 func update_targets() -> void:

@@ -6,6 +6,11 @@ var scene_cache: Dictionary={}
 var template_cache: Dictionary={}
 var party: Array=[0]
 var controls: Node
+var inventory: RefCounted
+var skills: RefCounted
+var campaign: RefCounted
+var heat := 0.0
+var map_marks: Dictionary={}
 var progression: RefCounted
 var settings_return := "pause"
 var map_region := 1
@@ -63,6 +68,7 @@ var gear := [true,false,false]
 var water := [false,false,0,false]
 var save_path := "user://ashen_save_v04.json"
 var qa_mode := false
+var external_qa := false
 var compatibility_smoke := false
 var capture_dir := ""
 var main_clock := 0.0
@@ -90,6 +96,10 @@ func _ready() -> void:
 		if arg=="--compat-smoke":qa_mode=true;compatibility_smoke=true;save_path="user://qa_compat_save.json"
 		if arg.begins_with("--capture-dir="):capture_dir=arg.trim_prefix("--capture-dir=")
 	get_tree().auto_accept_quit=false;get_window().close_requested.connect(request_quit)
+	inventory=preload("res://scripts/inventory.gd").new();inventory.game=self;inventory.reset()
+	skills=preload("res://scripts/skill_system.gd").new();skills.game=self
+	campaign=preload("res://scripts/progression_v10.gd").new();campaign.game=self
+	party_hp=full_health()
 	setup_input();setup_environment()
 	feedback=preload("res://scripts/action_feedback.gd").new();feedback.game=self;add_child(feedback)
 	controls=preload("res://scripts/controls_settings.gd").new();controls.game=self;add_child(controls)
@@ -102,10 +112,10 @@ func _ready() -> void:
 	load_room(0)
 	set_screen("title")
 	if compatibility_smoke:call_deferred("run_compatibility_smoke")
-	elif qa_mode:call_deferred("run_qa")
+	elif qa_mode and not external_qa:call_deferred("run_qa")
 
 func setup_input() -> void:
-	var actions := {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"light":[KEY_J],"heavy":[KEY_K],"dodge":[KEY_SHIFT],"guard":[KEY_L],"modifier":[KEY_CTRL],"grapple":[KEY_Q],"interact":[KEY_E],"switch":[KEY_F],"weapon":[KEY_V],"item":[KEY_R],"map":[KEY_M],"skills":[KEY_T],"pause":[KEY_ESCAPE],"run":[KEY_ALT],"overview":[KEY_TAB],"roster":[KEY_C],"journal":[KEY_N],"phase":[KEY_G]}
+	var actions := {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"light":[KEY_J],"heavy":[KEY_K],"dodge":[KEY_SHIFT],"guard":[KEY_L],"modifier":[KEY_CTRL],"grapple":[KEY_Q],"interact":[KEY_E],"switch":[KEY_F],"weapon":[KEY_V],"item":[KEY_R],"map":[KEY_M],"skills":[KEY_T],"pause":[KEY_ESCAPE],"run":[KEY_ALT],"overview":[KEY_TAB],"roster":[KEY_C],"journal":[KEY_N],"phase":[KEY_G],"inventory":[KEY_I],"equipment":[KEY_O],"transform":[KEY_B]}
 	for action in actions:
 		if not InputMap.has_action(action):InputMap.add_action(action)
 		for code in actions[action]:
@@ -162,7 +172,7 @@ func load_room(number: int, spawn_override: Variant = null) -> void:
 		var uid: String = rooms[room].id+":"+spec.kind
 		if opened.has(uid):continue
 		add_prop(spec.kind,vector(spec.p),spec.text,uid)
-	if rooms[room].has("checkpoint"):add_prop("save",vector(rooms[room].checkpoint),"休息灯 · 保存并恢复","")
+	if rooms[room].has("checkpoint") and data.get("rest",true):add_prop("save",vector(rooms[room].checkpoint),"休息灯 · 保存并恢复","")
 	add_prop("exit",vector(rooms[room].exit),"本阶段终点 · 查看完成情况" if data.get("terminal",false) else "→ "+rooms[int(data.next)].id+" · "+rooms[int(data.next)].name,"")
 	if room>0 and room!=11:add_prop("back",vector(rooms[room].back),"← "+rooms[int(data.previous)].id+" · "+rooms[int(data.previous)].name,"")
 	apply_atmosphere()
@@ -227,10 +237,11 @@ func _process(dt: float) -> void:
 	toast_clock=maxf(0,toast_clock-dt)
 	if not is_instance_valid(player):return
 	if not paused:
+		campaign.tick(dt)
 		doorway_cooldown=maxf(0,doorway_cooldown-dt);phase_cooldown=maxf(0,phase_cooldown-dt)
 		hitstop=maxf(0,hitstop-dt)
 		world_builder.tick(dt)
-		switch_cooldown=maxf(0,switch_cooldown-dt);skill_cooldown=maxf(0,skill_cooldown-dt);magic=minf(100,magic+dt*3)
+		switch_cooldown=maxf(0,switch_cooldown-dt);skill_cooldown=maxf(0,skill_cooldown-dt);magic=minf(100,magic+dt*3*(1+float(inventory.stats(active_slot).get("magic",0))));heat=maxf(0,heat-dt*20) if player.position.y>=0 else heat
 		if hatch:hatch.rotation.x=lerpf(hatch.rotation.x,hatch_target,1-exp(-dt*5))
 		update_nearest()
 		check_auto_exit()
@@ -288,13 +299,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("interact") or event.is_action_pressed("ui_accept") or event.is_action_pressed("pause"):set_screen(story_origin)
 		return
 	if event.is_action_pressed("pause"):
-		set_screen("pause" if screen=="play" else "play" if screen in ["pause","map","skills","roster","journal","travel","rest"] else "title");return
-	if screen in ["play","map","skills","roster","journal"]:
+		set_screen("pause" if screen=="play" else "play" if screen in ["pause","map","skills","roster","journal","travel","rest","inventory","equipment","shop","craft","ending"] else "title");return
+	if screen in ["play","map","skills","roster","journal","inventory","equipment"]:
+		if event.is_action_pressed("inventory"):set_screen("play" if screen=="inventory" else "inventory");return
+		if event.is_action_pressed("equipment"):set_screen("play" if screen=="equipment" else "equipment");return
 		if event.is_action_pressed("roster"):set_screen("play" if screen=="roster" else "roster");return
 		if event.is_action_pressed("journal"):set_screen("play" if screen=="journal" else "journal");return
 		if event.is_action_pressed("map"):set_screen("play" if screen=="map" else "map");return
 		if event.is_action_pressed("skills"):set_screen("play" if screen=="skills" else "skills");return
 	if paused:return
+	if event.is_action_pressed("transform"):campaign.transform()
 	if event.is_action_pressed("interact"):interact()
 	if event.is_action_pressed("switch"):switch_actor()
 	if event.is_action_pressed("phase"):phase_step()
@@ -315,17 +329,21 @@ func set_screen(value: String) -> void:
 	ui.rebuild_buttons()
 
 func new_game() -> void:
-	flags={};visited={};defeated={};opened={};party_hp=full_health();active_slot=0;magic=100;scrap=0;skill_points=3;learned={};potion=3;weapon_rank=0
+	flags={};visited={};defeated={};opened={};inventory.reset();skills.levels={};map_marks={};heat=0;campaign.form_time=0;campaign.resonance=0;campaign.quest_states={};party_hp=full_health();active_slot=0;magic=100;scrap=0;skill_points=3;learned={};potion=3;weapon_rank=0
 	weapons={"dagger":true};equipped_weapon="dagger";party=[0]
 	gear=[true,false,false];water=[false,false,0,false];checkpoint_room=0;checkpoint_pos=Vector3(-19,0,0)
 	set_screen("play");load_room(0);save_game()
 
-func max_hp() -> float:return Content.ROSTER[active_slot].hp
+func actor_hp(slot: int) -> float:return float(Content.ROSTER[slot].hp)+float(inventory.stats(slot).get("hp",0))+skills.bonus(slot,"hp")
+func max_hp() -> float:return actor_hp(active_slot)
+func damage_multiplier() -> float:return (0.20+skills.level(active_slot,"T2")*.05 if campaign and campaign.form_time>0 else 0.0)+1.0+float(inventory.stats(active_slot).get("damage",0))+skills.bonus(active_slot,"damage")
+func defense_multiplier() -> float:return 1.0-minf(.65,float(inventory.stats(active_slot).get("defense",0))+skills.bonus(active_slot,"defense")+(.10 if campaign and campaign.form_time>0 else 0))
 
 func interact() -> void:
 	if world_builder.activate_deck():return
 	if nearest.is_empty():return
 	var kind: String=nearest.kind
+	if campaign.handle(kind):return
 	if progression.handle(kind):return
 	if kind=="assassinate":
 		nearest.enemy.hurt(999,player.facing);player.attack_clock=.8;player.attack_total=.8;player.attack_hit=true;player.attack_clip="Katana3" if active_slot==0 and equipped_weapon=="katana" else "Dagger3";player.invulnerable=.5;sound("hit_flesh_1");toast("暗杀成功 · 机械与 Boss 不能暗杀");return
@@ -335,7 +353,9 @@ func interact() -> void:
 			if not gate.is_empty() and not flags.get(gate,false):toast("尚未完成本室目标 · "+rooms[room].hint,3);return
 			var next := int(rooms[room].next)
 			if data.get("terminal",false):
-				flags.stage_complete=true;checkpoint_room=room;checkpoint_pos=player.position;save_game();transition_pending=false;set_screen("chapter_complete");return
+				if flags.get("boss12",false) and flags.get("mila_wish",false):transition_pending=false;set_screen("ending")
+				else:transition_pending=false;toast("击败摄政并保全米菈的意愿后再作最终选择")
+				return
 			sound("door");call_deferred("load_room",next,vector(data.next_spawn) if data.has("next_spawn") else null);return
 		if kind=="back":
 			var previous := int(rooms[room].previous)
@@ -357,22 +377,22 @@ func interact() -> void:
 		if flags.get("ranger",false):return
 		for enemy in enemies:
 			if is_instance_valid(enemy) and enemy.hp>0:toast("先击退矿牢守卫");return
-		flags.ranger=true;skill_points+=3;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("伊瑟：这份名册，我会带给还活着的人。\n伊瑟自愿加入。3 或 F 切换第三槽，弓箭可以远距支援。");save_game();return
+		flags.ranger=true;inventory.on_recruit(2);skill_points+=3;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("伊瑟：这份名册，我会带给还活着的人。\n伊瑟自愿加入。3 或 F 切换第三槽，弓箭可以远距支援。");save_game();return
 	if kind=="completion":
 		if opened.has(nearest.uid):return
 		flags.slice_complete=true;skill_points+=1;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("总井图纸交付。灰闸囚厂与锈脊齿轮井回环开放。\n接下来要修复雾肺水务区，寻找米菈的真实去向。\nR01 / R02 已完成。右侧继续进入雾肺水务区。
 左侧可回访旧房间，休息灯保存恢复。");save_game();return
-	if kind=="chest":scrap+=20;toast(nearest.text);sound("chest")
+	if kind=="chest":scrap+=20;inventory.grant("gear_core",2);toast(nearest.text);sound("chest")
 	if kind=="katana_chest":
 		if opened.has(nearest.uid) or nearest.get("used",false):return
 		if not can_switch_weapon():toast("收招后再打开宝箱");return
-		weapons.katana=true;equip_weapon("katana");sound("chest");toast("获得灰钢太刀 · J 三连斩 / K 重劈 · V 切换匕首",5)
+		weapons.katana=true;inventory.grant("katana");inventory.equipment["0"]["weapon"]="katana";equip_weapon("katana");sound("chest");toast("获得灰钢太刀 · J 三连斩 / K 重劈 · V 切换匕首",5)
 	if kind=="rescue":
 		for enemy in enemies:
 			if is_instance_valid(enemy) and enemy.hp>0:toast("先击退囚门守卫");return
-		flags.rescued=true;skill_points+=2;show_story("洛铆：项圈熄了……这次由我自己决定。\n洛铆加入队伍。F 或 1 / 2 切换凯恩与洛铆。\n他用机械重击拆开装甲，你负责找到妹妹。",false)
+		flags.rescued=true;inventory.on_recruit(1);skill_points+=2;show_story("洛铆：项圈熄了……这次由我自己决定。\n洛铆加入队伍。F 或 1 / 2 切换凯恩与洛铆。\n他用机械重击拆开装甲，你负责找到妹妹。",false)
 	if kind=="grapple":flags.grapple=true;show_story("锚点钩索已修复。\n按住 Q 预选蓝色锚点，松开发射，空格可以释放。\n钩索只连接标记锚点。",false)
-	if kind=="manifest":flags.manifest=true;show_story("转运表：米菈 · 自愿稳定员。\n凯恩：这个签名不是她写的。\n洛铆：总井图纸在锈井。先把表留好。",false)
+	if kind=="manifest":inventory.grant("manifest");flags.manifest=true;show_story("转运表：米菈 · 自愿稳定员。\n凯恩：这个签名不是她写的。\n洛铆：总井图纸在锈井。先把表留好。",false)
 	if kind=="hub_story":show_story("阿芙：我会接住这批幸存者。\n洛铆：换人别换掉脚下的路。你在空中，我接手也在空中。\n阿芙：去工坊整备，再沿锈井找总图。",false);return
 	if kind=="upgrade":
 		if weapon_rank>=3:toast("当前武器已达样片上限");return
@@ -426,7 +446,7 @@ func actor_label(slot: int) -> String:
 	return "凯恩 · "+weapon_name() if slot==0 else Content.ROSTER[slot].name+" · "+Content.ROSTER[slot].role
 func full_health() -> Array:
 	var values: Array=[]
-	for actor in Content.ROSTER:values.append(float(actor.hp))
+	for slot in Content.ROSTER.size():values.append(actor_hp(slot))
 	return values
 func instantiate_model(model: String) -> Node3D:
 	if not scene_cache.has(model):scene_cache[model]=load("res://assets/models/"+model+".glb")
@@ -498,7 +518,7 @@ func can_switch_weapon() -> bool:
 	return player.attack_clock<=0 and player.hurt_clock<=0 and player.dodge_clock<=0 and player.dash_clock<=0 and player.motion!="vault" and not player.slamming
 
 func equip_weapon(value: String) -> void:
-	equipped_weapon=value;player.combo=0;player.combo_clock=0;player.queued_attack=false
+	equipped_weapon=value;inventory.equipment["0"]["weapon"]=value;player.combo=0;player.combo_clock=0;player.queued_attack=false
 	if active_slot==0:player.set_actor(0)
 
 func switch_weapon() -> void:
@@ -513,13 +533,14 @@ func switch_actor(slot: int = -1) -> void:
 	if switch_cooldown>0 or player.hurt_clock>0 or player.attack_clock>0 or player.motion=="vault":return
 	var next: int=slots[(slots.find(active_slot)+1)%slots.size()] if slot<0 else slot
 	if not next in slots or party_hp[next]<=0 or next==active_slot:return
-	sound("switch");active_slot=next;switch_cooldown=1;player.set_actor(next);toast(actor_label(next))
+	sound("switch");active_slot=next;campaign.form_time=0;switch_cooldown=1;player.set_actor(next);toast(actor_label(next))
 
 func menu_actor(slot: int) -> void:
 	if slot in field_slots() and party_hp[slot]>0 and can_switch_weapon():active_slot=slot;player.set_actor(slot);ui.rebuild_buttons()
 	else:toast("角色收招且存活时才能切换；休息灯可恢复全队")
 
 func actor_down() -> void:
+	campaign.form_time=0
 	player.attack_clock=0;player.queued_attack=false;player.slamming=false;player.grappling=false;player.shield_clock=0
 	player.clear_action_buffer();player.buffer=0;player.hit_pause=0
 	for slot in field_slots():
@@ -534,6 +555,7 @@ func reset_player() -> void:
 func environment_damage(amount: float) -> void:
 	if player.invulnerable>0:return
 	if player.shield_clock>0:amount*=.5
+	amount*=defense_multiplier()
 	party_hp[active_slot]=maxf(0,party_hp[active_slot]-amount);player.invulnerable=.8;player.hurt_clock=.25
 	feedback.impact(player,0,"light")
 	player.interrupt_for_hurt()
@@ -561,14 +583,40 @@ func show_story(value: String, _unused: bool = false) -> void:
 	story_origin=screen if screen in ["map","journal"] else "play";story=value;set_screen("story")
 
 func save_game() -> bool:
-	var payload := {"schema":1,"party":party,"version":Content.VERSION,"room":checkpoint_room,"p":[checkpoint_pos.x,checkpoint_pos.y,checkpoint_pos.z],"flags":flags,"visited":visited,"defeated":defeated,"opened":opened,"party_hp":party_hp,"active":active_slot,"magic":magic,"scrap":scrap,"weapon_rank":weapon_rank,"weapons":weapons,"equipped_weapon":equipped_weapon,"skill_points":skill_points,"learned":learned,"potion":potion,"gear":gear,"water":water}
+	var payload := {"quests_v10":campaign.quest_states,"inventory":inventory.items,"equipment":inventory.equipment,"wrap":inventory.wrap,"skills_v10":skills.levels,"map_marks":map_marks,"schema":1,"party":party,"version":Content.VERSION,"room":checkpoint_room,"p":[checkpoint_pos.x,checkpoint_pos.y,checkpoint_pos.z],"flags":flags,"visited":visited,"defeated":defeated,"opened":opened,"party_hp":party_hp,"active":active_slot,"magic":magic,"scrap":scrap,"weapon_rank":weapon_rank,"weapons":weapons,"equipped_weapon":equipped_weapon,"skill_points":skill_points,"learned":learned,"potion":potion,"gear":gear,"water":water}
 	var temp := save_path+".tmp";var file := FileAccess.open(temp,FileAccess.WRITE)
 	if not file:toast("保存失败 · 目录不可写");return false
 	file.store_string(JSON.stringify(payload));file.close()
 	if JSON.parse_string(FileAccess.get_file_as_string(temp))==null:return false
-	if FileAccess.file_exists(save_path):DirAccess.copy_absolute(save_path,save_path+".backup")
+	if FileAccess.file_exists(save_path):
+		var backup_parser:=JSON.new()
+		if backup_parser.parse(FileAccess.get_file_as_string(save_path))==OK and valid_save(backup_parser.data):DirAccess.copy_absolute(save_path,save_path+".backup")
 	var result := DirAccess.rename_absolute(temp,save_path)
 	if result!=OK:toast("保存失败 · "+error_string(result));return false
+	return true
+
+func valid_save(candidate: Variant) -> bool:
+	if not candidate is Dictionary or candidate.get("schema",0)!=1:return false
+	for key in ["flags","visited","defeated","opened","learned"]:
+		if not candidate.get(key) is Dictionary:return false
+	for key in ["inventory","equipment","skills_v10","map_marks","quests_v10","weapons"]:
+		if candidate.has(key) and not candidate[key] is Dictionary:return false
+	for key in ["party_hp","gear","water","p"]:
+		if not candidate.get(key) is Array:return false
+	if candidate.p.size()!=3 or candidate.gear.size()!=3 or candidate.water.size()!=4 or candidate.party_hp.size()<3:return false
+	for key in ["room","active","magic","scrap","weapon_rank","skill_points","potion"]:
+		if not (candidate.get(key) is int or candidate.get(key) is float):return false
+	if candidate.room<0 or candidate.room>=rooms.size() or candidate.active<0 or candidate.active>=Content.ROSTER.size():return false
+	for value in candidate.p+candidate.party_hp:
+		if not (value is int or value is float) or not is_finite(float(value)):return false
+	if candidate.has("party"):
+		if not candidate.party is Array:return false
+		for value in candidate.party:
+			if not (value is int or value is float):return false
+	for field in ["inventory","skills_v10","quests_v10"]:
+		for value in candidate.get(field,{}).values():
+			if not (value is int or value is float) or not is_finite(float(value)):return false
+			if field=="quests_v10" and (value<0 or value>3):return false
 	return true
 
 func load_game() -> bool:
@@ -578,7 +626,7 @@ func load_game() -> bool:
 			var parser := JSON.new()
 			if parser.parse(FileAccess.get_file_as_string(path))!=OK:continue
 			var candidate: Variant=parser.data
-			if candidate is Dictionary and candidate.get("schema",0)==1 and candidate.get("room",-1)>=0 and candidate.get("room",999)<rooms.size() and candidate.get("p",[]).size()==3:
+			if valid_save(candidate):
 				saved=candidate;break
 	if saved==null:toast("没有可用存档");return false
 	flags=saved.flags;visited=saved.visited;defeated=saved.defeated;opened=saved.opened;party_hp=saved.party_hp;active_slot=int(saved.active);magic=float(saved.magic);scrap=int(saved.scrap);weapon_rank=int(saved.weapon_rank);skill_points=int(saved.skill_points);learned=saved.learned;potion=int(saved.potion);gear=saved.gear;water=saved.water
@@ -587,6 +635,8 @@ func load_game() -> bool:
 	if not active_slot in party:active_slot=party[0]
 	weapons=saved.get("weapons",{"dagger":true});weapons.dagger=true
 	equipped_weapon="katana" if saved.get("equipped_weapon","dagger")=="katana" and weapons.get("katana",false) else "dagger"
+	campaign.quest_states=saved.get("quests_v10",{});campaign.form_time=0;campaign.resonance=0
+	inventory.restore(saved);skills.restore(saved.get("skills_v10",{}));map_marks=saved.get("map_marks",{});heat=0
 	checkpoint_room=int(saved.room);checkpoint_pos=vector(saved.p);set_screen("play");load_room(checkpoint_room,checkpoint_pos);return true
 
 func sound(kind: String,pos: Vector3=Vector3.INF) -> void:
@@ -635,15 +685,19 @@ func check_auto_exit() -> void:
 			if gate.is_empty() or flags.get(gate,false):nearest=prop;transition_pending=true;interact()
 
 func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: String="") -> void:
+	amount*=damage_multiplier()
 	for enemy in enemies:
 		if not is_instance_valid(enemy):continue
 		var d: Vector3=enemy.position-player.position
 		if absf(d.x)>reach or absf(d.y)>1.7 or absf(d.z)>1.5 or (not area and direction*d.x<-.3):continue
 		var query:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),enemy.position+Vector3(0,1,0),1)
-		if get_world_3d().direct_space_state.intersect_ray(query).is_empty():enemy.hurt(amount,direction,30 if amount>=35 else 12,tier,player)
+		if get_world_3d().direct_space_state.intersect_ray(query).is_empty():
+			var before: float=enemy.hp;enemy.hurt(amount,direction,30 if amount>=35 else 12,tier,player)
+			campaign.resonance=minf(100,campaign.resonance+8)
+			party_hp[active_slot]=minf(max_hp(),party_hp[active_slot]+minf(before,amount)*float(inventory.stats(active_slot).get("leech",0)))
 
 func fire_projectile(pos: Vector3,direction: float,amount: float,friendly: bool,source: Node) -> void:
-	var shot:=preload("res://scripts/projectile.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=amount;shot.friendly=friendly;shot.source=source
+	var shot:=preload("res://scripts/projectile.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=amount*(damage_multiplier() if friendly else 1.0);shot.friendly=friendly;shot.source=source
 	shot.travel=Vector3(direction,0,0)
 	if not friendly and is_instance_valid(source) and source.ranged():shot.travel=(player.position+Vector3(0,.9,0)-pos).normalized()
 	if friendly:
@@ -669,7 +723,7 @@ func open_settings() -> void:
 	settings_return="title" if screen=="title" else "pause";set_screen("settings")
 
 func fire_spell(pos: Vector3,direction: float,power: float,kind: String) -> void:
-	var shot:=preload("res://scripts/spell_v06.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=power;shot.kind=kind;shot.owner_slot=active_slot;world.add_child(shot)
+	var shot:=preload("res://scripts/spell_v06.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=power*damage_multiplier();shot.kind=kind;shot.owner_slot=active_slot;world.add_child(shot)
 func snare_nearby(reach: float) -> void:
 	for enemy in enemies:
 		if is_instance_valid(enemy) and enemy.position.distance_to(player.position)<reach:
@@ -688,8 +742,8 @@ func projectile_visual(friendly: bool) -> MeshInstance3D:
 func run_compatibility_smoke() -> void:
 	var records: Array=[]
 	graphics.set_quality("low",false);Engine.max_fps=60
-	for number in [0,9,19,27,35,43,48]:
-		active_slot=0 if number<18 else 3+(number%4);load_room(number);set_screen("play")
+	for number in [0,9,19,27,35,43,48,56,64,72,80,88,96]:
+		active_slot=0 if number<18 else 3+(number%14);load_room(number);set_screen("play")
 		for frame in range(45):await get_tree().process_frame
 		particles(player.position+Vector3(0,1,0),1,Color(.3,.6,1));sound("dash",player.position)
 		records.append({"room":number,"draw_calls":Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME),"slot":active_slot,"effects":dusts.size()})

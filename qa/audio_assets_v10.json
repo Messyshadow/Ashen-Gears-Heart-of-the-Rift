@@ -1,0 +1,41 @@
+{
+  "original": true,
+  "tracks": [
+    {
+      "name": "amb_smelter",
+      "seconds": 20,
+      "peak": 0.06489674226911112,
+      "bytes": 262416
+    },
+    {
+      "name": "amb_bonecity",
+      "seconds": 20,
+      "peak": 0.06349803806845371,
+      "bytes": 263183
+    },
+    {
+      "name": "amb_archive",
+      "seconds": 20,
+      "peak": 0.06640645814016026,
+      "bytes": 264871
+    },
+    {
+      "name": "amb_rail",
+      "seconds": 20,
+      "peak": 0.06708378122238304,
+      "bytes": 268170
+    },
+    {
+      "name": "amb_rift",
+      "seconds": 20,
+      "peak": 0.06299777053404193,
+      "bytes": 263131
+    },
+    {
+      "name": "amb_crown",
+      "seconds": 20,
+      "peak": 0.06092338954810231,
+      "bytes": 262460
+    }
+  ]
+}

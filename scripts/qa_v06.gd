@@ -21,17 +21,17 @@ func capture(name: String) -> void:
 	await RenderingServer.frame_post_draw;game.get_viewport().get_texture().get_image().save_png(directory.path_join(name+".png"))
 func run(g: Node3D,path: String) -> Array:
 	game=g;directory=path;game.new_game();game.set_screen("play")
-	check(game.rooms.size()==50 and game.Content.ROSTER.size()==7,"50 房间、七名可收集角色与六个主线区域")
+	check(game.rooms.size()==126 and game.Content.ROSTER.size()==17,"扩展世界仍保留原六区的稳定身份")
 	var distinct: Dictionary={};var doors_supported:=true;var ids: Dictionary={}
 	for r in game.rooms:
 		ids[r.id]=true;distinct[JSON.stringify([r.platforms,r.ladders,r.slopes])]=true
-		if int(r.next)<0 or int(r.next)>=50 or int(r.previous)<0 or int(r.previous)>=50:doors_supported=false
+		if int(r.next)<0 or int(r.next)>=126 or int(r.previous)<0 or int(r.previous)>=126:doors_supported=false
 		for doorway in [r.exit,r.back,r.spawn]:
 			var found:=false
 			for floor in r.platforms:
 				if float(doorway[0])>=float(floor[0]) and float(doorway[0])<=float(floor[1]) and absf(float(doorway[1])-float(floor[2]))<.05:found=true
 			if not found:doors_supported=false
-	check(ids.size()==50 and distinct.size()>=40 and doors_supported,"房间身份、独立路线布局及前后门入口均有实体地面",distinct.size())
+	check(ids.size()==126 and distinct.size()>=40 and doors_supported,"房间身份、独立路线布局及前后门入口均有实体地面",distinct.size())
 	# Test closed progression gates before solving them.
 	for number in [19,27,35,43,47]:
 		await enter(number);place(game.vector(game.rooms[number].exit));use("exit");await wait(.05)
@@ -95,14 +95,12 @@ func run(g: Node3D,path: String) -> Array:
 	for number in range(50):
 		await enter(number);await clear();place(game.vector(game.rooms[number].exit)+Vector3(-1,.04,0));await wait(.42)
 		Input.action_press("right");await wait(.32);Input.action_release("right");await wait(.08)
-		if number==49:
-			if game.room!=49 or game.screen!="chapter_complete":forward_ok=false
-		elif game.room!=int(game.rooms[number].next):forward_ok=false;print("V06_FORWARD_FAIL ",number," -> ",game.room)
+		if game.room!=int(game.rooms[number].next):forward_ok=false;print("V06_FORWARD_FAIL ",number," -> ",game.room)
 		if number==0 or number==11:continue
 		await enter(number);await clear();place(game.vector(game.rooms[number].back)+Vector3(1,.04,0));await wait(.42)
 		Input.action_press("left");await wait(.32);Input.action_release("left");await wait(.08)
 		if game.room!=int(game.rooms[number].previous):backward_ok=false;print("V06_BACK_FAIL ",number," -> ",game.room)
-	check(forward_ok,"50 个前门实际步行推进，最终终点明确停留完成界面")
+	check(forward_ok,"原 50 个前门实际步行推进，R06 接入 R07")
 	check(backward_ok,"48 个左门实际步行回访前室，不退回区域原点")
 	for number in [24,32,40,48]:
 		var flag: String=game.rooms[number].gate;game.flags[flag]=false;await enter(number);var boss: Node=game.enemies[0];boss.hurt(boss.max_hp*.52,1);await wait(.1)
@@ -111,13 +109,13 @@ func run(g: Node3D,path: String) -> Array:
 		await wait(1.65);check(boss.attacks>0 and game.party_hp[game.active_slot]<hp_before,"新 Boss 感知、前摇与实体攻击伤害 %s"%boss.kind)
 		await clear();var money: int=game.scrap;await enter(number);check(game.enemies.is_empty() and game.scrap==money,"新 Boss 唯一击败记录与回访 %s"%flag)
 	await enter(11);place(game.vector(game.data.checkpoint));game.fast_travel(26);check(game.room==26,"休息灯传送可回访已发现迁木园")
-	var old_keys: Dictionary=game.controls.keys.duplicate();check(game.controls.bind_key("jump",KEY_B),"按键设置真实重绑跳跃 B")
-	await wait(.25);var key:=InputEventKey.new();key.physical_keycode=KEY_B;key.keycode=KEY_B;key.pressed=true;Input.parse_input_event(key);await wait(.12);key.pressed=false;Input.parse_input_event(key)
-	check(game.player.position.y>.4,"重绑后的 B 键实际触发角色跳跃")
+	var old_keys: Dictionary=game.controls.keys.duplicate();check(game.controls.bind_key("jump",KEY_H),"按键设置真实重绑跳跃 H")
+	await wait(.25);var key:=InputEventKey.new();key.physical_keycode=KEY_H;key.keycode=KEY_H;key.pressed=true;Input.parse_input_event(key);await wait(.12);key.pressed=false;Input.parse_input_event(key)
+	check(game.player.position.y>.4,"重绑后的 H 键实际触发角色跳跃")
 	var found:=false
 	for event in InputMap.action_get_events("jump"):
-		if event is InputEventKey and event.physical_keycode==KEY_B:found=true
-	check(found and not game.controls.bind_key("light",KEY_B),"重绑生效并拒绝重复占用")
+		if event is InputEventKey and event.physical_keycode==KEY_H:found=true
+	check(found and not game.controls.bind_key("light",KEY_H),"重绑生效并拒绝重复占用")
 	game.controls.keys=old_keys;game.controls.apply();game.controls.save()
 	var config:=ConfigFile.new();check(config.load(game.controls.config_path)==OK and int(config.get_value("keys","jump",0))==KEY_SPACE,"按键设置写入可恢复的配置文件")
 	var original: Dictionary=game.graphics.settings.duplicate(true);game.graphics.settings.fog=false;game.graphics.settings.glow=false;game.graphics.settings.brightness=1.25;game.graphics.apply_settings(false)
@@ -132,11 +130,11 @@ func run(g: Node3D,path: String) -> Array:
 	DisplayServer.window_set_size(window_size);await wait(.2)
 	game.open_settings();check(game.screen=="settings","统一设置入口")
 	await capture("21_settings");game.set_screen("controls");await wait(.2);check(game.ui.buttons.size()>=10,"按键大类显示实际操作控件");await capture("22_controls")
-	game.set_screen("map");game.map_region=6;game.ui.rebuild_buttons();await wait(.2);check(game.ui.buttons.size()==15,"区域分页地图显示七个区域与八个房间");await capture("23_map")
+	game.set_screen("map");game.map_region=6;game.ui.rebuild_buttons();await wait(.2);check(is_instance_valid(game.ui.v10.map_view),"世界地图已改为真实空间布局与世界区域视图");await capture("23_map")
 	game.set_screen("play");await enter(49)
 	for prop in game.props:
 		if prop.kind=="exit":game.nearest=prop;break
-	game.interact();check(game.screen=="chapter_complete" and game.flags.get("stage_complete",false),"R06 终点保存阶段完成记录，回访入口明确")
+	game.interact();await wait(.2);check(game.room==50,"R06 运输梯继续进入熔海，不再截断主线")
 	await capture("24_final")
 	var report:=FileAccess.open(directory.get_base_dir().path_join("v06_runtime.json") if not directory.is_empty() else "user://v06_runtime.json",FileAccess.WRITE);report.store_string(JSON.stringify({"version":game.Content.VERSION,"checks":checks},"  "));report.close()
 	game.set_screen("play");return checks

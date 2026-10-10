@@ -1,4 +1,5 @@
 extends Control
+var v10: RefCounted
 var extension: RefCounted
 var game: Node3D
 var buttons: Array[Button]=[]
@@ -15,6 +16,7 @@ const DARK=Color(.024,.037,.047,.94)
 
 func _ready() -> void:
 	extension=preload("res://scripts/menus_v06.gd").new();extension.ui=self
+	v10=preload("res://scripts/menus_v10.gd").new();v10.ui=self
 	mouse_filter=Control.MOUSE_FILTER_IGNORE
 	font=ThemeDB.fallback_font
 	resized.connect(func():call_deferred("rebuild_buttons"))
@@ -28,6 +30,7 @@ func bar(pos: Vector2, width: float, value: float, max_value: float, col: Color)
 
 func _draw() -> void:
 	if not game or not font or not is_instance_valid(game.player):return
+	if v10.manages(game.screen):v10.draw_screen();return
 	var w := size.x;var h := size.y
 	draw_rect(Rect2(24,22,350,120),DARK)
 	draw_line(Vector2(24,22),Vector2(374,22),GOLD,2)
@@ -42,6 +45,9 @@ func _draw() -> void:
 	text_at(Vector2(w-368,107),"铁屑 %d    药剂 %d    技能点 %d"%[game.scrap,game.potion,game.skill_points],17)
 	var party: Array=game.field_slots();var names: Array=[]
 	for i in party.size():names.append("%d %s"%[i+1,game.Content.ROSTER[party[i]].name])
+	bar(Vector2(42,188),180,game.campaign.resonance,100,Color(.55,.26,.76))
+	text_at(Vector2(230,193),"B 共鸣" if game.campaign.form_time<=0 else "形态 %.1f秒"%game.campaign.form_time,13,MUTED)
+	if game.inventory.wrap=="lava_wrap":text_at(Vector2(42,215),"熔界护套 · 热负荷 %d / 100"%game.heat,15,GOLD)
 	text_at(Vector2(42,170),"  ".join(names)+" / "+game.controls.label("switch")+" 切换 · "+game.controls.label("roster")+" 名册",17,MUTED)
 	draw_rect(Rect2(0,h-72,w,72),DARK)
 	text_at(Vector2(28,h-43),game.rooms[game.room].hint,17,TEXT)
@@ -84,7 +90,7 @@ func _draw() -> void:
 		text_at(Vector2(w*.13,h*.37),"裂界之心",38,TEXT)
 		text_at(Vector2(w*.13,h*.43),"ASHEN GEARS  /  HEART OF THE RIFT",18,MUTED)
 		text_at(Vector2(w*.13,h*.51),"一座以记忆为燃料的城。一份被伪造的名字。",23,TEXT)
-		text_at(Vector2(w*.13,h*.89),"六个主线区域 × 维修所   /   50 房间 · 七名同伴 · v"+game.Content.VERSION,17,MUTED)
+		text_at(Vector2(w*.13,h*.89),"十二个主线区域 × 维修所   /   126 房间 · 十六位同伴 · v"+game.Content.VERSION,17,MUTED)
 	elif game.screen=="story":
 		var lines: PackedStringArray=game.story.split("\n")
 		var top := h*.35
@@ -107,10 +113,13 @@ func _draw() -> void:
 	elif game.screen=="graphics_confirm":
 		text_at(Vector2(w*.24,h*.35),"保留这组画面设置？",36,GOLD)
 		text_at(Vector2(w*.24,h*.44),"%d 秒内确认，超时或 Esc 自动恢复。"%ceil(game.graphics.confirmation_time),22,TEXT)
+	elif game.screen=="ending":
+		text_at(Vector2(w*.24,h*.25),"裂界之心 · 米菈的选择",40,GOLD)
+		text_at(Vector2(w*.24,h*.33),"水锚 %s / 气锚 %s / 电锚 %s"%["已修复" if game.flags.get("anchor_water",false) else "未修复","已修复" if game.flags.get("anchor_air",false) else "未修复","已修复" if game.flags.get("anchor_power",false) else "未修复"],22,TEXT)
 	elif game.screen=="chapter_complete":
-		text_at(Vector2(w*.20,h*.24),"R01 — R06 · 阶段完成",38,GOLD)
-		text_at(Vector2(w*.20,h*.34),"复制链路被切断，伪造的名字与幸存者记录已保全。",23,TEXT)
-		text_at(Vector2(w*.20,h*.41),"六个区域已连通；下一阶段 R07「倒吊钟楼」尚未开放。",21,MUTED)
+		text_at(Vector2(w*.20,h*.24),"灰炉城 · 旅程完成",38,GOLD)
+		text_at(Vector2(w*.20,h*.34),"城市的未来已记录，结局档案与全部探索进度保留。",23,TEXT)
+		text_at(Vector2(w*.20,h*.41),"十二个区域连通，可返回终战前或中枢继续寻找同伴与遗物。",21,MUTED)
 		text_at(Vector2(w*.20,h*.48),"以下入口用于回访与整备，不会重置 Boss、奖励或同伴进度。",20,MUTED)
 		text_at(Vector2(w*.20,h*.55),"伊瑟招募："+("已完成" if game.flags.get("ranger",false) else "可回轴承台中层侧门完成"),20,GOLD)
 	elif game.screen=="skills":
@@ -140,6 +149,7 @@ func rebuild_buttons() -> void:
 	for b in buttons:remove_child(b);b.queue_free()
 	buttons.clear()
 	var w := get_viewport_rect().size.x;var h := get_viewport_rect().size.y
+	if v10.manages(game.screen):v10.build();return
 	if game.screen=="title":
 		add_button("开始新的旅程",Vector2(w*.13,h*.59),game.new_game)
 		if FileAccess.file_exists(game.save_path):add_button("继续休息灯存档",Vector2(w*.13,h*.66),game.load_game)
@@ -152,6 +162,9 @@ func rebuild_buttons() -> void:
 		add_button("同伴与任务",Vector2(w*.35,h*.70),func():game.set_screen("roster"))
 		add_button("设置",Vector2(w*.35,h*.78),game.open_settings)
 		add_button("返回标题",Vector2(w*.35,h*.86),func():game.set_screen("title"))
+	if game.screen=="ending":
+		for i in range(3):add_button(["共同分离 · 余烬黎明","停止献祭 · 封炉长夜","接管炉心 · 灰冠继承"][i],Vector2(w*.24,h*(.44+i*.105)),game.campaign.complete_ending.bind(i+1),w*.5)
+		add_button("返回修复城市锚点",Vector2(w*.24,h*.79),game.chapter_return.bind(102),w*.5)
 	if game.screen=="graphics":build_graphics()
 	if game.screen=="graphics_confirm":
 		add_button("保留设置",Vector2(w*.24,h*.56),game.graphics.confirm,240)
@@ -181,11 +194,12 @@ func rebuild_buttons() -> void:
 		build_preview(Vector2(w*.66,h*.56),Vector2(w*.22,h*.28))
 
 	extension.build()
+	if game.screen in ["roster","settings"]:v10.navigation()
 
 func choose_skill(slot: int) -> void:
 	preview_slot=slot;game.learn_skill(slot);rebuild_buttons()
 
-func build_preview(pos: Vector2,dimensions: Vector2,actor_override: int=-1) -> void:
+func build_preview(pos: Vector2,dimensions: Vector2,actor_override: int=-1,clip_override: String="",training: bool=false) -> void:
 	var actor_slot: int=game.active_slot if actor_override<0 else actor_override
 	preview=SubViewportContainer.new();add_child(preview);preview.position=pos;preview.size=dimensions;preview.stretch=true;preview.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	var viewport:=SubViewport.new();viewport.size=Vector2i(dimensions);viewport.world_3d=World3D.new();viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS;preview.add_child(viewport)
@@ -197,7 +211,15 @@ func build_preview(pos: Vector2,dimensions: Vector2,actor_override: int=-1) -> v
 	var animator: AnimationPlayer=actor.find_child("AnimationPlayer",true,false)
 	var clip: String="AirDash" if preview_slot==2 else "BowShot" if actor_slot==2 else "MechLight" if actor_slot==1 and preview_slot==0 else "MechHeavy" if actor_slot==1 else "Dagger3" if preview_slot==0 else "Skill"
 	if actor_slot==0 and game.equipped_weapon=="katana" and preview_slot!=2:clip="Katana3" if preview_slot==0 else "KatanaHeavy"
-	if actor_slot>=3 and preview_slot!=2:clip=[["BoneThrust","BoneSlash"],["ShadowBind","ShadowStrike"],["BloodCast","BloodCast"],["ElectricBurst","ElectricBurst"]][actor_slot-3][preview_slot]
+	if actor_slot>=3 and actor_slot<7 and preview_slot!=2:clip=[["BoneThrust","BoneSlash"],["ShadowBind","ShadowStrike"],["BloodCast","BloodCast"],["ElectricBurst","ElectricBurst"]][actor_slot-3][preview_slot]
+	if actor_slot>=7:clip="RoleSkill"
+	if not clip_override.is_empty():clip=clip_override
+	if not animator.has_animation(clip):clip="Jump" if animator.has_animation("Jump") else "PassageIdle"
+	if training:
+		var dummy: Node3D=game.instantiate_model("kain_v04");scene.add_child(dummy);dummy.position=Vector3(1.2,0,0);dummy.rotation.y=-PI/2
+		var floor_mesh:=MeshInstance3D.new();scene.add_child(floor_mesh);var box:=BoxMesh.new();box.size=Vector3(5,.1,3);floor_mesh.mesh=box;floor_mesh.position=Vector3(0,-.07,0)
+		camera.position=Vector3(1.3,1.5,5);camera.look_at(Vector3(.6,.85,0));camera.size=3.2
+		var demonstration:=preload("res://scripts/skill_preview.gd").new();demonstration.actor=actor;demonstration.dummy=dummy;demonstration.clip=clip;demonstration.node_id=game.skills.selected;scene.add_child(demonstration);return
 	var anim: Animation=animator.get_animation(clip).duplicate();anim.loop_mode=Animation.LOOP_LINEAR;var library:=AnimationLibrary.new();library.add_animation("action",anim);animator.add_animation_library("preview",library);animator.play("preview/action")
 
 func graphics_option(items: Array, row: int, selected: int, changed: Callable) -> OptionButton:

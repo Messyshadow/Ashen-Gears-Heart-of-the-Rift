@@ -8,6 +8,7 @@ var sense_clock := 0.0
 var line_clear := true
 var edge_clock := 0.0
 var edge_safe := true
+var last_pattern := ""
 var game: Node3D
 var kind := "human"
 var uid := ""
@@ -41,7 +42,7 @@ func _ready() -> void:
 	if animator:
 		animator.callback_mode_process=AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
 		animator.get_animation("PassageWalk").loop_mode=Animation.LOOP_LINEAR;animator.play("PassageWalk")
-	var label: Label3D=game.marker({"human":"守军","ranged":"弩手","wraith":"管魂","thorn":"铁棘爬行兽","blood_guard":"血堡侍卫","scribe":"绘笔守卫","mother":"管喉之母","witch":"迁木女巫","lord":"血契侯爵","editor":"校稿者"}.get(kind,""),Color(.9,.3,.16));add_child(label);label.position.y=4.0 if boss() else 2.1
+	var label: Label3D=game.marker(definition.get("name",{"human":"守军","ranged":"弩手","wraith":"管魂","thorn":"铁棘爬行兽","blood_guard":"血堡侍卫","scribe":"绘笔守卫","mother":"管喉之母","witch":"迁木女巫","lord":"血契侯爵","editor":"校稿者"}.get(kind,"")),Color(.9,.3,.16));add_child(label);label.position.y=4.0 if boss() else 2.1
 	legs=visual.find_children("Leg*","MeshInstance3D",true,false);origin=position
 	game.feedback.prepare(self)
 
@@ -73,7 +74,7 @@ func _physics_process(dt: float) -> void:
 		visual.rotation.z=facing*.22*sin(minf(clock/.35,1)*PI)
 		if not attack_done and clock>.1:
 			attack_done=true
-			if kind in ["mother","witch","lord","editor"]:strike_extended(diff,same)
+			if kind in ["mother","witch","lord","editor"] or definition.get("extended",false):strike_extended(diff,same)
 			elif ranged() or pattern=="链钩":game.fire_projectile(position+Vector3(facing*.65,1.0,0),facing,18 if boss() else 12,false,self);game.sound("grapple_launch" if pattern=="链钩" else "enemy_fire",position)
 			elif pattern=="震地":
 				for direction in [-1.0,1.0]:game.fire_projectile(position+Vector3(direction*.8,.32,0),direction,22,false,self)
@@ -89,13 +90,15 @@ func _physics_process(dt: float) -> void:
 	elif state=="chase":
 		if same or ranged():
 			facing=signf(diff.x) if absf(diff.x)>.1 else facing
-			var reach:=11.0 if ranged() else 8.0 if kind=="boss" and (attacks+1)%3==1 else 8.0 if kind=="minotaur" and ((attacks+1)%3==0 or phase_two and (attacks+1)%2==0) else 9.0 if kind in ["mother","witch","lord","editor"] else 3.0 if boss() else 1.6
+			var reach:=11.0 if ranged() else 8.0 if kind=="boss" and (attacks+1)%3==1 else 8.0 if kind=="minotaur" and ((attacks+1)%3==0 or phase_two and (attacks+1)%2==0) else 9.0 if kind in ["mother","witch","lord","editor"] or definition.get("extended",false) else 3.0 if boss() else 1.6
 			velocity.x=0 if ranged() else facing*(2.5 if boss() else 3.2) if absf(diff.x)>reach else 0
 			if absf(diff.x)<reach and cooldown<=0 and clear:
 				attacks+=1;pattern="弩射" if ranged() else "落锤" if boss() else "近击"
 				if boss():pattern=["冲锋","落锤","震地"][attacks%3] if kind=="minotaur" else ["落锤","链钩","震地" if phase_two else "落锤"][attacks%3]
 				if kind=="minotaur" and phase_two and attacks%2==0:pattern="冲锋"
-				if kind in ["mother","witch","lord","editor"]:pattern=definition.patterns[attacks%3]
+				if kind in ["mother","witch","lord","editor"] or definition.get("extended",false):
+					var choices: Array=definition.patterns.duplicate();choices.erase(last_pattern)
+					pattern=choices[attacks%choices.size()];last_pattern=pattern
 				windup=.9 if boss() else .65 if ranged() else .45;state="windup";clock=0;game.sound("enemy_windup",position)
 		else:velocity.x=0
 	else:
@@ -113,7 +116,7 @@ func _physics_process(dt: float) -> void:
 	if position.y < -3:position=origin;velocity=Vector3.ZERO
 	if animator:
 		visual.rotation.y=facing*PI/2
-		var name: String="BowShot" if ranged() and state in ["windup","strike"] else "Heavy" if state=="windup" else "Hurt" if state=="stunned" else "PassageWalk"
+		var name: String="BowShot" if ranged() and state in ["windup","strike"] else "Heavy" if state in ["windup","strike"] else "Hurt" if state=="stunned" else "PassageWalk"
 		if animator.current_animation!=name:animator.play(name,.1)
 	else:visual.rotation.y=0 if facing>0 else PI
 	for i in legs.size():legs[i].rotation.z=.18*sin(clock*12+i*PI) if absf(velocity.x)>.1 else 0
@@ -128,11 +131,16 @@ func can_assassinate() -> bool:
 
 func hurt(amount: float,force: float,break_power: float=10,tier: String="",attacker: Node=null) -> void:
 	if hp<=0:return
+	if definition.get("shield",false) and force*facing<0 and state!="stunned" and amount<900:amount*=.30;game.sound("guard",position)
 	if tier.is_empty():tier=Tuning.tier_for_damage(amount)
 	hp=maxf(0,hp-amount);posture+=break_power;hit_flash=.15
 	var profile: Dictionary=game.feedback.impact(self,force,tier,attacker)
 	if hp<=0:
-		if not game.defeated.has(uid):game.scrap+=60 if boss() else 8
+		game.inventory.loot(kind,uid)
+		if not game.defeated.has(uid):
+			game.scrap+=60 if boss() else 8
+			game.flags.kill_progress=int(game.flags.get("kill_progress",0))+1
+			if int(game.flags.kill_progress)%4==0:game.skill_points+=1
 		game.defeated[uid]=true
 		if boss():
 			if not game.flags.get(definition.flag,false):game.skill_points+=3

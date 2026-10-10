@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$version = '0.6.1'
+$version = '1.0.0'
 $folderName = '灰烬齿轮-裂界之心-' + $version
 $stage = Join-Path $projectRoot ('build\package-' + $version)
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -15,8 +15,9 @@ if (-not $SkipExport) {
     $env:TEMP = Join-Path $projectRoot 'build\export-temp'
     $env:TMP = $env:TEMP
     New-Item -ItemType Directory -Path $env:TEMP -Force | Out-Null
-    & $Engine --headless --path $projectRoot --editor --import --quit
-    if ($LASTEXITCODE -ne 0) { throw 'Project import failed' }
+    $importLog = Join-Path $projectRoot 'build\package-import.log'
+    & $Engine --headless --path $projectRoot --editor --import --quit *> $importLog
+    if ($LASTEXITCODE -ne 0 -or (Select-String -LiteralPath $importLog -Pattern 'SCRIPT ERROR:|^ERROR:' -Quiet)) { throw 'Project import/parse failed; see build/package-import.log' }
     & $Engine --headless --path $projectRoot --export-release 'Windows Ashen Gears' (Join-Path $projectRoot 'build\AshenGears.exe')
     if ($LASTEXITCODE -ne 0) { throw 'Godot export failed' }
     $env:APPDATA = Join-Path $projectRoot '.godot-user-exe04'
@@ -28,18 +29,18 @@ if (-not $SkipExport) {
     if ((Get-Item -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json')).LastWriteTimeUtc -lt $acceptanceStarted) { throw 'EXE did not produce a fresh acceptance report' }
     if ((Get-Item -LiteralPath (Join-Path $projectRoot 'qa\exe_v04_error.log')).Length -ne 0) { throw 'EXE reported runtime errors; see qa/exe_v04_error.log' }
     $env:APPDATA = Join-Path $projectRoot '.godot-user-compat06'
-    $compatReport = (Join-Path $projectRoot 'qa\compatibility_v06.json').Replace('\','/')
-    $compat = Start-Process -FilePath (Join-Path $projectRoot 'build\AshenGears.exe') -ArgumentList @('--rendering-method','gl_compatibility','--resolution','1600x900','--','--compat-smoke','--graphics-low',('"--capture-dir=' + $compatReport + '"')) -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $projectRoot 'qa\compatibility_v06.log') -RedirectStandardError (Join-Path $projectRoot 'qa\compatibility_v06_error.log')
+    $compatReport = (Join-Path $projectRoot 'qa\compatibility_v10.json').Replace('\','/')
+    $compat = Start-Process -FilePath (Join-Path $projectRoot 'build\AshenGears.exe') -ArgumentList @('--rendering-method','gl_compatibility','--resolution','1600x900','--','--compat-smoke','--graphics-low',('"--capture-dir=' + $compatReport + '"')) -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $projectRoot 'qa\compatibility_v10.log') -RedirectStandardError (Join-Path $projectRoot 'qa\compatibility_v10_error.log')
     $compat.WaitForExit()
-    if ($compat.ExitCode -ne 0 -or (Get-Item -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v06_error.log')).Length -ne 0) { throw 'OpenGL compatibility smoke failed' }
+    if ($compat.ExitCode -ne 0 -or (Get-Item -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v10_error.log')).Length -ne 0) { throw 'OpenGL compatibility smoke failed' }
 }
 $report = Get-Content -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json') -Raw -Encoding utf8 | ConvertFrom-Json
 if ($report.failures -ne 0) { throw 'Runtime acceptance checks did not pass' }
 if ($report.version -ne $version) { throw 'Acceptance report version does not match release' }
 if ((Get-FileHash -LiteralPath (Join-Path $projectRoot 'build\AshenGears.exe') -Algorithm SHA256).Hash.ToLower() -ne $report.executable_sha256) { throw 'EXE has not passed this acceptance run' }
 if ((Get-FileHash -LiteralPath (Join-Path $projectRoot 'build\AshenGears.pck') -Algorithm SHA256).Hash.ToLower() -ne $report.pack_sha256) { throw 'PCK has changed since acceptance' }
-if (Test-Path -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v06.json')) {
-    $compat = Get-Content -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v06.json') -Raw -Encoding utf8 | ConvertFrom-Json
+if (Test-Path -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v10.json')) {
+    $compat = Get-Content -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v10.json') -Raw -Encoding utf8 | ConvertFrom-Json
     if ($compat.pack_sha256 -ne $report.pack_sha256 -or $compat.renderer -ne 'gl_compatibility') { throw 'Compatibility report does not match release' }
 }
 if ($AcceptanceOnly) { Write-Output ('Accepted EXE: ' + $report.checks.Count + ' checks, zero failures'); return }
@@ -53,8 +54,11 @@ Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\audio_runtime.json'),(Join-Pa
 foreach ($name in @('asset_validation.json','asset_optimization.json','weapon_asset_optimization.json','weapon_asset_validation.json','weapon_assets.json','weapons_runtime.json','performance_baseline.json','performance_high.json','performance_medium.json','performance_low.json','performance_compatibility.json','art_v06.json','asset_optimization_v06.json','asset_validation_v06.json','audio_assets_v06.json','v06_runtime.json','performance_v06_high.json','performance_v06_medium.json','performance_v06_low.json')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
 }
-Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v06.json') -Destination $stage
+Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v10.json') -Destination $stage
 foreach ($name in @('action_baseline_v061.json','actions_runtime_v061.json','performance_v061_high.json','performance_v061_medium.json','performance_v061_low.json')) {
+    Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
+}
+foreach ($name in @('art_v10.json','asset_validation_v10.json','asset_optimization_v10.json','audio_assets_v10.json','performance_v10_high.json','performance_v10_medium.json','performance_v10_low.json')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
 }
 $stageQa = Join-Path $stage 'qa'
@@ -67,12 +71,15 @@ New-Item -ItemType Directory -Path $images -Force | Out-Null
 foreach ($name in @('05_gears.png','10_combat.png','14_katana.png','15_double_jump.png','16_water.png','17_garden.png','18_castle.png','19_lab.png','20_roster.png','21_settings.png','22_controls.png','23_map.png','24_final.png')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\v04_screenshots\' + $name)) -Destination $images
 }
+$v10Images = Join-Path $stageQa 'v10_screenshots'
+New-Item -ItemType Directory -Path $v10Images -Force | Out-Null
+Get-ChildItem -LiteralPath (Join-Path $projectRoot 'qa\v10_screenshots') -Filter '*.png' | Copy-Item -Destination $v10Images
 $actionImages = Join-Path $stageQa 'action_screenshots'
 New-Item -ItemType Directory -Path $actionImages -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\action_screenshots\00_local_hit.png') -Destination $actionImages
 $releaseDocs = Join-Path $stage 'docs'
 New-Item -ItemType Directory -Path $releaseDocs -Force | Out-Null
-foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md','09_0.6.0区域与同伴.md','10_0.6.1动作与打击反馈.md')) {
+foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md','09_0.6.0区域与同伴.md','10_0.6.1动作与打击反馈.md','11_1.0.0策划验收指南.md')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $name)) -Destination $releaseDocs
 }
 $records = @()
@@ -80,7 +87,7 @@ foreach ($file in (Get-ChildItem -LiteralPath $stage -File -Recurse | Where-Obje
     $records += [ordered]@{ name=[System.IO.Path]::GetRelativePath($stage,$file.FullName).Replace('\','/'); bytes=$file.Length; sha256=(Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLower() }
 }
 $records | ForEach-Object { $_.sha256 + '  ' + $_.name } | Set-Content -LiteralPath (Join-Path $stage 'SHA256SUMS.txt') -Encoding utf8
-[ordered]@{version=$version;date='2026-10-10';checks=$report.checks.Count;failures=$report.failures;files=$records;scope='50 authored rooms, seven collectable prototype characters in a three-person party, six boss encounters; see README for remaining design scope'} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $stage 'manifest.json') -Encoding utf8
+[ordered]@{version=$version;date='2026-10-10';checks=$report.checks.Count;failures=$report.failures;files=$records;scope='126 rooms, 17 collectable prototype characters, 12 main bosses and 8 elites, character skill trees, inventory/equipment, 3 endings; planner acceptance build, see docs for scope'} | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $stage 'manifest.json') -Encoding utf8
 if ($PublishRoot) {
     $destination = Join-Path $PublishRoot $folderName
     if (Test-Path -LiteralPath $destination) { throw ('Release directory already exists: ' + $destination) }

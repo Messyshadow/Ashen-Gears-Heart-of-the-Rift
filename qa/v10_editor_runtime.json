@@ -1,0 +1,431 @@
+{
+  "checks": [
+    {
+      "check": "完整世界：126 房间、主角与 16 同伴、12 个主线区域",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "唯一房间身份、百种路线布局、全部门与支路目标有效",
+      "detail": 126,
+      "pass": true
+    },
+    {
+      "check": "17 套专属技能树，153 个命名节点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新档初始匕首，太刀必须开箱获得",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "装备饰品实际增加攻击属性",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "同一实体装备不能同时占据两个槽位",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "拥有两件饰品时可分别装备两槽",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "护甲属性实际降低伤害",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "生命饰品改变生命上限",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "背包消耗品恢复生命并消耗一件",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "魔力补剂实际恢复魔力",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "背包拒绝错误类别使用与未拥有武器",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "休息灯商店真实消耗货币并发货",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "制作材料不足时全部数量不变",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "固定配方一次性扣材料并发装备",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "背包数量、人物装备和属性随存档恢复",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能前置未满足时拒绝学习",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "基本技能学习接通实际战斗招式",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能升级扣点数与材料并保留等级",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能页可独立查看候补角色，不切换当前出战人物",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "不同人物的学习进度独立",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能学习与预览暂停游戏战斗",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "153 个技能预览的角色与动画资源均存在",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "章节条件满足后共鸣分支可学习",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "共鸣形态真实启动、扣共享资源并限定持续时间",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "名册按钮直达所选人物的专属技能页",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "世界地图使用真实双向房间连接",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "地图滚轮缩放实际生效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "地图自定义标记写入持久状态",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重复标记操作可移除标记",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 雷牙",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 佩奇",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 炉灯",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 缇娅",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 黎照",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 巴洛",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 莫恩",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 塞琳",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 鸦眼",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 星烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "热压炉门拒绝跳过泄压过程",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "两秒泄压后炉门可以固定",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "熔界许可发放并启用全队护套",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "岩浆护套承受热负荷并保护角色",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "没有护套时岩浆产生实际周期伤害",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重锚工具解开船坞门",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "档案姓名锁错序安全复位",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "三条真名按顺序恢复档案门",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "带电状态拒绝转接列车",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "断电转轨上电后救下列车",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "轨链教学接通实体中继升降平台",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未取得工具时三源锁拒绝通行",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "全队共鸣工具稳定三源锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "76 个新增房间均可构建，场景合批与角色模型有效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "76 个新增前门实际步行进入目标，炉心停留最终选择",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "76 个新增后门实际步行回访，支路回主路而非区域原点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "20 支线与 8 隐藏委托可接取、找证物、返回交付，奖励唯一",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · smelter",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · smelter",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss7",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · general",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · general",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss8",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · judge",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · judge",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss9",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · emperor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · emperor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss10",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · triphase",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · triphase",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss11",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · regent",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · regent",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss12",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "主线提供米菈真实意愿和唯一分离核心",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冠城炉锁整合工具 · lock_power",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冠城炉锁整合工具 · lock_blood",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冠城炉锁整合工具 · lock_rift",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "城市锚点不足时不能共同分离",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "三个城市锚点均可回访修复",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "结局 1 保存档案并回终战前安全房",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "结局 2 保存档案并回终战前安全房",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "结局 3 保存档案并回终战前安全房",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "通关存档载入保留多个结局与探索状态",
+      "detail": null,
+      "pass": true
+    }
+  ],
+  "failures": 0,
+  "scope": "Intermediate editor validation before final export; final release evidence is runtime_tests.json."
+}

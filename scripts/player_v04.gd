@@ -104,7 +104,7 @@ func _physics_process(dt: float) -> void:
 	shield_clock=maxf(0,shield_clock-dt)
 	double_jump_clock=maxf(0,double_jump_clock-dt)
 	invulnerable=maxf(0,invulnerable-dt);stamina_delay=maxf(0,stamina_delay-dt);wall_sound_clock=maxf(0,wall_sound_clock-dt);wall_lock=maxf(0,wall_lock-dt);detach_clock=maxf(0,detach_clock-dt)
-	if stamina_delay<=0:stamina=minf(100,stamina+25*dt)
+	if stamina_delay<=0:stamina=minf(100,stamina+25*dt*(1+float(game.inventory.stats(game.active_slot).get("stamina",0))+game.skills.bonus(game.active_slot,"stamina")))
 	combo_clock=maxf(0,combo_clock-dt)
 	if combo_clock<=0:combo=0
 	if position.y < -3 or absf(position.x)>25:game.reset_player();return
@@ -147,7 +147,11 @@ func _physics_process(dt: float) -> void:
 			elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
 			else:game.melee_hit(attack_power*(1+.15*game.weapon_rank),attack_reach,facing,attack_area,attack_tier)
 		while extra_hit_index<extra_hits.size() and attack_total-attack_clock>=float(extra_hits[extra_hit_index]):
-			extra_hit_index+=1;game.melee_hit(attack_power,attack_reach,facing,false,"light");game.sound("whoosh_light_1",position)
+			extra_hit_index+=1
+			if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,attack_power,spell)
+			elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
+			else:game.melee_hit(attack_power,attack_reach,facing,attack_area,"light")
+			game.sound("whoosh_light_1",position)
 		var elapsed: float=attack_total-attack_clock
 		var final_contact: float=float(extra_hits[-1]) if not extra_hits.is_empty() else hit_at
 		var active_end: float=final_contact+float(Tuning.ACTIVE_SECONDS.get(attack_clip,.08))
@@ -229,18 +233,31 @@ func begin_attack(heavy: bool) -> void:
 	configure_attack_timing("BowShotHeavy" if heavy and game.active_slot==2 else attack_clip)
 	animator.stop();clip(attack_clip);animator.play(attack_clip,.06,1);game.sound("bow_fire" if game.active_slot==2 else "whoosh_heavy" if heavy else "whoosh_light_%d"%randi_range(1,2),position)
 func begin_skill(slot: int) -> void:
+	if slot==3:
+		var finisher: bool=game.campaign.form_time>0 and game.skills.level(game.active_slot,"T3")>0
+		if not finisher and game.skills.level(game.active_slot,"C3")<=0:game.toast("在技能树学习职业高阶招式");return
+		if not finisher and (game.magic<36 or game.skill_cooldown>0):game.toast("需要 36 魔力并等待冷却");return
+		if finisher:game.campaign.form_time=0
+		else:game.magic-=36
+		game.skill_cooldown=10;spell="";extra_hits=[];extra_hit_index=0;attack_light=false;attack_tier="critical";attack_area=true;skill_variant="";clear_action_buffer()
+		start_companion(game.skills.animation(game.active_slot,"T3" if finisher else "C3"),1.1,(130 if finisher else 85)+15*maxi(0,game.skills.level(game.active_slot,"T3" if finisher else "C3")-1),5.5 if finisher else 4.0,.45);return
 	skill_variant="%d_%d"%[game.active_slot,slot]
 	attack_light=false;attack_tier="heavy"
 	spell="";extra_hits=[];extra_hit_index=0;attack_area=false
 	if not game.learned.has("%d_%d"%[game.active_slot,slot]):game.toast("T 学习对应招式与身法");return
-	if game.magic<(16 if slot==2 else 18) or game.skill_cooldown>0:game.toast("魔力不足或尚未冷却");return
+	var cost: int=16-2*maxi(0,game.skills.level(game.active_slot,"M2")-1) if slot==2 else 18 if slot==0 else 28
+	if game.magic<cost or game.skill_cooldown>0:game.toast("魔力不足或尚未冷却");return
 	if slot==2:
 		if air_dash_used:return
-		game.magic-=16;dash_clock=.19;air_dash_used=true;game.skill_cooldown=1;game.sound("dash",position);clip("AirDash");return
-	game.magic-=18;game.skill_cooldown=4
+		game.magic-=cost;dash_clock=.19;air_dash_used=true;game.skill_cooldown=5-.5*maxi(0,game.skills.level(game.active_slot,"M2")-1);game.sound("dash",position);clip("AirDash");return
+	game.magic-=cost;game.skill_cooldown=4 if slot==0 else 7
 	if game.active_slot>=3:begin_companion_skill(slot);return
 	if game.active_slot==1 and slot==0:game.party_hp[1]=minf(110,game.party_hp[1]+12)
 	attack_clip="BowShot" if game.active_slot==2 else "MechHeavy" if game.active_slot==1 else "Skill";attack_total=.7;attack_clock=.7;hit_at=.26;attack_power=55 if slot==0 else 42;attack_reach=3.2 if slot==0 else 4.4;attack_hit=false
+	if slot==1:
+		if game.active_slot==0:extra_hits=[.4,.56];attack_area=true;attack_power=22
+		elif game.active_slot==1:attack_area=true
+		elif game.active_slot==2:extra_hits=[.4,.56];attack_power=25
 	if game.active_slot==0 and game.equipped_weapon=="katana":attack_clip="Katana3" if slot==0 else "KatanaHeavy"
 	configure_attack_timing(attack_clip)
 	animator.stop();clip(attack_clip);animator.play(attack_clip);game.sound("arc")
@@ -254,6 +271,7 @@ func receive_damage(amount: float,direction: float,source: Node) -> void:
 			game.toast("完美弹反");return
 		game.feedback.impact(self,direction,"block",source);stamina=maxf(0,stamina-amount);amount*=.25
 	if shield_clock>0:amount*=.5
+	amount*=game.defense_multiplier()
 	game.party_hp[game.active_slot]=maxf(0,game.party_hp[game.active_slot]-amount);invulnerable=.55;hurt_clock=.23;velocity.x=direction*4
 	if not guarding:game.feedback.impact(self,direction,Tuning.tier_for_damage(amount),source)
 	interrupt_for_hurt()
@@ -276,6 +294,7 @@ func begin_companion_attack(heavy: bool) -> void:
 	var cost: float=20 if heavy else 4
 	if stamina<cost:return
 	stamina-=cost;stamina_delay=.55;combo=combo%3+1;combo_clock=.9
+	if game.active_slot>=7:preload("res://scripts/role_combat.gd").attack(self,heavy);return
 	match game.active_slot:
 		3:start_companion("BoneThrust" if heavy else "BoneSlash",.8 if heavy else .46,48 if heavy else 27+combo*2,3.5 if heavy else 2.9,.32 if heavy else .18)
 		4:start_companion("ShadowBind" if heavy else "ShadowStrike",.62 if heavy else .27,36 if heavy else 18,2.1 if heavy else 1.8,.25 if heavy else .1)
@@ -299,7 +318,9 @@ func capture_action_input(dt: float) -> void:
 	if Input.is_action_just_pressed("jump") and not Input.is_action_pressed("modifier"):buffer=Tuning.MOVEMENT.jump_buffer_seconds
 	var request: String="dodge" if Input.is_action_just_pressed("dodge") else "light" if Input.is_action_just_pressed("light") else "heavy" if Input.is_action_just_pressed("heavy") else ""
 	if request.is_empty():return
-	if Input.is_action_pressed("modifier") and request in ["light","heavy"]:request="skill0" if request=="light" else "skill1"
+	if Input.is_action_pressed("modifier"):
+		if request in ["light","heavy"]:request="skill0" if request=="light" else "skill1"
+		elif request=="dodge":request="skill3"
 	pending_action=request;pending_action_clock=Tuning.INPUT.dodge_buffer_seconds if request=="dodge" else Tuning.INPUT.attack_buffer_seconds;queued_attack=request=="light"
 func dispatch_action() -> bool:
 	if pending_action.is_empty() or pending_action_clock<=0:return false
@@ -317,6 +338,7 @@ func dispatch_action() -> bool:
 	else:begin_attack(request=="heavy")
 	return true
 func begin_companion_skill(slot: int) -> void:
+	if game.active_slot>=7:preload("res://scripts/role_combat.gd").skill(self,slot);return
 	match game.active_slot:
 		3:
 			if slot==0:spell="bone";start_companion("BoneThrust",.7,35,3,.22)

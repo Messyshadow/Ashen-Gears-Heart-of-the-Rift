@@ -3,24 +3,30 @@ var game: Node3D
 func handle(kind: String) -> bool:
 	var g:=game;var flag: String=""
 	if kind.begins_with("recruit") and kind!="recruit":
-		var slot:=int(kind.trim_prefix("recruit"));if slot<3 or slot>6:return false
+		var slot:=int(kind.trim_prefix("recruit"));if slot<3 or slot>=g.Content.ROSTER.size():return false
 		if g.available_slots().has(slot):return true
 		if g.alive_count()>0:g.toast("击退本室敌人，再与同伴交谈");return true
+		if slot==16 and not (g.flags.get("core1",false) and g.flags.get("core2",false) and g.flags.get("core3",false)):g.toast("归还三个观测核后再与星烬交谈");return true
+		if slot==8 and not g.flags.get("lab_evidence",false):g.toast("先取实验室原始日志，再来审计绘笔");return true
 		flag=g.Content.ROSTER[slot].flag;g.flags[flag]=true;g.skill_points+=2;g.learned["%d_0"%slot]=true
 		if g.flags.get("airdash",false):g.learned["%d_2"%slot]=true
-		g.consume_prop();g.field_slots();g.show_story(g.Content.ROSTER[slot].name+" 加入名册。\n"+g.Content.ROSTER[slot].desc+"\nC 查看同伴；在休息灯附近调整三人编队。");g.save_game();return true
+		g.inventory.on_recruit(slot);g.consume_prop();g.field_slots();g.show_story(g.Content.ROSTER[slot].name+" 加入名册。\n"+g.Content.ROSTER[slot].desc+"\nC 查看同伴；在休息灯附近调整三人编队。");g.save_game();return true
 	if kind.begins_with("portal"):
-		var target:=int(kind.trim_prefix("portal"));g.sound("door");g.call_deferred("load_room",target);return true
+		var target:=int(kind.trim_prefix("portal"));if g.campaign.entry_allowed(target):g.sound("door");g.call_deferred("load_room",target)
+		return true
 	if kind=="travel":g.set_screen("travel");return true
 	if kind=="story":g.show_story(g.nearest.text);return true
 	if kind in ["clue_water","clue_names","blood_record","lab_evidence"]:
-		g.flags[kind]=true;g.show_story(g.nearest.text+"\n记录已收入任务册，N 查看。");g.consume_prop();g.save_game();return true
+		g.flags[kind]=true
+		if g.inventory.CATALOG.has(kind) and g.inventory.owned(kind)==0:g.inventory.grant(kind)
+		g.show_story(g.nearest.text+"\n记录已收入任务册，N 查看。");g.consume_prop();g.save_game();return true
 	if kind=="airdash":
 		g.flags.airdash=true
 		for slot in g.available_slots():g.learned["%d_2"%slot]=true
 		g.show_story("空中冲刺训练完成。\n全队 Ctrl + Space 空冲；每次腾空一次。\n以后招募的同伴也保留训练成果。");g.consume_prop();g.save_game();return true
 	if kind=="phase_step":g.flags.phase_step=true;g.show_story("薄壁相移：靠近紫色标记墙，面向墙按 G。\n消耗 16 魔力，只穿越标记薄壁。\n落点必须安全，相移不会刷新二段跳。");g.consume_prop();g.save_game();return true
-	if kind=="final_report":g.flags.stage_complete=true;g.save_game();g.set_screen("chapter_complete");return true
+	if kind=="final_report":g.flags.lab_report=true;g.save_game();g.show_story("原始日志已保全。
+右侧运输梯进入烬海熔炉，寻找三源分离材料。 ");return true
 	if kind in ["root_light","root_lock","root_reset"]:
 		if g.flags.get("root_bridge",false):g.toast("迁木桥已锁定，回访保持位置");return true
 		if kind=="root_light":g.flags.root_light=not g.flags.get("root_light",false);g.toast("灯位接通，迁木桥移动" if g.flags.root_light else "灯位关闭，桥返回")

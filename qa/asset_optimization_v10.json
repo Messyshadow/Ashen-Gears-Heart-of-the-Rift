@@ -1,0 +1,80 @@
+{
+  "files": [
+    {
+      "file": "baluo_v10.glb",
+      "original_bytes": 5457740,
+      "optimized_bytes": 3469744,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "leiya_v10.glb",
+      "original_bytes": 5483708,
+      "optimized_bytes": 3495716,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "lizhao_v10.glb",
+      "original_bytes": 5477672,
+      "optimized_bytes": 3489680,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "ludeng_v10.glb",
+      "original_bytes": 5457320,
+      "optimized_bytes": 3469324,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "moen_v10.glb",
+      "original_bytes": 5486704,
+      "optimized_bytes": 3498712,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "peiqi_v10.glb",
+      "original_bytes": 5607156,
+      "optimized_bytes": 3619164,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "selin_v10.glb",
+      "original_bytes": 5506024,
+      "optimized_bytes": 3518028,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "tiya_v10.glb",
+      "original_bytes": 5474140,
+      "optimized_bytes": 3486148,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "xingjin_v10.glb",
+      "original_bytes": 5505880,
+      "optimized_bytes": 3517888,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "yayan_v10.glb",
+      "original_bytes": 5607280,
+      "optimized_bytes": 3619284,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    }
+  ],
+  "original_glb_bytes": 55063624,
+  "optimized_glb_bytes": 35183688,
+  "embedded_texture_bytes": 19879930,
+  "unique_texture_bytes": 1987993,
+  "unique_textures": 10,
+  "quality": "No resizing, no texture recompression, no mesh simplification, no animation removal."
+}

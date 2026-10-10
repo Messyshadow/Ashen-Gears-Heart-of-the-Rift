@@ -2,6 +2,7 @@ extends RefCounted
 var builder_ref: WeakRef
 var builder: RefCounted:
 	get:return builder_ref.get_ref()
+var late: RefCounted
 var spec: Dictionary
 var animated: Array=[]
 var floats: Array=[]
@@ -18,6 +19,7 @@ func build(b: RefCounted, room_spec: Dictionary, top: float) -> void:
 	var regional: Dictionary=g.kit_parts("regional_kit_v06")
 	b.parts.merge(regional)
 	var region: int=int(spec.region)
+	if region>=7:late=preload("res://scripts/world_v10.gd").new();late.build(b,spec,top);return
 	var variant: int=int(spec.id.right(2))-1
 	for column in range(6):
 		var x: float=-20+column*8+sin(column+variant)*1.2
@@ -90,6 +92,7 @@ func deck(pos: Vector3, width: float) -> AnimatableBody3D:
 	return body
 
 func tick(dt: float) -> void:
+	if late:late.tick(dt);return
 	elapsed+=dt;var g: Node3D=builder.game
 	for i in indicators:
 		var col:=Color(.15,.85,.55) if g.flags.get(i.flag,false) else Color(.9,.27,.12)

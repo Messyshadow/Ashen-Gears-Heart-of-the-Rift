@@ -1,0 +1,254 @@
+[
+  {
+    "id": "SQ01",
+    "title": "暗矿撤离",
+    "hidden": false,
+    "room": 17,
+    "proof_room": 13,
+    "reward": "gear_ring",
+    "description": "在暗矿牢房接取委托；去四层轴承台找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ02",
+    "title": "幼徒的呼吸",
+    "hidden": false,
+    "room": 108,
+    "proof_room": 28,
+    "reward": "wind_thread",
+    "description": "在幼徒避毒窖接取委托；去毒草回廊找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ03",
+    "title": "失控绘笔",
+    "hidden": false,
+    "room": 112,
+    "proof_room": 44,
+    "reward": "steam_rune",
+    "description": "在绘笔废稿间接取委托；去绝缘浮桥找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ04",
+    "title": "炉灯的自由",
+    "hidden": false,
+    "room": 114,
+    "proof_room": 52,
+    "reward": "steam_rune",
+    "description": "在幼龙卵窟接取委托；去蒸汽提升间找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ05",
+    "title": "不卖的龙卵",
+    "hidden": false,
+    "room": 114,
+    "proof_room": 52,
+    "reward": "furnace_armor",
+    "description": "在幼龙卵窟接取委托；去蒸汽提升间找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ06",
+    "title": "最后一批军火",
+    "hidden": false,
+    "room": 116,
+    "proof_room": 60,
+    "reward": "bone_rune",
+    "description": "在停火军火棚接取委托；去武士会馆找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ07",
+    "title": "守夜的名单",
+    "hidden": false,
+    "room": 118,
+    "proof_room": 68,
+    "reward": "light_bell",
+    "description": "在不灭祈堂接取委托；去三层档案井找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ08",
+    "title": "煤仓幸存者",
+    "hidden": false,
+    "room": 104,
+    "proof_room": 5,
+    "reward": "iron_armor",
+    "description": "在吊臂高仓接取委托；去刑柱竖井找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ09",
+    "title": "孤魂渡口",
+    "hidden": false,
+    "room": 106,
+    "proof_room": 20,
+    "reward": "bone_rune",
+    "description": "在孤魂渡口接取委托；去下水三层井找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ10",
+    "title": "赤汞旧账",
+    "hidden": false,
+    "room": 110,
+    "proof_room": 36,
+    "reward": "blood_mirror",
+    "description": "在赤汞旧库接取委托；去钟摆三层塔找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ11",
+    "title": "零七以前",
+    "hidden": false,
+    "room": 113,
+    "proof_room": 47,
+    "reward": "power_chain",
+    "description": "在重型培养仓接取委托；去链路总控室找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ12",
+    "title": "东渡剑名",
+    "hidden": false,
+    "room": 119,
+    "proof_room": 71,
+    "reward": "bone_rune",
+    "description": "在无名骨庭接取委托；去亡灵辩证室找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ13",
+    "title": "未发出的警报",
+    "hidden": false,
+    "room": 120,
+    "proof_room": 76,
+    "reward": "power_chain",
+    "description": "在旧事故月台接取委托；去上行轨链段找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ14",
+    "title": "城锚·水",
+    "hidden": false,
+    "room": 107,
+    "proof_room": 23,
+    "reward": "water_wrap",
+    "description": "在雾肺高管接取委托；去管喉育巢找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ15",
+    "title": "城锚·气",
+    "hidden": false,
+    "room": 109,
+    "proof_room": 31,
+    "reward": "poison_wrap",
+    "description": "在四雷暗阁接取委托；去根轮控制厅找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ16",
+    "title": "城锚·电",
+    "hidden": false,
+    "room": 113,
+    "proof_room": 47,
+    "reward": "steam_rune",
+    "description": "在重型培养仓接取委托；去链路总控室找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ17",
+    "title": "阿芙的运输表",
+    "hidden": false,
+    "room": 99,
+    "proof_room": 10,
+    "reward": "gear_ring",
+    "description": "在夜行客栈接取委托；去二层壁抓井找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ18",
+    "title": "两种忍道",
+    "hidden": false,
+    "room": 108,
+    "proof_room": 28,
+    "reward": "wind_thread",
+    "description": "在幼徒避毒窖接取委托；去毒草回廊找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ19",
+    "title": "契约退出条款",
+    "hidden": false,
+    "room": 118,
+    "proof_room": 68,
+    "reward": "light_bell",
+    "description": "在不灭祈堂接取委托；去三层档案井找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "SQ20",
+    "title": "铆火与符墨",
+    "hidden": false,
+    "room": 112,
+    "proof_room": 44,
+    "reward": "steam_rune",
+    "description": "在绘笔废稿间接取委托；去绝缘浮桥找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ01",
+    "title": "四雷暗阁",
+    "hidden": true,
+    "room": 109,
+    "proof_room": 31,
+    "reward": "wind_thread",
+    "description": "在四雷暗阁接取委托；去根轮控制厅找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ02",
+    "title": "星烬断观",
+    "hidden": true,
+    "room": 122,
+    "proof_room": 84,
+    "reward": "star_rune",
+    "description": "在星烬断观台接取委托；去水镜三层井找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ03",
+    "title": "假镜后的名字",
+    "hidden": true,
+    "room": 111,
+    "proof_room": 39,
+    "reward": "blood_mirror",
+    "description": "在假镜墓室接取委托；去薄壁裂隙厅找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ04",
+    "title": "熔海余烬",
+    "hidden": true,
+    "room": 115,
+    "proof_room": 55,
+    "reward": "furnace_armor",
+    "description": "在熔海遗库接取委托；去岩浆试潜池找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ05",
+    "title": "东渡未寄信",
+    "hidden": true,
+    "room": 117,
+    "proof_room": 63,
+    "reward": "bone_rune",
+    "description": "在东渡轨廊接取委托；去远征纪念堂找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ06",
+    "title": "裂雷测站",
+    "hidden": true,
+    "room": 121,
+    "proof_room": 79,
+    "reward": "power_chain",
+    "description": "在裂雷测站接取委托；去下行炮火段找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ07",
+    "title": "镜兽巢",
+    "hidden": true,
+    "room": 123,
+    "proof_room": 87,
+    "reward": "star_rune",
+    "description": "在镜兽巢接取委托；去三源共鸣锁找证物，返回清理追兵并交付。"
+  },
+  {
+    "id": "HQ08",
+    "title": "摄政的旧扳手",
+    "hidden": true,
+    "room": 124,
+    "proof_room": 92,
+    "reward": "rift_armor",
+    "description": "在旧王维修层接取委托；去电链炉锁找证物，返回清理追兵并交付。"
+  }
+]

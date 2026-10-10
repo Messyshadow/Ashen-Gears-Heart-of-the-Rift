@@ -12,7 +12,7 @@ func run() -> void:
 	if game.get("graphics")!=null:game.graphics.set_quality(profile if profile!="baseline" else "high",false)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED);DisplayServer.window_set_size(Vector2i(1920,1080));DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED);Engine.max_fps=0
 	var records: Array=[]
-	for room in [2,9,15,19,27,35,43,48]:
+	for room in [2,9,15,19,27,35,43,48,56,64,72,80,88,96]:
 		var start:=Time.get_ticks_usec();game.load_room(room);game.set_screen("play");game.player.position=Vector3(-8,0,0)
 		var load_ms: float=(Time.get_ticks_usec()-start)/1000.0
 		await create_timer(1.5).timeout

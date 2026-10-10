@@ -121,13 +121,13 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -11.1083164215088,
-          -0.00917795300483704,
+          -11.1216497421265,
+          -0.00918342545628548,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.800000190734863,
+          1.30000019073486,
           0.0,
           0.0
         ],
@@ -283,8 +283,8 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          0.340000003576279,
-          -0.00920176133513451,
+          0.340000063180923,
+          -0.00922536104917526,
           0.0
         ],
         "vaults": 1,
@@ -391,8 +391,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          3.36976027488708,
-          4.99081659317017,
+          3.46642684936523,
+          4.99082851409912,
           0.0
         ],
         "vaults": 0,
@@ -1120,14 +1120,14 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -6.05427122116089,
-          2.38406991958618,
+          -6.17093801498413,
+          2.32850050926208,
           0.0
         ],
         "vaults": 0,
         "velocity": [
           -7.0,
-          -2.63083338737488,
+          -3.33416676521301,
           0.0
         ],
         "wall_jumps": 1,
@@ -1174,13 +1174,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          -4.53749465942383,
-          4.99083423614502,
+          -4.65499496459961,
+          4.99083614349365,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          5.80000019073486,
+          6.05000019073486,
           0.0,
           0.0
         ],
@@ -1228,13 +1228,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          6.15952301025391,
-          6.99082183837891,
+          6.07118988037109,
+          6.99082803726196,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.550000190734863,
+          0.800000190734863,
           0.0,
           0.0
         ],
@@ -1336,8 +1336,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -9.20000076293945,
-          -0.0100122159346938,
+          -9.21333408355713,
+          -0.0100123314186931,
           0.0
         ],
         "vaults": 0,
@@ -1687,8 +1687,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          2.68810153007507,
-          3.99084067344666,
+          2.68818640708923,
+          3.99084043502808,
           0.0
         ],
         "vaults": 0,
@@ -1756,25 +1756,25 @@
       }
     },
     {
-      "check": "57 个声音资源加载，20 路并发播放器",
+      "check": "63 个声音资源加载，20 路并发播放器",
       "detail": {},
       "pass": true
     },
     {
       "check": "探索音乐与环境实际混音非静音",
       "detail": {
-        "frames": 17920,
-        "peak": 0.117855489253998,
-        "rms": 0.0431395265822738
+        "frames": 18944,
+        "peak": 0.154296725988388,
+        "rms": 0.0424395203434718
       },
       "pass": true
     },
     {
       "check": "攻击命中突进同时播放，有混音信号且不削波",
       "detail": {
-        "frames": 10240,
+        "frames": 10752,
         "peak": 0.912010848522186,
-        "rms": 0.184881263101541
+        "rms": 0.191055847194754
       },
       "pass": true
     },
@@ -1782,17 +1782,17 @@
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
         "frames": 8704,
-        "peak": 0.625368535518646,
-        "rms": 0.131960260088243
+        "peak": 0.625667691230774,
+        "rms": 0.132338039251272
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 7168,
-        "peak": 0.446265906095505,
-        "rms": 0.0991069861275577
+        "frames": 9728,
+        "peak": 0.723745226860046,
+        "rms": 0.124248431265348
       },
       "pass": true
     },
@@ -1800,8 +1800,8 @@
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
         "frames": 39424,
-        "peak": 0.717990696430206,
-        "rms": 0.110604263581937
+        "peak": 0.711163997650146,
+        "rms": 0.113780132724699
       },
       "pass": true
     },
@@ -1829,8 +1829,8 @@
       "check": "附近战斗切入战斗音乐",
       "detail": {
         "frames": 40448,
-        "peak": 0.77773118019104,
-        "rms": 0.0939758228039915
+        "peak": 0.740039169788361,
+        "rms": 0.0964727543913796
       },
       "pass": true
     },
@@ -2648,7 +2648,7 @@
       }
     },
     {
-      "check": "旧三人 HP 存档兼容升级到七人名册",
+      "check": "旧三人 HP 存档兼容升级到完整名册",
       "pass": true,
       "state": {
         "air_dash_used": false,
@@ -2700,13 +2700,13 @@
       }
     },
     {
-      "check": "50 房间、七名可收集角色与六个主线区域",
+      "check": "扩展世界仍保留原六区的稳定身份",
       "detail": null,
       "pass": true
     },
     {
       "check": "房间身份、独立路线布局及前后门入口均有实体地面",
-      "detail": 50,
+      "detail": 126,
       "pass": true
     },
     {
@@ -2919,7 +2919,7 @@
       "pass": true
     },
     {
-      "check": "50 个前门实际步行推进，最终终点明确停留完成界面",
+      "check": "原 50 个前门实际步行推进，R06 接入 R07",
       "detail": null,
       "pass": true
     },
@@ -2994,12 +2994,12 @@
       "pass": true
     },
     {
-      "check": "按键设置真实重绑跳跃 B",
+      "check": "按键设置真实重绑跳跃 H",
       "detail": null,
       "pass": true
     },
     {
-      "check": "重绑后的 B 键实际触发角色跳跃",
+      "check": "重绑后的 H 键实际触发角色跳跃",
       "detail": null,
       "pass": true
     },
@@ -3034,24 +3034,24 @@
       "pass": true
     },
     {
-      "check": "区域分页地图显示七个区域与八个房间",
+      "check": "世界地图已改为真实空间布局与世界区域视图",
       "detail": null,
       "pass": true
     },
     {
-      "check": "R06 终点保存阶段完成记录，回访入口明确",
+      "check": "R06 运输梯继续进入熔海，不再截断主线",
       "detail": null,
       "pass": true
     },
     {
       "check": "真实近战命中同时启动双方局部顿帧",
       "detail": {
-        "attacker": 4224469437434,
+        "attacker": 4277552548898,
         "duration": 0.05,
         "particles": 7,
         "tier": "light",
-        "time_usec": 252022274,
-        "victim": 4225861946251
+        "time_usec": 251821196,
+        "victim": 4278659844986
       },
       "pass": true
     },
@@ -3252,13 +3252,463 @@
       "check": "换房清理反馈引用与粒子池，不持有旧角色",
       "detail": null,
       "pass": true
+    },
+    {
+      "check": "完整世界：126 房间、主角与 16 同伴、12 个主线区域",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "唯一房间身份、百种路线布局、全部门与支路目标有效",
+      "detail": 126,
+      "pass": true
+    },
+    {
+      "check": "17 套专属技能树，153 个命名节点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新档初始匕首，太刀必须开箱获得",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "装备饰品实际增加攻击属性",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "同一实体装备不能同时占据两个槽位",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "拥有两件饰品时可分别装备两槽",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "护甲属性实际降低伤害",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "生命饰品改变生命上限",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "背包消耗品恢复生命并消耗一件",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "魔力补剂实际恢复魔力",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "背包拒绝错误类别使用与未拥有武器",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "休息灯商店真实消耗货币并发货",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "制作材料不足时全部数量不变",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "固定配方一次性扣材料并发装备",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "背包数量、人物装备和属性随存档恢复",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "格式合法但背包字段损坏的主存档安全恢复备份",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "存档恢复不允许同一件装备重复分配给多个角色",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能前置未满足时拒绝学习",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "基本技能学习接通实际战斗招式",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能升级扣点数与材料并保留等级",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能页可独立查看候补角色，不切换当前出战人物",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "不同人物的学习进度独立",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "技能学习与预览暂停游戏战斗",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "153 个技能预览的角色与动画资源均存在",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "章节条件满足后共鸣分支可学习",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "共鸣形态真实启动、扣共享资源并限定持续时间",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "名册按钮直达所选人物的专属技能页",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "世界地图使用真实双向房间连接",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "地图滚轮缩放实际生效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "地图自定义标记写入持久状态",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重复标记操作可移除标记",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "地图 R 键通过真实输入事件定位玩家",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 雷牙",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 佩奇",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 炉灯",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 缇娅",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 黎照",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 巴洛",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 莫恩",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 塞琳",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 鸦眼",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新增角色真实轻击 / 投射命中 · 星烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "热压炉门拒绝跳过泄压过程",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "两秒泄压后炉门可以固定",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "熔界许可发放并启用全队护套",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "岩浆护套承受热负荷并保护角色",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "没有护套时岩浆产生实际周期伤害",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重锚工具解开船坞门",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "档案姓名锁错序安全复位",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "三条真名按顺序恢复档案门",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "带电状态拒绝转接列车",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "断电转轨上电后救下列车",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "轨链教学接通实体中继升降平台",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未取得工具时三源锁拒绝通行",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "全队共鸣工具稳定三源锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "76 个新增房间均可构建，场景合批与角色模型有效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "76 个新增前门实际步行进入目标，炉心停留最终选择",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "76 个新增后门实际步行回访，支路回主路而非区域原点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "20 支线与 8 隐藏委托可接取、找证物、返回交付，奖励唯一",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "所有新增同伴在各自实际招募点加入，重复交谈不复制武器或点数",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "八个隐藏精英实体战斗与击败存档，回访不复活或重复奖励",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · smelter",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · smelter",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss7",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · general",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · general",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss8",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · judge",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · judge",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss9",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · emperor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · emperor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss10",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · triphase",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · triphase",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss11",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 感知、预警与实际伤害 · regent",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 半血强化 · regent",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "后六章 Boss 回访不重复奖励 · boss12",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "主线提供米菈真实意愿和唯一分离核心",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冠城炉锁整合工具 · lock_power",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冠城炉锁整合工具 · lock_blood",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冠城炉锁整合工具 · lock_rift",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "城市锚点不足时不能共同分离",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "三个城市锚点均可回访修复",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "结局 1 保存档案并回终战前安全房",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "结局 2 保存档案并回终战前安全房",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "结局 3 保存档案并回终战前安全房",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "通关存档载入保留多个结局与探索状态",
+      "detail": null,
+      "pass": true
     }
   ],
   "engine": "4.7-rc (custom_build)",
   "executable": "E:/Godot/test-project/Ashen-Gears-Heart-of-the-Rift/build/AshenGears.exe",
-  "executable_sha256": "e31adce2e36a97f57bfa111c0b81db20b00d47849ed564822d727228dad26c94",
+  "executable_sha256": "a873efd730bbda24d7fe7478ac9b8ca8ad012f40b5de7cb907662af5e3e4b3a0",
   "failures": 0,
   "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
-  "pack_sha256": "ee21d1f6e8cfbe0f90c018e574054d654e00385464420b37db26f320e4f6bcd7",
-  "version": "0.6.1"
+  "pack_sha256": "689e3dcfa62d89e4cbcdfc236065d374f7961e21a0e5d60e6410c5a79669629f",
+  "version": "1.0.0"
 }

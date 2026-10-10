@@ -1,13 +1,13 @@
 {
   "checks": [
     {
-      "check": "50 房间、七名可收集角色与六个主线区域",
+      "check": "扩展世界仍保留原六区的稳定身份",
       "detail": null,
       "pass": true
     },
     {
       "check": "房间身份、独立路线布局及前后门入口均有实体地面",
-      "detail": 50,
+      "detail": 126,
       "pass": true
     },
     {
@@ -220,7 +220,7 @@
       "pass": true
     },
     {
-      "check": "50 个前门实际步行推进，最终终点明确停留完成界面",
+      "check": "原 50 个前门实际步行推进，R06 接入 R07",
       "detail": null,
       "pass": true
     },
@@ -295,12 +295,12 @@
       "pass": true
     },
     {
-      "check": "按键设置真实重绑跳跃 B",
+      "check": "按键设置真实重绑跳跃 H",
       "detail": null,
       "pass": true
     },
     {
-      "check": "重绑后的 B 键实际触发角色跳跃",
+      "check": "重绑后的 H 键实际触发角色跳跃",
       "detail": null,
       "pass": true
     },
@@ -335,15 +335,15 @@
       "pass": true
     },
     {
-      "check": "区域分页地图显示七个区域与八个房间",
+      "check": "世界地图已改为真实空间布局与世界区域视图",
       "detail": null,
       "pass": true
     },
     {
-      "check": "R06 终点保存阶段完成记录，回访入口明确",
+      "check": "R06 运输梯继续进入熔海，不再截断主线",
       "detail": null,
       "pass": true
     }
   ],
-  "version": "0.6.1"
+  "version": "1.0.0"
 }

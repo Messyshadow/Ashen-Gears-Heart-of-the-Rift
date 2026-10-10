@@ -1,5 +1,5 @@
 extends Node
-const LABELS={"left":"向左","right":"向右","up":"上攀梯","down":"蹲行 / 下攀梯","jump":"跳跃 / 二段跳","light":"轻攻击","heavy":"重攻击","dodge":"翻滚","guard":"格挡 / 弹反","modifier":"技能修饰键","grapple":"钩索","interact":"交互","switch":"切换同伴","weapon":"切换武器","item":"使用药剂","map":"地图","skills":"招式工坊","run":"冲跑","overview":"场景总览","roster":"同伴名册","journal":"任务记录","phase":"薄壁相移"}
+const LABELS={"left":"向左","right":"向右","up":"上攀梯","down":"蹲行 / 下攀梯","jump":"跳跃 / 二段跳","light":"轻攻击","heavy":"重攻击","dodge":"翻滚","guard":"格挡 / 弹反","modifier":"技能修饰键","grapple":"钩索","interact":"交互","switch":"切换同伴","weapon":"切换武器","item":"使用药剂","map":"地图","skills":"招式工坊","run":"冲跑","overview":"场景总览","roster":"同伴名册","journal":"任务记录","phase":"薄壁相移","inventory":"背包","equipment":"装备","transform":"共鸣形态"}
 var game: Node3D
 var defaults: Dictionary={}
 var keys: Dictionary={}

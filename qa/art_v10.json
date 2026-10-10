@@ -1,0 +1,30 @@
+{
+  "actors": [
+    "leiya",
+    "peiqi",
+    "ludeng",
+    "tiya",
+    "lizhao",
+    "baluo",
+    "moen",
+    "selin",
+    "yayan",
+    "xingjin"
+  ],
+  "enemies": 14,
+  "kit_parts": 10,
+  "clips": [
+    "RoleLight",
+    "RoleHeavy",
+    "RoleSkill"
+  ],
+  "original_assets_preserved": true,
+  "enemy_rigs": 14,
+  "enemy_clips": [
+    "PassageWalk",
+    "Heavy",
+    "BowShot",
+    "Hurt"
+  ],
+  "enemy_animation_count": 56
+}
