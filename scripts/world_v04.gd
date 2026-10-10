@@ -1,5 +1,6 @@
 extends RefCounted
 const KIT = preload("res://assets/models/industrial_kit_v04.glb")
+var extension: RefCounted
 var game: Node3D
 var parts: Dictionary={}
 var moving: Array=[]
@@ -14,8 +15,7 @@ var batches := 0
 
 func build(g: Node3D, spec: Dictionary) -> void:
 	game=g;clock=0
-	var kit: Node3D=KIT.instantiate()
-	for mesh in kit.find_children("*","MeshInstance3D",true,false):parts[mesh.name]=mesh
+	parts=game.kit_parts("industrial_kit_v04").duplicate()
 	var bounds: Array=spec.bounds
 	for platform in spec.platforms:platform_segment(float(platform[0]),float(platform[1]),float(platform[2]))
 	for stair in spec.slopes:
@@ -38,56 +38,11 @@ func build(g: Node3D, spec: Dictionary) -> void:
 		var body: StaticBody3D=game.body(shape,Vector3(wall[0],(wall[1]+wall[2])*.5,0));body.set_meta("climbable",true)
 		part("Pipe",Vector3(wall[0],wall[1],0),Vector3(1,(wall[2]-wall[1])/4,3))
 		part("Coil",Vector3(wall[0],wall[1],1.7),Vector3(.24,(wall[2]-wall[1])/3,.24))
-	# Distinct architectural composition and colour-coded industrial purpose.
 	var style: String=spec.style
 	var top: float=float(bounds[3])
-	for x in range(-21,23,7):
-		var arch_height: float=5.0 if style in ["coal","cargo","hub"] else top+1
-		part("Arch",Vector3(x,0,-4),Vector3(1.07,arch_height/6.8,1))
-		part("Pipe",Vector3(x+2,0,-2.6),Vector3(1,maxf(top/4,1),1))
-		for y in [2.0,minf(top-1,7.0)]:
-			part("Lantern",Vector3(x+1.6,y,-2.15))
-			var light:=OmniLight3D.new();game.world.add_child(light);light.position=Vector3(x+1.6,y,-1.4)
-			light.light_color=Color(.3,.63,1) if spec.theme in ["blue","void"] else Color(.58,.92,.53) if spec.theme=="green" else Color(1,.52,.18)
-			light.light_energy=2.0;light.omni_range=6.5;lights.append(light)
-	for i in range(9):
-		var x: float=-26+i*6
-		part("Arch",Vector3(x,-2,-12-(i%3)*3),Vector3(1.3,1.5+(i%3)*.4,1.5))
-	for xy in [[-18,0],[-9,3],[0,0],[9,6],[18,0]]:
-		part("WallPanel",Vector3(xy[0],xy[1],-8),Vector3(1.2,1.4,1))
-	for x in [-16.0,6.0,18.0]:
-		part("Chain",Vector3(x,1,-1.8),Vector3(1,top/1.92,1))
-	var heat:=MeshInstance3D.new();var pool:=PlaneMesh.new();pool.size=Vector2(48,5);heat.mesh=pool;game.world.add_child(heat);heat.position=Vector3(0,-1.6,-1)
-	var shader:=ShaderMaterial.new();shader.shader=preload("res://scripts/lava.gdshader");heat.material_override=shader
-	if spec.theme in ["blue","green","void"]:heat.visible=false
-	for x in [-20.0,20.0]:
-		var wallshape:=BoxShape3D.new();wallshape.size=Vector3(.5,top+7,5)
-		# Side boundaries beyond actual door triggers stop accidental coal-room resets.
-		game.body(wallshape,Vector3(x+3*signf(x),top*.5,0))
-	if style in ["coal","stock"]:
-		for x in [-17,-11,-3,9,16]:part("CoalPile",Vector3(x,0,-2.6),Vector3(1.4,1.6,1.4))
-		for x in [-14,5,17]:part("Crate",Vector3(x,0,-2.6))
-	elif style=="prison" or style=="mine":
-		for x in [-17,-11,-5,5,11,17]:part("Cell",Vector3(x,0,-3.3))
-		for x in [-12,12]:part("Banner",Vector3(x,3,-3))
-	elif style in ["execution","minotaur"]:
-		part("Boiler",Vector3(0,0,-5),Vector3(2,2.5,2))
-		for x in [-15,15]:part("Coil",Vector3(x,0,-2.2),Vector3(1.2,2.0,1.2))
-		for x in [-9,9]:part("Gear",Vector3(x,7,-7),Vector3(2,2,1))
-	elif style in ["gears","bearing","lift"]:
-		for xy in [[-14,7],[0,9],[14,4]]:
-			var gear:=part("Gear",Vector3(xy[0],xy[1],-5),Vector3(1.4,1.4,1));mechanisms.append({"node":gear,"kind":"gear"});gear.set_meta("static_part",false)
-		for x in [-18,18]:part("Boiler",Vector3(x,0,-5),Vector3(.8,1.7,.8))
-	elif style in ["workshop","hub"]:
-		for x in [-14,0,14]:part("Banner",Vector3(x,1.5,-3))
-		for x in [-16,-10,9,15]:part("Crate",Vector3(x,0,-2.4))
-		part("Boiler",Vector3(12,0,-5))
-	elif style=="cargo" or style=="bridge":
-		for x in [-18,-7,4,14]:
-			part("Crate",Vector3(x,0,-3),Vector3(2,2,2))
-			part("Rail",Vector3(x,9,-3),Vector3(2,1,1))
-	else:
-		for x in [-15,0,15]:part("Boiler",Vector3(x,0,-5),Vector3(1,1.7,1))
+	if int(spec.get("region",1))>=3:
+		extension=preload("res://scripts/world_extension.gd").new();extension.build(self,spec,top)
+	else:build_legacy(spec,top)
 	for anchor in spec.get("anchors",[]):part("Coil",game.vector(anchor)+Vector3(0,-.25,-.2),Vector3(.22,.22,.22))
 	for deck in spec.get("elevators",[]):
 		var body:=AnimatableBody3D.new();body.sync_to_physics=false;game.world.add_child(body);body.position=Vector3(deck.x,deck.low-.18,0)
@@ -106,7 +61,7 @@ func build(g: Node3D, spec: Dictionary) -> void:
 	if style in ["conveyor","cargo","stock"]:
 		var ob:=BoxShape3D.new();ob.size=Vector3(.8,.85,2.8)
 		game.body(ob,Vector3(-1,.425,0));part("Crate",Vector3(-1,0,0),Vector3(.8,1,3.5));obstacles.append(Vector3(-1,.85,0))
-	game.world.add_child(kit);kit.visible=false
+
 
 func part(name: String, pos: Vector3, scale_value: Vector3=Vector3.ONE) -> MeshInstance3D:
 	var n: MeshInstance3D=parts[name].duplicate();game.world.add_child(n);n.position=pos;n.scale=scale_value;n.set_meta("static_part",true);n.set_meta("distant_decor",pos.z < -12);return n
@@ -122,6 +77,7 @@ func platform_segment(a: float,b: float,y: float) -> void:
 func tick(dt: float) -> void:
 	if game.paused:return
 	clock+=dt
+	if extension:extension.tick(dt)
 	var p: CharacterBody3D=game.player
 	for m in moving:
 		var body: AnimatableBody3D=m.body
@@ -173,3 +129,54 @@ func batch_static_parts() -> void:
 		var batch:=MultiMeshInstance3D.new();batch.multimesh=multi;game.world.add_child(batch);batch.set_meta("distant_decor",group[0].get_meta("distant_decor",false))
 		for i in range(group.size()):multi.set_instance_transform(i,group[i].transform);game.world.remove_child(group[i]);group[i].queue_free()
 		batched_instances+=group.size();batches+=1
+
+func build_legacy(spec: Dictionary,top: float) -> void:
+	# Distinct architectural composition and colour-coded industrial purpose.
+	var style: String=spec.style
+	for x in range(-21,23,7):
+		var arch_height: float=5.0 if style in ["coal","cargo","hub"] else top+1
+		part("Arch",Vector3(x,0,-4),Vector3(1.07,arch_height/6.8,1))
+		part("Pipe",Vector3(x+2,0,-2.6),Vector3(1,maxf(top/4,1),1))
+		for y in [2.0,minf(top-1,7.0)]:
+			part("Lantern",Vector3(x+1.6,y,-2.15))
+			var light:=OmniLight3D.new();game.world.add_child(light);light.position=Vector3(x+1.6,y,-1.4)
+			light.light_color=Color(.3,.63,1) if spec.theme in ["blue","void"] else Color(.58,.92,.53) if spec.theme=="green" else Color(1,.52,.18)
+			light.light_energy=2.0;light.omni_range=6.5;lights.append(light)
+	for i in range(9):
+		var x: float=-26+i*6
+		part("Arch",Vector3(x,-2,-12-(i%3)*3),Vector3(1.3,1.5+(i%3)*.4,1.5))
+	for xy in [[-18,0],[-9,3],[0,0],[9,6],[18,0]]:
+		part("WallPanel",Vector3(xy[0],xy[1],-8),Vector3(1.2,1.4,1))
+	for x in [-16.0,6.0,18.0]:
+		part("Chain",Vector3(x,1,-1.8),Vector3(1,top/1.92,1))
+	var heat:=MeshInstance3D.new();var pool:=PlaneMesh.new();pool.size=Vector2(48,5);heat.mesh=pool;game.world.add_child(heat);heat.position=Vector3(0,-1.6,-1)
+	var shader:=ShaderMaterial.new();shader.shader=preload("res://scripts/lava.gdshader");heat.material_override=shader
+	if spec.theme in ["blue","green","void"]:heat.visible=false
+	for x in [-20.0,20.0]:
+		var wallshape:=BoxShape3D.new();wallshape.size=Vector3(.5,top+7,5)
+		# Side boundaries beyond actual door triggers stop accidental coal-room resets.
+		game.body(wallshape,Vector3(x+3*signf(x),top*.5,0))
+	if style in ["coal","stock"]:
+		for x in [-17,-11,-3,9,16]:part("CoalPile",Vector3(x,0,-2.6),Vector3(1.4,1.6,1.4))
+		for x in [-14,5,17]:part("Crate",Vector3(x,0,-2.6))
+	elif style=="prison" or style=="mine":
+		for x in [-17,-11,-5,5,11,17]:part("Cell",Vector3(x,0,-3.3))
+		for x in [-12,12]:part("Banner",Vector3(x,3,-3))
+	elif style in ["execution","minotaur"]:
+		part("Boiler",Vector3(0,0,-5),Vector3(2,2.5,2))
+		for x in [-15,15]:part("Coil",Vector3(x,0,-2.2),Vector3(1.2,2.0,1.2))
+		for x in [-9,9]:part("Gear",Vector3(x,7,-7),Vector3(2,2,1))
+	elif style in ["gears","bearing","lift"]:
+		for xy in [[-14,7],[0,9],[14,4]]:
+			var gear:=part("Gear",Vector3(xy[0],xy[1],-5),Vector3(1.4,1.4,1));mechanisms.append({"node":gear,"kind":"gear"});gear.set_meta("static_part",false)
+		for x in [-18,18]:part("Boiler",Vector3(x,0,-5),Vector3(.8,1.7,.8))
+	elif style in ["workshop","hub"]:
+		for x in [-14,0,14]:part("Banner",Vector3(x,1.5,-3))
+		for x in [-16,-10,9,15]:part("Crate",Vector3(x,0,-2.4))
+		part("Boiler",Vector3(12,0,-5))
+	elif style=="cargo" or style=="bridge":
+		for x in [-18,-7,4,14]:
+			part("Crate",Vector3(x,0,-3),Vector3(2,2,2))
+			part("Rail",Vector3(x,9,-3),Vector3(2,1,1))
+	else:
+		for x in [-15,0,15]:part("Boiler",Vector3(x,0,-5),Vector3(1,1.7,1))

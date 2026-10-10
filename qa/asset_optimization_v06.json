@@ -1,0 +1,87 @@
+{
+  "files": [
+    {
+      "file": "editor_v06.glb",
+      "original_bytes": 11441112,
+      "optimized_bytes": 185760,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "lord_v06.glb",
+      "original_bytes": 11375692,
+      "optimized_bytes": 120340,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "mother_v06.glb",
+      "original_bytes": 11420132,
+      "optimized_bytes": 164784,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "regional_kit_v06.glb",
+      "original_bytes": 24485852,
+      "optimized_bytes": 2425252,
+      "texture_count": 12,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "shayin_v06.glb",
+      "original_bytes": 5428140,
+      "optimized_bytes": 3440148,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "shenjin_v06.glb",
+      "original_bytes": 5419784,
+      "optimized_bytes": 3431792,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "thorn_v06.glb",
+      "original_bytes": 11379220,
+      "optimized_bytes": 123876,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "weiluo_v06.glb",
+      "original_bytes": 5429032,
+      "optimized_bytes": 3441036,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "witch_v06.glb",
+      "original_bytes": 11453572,
+      "optimized_bytes": 198224,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "wraith_v06.glb",
+      "original_bytes": 11328524,
+      "optimized_bytes": 73180,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "zero7_v06.glb",
+      "original_bytes": 5393388,
+      "optimized_bytes": 3405396,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    }
+  ],
+  "original_glb_bytes": 114554448,
+  "optimized_glb_bytes": 17009788,
+  "embedded_texture_bytes": 97544362,
+  "unique_texture_bytes": 24048343,
+  "unique_textures": 22,
+  "quality": "No resizing, no texture recompression, no mesh simplification, no animation removal."
+}

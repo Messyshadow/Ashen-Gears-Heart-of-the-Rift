@@ -121,13 +121,13 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -11.1083164215088,
-          -0.00917795300483704,
+          -11.1216497421265,
+          -0.00918342545628548,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.800000190734863,
+          1.30000019073486,
           0.0,
           0.0
         ],
@@ -202,8 +202,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -17.3575019836426,
-          -0.00915962923318148,
+          -17.4541664123535,
+          -0.00916556920856237,
           0.0
         ],
         "vaults": 0,
@@ -229,8 +229,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -17.3575019836426,
-          -0.00915962923318148,
+          -17.4541664123535,
+          -0.00916556920856237,
           0.0
         ],
         "vaults": 0,
@@ -283,8 +283,8 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          0.340000003576279,
-          -0.00920176133513451,
+          0.340000063180923,
+          -0.00922536104917526,
           0.0
         ],
         "vaults": 1,
@@ -391,8 +391,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          3.46642684936523,
-          4.99082851409912,
+          3.49268102645874,
+          4.99083423614502,
           0.0
         ],
         "vaults": 0,
@@ -905,7 +905,7 @@
         "motion": "ground",
         "p": [
           -2.0,
-          5.99008512496948,
+          5.99008464813232,
           0.0
         ],
         "vaults": 0,
@@ -1228,13 +1228,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          6.15952301025391,
-          6.99082183837891,
+          6.07118988037109,
+          6.99082803726196,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.550000190734863,
+          0.800000190734863,
           0.0,
           0.0
         ],
@@ -1336,8 +1336,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -9.20000076293945,
-          -0.0100122159346938,
+          -9.21333408355713,
+          -0.0100123314186931,
           0.0
         ],
         "vaults": 0,
@@ -1459,20 +1459,20 @@
       }
     },
     {
-      "check": "18 个前门实际步行连接目标，第二章终点停留完成界面",
+      "check": "18 个前门实际步行连接目标，第二章终点接入水务区",
       "pass": true,
       "room": 13,
       "state": {
         "air_dash_used": false,
         "air_jump_used": false,
-        "clip": "StairUp",
+        "clip": "PassageWalk",
         "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -18.0408687591553,
-          -0.00186843192204833,
+          -1.03749978542328,
+          5.99084043502808,
           0.0
         ],
         "vaults": 0,
@@ -1660,7 +1660,7 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          0.105104818940163,
+          0.105108425021172,
           5.99084043502808,
           0.0
         ],
@@ -1687,8 +1687,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          2.68810153007507,
-          3.99084067344666,
+          2.68818640708923,
+          3.99084043502808,
           0.0
         ],
         "vaults": 0,
@@ -1756,25 +1756,25 @@
       }
     },
     {
-      "check": "53 个声音资源加载，20 路并发播放器",
+      "check": "57 个声音资源加载，20 路并发播放器",
       "detail": {},
       "pass": true
     },
     {
       "check": "探索音乐与环境实际混音非静音",
       "detail": {
-        "frames": 18432,
-        "peak": 0.160081475973129,
-        "rms": 0.0436447422319016
+        "frames": 19456,
+        "peak": 0.128843158483505,
+        "rms": 0.0397908660781445
       },
       "pass": true
     },
     {
       "check": "攻击命中突进同时播放，有混音信号且不削波",
       "detail": {
-        "frames": 10240,
+        "frames": 10752,
         "peak": 0.912010848522186,
-        "rms": 0.189968225467326
+        "rms": 0.185274106330566
       },
       "pass": true
     },
@@ -1782,17 +1782,17 @@
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
         "frames": 8704,
-        "peak": 0.719147264957428,
-        "rms": 0.145603291664948
+        "peak": 0.724257528781891,
+        "rms": 0.145933179619468
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 9216,
-        "peak": 0.4438336789608,
-        "rms": 0.103324309050717
+        "frames": 7168,
+        "peak": 0.392976403236389,
+        "rms": 0.0757161139565993
       },
       "pass": true
     },
@@ -1800,8 +1800,8 @@
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
         "frames": 38912,
-        "peak": 0.719190716743469,
-        "rms": 0.110884286345836
+        "peak": 0.766376793384552,
+        "rms": 0.116597940923699
       },
       "pass": true
     },
@@ -1829,8 +1829,8 @@
       "check": "附近战斗切入战斗音乐",
       "detail": {
         "frames": 40960,
-        "peak": 0.746571838855743,
-        "rms": 0.101414397224306
+        "peak": 0.749271035194397,
+        "rms": 0.0953050623549175
       },
       "pass": true
     },
@@ -1904,11 +1904,11 @@
       "pass": true
     },
     {
-      "check": "画面菜单显示八项可操作设置",
+      "check": "画面菜单显示十一项可操作设置",
       "pass": true
     },
     {
-      "check": "第二章终点显示完成界面且不自动回到原点",
+      "check": "第二章右门继续进入水务区，不回到原点",
       "pass": true
     },
     {
@@ -2648,6 +2648,32 @@
       }
     },
     {
+      "check": "旧三人 HP 存档兼容升级到七人名册",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
       "check": "四个太刀动作均为 Blender 导出的独立骨骼动画",
       "pass": true,
       "state": {
@@ -2672,6 +2698,350 @@
         "wall_jumps": 0,
         "weapon": "dagger"
       }
+    },
+    {
+      "check": "50 房间、七名可收集角色与六个主线区域",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "房间身份、独立路线布局及前后门入口均有实体地面",
+      "detail": 50,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R03-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R04-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R05-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R06-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R06-06",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "水务区错序不能直接开启旁路",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "水务区真实加水、停水、旁路、排水联锁完成",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "水位控制有实体碰撞浮筒平台",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "迁木桥未到灯位不能锁定",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "迁木桥实际移动到灯位并锁定",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "单镜不足以开钟锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "双镜对齐开启钟锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "复制机关错序压板拒绝交付",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "登记、复制、双压板联锁完成",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "错序上电保护跳闸且可以重接",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "断电接四路、绝缘再上电冷却两秒联锁完成",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "七名角色收集完成，出战编队限制三人",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "空冲训练同步已招募同伴",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "标记薄壁安全相移实际跨墙并扣魔力",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "休息灯三人编队可替换收集角色",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "继续游戏恢复七名收集记录与三人编队",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "攻击未收招时技能与名册菜单不能强制换人或取消攻击",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "菜单不能切入或编入已倒地同伴",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "环境伤害击倒攻击中的角色后安全接替，不继承缺失的专属攻击动画",
+      "detail": {
+        "actual": 3,
+        "expected": 3,
+        "fallen": 6
+      },
+      "pass": true
+    },
+    {
+      "check": "护盾减伤同样覆盖环境与物理机关",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "50 个前门实际步行推进，最终终点明确停留完成界面",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "48 个左门实际步行回访前室，不退回区域原点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 mother",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 mother",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss3",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 witch",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 witch",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss4",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 lord",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 lord",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss5",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 editor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 editor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss6",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "休息灯传送可回访已发现迁木园",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "按键设置真实重绑跳跃 B",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重绑后的 B 键实际触发角色跳跃",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重绑生效并拒绝重复占用",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "按键设置写入可恢复的配置文件",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "雾气、辉光与环境亮度设置实际生效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "960×540 小窗口下十一项画面控件不重叠",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "统一设置入口",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "按键大类显示实际操作控件",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "区域分页地图显示七个区域与八个房间",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "R06 终点保存阶段完成记录，回访入口明确",
+      "detail": null,
+      "pass": true
     }
   ],
   "engine": "4.7-rc (custom_build)",
@@ -2679,6 +3049,6 @@
   "executable_sha256": "e31adce2e36a97f57bfa111c0b81db20b00d47849ed564822d727228dad26c94",
   "failures": 0,
   "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
-  "pack_sha256": "f732e150f9132a3d6d1b07a4d60bf4e1b2bf662d6792b94c372ec9c39b66cf79",
-  "version": "0.4.3"
+  "pack_sha256": "fa682a9586db24d39bd431590afeb1c78d4d5cccd9114450d854cacbadb6c207",
+  "version": "0.6.0"
 }

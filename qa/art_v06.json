@@ -1,0 +1,27 @@
+{
+  "version": "0.6.0",
+  "kit_parts": 18,
+  "companions": [
+    "shenjin_v06",
+    "shayin_v06",
+    "weiluo_v06",
+    "zero7_v06"
+  ],
+  "bosses": [
+    "mother",
+    "witch",
+    "lord",
+    "editor"
+  ],
+  "clips": [
+    "BoneSlash",
+    "BoneThrust",
+    "ShadowStrike",
+    "ShadowBind",
+    "RapierThrust",
+    "BloodCast",
+    "ElectricPunch",
+    "ElectricBurst"
+  ],
+  "scope": "Original Blender procedural geometry; shared original demo PBR materials. Prototype art, not finished sculpted characters."
+}

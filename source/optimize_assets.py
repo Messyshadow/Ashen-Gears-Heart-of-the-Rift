@@ -9,11 +9,11 @@ def decode(path):
     length,kind=struct.unpack_from('<II',data,offset)
     if kind!=0x004E4942:raise ValueError('Expected BIN chunk')
     return doc,data[offset+8:offset+8+length]
-def optimize(report_name='asset_optimization.json'):
+def optimize(report_name='asset_optimization.json',pattern='*v04.glb'):
     target=ROOT/'assets/textures/shared';target.mkdir(parents=True,exist_ok=True)
     backups=ROOT/'build/embedded_texture_originals';backups.mkdir(parents=True,exist_ok=True)
     records=[];before_total=0;after_total=0;texture_total=0;unique={}
-    for path in sorted((ROOT/'assets/models').glob('*v04.glb')):
+    for path in sorted((ROOT/'assets/models').glob(pattern)):
         doc,blob=decode(path);images=doc.get('images',[])
         if not any('bufferView' in image for image in images):continue
         before_total+=path.stat().st_size;shutil.copy2(path,backups/path.name)
@@ -24,9 +24,11 @@ def optimize(report_name='asset_optimization.json'):
             texture_total+=len(payload);digest=hashlib.sha256(payload).hexdigest();suffix='.png' if image.get('mimeType')=='image/png' else '.jpg'
             destination=target/(digest+suffix)
             if destination.exists() and destination.read_bytes()!=payload:raise ValueError('Texture hash mismatch')
-            destination.write_bytes(payload)
+            if not destination.exists():destination.write_bytes(payload)
             settings=Path(str(destination)+'.import')
-            if settings.exists():settings.write_text(settings.read_text('utf-8').replace('mipmaps/generate=false','mipmaps/generate=true'),encoding='utf-8')
+            if settings.exists():
+                original=settings.read_text('utf-8');updated=original.replace('mipmaps/generate=false','mipmaps/generate=true')
+                if updated!=original:settings.write_text(updated,encoding='utf-8')
             unique[digest]=len(payload);image['uri']='../textures/shared/'+destination.name;image.pop('mimeType',None);image_views.add(index)
         packed=bytearray();views=[];mapping={}
         for index,view in enumerate(old_views):

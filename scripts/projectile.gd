@@ -8,8 +8,7 @@ var life := 2.0
 var speed := 14.0
 var travel := Vector3.RIGHT
 func _ready() -> void:
-	var mesh:=MeshInstance3D.new();var box:=BoxMesh.new();box.size=Vector3(.5,.055,.055);mesh.mesh=box
-	var mat:=StandardMaterial3D.new();mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;mat.albedo_color=Color(.2,.75,1) if friendly else Color(1,.4,.04);mat.emission_enabled=true;mat.emission=mat.albedo_color*2;mesh.material_override=mat;add_child(mesh)
+	add_child(game.projectile_visual(friendly))
 func _physics_process(dt: float) -> void:
 	if game.paused or game.hitstop>0:return
 	life-=dt

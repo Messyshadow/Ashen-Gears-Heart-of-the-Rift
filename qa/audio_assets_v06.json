@@ -1,0 +1,30 @@
+{
+  "version": "0.6.0",
+  "original": true,
+  "tracks": [
+    {
+      "name": "amb_water",
+      "seconds": 20,
+      "peak": 0.06875084707952278,
+      "bytes": 271345
+    },
+    {
+      "name": "amb_garden",
+      "seconds": 20,
+      "peak": 0.02667379608255467,
+      "bytes": 259950
+    },
+    {
+      "name": "amb_castle",
+      "seconds": 20,
+      "peak": 0.04988832690759003,
+      "bytes": 258454
+    },
+    {
+      "name": "amb_lab",
+      "seconds": 20,
+      "peak": 0.020429264740049784,
+      "bytes": 259841
+    }
+  ]
+}

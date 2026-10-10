@@ -90,7 +90,9 @@
     ],
     "previous": 0,
     "title": "R01-01 / 煤仓醒室",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-02",
@@ -189,7 +191,9 @@
     ],
     "previous": 0,
     "title": "R01-02 / 巡逻暗道",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-03",
@@ -328,7 +332,9 @@
     ],
     "previous": 1,
     "title": "R01-03 / 压料车间",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-04",
@@ -435,7 +441,9 @@
     ],
     "previous": 2,
     "title": "R01-04 / 断电囚门",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-05",
@@ -529,7 +537,9 @@
     ],
     "previous": 3,
     "title": "R01-05 / 钩索维修台",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-06",
@@ -640,7 +650,9 @@
     ],
     "previous": 4,
     "title": "R01-06 / 刑柱竖井",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-07",
@@ -710,7 +722,9 @@
     ],
     "previous": 5,
     "title": "R01-07 / 典刑机大厅",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R01-08",
@@ -817,7 +831,9 @@
     ],
     "previous": 6,
     "title": "R01-08 / 逆向出货门",
-    "kit": true
+    "kit": true,
+    "region": 1,
+    "terminal": false
   },
   {
     "id": "R02-01",
@@ -907,7 +923,9 @@
     ],
     "previous": 7,
     "title": "R02-01 / 锈井入口",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-02",
@@ -1064,7 +1082,9 @@
     ],
     "previous": 8,
     "title": "R02-02 / 四层配速井",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-03",
@@ -1190,7 +1210,9 @@
     ],
     "previous": 9,
     "title": "R02-03 / 二层壁抓井",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R00-01",
@@ -1263,6 +1285,15 @@
           0
         ],
         "text": "身法与招式训练"
+      },
+      {
+        "kind": "travel",
+        "p": [
+          -12,
+          0,
+          0
+        ],
+        "text": "封界站 · 已发现区域传送"
       }
     ],
     "checkpoint": [
@@ -1270,7 +1301,7 @@
       0,
       0
     ],
-    "hint": "温暖维修所：休息刷新普通敌人。F 切换；T 招式；M 地图。右门为锈井入口回访，不是第三章。",
+    "hint": "维修所：C 名册编队，N 任务，M 地图；在休息灯开启已发现区域传送。",
     "gate": "",
     "template": 0,
     "bounds": [
@@ -1281,7 +1312,9 @@
     ],
     "previous": 7,
     "title": "R00-01 / 余烬广场",
-    "kit": true
+    "kit": true,
+    "region": 0,
+    "terminal": false
   },
   {
     "id": "R02-04",
@@ -1391,7 +1424,9 @@
     ],
     "previous": 10,
     "title": "R02-04 / 三层投石廊",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-05",
@@ -1519,7 +1554,9 @@
     ],
     "previous": 12,
     "title": "R02-05 / 四层轴承台",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-06",
@@ -1620,7 +1657,9 @@
     ],
     "previous": 13,
     "title": "R02-06 / 牛头备料场",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-07",
@@ -1719,7 +1758,9 @@
     ],
     "previous": 14,
     "title": "R02-07 / 督工轴心",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-08",
@@ -1753,7 +1794,7 @@
       4,
       0
     ],
-    "next": 11,
+    "next": 18,
     "ladders": [],
     "slopes": [
       {
@@ -1796,7 +1837,7 @@
       0,
       0
     ],
-    "hint": "本章终点：交付图纸后沿斜梯到右门，查看章节完成；回访需主动选择。",
+    "hint": "总井已经恢复。沿维修桥右门进入雾肺水务区；向左可返回督工轴心。",
     "gate": "boss2",
     "template": 0,
     "bounds": [
@@ -1807,7 +1848,9 @@
     ],
     "previous": 15,
     "title": "R02-08 / 维修桥回环",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false
   },
   {
     "id": "R02-H1",
@@ -1920,6 +1963,3424 @@
     ],
     "previous": 13,
     "title": "R02-H1 / 暗矿牢房",
-    "kit": true
+    "kit": true,
+    "region": 2,
+    "terminal": false,
+    "next_spawn": [
+      -2,
+      6,
+      0
+    ],
+    "back_spawn": [
+      -2,
+      6,
+      0
+    ]
+  },
+  {
+    "id": "R03-01",
+    "name": "干管入口",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -14,
+        -5,
+        3
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 19,
+    "previous": 16,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -10,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "clue_water",
+        "p": [
+          -8,
+          3,
+          0
+        ],
+        "text": "维修札记 · 被删去的魂名"
+      }
+    ],
+    "hint": "新区域 · 雾肺水务区。左门返回维修桥，右门进入泄压厅；休息灯可传送回旧区域。",
+    "story": "冷却水将灰炉城的名字带进下水道。\n沈烬的束魂铭文在折返维修梯。先恢复泄压系统。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      8
+    ],
+    "title": "R03-01 / 干管入口"
+  },
+  {
+    "id": "R03-02",
+    "name": "蒸汽泄压厅",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -16,
+        -3,
+        4
+      ],
+      [
+        5,
+        22,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 20,
+    "previous": 18,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "steam",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 12,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "wraith",
+        "p": [
+          7,
+          6,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "water",
+        "p": [
+          -12,
+          0,
+          0
+        ],
+        "text": "A 加水阀"
+      },
+      {
+        "kind": "steam",
+        "p": [
+          -6,
+          0,
+          0
+        ],
+        "text": "B 排水阀"
+      },
+      {
+        "kind": "confirm",
+        "p": [
+          -7,
+          4,
+          0
+        ],
+        "text": "蒸汽旁路"
+      },
+      {
+        "kind": "steam_reset",
+        "p": [
+          -17,
+          0,
+          0
+        ],
+        "text": "压力安全复位"
+      }
+    ],
+    "hint": "关闭排水 → 加水至中水位 → 关加水 → 开蒸汽旁路 → 排水。错序可复位。",
+    "water_pool": [
+      -3,
+      10,
+      0
+    ],
+    "floats": [
+      {
+        "x": 1,
+        "low": 0.2,
+        "high": 2.2,
+        "width": 4
+      }
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R03-02 / 蒸汽泄压厅"
+  },
+  {
+    "id": "R03-03",
+    "name": "下水三层井",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -18,
+        -2,
+        4
+      ],
+      [
+        3,
+        22,
+        7
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      7,
+      0
+    ],
+    "next": 21,
+    "previous": 19,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -14,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 8,
+        "low": 0,
+        "high": 7,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "wraith",
+        "p": [
+          0,
+          6,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "hound",
+        "p": [
+          10,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "ranged",
+        "p": [
+          17,
+          7,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "chest",
+        "p": [
+          -12,
+          4,
+          0
+        ],
+        "text": "水务零件 · 铁屑 +20"
+      }
+    ],
+    "hint": "青铜水轮井：中层藏匣，右侧长梯接上排水管。幽影不能暗杀。",
+    "water_pool": [
+      -10,
+      17,
+      -0.8
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      12
+    ],
+    "title": "R03-03 / 下水三层井"
+  },
+  {
+    "id": "R03-04",
+    "name": "折返维修梯",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -4,
+        22,
+        5
+      ],
+      [
+        -18,
+        -7,
+        8
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 22,
+    "previous": 20,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 8,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 14,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [
+      {
+        "a": [
+          -16,
+          0
+        ],
+        "b": [
+          -4,
+          5
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [
+      {
+        "kind": "human",
+        "p": [
+          -5,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          7,
+          7,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "recruit3",
+        "p": [
+          7,
+          5,
+          0
+        ],
+        "text": "沈烬 · 解除束魂铭文"
+      }
+    ],
+    "hint": "清除维修梯守卫，E 招募沈烬；C 名册将骨剑客编入三人队伍。",
+    "story": "沈烬：铭文在叫我杀你……这不是我的誓约。\n凯恩：我会先拆掉锁，再问你的名字。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      13
+    ],
+    "title": "R03-04 / 折返维修梯"
+  },
+  {
+    "id": "R03-05",
+    "name": "浮筒跳跃槽",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        -8,
+        0
+      ],
+      [
+        -8,
+        22,
+        0
+      ],
+      [
+        -4,
+        3,
+        3
+      ],
+      [
+        8,
+        22,
+        6
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      6,
+      0
+    ],
+    "next": 23,
+    "previous": 21,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": 15,
+        "low": 0,
+        "high": 6,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "thorn",
+        "p": [
+          2,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          11,
+          8,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "clue_names",
+        "p": [
+          0,
+          3,
+          0
+        ],
+        "text": "魂名残页 · 米菈的拒绝签字"
+      }
+    ],
+    "hint": "二段跳跨过浮筒；空中按 K 下砸。上层残页记录了米菈拒绝签字的事实。",
+    "floats": [
+      {
+        "x": -6,
+        "low": 0.2,
+        "high": 2,
+        "width": 3
+      }
+    ],
+    "water_pool": [
+      -7,
+      8,
+      -0.4
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      11
+    ],
+    "title": "R03-05 / 浮筒跳跃槽"
+  },
+  {
+    "id": "R03-06",
+    "name": "管喉育巢",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -15,
+        -4,
+        3
+      ],
+      [
+        5,
+        22,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 24,
+    "previous": 22,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -10,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 12,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "wraith",
+        "p": [
+          2,
+          4,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "thorn",
+        "p": [
+          11,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "portal19",
+        "p": [
+          -9,
+          3,
+          0
+        ],
+        "text": "泄压厅维修捷径"
+      }
+    ],
+    "hint": "Boss 前整备；上层捷径返回泄压厅。蒸汽口有橙色预警，可走上层避开。",
+    "vents": [
+      {
+        "x": 4,
+        "y": 0,
+        "period": 4,
+        "phase": 0
+      }
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R03-06 / 管喉育巢"
+  },
+  {
+    "id": "R03-07",
+    "name": "母体排水室",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -19,
+        -10,
+        4
+      ],
+      [
+        10,
+        19,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 25,
+    "previous": 23,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss3",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -15,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 15,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "mother",
+        "p": [
+          6,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [],
+    "hint": "管喉之母：毒潮远射、管刺近击、震地波。半血后毒潮增加；跳上侧台避地波。",
+    "water_pool": [
+      -18,
+      18,
+      -1
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R03-07 / 母体排水室"
+  },
+  {
+    "id": "R03-08",
+    "name": "阀闸回城口",
+    "region": 3,
+    "style": "water",
+    "theme": "aqua",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -6,
+        22,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      4,
+      0
+    ],
+    "next": 26,
+    "previous": 24,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss3",
+    "terminal": false,
+    "ladders": [],
+    "slopes": [
+      {
+        "a": [
+          -18,
+          0
+        ],
+        "b": [
+          -6,
+          4
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "portal18",
+        "p": [
+          -10,
+          0,
+          0
+        ],
+        "text": "水务回环 · 干管入口"
+      },
+      {
+        "kind": "travel",
+        "p": [
+          -6,
+          4,
+          0
+        ],
+        "text": "封界站 · 旧区域回访"
+      }
+    ],
+    "hint": "右门进入黑棘迁木园；左门返回排水室。已发现传送点永久保留。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R03-08 / 阀闸回城口"
+  },
+  {
+    "id": "R04-01",
+    "name": "铁根温室",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -9,
+        9,
+        3
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 27,
+    "previous": 25,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -6,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "chest",
+        "p": [
+          4,
+          3,
+          0
+        ],
+        "text": "根庭补给 · 铁屑 +20"
+      }
+    ],
+    "hint": "新区域 · 黑棘迁木园。玻璃穹顶下的铁根正在毒性循环；右侧通向迁木苗床。",
+    "story": "伊瑟：这些铁根原本净化空气。\n暖灯仍能引导迁木；关闭毒阀，给幸存者留下路。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      8
+    ],
+    "title": "R04-01 / 铁根温室"
+  },
+  {
+    "id": "R04-02",
+    "name": "迁木苗床",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -18,
+        -5,
+        4
+      ],
+      [
+        5,
+        22,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      4,
+      0
+    ],
+    "next": 28,
+    "previous": 26,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "root_bridge",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 15,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "thorn",
+        "p": [
+          13,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "root_light",
+        "p": [
+          -13,
+          0,
+          0
+        ],
+        "text": "右侧暖灯 · 引迁木"
+      },
+      {
+        "kind": "root_lock",
+        "p": [
+          10,
+          0,
+          0
+        ],
+        "text": "桥位固定柄"
+      },
+      {
+        "kind": "root_reset",
+        "p": [
+          -17,
+          0,
+          0
+        ],
+        "text": "迁木安全复位"
+      }
+    ],
+    "hint": "E 打开暖灯，等迁木到右侧桥位，再 E 固定柄。树冠随平台移动；错位可复位。",
+    "root_bridge": {
+      "low": -7,
+      "high": 3,
+      "y": 4,
+      "width": 5
+    },
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R04-02 / 迁木苗床"
+  },
+  {
+    "id": "R04-03",
+    "name": "毒草回廊",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -18,
+        -4,
+        4
+      ],
+      [
+        1,
+        22,
+        7
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      7,
+      0
+    ],
+    "next": 29,
+    "previous": 27,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 9,
+        "low": 0,
+        "high": 7,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "thorn",
+        "p": [
+          -2,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          7,
+          7,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "ranged",
+        "p": [
+          17,
+          7,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "chest",
+        "p": [
+          -8,
+          4,
+          0
+        ],
+        "text": "避毒零件 · 铁屑 +20"
+      }
+    ],
+    "hint": "毒草口按固定周期喷发，先看橙色提示；上层平台可绕过毒雾。",
+    "vents": [
+      {
+        "x": 0,
+        "y": 0,
+        "period": 4.5,
+        "phase": 1
+      },
+      {
+        "x": 10,
+        "y": 0,
+        "period": 4.5,
+        "phase": 0
+      }
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      12
+    ],
+    "title": "R04-03 / 毒草回廊"
+  },
+  {
+    "id": "R04-04",
+    "name": "孢子跳井",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -17,
+        -4,
+        5
+      ],
+      [
+        4,
+        22,
+        8
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      8,
+      0
+    ],
+    "next": 30,
+    "previous": 28,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -11,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 12,
+        "low": 0,
+        "high": 8,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "wraith",
+        "p": [
+          5,
+          10,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "airdash",
+        "p": [
+          -8,
+          5,
+          0
+        ],
+        "text": "A04 空中冲刺 · 全队训练"
+      }
+    ],
+    "hint": "上层 E 学全队空冲：Ctrl + Space。二段跳与空冲分别每次腾空一次；右梯提供安全退路。",
+    "anchors": [
+      [
+        0,
+        7,
+        0
+      ],
+      [
+        8,
+        9.2,
+        0
+      ]
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      13
+    ],
+    "title": "R04-04 / 孢子跳井"
+  },
+  {
+    "id": "R04-05",
+    "name": "双忍藏室",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -3,
+        22,
+        6
+      ],
+      [
+        -18,
+        -8,
+        3
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      6,
+      0
+    ],
+    "next": 31,
+    "previous": 29,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -13,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 14,
+        "low": 0,
+        "high": 6,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [
+      {
+        "a": [
+          -15,
+          0
+        ],
+        "b": [
+          -3,
+          6
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [
+      {
+        "kind": "blood_guard",
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "thorn",
+        "p": [
+          10,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          13,
+          8,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "recruit4",
+        "p": [
+          9,
+          6,
+          0
+        ],
+        "text": "纱隐 · 解开影织锁"
+      }
+    ],
+    "hint": "击退藏室追兵后招募纱隐。影织忍者以双刃快攻、影缚与安全短位移战斗。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      11
+    ],
+    "title": "R04-05 / 双忍藏室"
+  },
+  {
+    "id": "R04-06",
+    "name": "根轮控制厅",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -16,
+        -3,
+        3
+      ],
+      [
+        3,
+        22,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 32,
+    "previous": 30,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -10,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 14,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "thorn",
+        "p": [
+          5,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "scribe",
+        "p": [
+          14,
+          5,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "portal27",
+        "p": [
+          -8,
+          3,
+          0
+        ],
+        "text": "苗床维护捷径"
+      }
+    ],
+    "hint": "Boss 前休息与回退；绕上根輪避开喷口，右侧进入女巫穹室。",
+    "vents": [
+      {
+        "x": 1,
+        "y": 0,
+        "period": 5,
+        "phase": 0.4
+      }
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R04-06 / 根轮控制厅"
+  },
+  {
+    "id": "R04-07",
+    "name": "女巫穹室",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -18,
+        -10,
+        3
+      ],
+      [
+        8,
+        18,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 33,
+    "previous": 31,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss4",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -14,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 13,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "witch",
+        "p": [
+          5,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [],
+    "hint": "迁木女巫：孢弹、根刺与根行冲锋。半血提高攻速；冲锋前有长预警，留出退路。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R04-07 / 女巫穹室"
+  },
+  {
+    "id": "R04-08",
+    "name": "地表采光井",
+    "region": 4,
+    "style": "garden",
+    "theme": "green",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -1,
+        22,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 34,
+    "previous": 32,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss4",
+    "terminal": false,
+    "ladders": [],
+    "slopes": [
+      {
+        "a": [
+          -17,
+          0
+        ],
+        "b": [
+          -1,
+          5
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "portal26",
+        "p": [
+          -12,
+          0,
+          0
+        ],
+        "text": "迁木园回环"
+      },
+      {
+        "kind": "travel",
+        "p": [
+          4,
+          5,
+          0
+        ],
+        "text": "封界站 · 旧区域回访"
+      }
+    ],
+    "hint": "迁木园循环已经解除。沿采光井右门进入夜血城堡；封界站可回访旧区。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R04-08 / 地表采光井"
+  },
+  {
+    "id": "R05-01",
+    "name": "血堡吊桥",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -12,
+        -3,
+        3
+      ],
+      [
+        7,
+        22,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      4,
+      0
+    ],
+    "next": 35,
+    "previous": 33,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -7,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 14,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [],
+    "props": [],
+    "hint": "新区域 · 夜血城堡。齿轮钟控制血液导管；前方双镜可以减速钟摆。",
+    "story": "维萝：名单上的“自愿”，是他们事后补写的。\n凯恩：我需要原始血契，不是他们的解释。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R05-01 / 血堡吊桥"
+  },
+  {
+    "id": "R05-02",
+    "name": "窥视走廊",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -17,
+        -3,
+        4
+      ],
+      [
+        4,
+        22,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      4,
+      0
+    ],
+    "next": 36,
+    "previous": 34,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "clock_open",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -11,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 12,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "blood_guard",
+        "p": [
+          1,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "mirror_a",
+        "p": [
+          -9,
+          0,
+          0
+        ],
+        "text": "镜 A · 对准钟芯"
+      },
+      {
+        "kind": "mirror_b",
+        "p": [
+          8,
+          4,
+          0
+        ],
+        "text": "镜 B · 对准钟芯"
+      },
+      {
+        "kind": "mirror_reset",
+        "p": [
+          -17,
+          0,
+          0
+        ],
+        "text": "双镜复位"
+      }
+    ],
+    "hint": "旋转 A 与 B 让双束光同时照亮钟芯，保持 2 秒后开启走廊门；完成后永久减速钟摆。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R05-02 / 窥视走廊"
+  },
+  {
+    "id": "R05-03",
+    "name": "钟摆三层塔",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -17,
+        -1,
+        4
+      ],
+      [
+        3,
+        22,
+        8
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      8,
+      0
+    ],
+    "next": 37,
+    "previous": 35,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 11,
+        "low": 0,
+        "high": 8,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "blood_guard",
+        "p": [
+          -2,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "ranged",
+        "p": [
+          17,
+          8,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "chest",
+        "p": [
+          -7,
+          4,
+          0
+        ],
+        "text": "钟塔藏匣 · 铁屑 +20"
+      }
+    ],
+    "hint": "钟摆攻击前亮橙，暂停时不推进周期。双镜已减速；沿分层竖梯绕过摆锤。",
+    "pendulum": {
+      "x": 2,
+      "y": 0,
+      "period": 4.8
+    },
+    "bounds": [
+      -22,
+      22,
+      -2,
+      13
+    ],
+    "title": "R05-03 / 钟摆三层塔"
+  },
+  {
+    "id": "R05-04",
+    "name": "暗镜书房",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -2,
+        22,
+        5
+      ],
+      [
+        -18,
+        -6,
+        8
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 38,
+    "previous": 36,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 8,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [
+      {
+        "a": [
+          -16,
+          0
+        ],
+        "b": [
+          -2,
+          5
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [
+      {
+        "kind": "blood_guard",
+        "p": [
+          6,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "scribe",
+        "p": [
+          13,
+          5,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "blood_record",
+        "p": [
+          -10,
+          8,
+          0
+        ],
+        "text": "旧血契 · 米菈的原签名"
+      }
+    ],
+    "hint": "上层旧血契是可选证据；穿过书房即可前进，证据可随时回访收集。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      13
+    ],
+    "title": "R05-04 / 暗镜书房"
+  },
+  {
+    "id": "R05-05",
+    "name": "血契炼金室",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -8,
+        8,
+        4
+      ],
+      [
+        9,
+        22,
+        7
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      7,
+      0
+    ],
+    "next": 39,
+    "previous": 37,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -4,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 15,
+        "low": 0,
+        "high": 7,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "blood_guard",
+        "p": [
+          2,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          7,
+          6,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "recruit5",
+        "p": [
+          1,
+          4,
+          0
+        ],
+        "text": "维萝 · 解除血瓶封印"
+      }
+    ],
+    "hint": "击退强征守卫后招募维萝。刺剑近攻，血瓶远射；血瓶回流命中后才治疗。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      12
+    ],
+    "title": "R05-05 / 血契炼金室"
+  },
+  {
+    "id": "R05-06",
+    "name": "薄壁裂隙厅",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -15,
+        -5,
+        5
+      ],
+      [
+        5,
+        22,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 40,
+    "previous": 38,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -10,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 12,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "blood_guard",
+        "p": [
+          11,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "phase_step",
+        "p": [
+          -13,
+          0,
+          0
+        ],
+        "text": "A05 裂隙步 · G 穿过标记薄壁"
+      }
+    ],
+    "hint": "E 学裂隙步，靠近蓝色裂纹壁按 G。只穿标记薄壁，安全落点检测；魔力不足可走上层。",
+    "phase_walls": [
+      {
+        "x": 0,
+        "y": 0,
+        "height": 4.7
+      }
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R05-06 / 薄壁裂隙厅"
+  },
+  {
+    "id": "R05-07",
+    "name": "侯爵宴厅",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -19,
+        -11,
+        4
+      ],
+      [
+        9,
+        19,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 41,
+    "previous": 39,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss5",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -15,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 14,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "lord",
+        "p": [
+          5,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [],
+    "hint": "血契侯爵：血矛远射、冲锋、双向血潮。半血后矛群增加；利用两侧宴台躲血潮。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R05-07 / 侯爵宴厅"
+  },
+  {
+    "id": "R05-08",
+    "name": "棺梯捷径",
+    "region": 5,
+    "style": "castle",
+    "theme": "crimson",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -5,
+        22,
+        6
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      6,
+      0
+    ],
+    "next": 42,
+    "previous": 40,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss5",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": 13,
+        "low": 0,
+        "high": 6,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [
+      {
+        "a": [
+          -19,
+          0
+        ],
+        "b": [
+          -5,
+          6
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "portal34",
+        "p": [
+          -8,
+          0,
+          0
+        ],
+        "text": "血堡回环 · 吊桥"
+      },
+      {
+        "kind": "travel",
+        "p": [
+          4,
+          6,
+          0
+        ],
+        "text": "封界站 · 旧区域回访"
+      }
+    ],
+    "hint": "右门进入神笔实验室；已解锁的旧区保持敌人、招募与证据记录。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      11
+    ],
+    "title": "R05-08 / 棺梯捷径"
+  },
+  {
+    "id": "R06-01",
+    "name": "绘笔登记厅",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -15,
+        -4,
+        4
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 43,
+    "previous": 41,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -9,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "chest",
+        "p": [
+          -8,
+          4,
+          0
+        ],
+        "text": "研究物资 · 铁屑 +20"
+      }
+    ],
+    "hint": "新区域 · 神笔实验室。复制房、绝缘桥和链路总控都能安全复位。",
+    "story": "零七：我只记得被擦去之前，有人叫过我的名字。\n原始实验日志就在神笔核心台。先停掉校稿机。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      9
+    ],
+    "title": "R06-01 / 绘笔登记厅"
+  },
+  {
+    "id": "R06-02",
+    "name": "复制样本室",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -9,
+        9,
+        4
+      ],
+      [
+        13,
+        22,
+        6
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      6,
+      0
+    ],
+    "next": 44,
+    "previous": 42,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "copy_complete",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -5,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 17,
+        "low": 0,
+        "high": 6,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "scribe",
+        "p": [
+          16,
+          6,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "scan",
+        "p": [
+          -12,
+          0,
+          0
+        ],
+        "text": "扫描原始重块"
+      },
+      {
+        "kind": "copy",
+        "p": [
+          -5,
+          0,
+          0
+        ],
+        "text": "神笔 · 生成一份副本"
+      },
+      {
+        "kind": "plate_left",
+        "p": [
+          0,
+          4,
+          0
+        ],
+        "text": "原块放上左压板"
+      },
+      {
+        "kind": "plate_right",
+        "p": [
+          7,
+          4,
+          0
+        ],
+        "text": "副本放上右压板"
+      },
+      {
+        "kind": "copy_reset",
+        "p": [
+          -17,
+          0,
+          0
+        ],
+        "text": "复制槽复位"
+      }
+    ],
+    "hint": "扫描重块 → 生成副本 → 左板放原块 → 右板放副本。只有一个复制槽，错序可复位。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      11
+    ],
+    "title": "R06-02 / 复制样本室"
+  },
+  {
+    "id": "R06-03",
+    "name": "绝缘浮桥",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        -6,
+        0
+      ],
+      [
+        -3,
+        4,
+        2
+      ],
+      [
+        7,
+        22,
+        5
+      ],
+      [
+        -6,
+        22,
+        0
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 45,
+    "previous": 43,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": 14,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "scribe",
+        "p": [
+          15,
+          5,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          4,
+          6,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [],
+    "hint": "蓝色电柱放电前会变橙；下层安全路与右梯可回退，上层二段跳接空冲。",
+    "anchors": [
+      [
+        -1,
+        3.3,
+        0
+      ],
+      [
+        11,
+        6.3,
+        0
+      ]
+    ],
+    "vents": [
+      {
+        "x": 5,
+        "y": 0,
+        "period": 4.2,
+        "phase": 0
+      }
+    ],
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R06-03 / 绝缘浮桥"
+  },
+  {
+    "id": "R06-04",
+    "name": "活体四层仓",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -17,
+        -3,
+        4
+      ],
+      [
+        3,
+        22,
+        8
+      ],
+      [
+        -10,
+        15,
+        12
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      8,
+      0
+    ],
+    "next": 46,
+    "previous": 44,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -11,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 10,
+        "low": 0,
+        "high": 8,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 4,
+        "low": 8,
+        "high": 12,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "scribe",
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "turret",
+        "p": [
+          15,
+          8,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "wraith",
+        "p": [
+          3,
+          11,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "recruit6",
+        "p": [
+          0,
+          12,
+          0
+        ],
+        "text": "零七 · 停止记忆覆盖"
+      }
+    ],
+    "hint": "击退活体仓守卫，攀上第四层 E 解救零七；电能改造人的拳刃与护盾适合近战破势。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      17
+    ],
+    "title": "R06-04 / 活体四层仓"
+  },
+  {
+    "id": "R06-05",
+    "name": "神笔核心台",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -3,
+        22,
+        6
+      ],
+      [
+        -17,
+        -7,
+        3
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      6,
+      0
+    ],
+    "next": 47,
+    "previous": 45,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -12,
+        "low": 0,
+        "high": 3,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [
+      {
+        "a": [
+          -18,
+          0
+        ],
+        "b": [
+          -3,
+          6
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [
+      {
+        "kind": "scribe",
+        "p": [
+          10,
+          6,
+          0
+        ],
+        "face": -1
+      },
+      {
+        "kind": "blood_guard",
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [
+      {
+        "kind": "lab_evidence",
+        "p": [
+          6,
+          6,
+          0
+        ],
+        "text": "原始实验日志 · 稳定员米菈"
+      }
+    ],
+    "hint": "E 读取原始日志，取得后永久保留。米菈被转移至更深的炉心，不在本实验室。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      11
+    ],
+    "title": "R06-05 / 神笔核心台"
+  },
+  {
+    "id": "R06-06",
+    "name": "链路总控室",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -16,
+        -2,
+        4
+      ],
+      [
+        3,
+        22,
+        7
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      7,
+      0
+    ],
+    "next": 48,
+    "previous": 46,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "circuit",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -10,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 12,
+        "low": 0,
+        "high": 7,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "power",
+        "p": [
+          -14,
+          0,
+          0
+        ],
+        "text": "S 总电源"
+      },
+      {
+        "kind": "split",
+        "p": [
+          -7,
+          4,
+          0
+        ],
+        "text": "S → J 分流接线"
+      },
+      {
+        "kind": "coolant",
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "text": "J → C 冷却器接线"
+      },
+      {
+        "kind": "door_link",
+        "p": [
+          8,
+          7,
+          0
+        ],
+        "text": "J → M 门锁接线"
+      },
+      {
+        "kind": "insulate",
+        "p": [
+          15,
+          0,
+          0
+        ],
+        "text": "I 绝缘开关"
+      },
+      {
+        "kind": "power_reset",
+        "p": [
+          -18,
+          0,
+          0
+        ],
+        "text": "安全断路器复位"
+      }
+    ],
+    "hint": "先断电，接分流、冷却器与门锁，再合绝缘开关；上电冷却 2 秒。上电时不能换线路。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      12
+    ],
+    "title": "R06-06 / 链路总控室"
+  },
+  {
+    "id": "R06-07",
+    "name": "校稿剧场",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        -18,
+        -9,
+        4
+      ],
+      [
+        10,
+        19,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      0,
+      0
+    ],
+    "next": 49,
+    "previous": 47,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss6",
+    "terminal": false,
+    "ladders": [
+      {
+        "x": -14,
+        "low": 0,
+        "high": 4,
+        "z": -0.25,
+        "hatch": false
+      },
+      {
+        "x": 15,
+        "low": 0,
+        "high": 5,
+        "z": -0.25,
+        "hatch": false
+      }
+    ],
+    "slopes": [],
+    "enemies": [
+      {
+        "kind": "editor",
+        "p": [
+          5,
+          0,
+          0
+        ],
+        "face": -1
+      }
+    ],
+    "props": [],
+    "hint": "无面校稿者：墨弹、裁稿波、复写突进。半血后强化墨弹；左右观测台避波，长前摇再闪避。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R06-07 / 校稿剧场"
+  },
+  {
+    "id": "R06-08",
+    "name": "逃生运输梯",
+    "region": 6,
+    "style": "laboratory",
+    "theme": "cyan",
+    "template": 0,
+    "kit": true,
+    "platforms": [
+      [
+        -22,
+        22,
+        0
+      ],
+      [
+        0,
+        22,
+        5
+      ]
+    ],
+    "spawn": [
+      -19,
+      0,
+      0
+    ],
+    "back": [
+      -20,
+      0,
+      0
+    ],
+    "exit": [
+      20,
+      5,
+      0
+    ],
+    "next": 49,
+    "previous": 48,
+    "checkpoint": [
+      -19,
+      0,
+      0
+    ],
+    "gate": "boss6",
+    "terminal": true,
+    "ladders": [],
+    "slopes": [
+      {
+        "a": [
+          -18,
+          0
+        ],
+        "b": [
+          0,
+          5
+        ],
+        "z": 0,
+        "width": 3,
+        "thick": 0.25
+      }
+    ],
+    "enemies": [],
+    "props": [
+      {
+        "kind": "final_report",
+        "p": [
+          6,
+          5,
+          0
+        ],
+        "text": "交付实验日志 · 阶段完成"
+      },
+      {
+        "kind": "travel",
+        "p": [
+          -8,
+          0,
+          0
+        ],
+        "text": "封界站 · 所有已发现区域"
+      }
+    ],
+    "hint": "0.6 阶段终点：交付日志后可回访六大区域与维修所；后续熔炉区域尚未开放。",
+    "bounds": [
+      -22,
+      22,
+      -2,
+      10
+    ],
+    "title": "R06-08 / 逃生运输梯"
   }
 ]

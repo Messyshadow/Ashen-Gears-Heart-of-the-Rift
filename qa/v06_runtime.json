@@ -1,0 +1,349 @@
+{
+  "checks": [
+    {
+      "check": "50 房间、七名可收集角色与六个主线区域",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "房间身份、独立路线布局及前后门入口均有实体地面",
+      "detail": 50,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R03-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R04-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R05-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R06-02",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "未解机关阻挡区域门 R06-06",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "水务区错序不能直接开启旁路",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "水务区真实加水、停水、旁路、排水联锁完成",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "水位控制有实体碰撞浮筒平台",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "迁木桥未到灯位不能锁定",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "迁木桥实际移动到灯位并锁定",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "单镜不足以开钟锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "双镜对齐开启钟锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "复制机关错序压板拒绝交付",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "登记、复制、双压板联锁完成",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "错序上电保护跳闸且可以重接",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "断电接四路、绝缘再上电冷却两秒联锁完成",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "守卫存在时不能招募 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "招募记录与唯一奖励 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "七名角色收集完成，出战编队限制三人",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "空冲训练同步已招募同伴",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "标记薄壁安全相移实际跨墙并扣魔力",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "休息灯三人编队可替换收集角色",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "继续游戏恢复七名收集记录与三人编队",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 沈烬",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 纱隐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 维萝",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴轻击骨骼动作与有效帧命中 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新同伴招式真实命中 零七",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "攻击未收招时技能与名册菜单不能强制换人或取消攻击",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "菜单不能切入或编入已倒地同伴",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "环境伤害击倒攻击中的角色后安全接替，不继承缺失的专属攻击动画",
+      "detail": {
+        "actual": 3,
+        "expected": 3,
+        "fallen": 6
+      },
+      "pass": true
+    },
+    {
+      "check": "护盾减伤同样覆盖环境与物理机关",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "50 个前门实际步行推进，最终终点明确停留完成界面",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "48 个左门实际步行回访前室，不退回区域原点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 mother",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 mother",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss3",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 witch",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 witch",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss4",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 lord",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 lord",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss5",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 半血二阶段与暗杀限制 editor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 感知、前摇与实体攻击伤害 editor",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "新 Boss 唯一击败记录与回访 boss6",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "休息灯传送可回访已发现迁木园",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "按键设置真实重绑跳跃 B",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重绑后的 B 键实际触发角色跳跃",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重绑生效并拒绝重复占用",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "按键设置写入可恢复的配置文件",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "雾气、辉光与环境亮度设置实际生效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "960×540 小窗口下十一项画面控件不重叠",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "统一设置入口",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "按键大类显示实际操作控件",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "区域分页地图显示七个区域与八个房间",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "R06 终点保存阶段完成记录，回访入口明确",
+      "detail": null,
+      "pass": true
+    }
+  ],
+  "version": "0.6.0"
+}

@@ -11,7 +11,7 @@ var light_clock := 0.0
 func defaults() -> Dictionary:
 	var gpu:=RenderingServer.get_video_adapter_name().to_lower()
 	var quality: String="low" if "intel" in gpu or "uhd" in gpu or "iris" in gpu or "radeon graphics" in gpu else "high" if "rtx 50" in gpu or "rtx 40" in gpu or "rtx 30" in gpu else "medium"
-	return {"quality":quality,"resolution":0,"mode":1,"fps":60,"vsync":true,"scale":.67 if quality=="low" else .85 if quality=="medium" else 1.0,"shadows":quality!="low","show_fps":false}
+	return {"quality":quality,"resolution":0,"mode":1,"fps":60,"vsync":true,"scale":.67 if quality=="low" else .85 if quality=="medium" else 1.0,"shadows":quality!="low","show_fps":false,"fog":true,"glow":true,"brightness":1.0}
 func _ready() -> void:
 	if game.qa_mode:config_path="user://qa_graphics_settings.cfg"
 	settings=defaults();load_settings()
@@ -27,7 +27,7 @@ func sanitize() -> void:
 	if str(settings.quality) not in ["low","medium","high"]:settings.quality="medium"
 	settings.resolution=clampi(int(settings.resolution),0,RESOLUTIONS.size()-1);settings.mode=clampi(int(settings.mode),0,1)
 	if int(settings.fps) not in FPS_LIMITS:settings.fps=60
-	settings.scale=clampf(float(settings.scale),.5,1);settings.vsync=bool(settings.vsync);settings.shadows=bool(settings.shadows);settings.show_fps=bool(settings.show_fps)
+	settings.scale=clampf(float(settings.scale),.5,1);settings.vsync=bool(settings.vsync);settings.shadows=bool(settings.shadows);settings.show_fps=bool(settings.show_fps);settings.fog=bool(settings.get("fog",true));settings.glow=bool(settings.get("glow",true));settings.brightness=clampf(float(settings.get("brightness",1)),.75,1.5)
 func save_settings() -> void:
 	var cfg:=ConfigFile.new()
 	for key in settings:cfg.set_value("graphics",key,settings[key])
@@ -49,7 +49,8 @@ func apply_settings(window: bool=true) -> void:
 	view.msaa_3d=Viewport.MSAA_4X if settings.quality=="high" else Viewport.MSAA_DISABLED
 	view.screen_space_aa=Viewport.SCREEN_SPACE_AA_FXAA if settings.quality!="low" and RenderingServer.get_current_rendering_method()!="gl_compatibility" else Viewport.SCREEN_SPACE_AA_DISABLED
 	var forward: bool=RenderingServer.get_current_rendering_method()=="forward_plus"
-	game.environment.glow_enabled=forward and settings.quality=="high";game.environment.ssao_enabled=forward and settings.quality=="high"
+	game.environment.fog_enabled=settings.fog;game.environment.ambient_light_energy=.56*float(settings.brightness)
+	game.environment.glow_enabled=forward and settings.quality=="high" and settings.glow;game.environment.ssao_enabled=forward and settings.quality=="high"
 	game.sun.shadow_enabled=settings.shadows;game.sun.directional_shadow_max_distance=70 if settings.quality=="high" else 42;game.sun.directional_shadow_mode=DirectionalLight3D.SHADOW_PARALLEL_4_SPLITS if settings.quality=="high" else DirectionalLight3D.SHADOW_ORTHOGONAL
 	game.get_viewport().positional_shadow_atlas_size=1024 if settings.quality=="low" else 2048
 	apply_world_quality();light_clock=0

@@ -1,4 +1,9 @@
 extends CharacterBody3D
+var shield_clock := 0.0
+var extra_hits: Array=[]
+var extra_hit_index := 0
+var spell := ""
+var attack_area := false
 var game: Node3D
 var visual: Node3D
 var animator: AnimationPlayer
@@ -60,7 +65,7 @@ func _ready() -> void:
 
 func set_actor(slot: int) -> void:
 	if is_instance_valid(visual):remove_child(visual);visual.queue_free()
-	visual=load("res://assets/models/"+game.actor_model(slot)+".glb").instantiate();add_child(visual)
+	visual=game.instantiate_model(game.actor_model(slot));add_child(visual)
 	visual.scale=Vector3.ONE*(1.1 if slot==1 else 1);animator=visual.find_child("AnimationPlayer",true,false)
 	for name in ["PassageIdle","PassageWalk","Run","Crouch","LadderUp","LadderDown","LadderIdle","WallHold","HookPull","StairUp","StairDown"]:
 		if animator.has_animation(name):animator.get_animation(name).loop_mode=Animation.LOOP_LINEAR
@@ -82,6 +87,7 @@ func vertical_axis() -> float:
 
 func _physics_process(dt: float) -> void:
 	if game.paused or game.hitstop>0:return
+	shield_clock=maxf(0,shield_clock-dt)
 	double_jump_clock=maxf(0,double_jump_clock-dt)
 	invulnerable=maxf(0,invulnerable-dt);stamina_delay=maxf(0,stamina_delay-dt);wall_sound_clock=maxf(0,wall_sound_clock-dt);wall_lock=maxf(0,wall_lock-dt);detach_clock=maxf(0,detach_clock-dt)
 	if stamina_delay<=0:stamina=minf(100,stamina+25*dt)
@@ -120,11 +126,15 @@ func _physics_process(dt: float) -> void:
 		attack_clock-=dt
 		if Input.is_action_just_pressed("light") and (attack_clip.begins_with("Dagger") or (attack_clip.begins_with("Katana") and attack_clip!="KatanaHeavy")):queued_attack=true
 		velocity.x=move_toward(velocity.x,0,32*dt);velocity.y-=31.25*dt;move_with_sound()
-		clip(attack_clip,animator.get_animation(attack_clip).length/attack_total if attack_clip.begins_with("Katana") else 1.0)
+		var requested: String=attack_clip if animator.has_animation(attack_clip) else "PassageIdle"
+		clip(requested,animator.get_animation(requested).length/maxf(attack_total,.01) if attack_clip.begins_with("Katana") or game.active_slot>=3 else 1.0)
 		if not attack_hit and attack_total-attack_clock>=hit_at:
 			attack_hit=true
-			if game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
-			else:game.melee_hit(attack_power*(1+.15*game.weapon_rank),attack_reach,facing,false)
+			if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,attack_power,spell)
+			elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
+			else:game.melee_hit(attack_power*(1+.15*game.weapon_rank),attack_reach,facing,attack_area)
+		while extra_hit_index<extra_hits.size() and attack_total-attack_clock>=float(extra_hits[extra_hit_index]):
+			extra_hit_index+=1;game.melee_hit(attack_power,attack_reach,facing,false);game.sound("whoosh_light_1",position)
 		if attack_clock<=0 and queued_attack:queued_attack=false;begin_attack(false)
 		return
 	guarding=Input.is_action_pressed("guard") and is_on_floor() and stamina>0;guard_clock=guard_clock+dt if guarding else 0
@@ -193,6 +203,8 @@ func try_vault() -> bool:
 			vault_from=position;vault_to=Vector3(p.x+facing*1.1,position.y,0);vault_clock=.4;motion="vault";game.sound("vault",position);vaults+=1;buffer=0;return true
 	return false
 func begin_attack(heavy: bool) -> void:
+	spell="";extra_hits=[];extra_hit_index=0;attack_area=false
+	if game.active_slot>=3:begin_companion_attack(heavy);return
 	var katana: bool=game.active_slot==0 and game.equipped_weapon=="katana"
 	var cost: float=(24 if heavy else 8) if katana else 18 if heavy else 0
 	if stamina<cost:return
@@ -206,12 +218,14 @@ func begin_attack(heavy: bool) -> void:
 		attack_power=56 if heavy else [28,30,36][combo-1];attack_reach=3.65 if heavy else [3.0,3.2,3.4][combo-1];attack_clock=attack_total
 	animator.stop();clip(attack_clip);animator.play(attack_clip,.06,1);game.sound("bow_fire" if game.active_slot==2 else "whoosh_heavy" if heavy else "whoosh_light_%d"%randi_range(1,2),position)
 func begin_skill(slot: int) -> void:
+	spell="";extra_hits=[];extra_hit_index=0;attack_area=false
 	if not game.learned.has("%d_%d"%[game.active_slot,slot]):game.toast("T 学习对应招式与身法");return
-	if game.magic<16 or game.skill_cooldown>0:game.toast("魔力不足或尚未冷却");return
+	if game.magic<(16 if slot==2 else 18) or game.skill_cooldown>0:game.toast("魔力不足或尚未冷却");return
 	if slot==2:
 		if air_dash_used:return
 		game.magic-=16;dash_clock=.19;air_dash_used=true;game.skill_cooldown=1;game.sound("dash",position);clip("AirDash");return
 	game.magic-=18;game.skill_cooldown=4
+	if game.active_slot>=3:begin_companion_skill(slot);return
 	if game.active_slot==1 and slot==0:game.party_hp[1]=minf(110,game.party_hp[1]+12)
 	attack_clip="BowShot" if game.active_slot==2 else "MechHeavy" if game.active_slot==1 else "Skill";attack_total=.7;attack_clock=.7;hit_at=.26;attack_power=55 if slot==0 else 42;attack_reach=3.2 if slot==0 else 4.4;attack_hit=false
 	if game.active_slot==0 and game.equipped_weapon=="katana":attack_clip="Katana3" if slot==0 else "KatanaHeavy"
@@ -224,6 +238,7 @@ func receive_damage(amount: float,direction: float,source: Node) -> void:
 			if is_instance_valid(source):source.posture+=50;source.state="stunned";source.clock=0
 			game.toast("完美弹反");game.sound("parry",position);return
 		game.sound("guard",position);stamina=maxf(0,stamina-amount);amount*=.25
+	if shield_clock>0:amount*=.5
 	game.party_hp[game.active_slot]=maxf(0,game.party_hp[game.active_slot]-amount);invulnerable=.55;hurt_clock=.23;attack_clock=0;grappling=false;slamming=false;velocity.x=direction*4;game.camera_impact=.16;game.sound("hit")
 	if game.party_hp[game.active_slot]<=0:game.actor_down()
 func snapshot() -> Dictionary:
@@ -234,3 +249,34 @@ func move_with_sound() -> void:
 	move_and_slide()
 	if is_on_floor():air_jump_used=false;double_jump_clock=0
 	if not on_ground and is_on_floor() and fall_speed < -2 and not slamming:game.sound("land_heavy" if fall_speed < -16 else "land_soft",position)
+
+func start_companion(clip_name: String, duration: float, power: float, reach: float, hit_time: float) -> void:
+	attack_clip=clip_name;attack_total=duration;attack_clock=duration;attack_power=power;attack_reach=reach;hit_at=hit_time;attack_hit=false
+	animator.stop();animator.play(attack_clip,.06,animator.get_animation(attack_clip).length/duration);current_clip=attack_clip
+	game.sound("skill" if not spell.is_empty() else "whoosh_heavy" if duration>.65 else "whoosh_light_1",position)
+func begin_companion_attack(heavy: bool) -> void:
+	var cost: float=20 if heavy else 4
+	if stamina<cost:return
+	stamina-=cost;stamina_delay=.55;combo=combo%3+1;combo_clock=.9
+	match game.active_slot:
+		3:start_companion("BoneThrust" if heavy else "BoneSlash",.8 if heavy else .46,48 if heavy else 27+combo*2,3.5 if heavy else 2.9,.32 if heavy else .18)
+		4:start_companion("ShadowBind" if heavy else "ShadowStrike",.62 if heavy else .27,36 if heavy else 18,2.1 if heavy else 1.8,.25 if heavy else .1)
+		5:
+			spell="blood" if heavy else "";start_companion("BloodCast" if heavy else "RapierThrust",.75 if heavy else .4,34 if heavy else 25,3.0 if heavy else 2.6,.3 if heavy else .16)
+		6:attack_area=heavy;start_companion("ElectricBurst" if heavy else "ElectricPunch",.8 if heavy else .36,45 if heavy else 28,3.2 if heavy else 2.0,.32 if heavy else .13)
+func begin_companion_skill(slot: int) -> void:
+	match game.active_slot:
+		3:
+			if slot==0:spell="bone";start_companion("BoneThrust",.7,35,3,.22)
+			else:extra_hits=[.36,.55];start_companion("BoneSlash",.8,22,3.4,.16)
+		4:
+			if slot==0:game.snare_nearby(3.5);start_companion("ShadowBind",.65,40,3.5,.24)
+			else:
+				var next:=position+Vector3(facing*2.4,0,0);var ray:=PhysicsRayQueryParameters3D.create(position+Vector3(0,1,0),next+Vector3(0,1,0),1);var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
+				if hit.is_empty():position=next
+				invulnerable=.25;start_companion("ShadowStrike",.5,52,2.2,.18)
+		5:spell="leech" if slot==0 else "blood_burst";start_companion("BloodCast",.8,42 if slot==0 else 52,4,.28)
+		6:
+			attack_area=true
+			if slot==0:game.snare_nearby(4);start_companion("ElectricBurst",.8,50,4,.3)
+			else:shield_clock=3;game.spawn_sparks(position+Vector3(0,1,0),true);start_companion("ElectricBurst",.65,25,2.4,.25);game.toast("绝缘护盾 · 3 秒减伤 50%")

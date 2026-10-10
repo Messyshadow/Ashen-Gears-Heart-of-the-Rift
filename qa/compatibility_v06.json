@@ -1,0 +1,51 @@
+{
+  "executable_sha256": "e31adce2e36a97f57bfa111c0b81db20b00d47849ed564822d727228dad26c94",
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "pack_sha256": "fa682a9586db24d39bd431590afeb1c78d4d5cccd9114450d854cacbadb6c207",
+  "renderer": "gl_compatibility",
+  "rooms": [
+    {
+      "draw_calls": 169.0,
+      "effects": 7,
+      "room": 0,
+      "slot": 0
+    },
+    {
+      "draw_calls": 175.0,
+      "effects": 7,
+      "room": 9,
+      "slot": 0
+    },
+    {
+      "draw_calls": 183.0,
+      "effects": 7,
+      "room": 19,
+      "slot": 6
+    },
+    {
+      "draw_calls": 178.0,
+      "effects": 7,
+      "room": 27,
+      "slot": 6
+    },
+    {
+      "draw_calls": 198.0,
+      "effects": 7,
+      "room": 35,
+      "slot": 6
+    },
+    {
+      "draw_calls": 209.0,
+      "effects": 7,
+      "room": 43,
+      "slot": 6
+    },
+    {
+      "draw_calls": 171.0,
+      "effects": 7,
+      "room": 48,
+      "slot": 3
+    }
+  ],
+  "version": "0.6.0"
+}

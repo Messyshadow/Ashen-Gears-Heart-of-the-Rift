@@ -20,7 +20,7 @@ func measure() -> Dictionary:
 func run(g: Node3D,path: String) -> Array:
 	game=g;var audio: Node=game.audio_system;audio.reset_defaults(false)
 	master=AudioServer.get_bus_index("Master");recorder=AudioEffectCapture.new();recorder.buffer_length=1;AudioServer.add_bus_effect(master,recorder)
-	check(audio.streams.size()==53 and audio.voices.size()==20,"53 个声音资源加载，20 路并发播放器")
+	check(audio.streams.size()==57 and audio.voices.size()==20,"57 个声音资源加载，20 路并发播放器")
 	await wait(.5);var mix:=measure();check(mix.rms>.002,"探索音乐与环境实际混音非静音",mix)
 	audio.set_volume("Music",0,false);audio.set_volume("Ambient",0,false)
 	for voice in audio.voices:voice.stop()

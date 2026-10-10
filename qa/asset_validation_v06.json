@@ -1,0 +1,172 @@
+{
+  "version": "0.6.0",
+  "checks": [
+    {
+      "passed": true,
+      "check": "18 regional Blender kit mesh parts",
+      "detail": [
+        "WaterPipe",
+        "WaterWheel",
+        "WaterTank",
+        "SteamVent",
+        "IronTree",
+        "RootVine",
+        "SporeCluster",
+        "GlassDome",
+        "GothicWindow",
+        "Bookshelf",
+        "ClockFace",
+        "BloodVessel",
+        "Chandelier",
+        "LabTank",
+        "Terminal",
+        "CircuitPylon",
+        "HologramRing",
+        "Chest"
+      ]
+    },
+    {
+      "passed": true,
+      "check": "Independent skeletal attack clips shenjin",
+      "detail": {
+        "BoneSlash": 42,
+        "BoneThrust": 42
+      }
+    },
+    {
+      "passed": true,
+      "check": "Complete mobility retained shenjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Shared demo skeleton shenjin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Independent skeletal attack clips shayin",
+      "detail": {
+        "ShadowStrike": 42,
+        "ShadowBind": 42
+      }
+    },
+    {
+      "passed": true,
+      "check": "Complete mobility retained shayin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Shared demo skeleton shayin",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Independent skeletal attack clips weiluo",
+      "detail": {
+        "RapierThrust": 42,
+        "BloodCast": 42
+      }
+    },
+    {
+      "passed": true,
+      "check": "Complete mobility retained weiluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Shared demo skeleton weiluo",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Independent skeletal attack clips zero7",
+      "detail": {
+        "ElectricPunch": 42,
+        "ElectricBurst": 42
+      }
+    },
+    {
+      "passed": true,
+      "check": "Complete mobility retained zero7",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Shared demo skeleton zero7",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical industrial_kit_v04",
+      "detail": "c86628364bd2958635d6f4513668306b2fa814f7e647ce5ad4673beaf1d9fb30"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical kain_v04",
+      "detail": "41614aee9273dcf1462250fd34fda1344d26c529451f5a71f2a4cfa9899f2659"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical kain_katana_v04",
+      "detail": "ebf0414000d8ce234ea5d587949c2e72f6eb31b09706c58948f2132516421680"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical luomao_v04",
+      "detail": "c011139ca944975688d2150eb2538d001c10513acc6963ce803f299f05cf1c56"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical yise_v04",
+      "detail": "2345a665f58c7e37e84189dafe86bc7d45bb775a1be418fe8bd508b19b945160"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical minotaur_v04",
+      "detail": "0276a0f929fb4e25d86ee1742217a67cdda6de3445aa17c11caa4ca7fe5b8846"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical execution_machine",
+      "detail": "a454324f2040e9b0dfcc6e6c8f96ef2910bb63dc3acd42518db3781e88b7f9bb"
+    },
+    {
+      "passed": true,
+      "check": "0.4.3 source model remains byte-identical mechanical_hound",
+      "detail": "84148dfc42666bb70ffc487afc5d46ae4080c66c3aa036c5b9fed673a76b569c"
+    },
+    {
+      "passed": true,
+      "check": "Original Blender enemy geometry mother",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Original Blender enemy geometry witch",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Original Blender enemy geometry lord",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Original Blender enemy geometry editor",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Original Blender enemy geometry wraith",
+      "detail": null
+    },
+    {
+      "passed": true,
+      "check": "Original Blender enemy geometry thorn",
+      "detail": null
+    }
+  ],
+  "failures": 0
+}

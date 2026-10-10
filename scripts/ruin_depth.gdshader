@@ -11,6 +11,8 @@ uniform bool has_roughness = false;
 uniform float base_roughness = 0.80;
 uniform bool detail_normal = true;
 uniform bool detail_rough = true;
+uniform bool remap_color = false;
+uniform vec3 remap_tint : source_color = vec3(1.0);
 varying float world_depth;
 void vertex() {
     world_depth = (MODEL_MATRIX * vec4(VERTEX,1.0)).z;
@@ -18,6 +20,7 @@ void vertex() {
 void fragment() {
     vec3 stone = base_color.rgb;
     if (has_texture) stone *= texture(base_texture,UV).rgb;
+    if (remap_color) stone = vec3(max(dot(stone,vec3(0.2126,0.7152,0.0722))*1.5,0.12)) * remap_tint;
     stone *= COLOR.rgb;
     ALBEDO = stone;
     METALLIC = metalness;
