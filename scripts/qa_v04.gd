@@ -116,8 +116,10 @@ func run(g: Node3D,path: String) -> int:
 	var route_ok:=true
 	for i in range(game.rooms.size()):
 		await enter(i);await clear_enemies();place(game.vector(game.rooms[i].exit)+Vector3(-1,.02,0));await settle(.1);await drive("right",.3);await settle(.1)
-		if game.room!=int(game.rooms[i].next):route_ok=false;print("ROUTE_FAIL ",i," -> ",game.room)
-	check(route_ok,"18 个前门实际步行触发并连接正确目标")
+		if i==16:
+			if game.room!=16 or game.screen!="chapter_complete":route_ok=false
+		elif game.room!=int(game.rooms[i].next):route_ok=false;print("ROUTE_FAIL ",i," -> ",game.room)
+	check(route_ok,"18 个前门实际步行连接目标，第二章终点停留完成界面")
 	await enter(4);game.flags.grapple=false;place(Vector3(20,6,0));await settle(.2);game.update_nearest();game.interact();await settle(.1);check(game.room==4,"未取得钩索时能力门拒绝通行");game.flags.grapple=true
 	await enter(12);place(Vector3(0,-4,0));await settle(.3);check(game.room==12 and game.player.position.x< -18,"坠落在当前房间重试，不退回首室")
 	await enter(0);await clear_enemies();var money: int=game.scrap;await enter(0);check(game.enemies.size()==1,"普通守卫重访刷新");await clear_enemies();check(game.scrap==money,"刷新普通敌人不重复领取铁屑")
@@ -129,12 +131,13 @@ func run(g: Node3D,path: String) -> int:
 	game.set_screen("skills");await settle(.2);check(is_instance_valid(game.ui.preview) and game.ui.preview.get_child(0).world_3d!=game.get_world_3d(),"招式预览使用隔离的三维世界");await capture("08_skills")
 	await enter(11);game.overview=false;await settle(.5);await capture("09_hub")
 	checks.append_array(await preload("res://scripts/qa_audio.gd").new().run(game,directory))
+	checks.append_array(await preload("res://scripts/qa_graphics.gd").new().run(game,directory))
 	var failures:=0
 	for item in checks:
 		if not item.pass:failures+=1
 	var executable: String=OS.get_executable_path()
 	var pack: String=executable.get_basename()+".pck"
-	var report: Dictionary={"version":"0.4.1","checks":checks,"failures":failures,"engine":Engine.get_version_info().string,"executable":executable,"executable_sha256":FileAccess.get_sha256(executable),"pack_sha256":FileAccess.get_sha256(pack) if FileAccess.file_exists(pack) else "","input":"Godot input actions and isolated physics acceptance; no physical controller or full human playthrough"}
+	var report: Dictionary={"version":"0.4.2","checks":checks,"failures":failures,"engine":Engine.get_version_info().string,"executable":executable,"executable_sha256":FileAccess.get_sha256(executable),"pack_sha256":FileAccess.get_sha256(pack) if FileAccess.file_exists(pack) else "","input":"Godot input actions and isolated physics acceptance; no physical controller or full human playthrough"}
 	var report_path: String=directory.get_base_dir().path_join("runtime_tests.json") if not directory.is_empty() else "user://runtime_tests.json"
 	var out:=FileAccess.open(report_path,FileAccess.WRITE);out.store_string(JSON.stringify(report,"  "));out.close()
 	print("QA_FINISHED ",checks.size()," checks, ",failures," failures");return failures

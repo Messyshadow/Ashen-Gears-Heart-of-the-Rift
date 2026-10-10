@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "file": "drone_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "a78ccf2855acbc40e326616c6a184af194c5f433188510186a7243cfc7bb1c61"
+    },
+    {
+      "file": "industrial_kit_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "c86628364bd2958635d6f4513668306b2fa814f7e647ce5ad4673beaf1d9fb30"
+    },
+    {
+      "file": "kain_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "32037863912dfb0c76dc68a19eed9f8d2f655347884222d2c4d8fd9904e5e54b"
+    },
+    {
+      "file": "luomao_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "57cc690f132d8918c5dc1ace23a623dfb123b5f2f71dd554033f4c22cdc05440"
+    },
+    {
+      "file": "minotaur_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "0276a0f929fb4e25d86ee1742217a67cdda6de3445aa17c11caa4ca7fe5b8846"
+    },
+    {
+      "file": "turret_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "9577387eee1d2bf58da3b6c8efee65daa3f8b480f0ab4a088489f887e1f31b9a"
+    },
+    {
+      "file": "yise_v04.glb",
+      "geometry_animation_materials_unchanged": true,
+      "accessor_buffers_identical": true,
+      "texture_bytes_identical": true,
+      "sha256": "88a1b9d5b17437ec9a7d45b5a78395ba44513f4d2e3bf46d5f60a104b4010ad8"
+    }
+  ]
+}

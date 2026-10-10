@@ -105,3 +105,6 @@ func halt() -> void:
 	set_process(false)
 	for voice in voices:voice.stop();voice.stream=null
 	for voice in beds.values():voice.stop();voice.stream=null
+
+func _exit_tree() -> void:
+	halt()

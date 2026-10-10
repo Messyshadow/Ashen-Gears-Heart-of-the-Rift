@@ -8,18 +8,18 @@
     {
       "check": "探索音乐与环境实际混音非静音",
       "detail": {
-        "frames": 17408,
-        "peak": 0.145524188876152,
-        "rms": 0.045703176610975
+        "frames": 18432,
+        "peak": 0.160081475973129,
+        "rms": 0.0433425493663988
       },
       "pass": true
     },
     {
       "check": "攻击命中突进同时播放，有混音信号且不削波",
       "detail": {
-        "frames": 10240,
+        "frames": 10752,
         "peak": 0.912010848522186,
-        "rms": 0.184452051460134
+        "rms": 0.19016571742728
       },
       "pass": true
     },
@@ -27,26 +27,26 @@
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
         "frames": 9216,
-        "peak": 0.720044612884521,
-        "rms": 0.138791923243546
+        "peak": 0.725461423397064,
+        "rms": 0.141658098205852
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 6656,
-        "peak": 0.399970471858978,
-        "rms": 0.0756958511167065
+        "frames": 8192,
+        "peak": 0.392281889915466,
+        "rms": 0.084613274273417
       },
       "pass": true
     },
     {
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
-        "frames": 38400,
-        "peak": 0.727207899093628,
-        "rms": 0.109015609202379
+        "frames": 38912,
+        "peak": 0.780506372451782,
+        "rms": 0.114444242963266
       },
       "pass": true
     },
@@ -74,8 +74,8 @@
       "check": "附近战斗切入战斗音乐",
       "detail": {
         "frames": 39424,
-        "peak": 0.791695177555084,
-        "rms": 0.101615294753989
+        "peak": 0.772206962108612,
+        "rms": 0.102513402662067
       },
       "pass": true
     },
@@ -110,27 +110,27 @@
     "boss_roar": 2,
     "bow_fire": 1,
     "dash": 3,
-    "door": 19,
+    "door": 18,
     "elevator_start": 1,
     "elevator_stop": 1,
     "enemy_windup": 2,
     "foot_metal_1": 29,
-    "foot_metal_2": 30,
-    "foot_metal_3": 30,
-    "foot_stone_1": 9,
-    "foot_stone_2": 3,
-    "foot_stone_3": 8,
+    "foot_metal_2": 37,
+    "foot_metal_3": 24,
+    "foot_stone_1": 8,
+    "foot_stone_2": 6,
+    "foot_stone_3": 5,
     "gear_latch": 4,
     "gear_start": 1,
     "grapple_attach": 4,
     "grapple_launch": 3,
-    "hit_flesh_1": 17,
-    "hit_flesh_2": 15,
-    "hit_metal_1": 16,
-    "hit_metal_2": 16,
+    "hit_flesh_1": 19,
+    "hit_flesh_2": 13,
+    "hit_metal_1": 18,
+    "hit_metal_2": 14,
     "jump": 7,
-    "ladder_1": 22,
-    "ladder_2": 15,
+    "ladder_1": 21,
+    "ladder_2": 16,
     "land_heavy": 1,
     "land_soft": 8,
     "parry": 1,

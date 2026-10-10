@@ -1,0 +1,39 @@
+{
+  "fps_limit": 0,
+  "frames_per_room": 240,
+  "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "note": "Measured on this GPU; does not certify GTX 1060 or integrated GPU FPS. Room build includes instantiation, not all driver shader compilation.",
+  "profile": "baseline",
+  "records": [
+    {
+      "average_fps": 393.809963720257,
+      "draw_calls": 470.875,
+      "mean_frame_ms": 2.53929583333333,
+      "p95_frame_ms": 3.432,
+      "room": 2,
+      "room_build_ms": 501.105,
+      "visible_objects": 591.3125
+    },
+    {
+      "average_fps": 391.199319313184,
+      "draw_calls": 443.920833333333,
+      "mean_frame_ms": 2.55624166666667,
+      "p95_frame_ms": 3.328,
+      "room": 9,
+      "room_build_ms": 39.669,
+      "visible_objects": 574.820833333333
+    },
+    {
+      "average_fps": 394.942108069325,
+      "draw_calls": 318.670833333333,
+      "mean_frame_ms": 2.53201666666667,
+      "p95_frame_ms": 3.24,
+      "room": 15,
+      "room_build_ms": 245.151,
+      "visible_objects": 437.708333333333
+    }
+  ],
+  "renderer": "forward_plus",
+  "resolution": "1920x1080",
+  "vsync": false
+}

@@ -52,8 +52,8 @@ def build():
     prop(r,'wall',-12,0,'获得 A02 壁抓与壁跳');enemy(r,'hound',8);enemy(r,'ranged',17,7)
     r['hint']='E 学会壁抓：跳向带蓝纹的墙，按住朝墙方向滑落；Space 蹬墙。右梯可回退。'
     # Hub stays at index 11, preserving route references.
-    r=room('R00-01','余烬广场','hub',[floor(-22,22,0),floor(-8,8,4)],[-19,0,0],[20,0,0],16,[ladder(-5,0,4)],theme='warm')
-    prop(r,'hub_story',-5,0,'阿芙 · 幸存者维修所');prop(r,'upgrade',5,0,'工坊 · 40 铁屑强化');prop(r,'training',0,4,'身法与招式训练');r['hint']='温暖维修所：休息刷新普通敌人。F 切换；T 招式；M 地图。右门回锈井桥。'
+    r=room('R00-01','余烬广场','hub',[floor(-22,22,0),floor(-8,8,4)],[-19,0,0],[20,0,0],8,[ladder(-5,0,4)],theme='warm')
+    prop(r,'hub_story',-5,0,'阿芙 · 幸存者维修所');prop(r,'upgrade',5,0,'工坊 · 40 铁屑强化');prop(r,'training',0,4,'身法与招式训练');r['hint']='温暖维修所：休息刷新普通敌人。F 切换；T 招式；M 地图。右门为锈井入口回访，不是第三章。'
     r=room('R02-04','三层投石廊','barrage',[floor(-22,-2,0),floor(-2,3,2),floor(3,22,0),floor(8,22,5)],[-19,0,0],[20,0,0],13,[ladder(17,0,5)],theme='green')
     enemy(r,'ranged',9);enemy(r,'turret',16,5);enemy(r,'drone',2,6);enemy(r,'human',17)
     r['hint']='远程交叉火力：冲跑跳过断层，利用平台遮挡；空中 K 下砸破开守卫。'
@@ -67,7 +67,7 @@ def build():
     r=room('R02-07','督工轴心','minotaur',[floor(-22,22,0),floor(-18,-10,3),floor(10,18,3)],[-19,0,0],[20,0,0],16,[ladder(-16,0,3),ladder(16,0,3)],stairs=[stair([-22,0],[-18,3])],gate='boss2',theme='furnace')
     enemy(r,'minotaur',6);r['hint']='锈脊牛头督工：读出冲锋前摇，跳上侧台躲地震，半血后警惕连续锤击。'
     r=room('R02-08','维修桥回环','bridge',[floor(-22,22,0),floor(0,22,4)],[-19,0,0],[20,4,0],11,stairs=[stair([-12,0],[0,4])],gate='boss2',theme='blue')
-    prop(r,'rust_loop',-18,0,'锈井回环 · 锈井入口');prop(r,'completion',5,4,'交付总井图纸');r['hint']='图纸送回维修所，灰闸囚厂与锈脊齿轮井的回环已连通。'
+    prop(r,'rust_loop',-18,0,'锈井回环 · 锈井入口');prop(r,'completion',5,4,'交付总井图纸');r['hint']='本章终点：交付图纸后沿斜梯到右门，查看章节完成；回访需主动选择。'
     r=room('R02-H1','暗矿牢房','mine',[floor(-22,22,0),floor(-18,-5,5),floor(4,22,5)],[-19,0,0],[20,0,0],13,[ladder(-12,0,5),ladder(15,0,5)],theme='green')
     enemy(r,'human',-4);enemy(r,'hound',6);enemy(r,'ranged',12,5);prop(r,'recruit',18,5,'伊瑟 · 归还矿族名册')
     r['hint']='可选救援：击退守卫，攀到右侧牢房，伊瑟自愿加入第三槽。'

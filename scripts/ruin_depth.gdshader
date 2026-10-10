@@ -9,6 +9,8 @@ uniform bool has_texture = true;
 uniform bool has_normal = false;
 uniform bool has_roughness = false;
 uniform float base_roughness = 0.80;
+uniform bool detail_normal = true;
+uniform bool detail_rough = true;
 varying float world_depth;
 void vertex() {
     world_depth = (MODEL_MATRIX * vec4(VERTEX,1.0)).z;
@@ -19,8 +21,8 @@ void fragment() {
     stone *= COLOR.rgb;
     ALBEDO = stone;
     METALLIC = metalness;
-    ROUGHNESS = has_roughness ? texture(rough_texture,UV).g : base_roughness;
-    if (has_normal && world_depth > -7.5) NORMAL_MAP = texture(normal_texture,UV).rgb;
+    ROUGHNESS = has_roughness && detail_rough ? texture(rough_texture,UV).g : base_roughness;
+    if (has_normal && detail_normal && world_depth > -7.5) NORMAL_MAP = texture(normal_texture,UV).rgb;
     if (world_depth < -8.0) {
         // Keep the cavern's shaded form; haze adds a small scattering floor
         // instead of replacing every face with a flat unlit silhouette.

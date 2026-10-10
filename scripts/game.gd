@@ -50,17 +50,28 @@ var save_path := "user://ashen_save_v04.json"
 var qa_mode := false
 var capture_dir := ""
 var main_clock := 0.0
+var environment: Environment
+var sun: DirectionalLight3D
+var graphics: Node
+var atmosphere_materials: Dictionary={}
+var batched_meshes: Dictionary={}
+var hud_clock := 0.0
+var particle_mesh: SphereMesh
+var particle_materials: Dictionary={}
 var world_builder: RefCounted
 var hitstop := 0.0
 var overview := false
 var transition_pending := false
+var quitting := false
 
 func _ready() -> void:
 	rooms=JSON.parse_string(FileAccess.get_file_as_string("res://data/rooms.json"))
 	for arg in OS.get_cmdline_user_args():
 		if arg=="--qa":qa_mode=true;save_path="user://qa_save.json"
 		if arg.begins_with("--capture-dir="):capture_dir=arg.trim_prefix("--capture-dir=")
+	get_tree().auto_accept_quit=false;get_window().close_requested.connect(request_quit)
 	setup_input();setup_environment()
+	graphics=preload("res://scripts/graphics_settings.gd").new();graphics.game=self;add_child(graphics)
 	var canvas := CanvasLayer.new();add_child(canvas)
 	ui=preload("res://scripts/hud.gd").new();ui.game=self;canvas.add_child(ui)
 	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -86,7 +97,7 @@ func refresh_pad() -> void:
 	var pads := Input.get_connected_joypads();pad=pads[0] if not pads.is_empty() else -1
 
 func setup_environment() -> void:
-	var env := WorldEnvironment.new();var e := Environment.new();env.environment=e;add_child(env)
+	var env := WorldEnvironment.new();var e := Environment.new();environment=e;env.environment=e;add_child(env)
 	e.background_mode=Environment.BG_COLOR;e.background_color=Color(.017,.027,.036)
 	e.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;e.ambient_light_color=Color(.36,.46,.56);e.ambient_light_energy=.56
 	var sky := Sky.new();var s := ProceduralSkyMaterial.new()
@@ -95,7 +106,7 @@ func setup_environment() -> void:
 	e.tonemap_mode=Environment.TONE_MAPPER_FILMIC;e.glow_enabled=true;e.glow_intensity=.6
 	e.ssao_enabled=true;e.ssao_radius=.45;e.ssao_intensity=1
 	e.fog_enabled=true;e.fog_light_color=Color(.07,.11,.15);e.fog_density=.003
-	var moon := DirectionalLight3D.new();add_child(moon);moon.rotation_degrees=Vector3(-32,-20,0);moon.light_color=Color(.92,.81,.65);moon.light_energy=1.35;moon.shadow_enabled=true;moon.directional_shadow_max_distance=70
+	var moon := DirectionalLight3D.new();sun=moon;add_child(moon);moon.rotation_degrees=Vector3(-32,-20,0);moon.light_color=Color(.92,.81,.65);moon.light_energy=1.35;moon.shadow_enabled=true;moon.directional_shadow_max_distance=70
 	var fill := DirectionalLight3D.new();add_child(fill);fill.rotation_degrees=Vector3(-20,145,0);fill.light_color=Color(.52,.68,.87);fill.light_energy=.65
 	rig=Node3D.new();add_child(rig);camera=Camera3D.new();rig.add_child(camera)
 	camera.projection=Camera3D.PROJECTION_ORTHOGONAL;camera.size=12.5;camera.position=Vector3(0,2,30);camera.rotation_degrees.x=-3.8;camera.far=110;camera.current=true
@@ -125,9 +136,11 @@ func load_room(number: int, spawn_override: Variant = null) -> void:
 		if opened.has(uid) and spec.kind in ["chest","rescue","grapple","manifest","recruit","completion"]:continue
 		add_prop(spec.kind,vector(spec.p),spec.text,uid)
 	if rooms[room].has("checkpoint"):add_prop("save",vector(rooms[room].checkpoint),"休息灯 · 保存并恢复","")
-	add_prop("exit",vector(rooms[room].exit),"通道 → "+rooms[int(rooms[room].next)].name,"")
+	add_prop("exit",vector(rooms[room].exit),"本章终点 · 查看完成情况" if room==16 else "回访 → 锈井入口" if room==11 else "通道 → "+rooms[int(rooms[room].next)].name,"")
 	if room>0 and room!=11:add_prop("back",vector(rooms[room].back),"← 返回前室","")
 	apply_atmosphere()
+	world_builder.batch_static_parts()
+	graphics.apply_world_quality()
 	player=Player.new();player.game=self;add_child(player);player.position=vector(rooms[room].spawn) if spawn_override==null else spawn_override
 	audio_system.set_room(rooms[room].style)
 	visited[rooms[room].id]=true
@@ -143,6 +156,7 @@ func add_prop(kind: String, pos: Vector3, text_value: String, uid: String) -> vo
 	var label := marker(("→  " if kind=="exit" else "←  " if kind=="back" else "✦  ")+text_value,Color(.22,.68,1) if kind in ["save","grapple","wall"] else Color(.97,.64,.27))
 	world.add_child(label);label.position=pos+Vector3(0,3.6 if kind in ["exit","back"] else 2.1,0);label.font_size=26;label.pixel_size=.01
 	var prop: MeshInstance3D=world_builder.part("Gate" if kind in ["exit","back","side","hub"] else "Coil" if kind in ["save","grapple","wall"] else "Crate",pos+Vector3(0,0,-.65),Vector3.ONE if kind in ["exit","back","side","hub"] else Vector3(.6,.6,.6))
+	prop.set_meta("static_part",false)
 	if kind in ["exit","back"]:prop.rotation.y=PI/2
 	if kind=="rescue":
 		var friend: Node3D=load("res://assets/models/luomao_v04.glb").instantiate();world.add_child(friend);friend.position=pos+Vector3(0,0,-.7);friend.rotation.y=-PI/2
@@ -160,7 +174,10 @@ func apply_atmosphere() -> void:
 		for i in mesh.mesh.get_surface_count():
 			var original: StandardMaterial3D=mesh.mesh.surface_get_material(i)
 			if not original or original.emission_enabled:continue
+			var key: int=original.get_instance_id()
+			if atmosphere_materials.has(key):mesh.set_surface_override_material(i,atmosphere_materials[key]);continue
 			var mat := ShaderMaterial.new();mat.shader=preload("res://scripts/ruin_depth.gdshader")
+			atmosphere_materials[key]=mat
 			for pair in [["base_color",original.albedo_color],["metalness",original.metallic],["base_texture",original.albedo_texture],["has_texture",original.albedo_texture!=null],["normal_texture",original.normal_texture],["has_normal",original.normal_enabled],["rough_texture",original.roughness_texture],["has_roughness",original.roughness_texture!=null],["base_roughness",original.roughness]]:mat.set_shader_parameter(pair[0],pair[1])
 			mesh.set_surface_override_material(i,mat)
 
@@ -195,7 +212,9 @@ func _process(dt: float) -> void:
 		camera.size=lerpf(camera.size,maxf(46.0/view_aspect,float(rooms[room].bounds[3])+4) if overview else 12.5,1-exp(-dt*4))
 		target=target.lerp(desired,1-exp(-dt*6));rig.position=target+Vector3(0,-camera_impact,0)
 		camera_impact=move_toward(camera_impact,0,dt*.8)
-	ui.queue_redraw()
+	hud_clock+=dt
+	if hud_clock>=1.0/30 or screen in ["graphics","graphics_confirm"]:
+		hud_clock=0;ui.queue_redraw()
 
 func update_nearest() -> void:
 	nearest={};var distance := 1.65
@@ -211,7 +230,12 @@ func update_nearest() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("overview") and screen=="play":overview=not overview
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_F11:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if DisplayServer.window_get_mode()==DisplayServer.WINDOW_MODE_FULLSCREEN else DisplayServer.WINDOW_MODE_FULLSCREEN)
+		graphics.settings.mode=0 if graphics.settings.mode==1 else 1;graphics.apply_settings();graphics.save_settings()
+	if screen=="graphics_confirm":
+		if event.is_action_pressed("pause"):graphics.revert()
+		return
+	if screen=="graphics" and event.is_action_pressed("pause"):set_screen(graphics.return_screen);return
+	if screen=="chapter_complete" and event.is_action_pressed("pause"):return
 	if screen=="story":
 		if event.is_action_pressed("interact") or event.is_action_pressed("ui_accept") or event.is_action_pressed("pause"):set_screen("play")
 		return
@@ -251,7 +275,8 @@ func interact() -> void:
 			var gate: String=rooms[room].get("gate","")
 			if not gate.is_empty() and not flags.get(gate,false):toast("尚未完成本室目标 · "+rooms[room].hint,3);return
 			var next := int(rooms[room].next)
-			if room==16 and not flags.get("slice_complete",false):flags.slice_complete=true;save_game();show_story("总井的回流系统重新启动。\n洛铆：维修所接住了第一批幸存者。\n凯恩：米菈，我会继续往下找你。\n\n0.4.0 当前章节完成。维修所与两片区域回环开放。",false)
+			if room==16:
+				flags.slice_complete=true;checkpoint_room=room;checkpoint_pos=player.position;save_game();transition_pending=false;set_screen("chapter_complete");return
 			sound("door");call_deferred("load_room",next);return
 		if kind=="back":
 			var previous := int(rooms[room].previous)
@@ -276,7 +301,7 @@ func interact() -> void:
 		flags.ranger=true;skill_points+=3;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("伊瑟：这份名册，我会带给还活着的人。\n伊瑟自愿加入。3 或 F 切换第三槽，弓箭可以远距支援。");save_game();return
 	if kind=="completion":
 		if opened.has(nearest.uid):return
-		flags.slice_complete=true;skill_points+=1;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("总井图纸交付。灰闸囚厂与锈脊齿轮井回环开放。\n接下来要修复雾肺水务区，寻找米菈的真实去向。\n0.4.0 当前章节结束，可以继续回访、训练与救援。");save_game();return
+		flags.slice_complete=true;skill_points+=1;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("总井图纸交付。灰闸囚厂与锈脊齿轮井回环开放。\n接下来要修复雾肺水务区，寻找米菈的真实去向。\nR01 / R02 已完成。右侧终点查看章节完成情况；回访需主动选择。");save_game();return
 	if kind=="chest":scrap+=20;toast(nearest.text);sound("chest")
 	if kind=="rescue":
 		for enemy in enemies:
@@ -408,10 +433,15 @@ func preview_audio() -> void:
 func spawn_dust(pos: Vector3, force: float) -> void:particles(pos,force,Color(.43,.37,.29,.24))
 func spawn_sparks(pos: Vector3, metal: bool) -> void:particles(pos,2,Color(1,.43,.05) if metal else Color(.8,.14,.07))
 func particles(pos: Vector3, force: float, col: Color) -> void:
-	for i in range(7):
-		var n := MeshInstance3D.new();var m := SphereMesh.new();m.radius=.045;m.height=.09;m.radial_segments=6;m.rings=3;n.mesh=m
-		var material := StandardMaterial3D.new();material.albedo_color=col;material.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;n.material_override=material
-		world.add_child(n);n.position=pos;dusts.append({"node":n,"mat":material,"life":.45,"velocity":Vector3(randf_range(-1.5,1.5)*force,randf_range(.5,2),0)})
+	if particle_mesh==null:
+		particle_mesh=SphereMesh.new();particle_mesh.radius=.045;particle_mesh.height=.09;particle_mesh.radial_segments=6;particle_mesh.rings=3
+	var key:=col.to_html()
+	if not particle_materials.has(key):
+		var material:=StandardMaterial3D.new();material.albedo_color=col;material.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;particle_materials[key]=material
+	var count: int=7
+	for i in range(count):
+		var n:=MeshInstance3D.new();n.mesh=particle_mesh;n.material_override=particle_materials[key];n.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		world.add_child(n);n.position=pos;dusts.append({"node":n,"life":.45,"velocity":Vector3(randf_range(-1.5,1.5)*force,randf_range(.5,2),0)})
 
 func run_qa() -> void:
 	var suite: RefCounted=preload("res://scripts/qa_v04.gd").new()
@@ -447,3 +477,14 @@ func fire_projectile(pos: Vector3,direction: float,amount: float,friendly: bool,
 			var diff: Vector3=enemy.position+Vector3(0,.9,0)-pos
 			if diff.x*direction>0 and absf(diff.y)<3 and diff.length()<best:best=diff.length();shot.travel=diff.normalized()
 	world.add_child(shot)
+
+func open_graphics() -> void:
+	graphics.return_screen="title" if screen=="title" else "pause";set_screen("graphics")
+func chapter_return(target_room: int) -> void:
+	set_screen("play");load_room(target_room)
+
+func request_quit() -> void:
+	if quitting:return
+	quitting=true;paused=true;audio_system.halt()
+	await get_tree().create_timer(.15).timeout
+	get_tree().quit()

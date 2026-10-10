@@ -5,7 +5,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$version = '0.4.1'
+$version = '0.4.2'
 $folderName = '灰烬齿轮-裂界之心-' + $version
 $stage = Join-Path $projectRoot ('build\package-' + $version)
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -14,13 +14,18 @@ if (-not $SkipExport) {
     $env:TEMP = Join-Path $projectRoot 'build\export-temp'
     $env:TMP = $env:TEMP
     New-Item -ItemType Directory -Path $env:TEMP -Force | Out-Null
+    & $Engine --headless --path $projectRoot --editor --import --quit
+    if ($LASTEXITCODE -ne 0) { throw 'Project import failed' }
     & $Engine --headless --path $projectRoot --export-release 'Windows Ashen Gears' (Join-Path $projectRoot 'build\AshenGears.exe')
     if ($LASTEXITCODE -ne 0) { throw 'Godot export failed' }
     $env:APPDATA = Join-Path $projectRoot '.godot-user-exe04'
     $capture = (Join-Path $projectRoot 'qa\v04_screenshots').Replace('\','/')
+    $acceptanceStarted = [DateTime]::UtcNow
     $acceptance = Start-Process -FilePath (Join-Path $projectRoot 'build\AshenGears.exe') -ArgumentList @('--resolution','1600x900','--','--qa',('"--capture-dir=' + $capture + '"')) -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $projectRoot 'qa\exe_v04.log') -RedirectStandardError (Join-Path $projectRoot 'qa\exe_v04_error.log')
     $acceptance.WaitForExit()
     if ($acceptance.ExitCode -ne 0) { throw 'Exported EXE acceptance failed; see qa/exe_v04.log' }
+    if ((Get-Item -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json')).LastWriteTimeUtc -lt $acceptanceStarted) { throw 'EXE did not produce a fresh acceptance report' }
+    if ((Get-Item -LiteralPath (Join-Path $projectRoot 'qa\exe_v04_error.log')).Length -ne 0) { throw 'EXE reported runtime errors; see qa/exe_v04_error.log' }
 }
 $report = Get-Content -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json') -Raw -Encoding utf8 | ConvertFrom-Json
 if ($report.failures -ne 0) { throw 'Runtime acceptance checks did not pass' }
@@ -34,10 +39,19 @@ Copy-Item -LiteralPath (Join-Path $projectRoot 'README.md') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'licenses\Godot-LICENSE.txt'),(Join-Path $projectRoot 'licenses\Godot-COPYRIGHT.txt') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\audio_runtime.json'),(Join-Path $projectRoot 'qa\audio_assets.json') -Destination $stage
+foreach ($name in @('asset_validation.json','asset_optimization.json','performance_baseline.json','performance_high.json','performance_medium.json','performance_low.json','performance_compatibility.json')) {
+    Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
+}
+@('@echo off','cd /d "%~dp0"','start "" "%~dp0AshenGears.exe" --rendering-method gl_compatibility -- --graphics-low') | Set-Content -LiteralPath (Join-Path $stage 'AshenGears-LowSpec.cmd') -Encoding ascii
 $images = Join-Path $stage 'qa\v04_screenshots'
 New-Item -ItemType Directory -Path $images -Force | Out-Null
 foreach ($name in @('05_gears.png','10_combat.png')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\v04_screenshots\' + $name)) -Destination $images
+}
+$releaseDocs = Join-Path $stage 'docs'
+New-Item -ItemType Directory -Path $releaseDocs -Force | Out-Null
+foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md')) {
+    Copy-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $name)) -Destination $releaseDocs
 }
 $records = @()
 foreach ($file in (Get-ChildItem -LiteralPath $stage -File -Recurse | Where-Object Name -NotIn @('SHA256SUMS.txt','manifest.json'))) {

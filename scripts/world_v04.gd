@@ -1,4 +1,5 @@
 extends RefCounted
+const KIT = preload("res://assets/models/industrial_kit_v04.glb")
 var game: Node3D
 var parts: Dictionary={}
 var moving: Array=[]
@@ -7,10 +8,13 @@ var hazards: Array=[]
 var conveyors: Array=[]
 var obstacles: Array=[]
 var clock := 0.0
+var lights: Array[OmniLight3D]=[]
+var batched_instances := 0
+var batches := 0
 
 func build(g: Node3D, spec: Dictionary) -> void:
 	game=g;clock=0
-	var kit: Node3D=load("res://assets/models/industrial_kit_v04.glb").instantiate()
+	var kit: Node3D=KIT.instantiate()
 	for mesh in kit.find_children("*","MeshInstance3D",true,false):parts[mesh.name]=mesh
 	var bounds: Array=spec.bounds
 	for platform in spec.platforms:platform_segment(float(platform[0]),float(platform[1]),float(platform[2]))
@@ -45,7 +49,7 @@ func build(g: Node3D, spec: Dictionary) -> void:
 			part("Lantern",Vector3(x+1.6,y,-2.15))
 			var light:=OmniLight3D.new();game.world.add_child(light);light.position=Vector3(x+1.6,y,-1.4)
 			light.light_color=Color(.3,.63,1) if spec.theme in ["blue","void"] else Color(.58,.92,.53) if spec.theme=="green" else Color(1,.52,.18)
-			light.light_energy=2.0;light.omni_range=6.5
+			light.light_energy=2.0;light.omni_range=6.5;lights.append(light)
 	for i in range(9):
 		var x: float=-26+i*6
 		part("Arch",Vector3(x,-2,-12-(i%3)*3),Vector3(1.3,1.5+(i%3)*.4,1.5))
@@ -72,7 +76,7 @@ func build(g: Node3D, spec: Dictionary) -> void:
 		for x in [-9,9]:part("Gear",Vector3(x,7,-7),Vector3(2,2,1))
 	elif style in ["gears","bearing","lift"]:
 		for xy in [[-14,7],[0,9],[14,4]]:
-			var gear:=part("Gear",Vector3(xy[0],xy[1],-5),Vector3(1.4,1.4,1));mechanisms.append({"node":gear,"kind":"gear"})
+			var gear:=part("Gear",Vector3(xy[0],xy[1],-5),Vector3(1.4,1.4,1));mechanisms.append({"node":gear,"kind":"gear"});gear.set_meta("static_part",false)
 		for x in [-18,18]:part("Boiler",Vector3(x,0,-5),Vector3(.8,1.7,.8))
 	elif style in ["workshop","hub"]:
 		for x in [-14,0,14]:part("Banner",Vector3(x,1.5,-3))
@@ -93,7 +97,7 @@ func build(g: Node3D, spec: Dictionary) -> void:
 		part("Pipe",Vector3(deck.x+2.5,deck.low,-1.5),Vector3(1,(deck.high-deck.low+2)/4,1))
 		moving.append({"body":body,"low":float(deck.low)-.18,"high":float(deck.high)-.18,"target":float(deck.low)-.18,"width":float(deck.width)})
 	for hazard in spec.get("hazards",[]):
-		var press:=part("Platform",game.vector(hazard.p)+Vector3(0,5,0),Vector3(.7,1.8,1));hazards.append({"node":press,"p":game.vector(hazard.p),"period":float(hazard.period),"damage_clock":0.0,"last_phase":0.0})
+		var press:=part("Platform",game.vector(hazard.p)+Vector3(0,5,0),Vector3(.7,1.8,1));press.set_meta("static_part",false);hazards.append({"node":press,"p":game.vector(hazard.p),"period":float(hazard.period),"damage_clock":0.0,"last_phase":0.0})
 		part("Pipe",game.vector(hazard.p)+Vector3(0,5,-.8),Vector3(1,1.5,1))
 	conveyors=spec.get("conveyors",[])
 	for conveyor in conveyors:
@@ -105,7 +109,7 @@ func build(g: Node3D, spec: Dictionary) -> void:
 	game.world.add_child(kit);kit.visible=false
 
 func part(name: String, pos: Vector3, scale_value: Vector3=Vector3.ONE) -> MeshInstance3D:
-	var n: MeshInstance3D=parts[name].duplicate();game.world.add_child(n);n.position=pos;n.scale=scale_value;return n
+	var n: MeshInstance3D=parts[name].duplicate();game.world.add_child(n);n.position=pos;n.scale=scale_value;n.set_meta("static_part",true);n.set_meta("distant_decor",pos.z < -12);return n
 
 func platform_segment(a: float,b: float,y: float) -> void:
 	var count:=int(ceil((b-a)/4))
@@ -147,3 +151,25 @@ func conveyor_speed(pos: Vector3) -> float:
 	for c in conveyors:
 		if pos.x>c[0] and pos.x<c[1] and absf(pos.y-c[2])<.2:return c[3]
 	return 0
+
+func batch_static_parts() -> void:
+	var groups: Dictionary={}
+	for node in game.world.get_children():
+		if not node is MeshInstance3D or not node.get_meta("static_part",false):continue
+		var key: String="%d:%d:%d"%[node.mesh.get_instance_id(),int(floor(node.position.x/8)),int(floor(node.position.z/8))]
+		if not groups.has(key):groups[key]=[]
+		groups[key].append(node)
+	for group in groups.values():
+		if group.size()<2:continue
+		var mesh_id: int=group[0].mesh.get_instance_id()
+		if not game.batched_meshes.has(mesh_id):
+			var copy: Mesh=group[0].mesh.duplicate()
+			for surface in copy.get_surface_count():
+				var mat: Material=group[0].get_surface_override_material(surface)
+				if mat:copy.surface_set_material(surface,mat)
+			game.batched_meshes[mesh_id]=copy
+		var mesh: Mesh=game.batched_meshes[mesh_id]
+		var multi:=MultiMesh.new();multi.transform_format=MultiMesh.TRANSFORM_3D;multi.mesh=mesh;multi.instance_count=group.size()
+		var batch:=MultiMeshInstance3D.new();batch.multimesh=multi;game.world.add_child(batch);batch.set_meta("distant_decor",group[0].get_meta("distant_decor",false))
+		for i in range(group.size()):multi.set_instance_transform(i,group[i].transform);game.world.remove_child(group[i]);group[i].queue_free()
+		batched_instances+=group.size();batches+=1

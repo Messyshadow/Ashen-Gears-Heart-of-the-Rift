@@ -1,0 +1,59 @@
+{
+  "files": [
+    {
+      "file": "drone_v04.glb",
+      "original_bytes": 11313804,
+      "optimized_bytes": 58444,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "industrial_kit_v04.glb",
+      "original_bytes": 23857900,
+      "optimized_bytes": 1797344,
+      "texture_count": 12,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "kain_v04.glb",
+      "original_bytes": 5315880,
+      "optimized_bytes": 3327884,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "luomao_v04.glb",
+      "original_bytes": 5331880,
+      "optimized_bytes": 3343888,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "minotaur_v04.glb",
+      "original_bytes": 11498188,
+      "optimized_bytes": 242836,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "turret_v04.glb",
+      "original_bytes": 11305744,
+      "optimized_bytes": 50388,
+      "texture_count": 6,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "yise_v04.glb",
+      "original_bytes": 5471700,
+      "optimized_bytes": 3483708,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    }
+  ],
+  "original_glb_bytes": 74095096,
+  "optimized_glb_bytes": 12304492,
+  "embedded_texture_bytes": 61790349,
+  "unique_texture_bytes": 24048343,
+  "unique_textures": 22,
+  "quality": "No resizing, no texture recompression, no mesh simplification, no animation removal."
+}
