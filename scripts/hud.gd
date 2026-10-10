@@ -29,20 +29,20 @@ func _draw() -> void:
 	var w := size.x;var h := size.y
 	draw_rect(Rect2(24,22,350,120),DARK)
 	draw_line(Vector2(24,22),Vector2(374,22),GOLD,2)
-	text_at(Vector2(42,55),["凯恩 · 裂影匕首","洛铆 · 机械师","伊瑟 · 矿族游侠"][game.active_slot],22)
+	text_at(Vector2(42,55),["凯恩 · "+game.weapon_name(),"洛铆 · 机械师","伊瑟 · 矿族游侠"][game.active_slot],22)
 	text_at(Vector2(42,83),"%d / %d"%[game.party_hp[game.active_slot],game.max_hp()],16,MUTED)
 	bar(Vector2(142,72),208,game.party_hp[game.active_slot],game.max_hp(),Color(.67,.21,.15))
 	bar(Vector2(42,99),308,game.player.stamina,100,Color(.72,.56,.28))
 	bar(Vector2(42,118),308,game.magic,100,Color(.16,.48,.67))
 	draw_rect(Rect2(w-390,22,366,108),DARK)
 	text_at(Vector2(w-368,53),game.rooms[game.room].name,24,GOLD)
-	text_at(Vector2(w-368,80),game.rooms[game.room].id+"  /  v0.4.2",16,MUTED)
+	text_at(Vector2(w-368,80),game.rooms[game.room].id+"  /  v0.4.3",16,MUTED)
 	text_at(Vector2(w-368,107),"铁屑 %d    药剂 %d    技能点 %d"%[game.scrap,game.potion,game.skill_points],17)
 	if game.flags.get("rescued",false):
 		text_at(Vector2(42,170),"1 凯恩  2 洛铆"+("  3 伊瑟" if game.flags.get("ranger",false) else "")+"  /  F 切换",17,MUTED)
 	draw_rect(Rect2(0,h-72,w,72),DARK)
 	text_at(Vector2(28,h-43),game.rooms[game.room].hint,17,TEXT)
-	text_at(Vector2(28,h-16),"摇杆 移动  A 跳跃  X/Y 攻击  B 闪避  LB 格挡  ↑ 交互  LT 钩索  RT 切换" if game.pad>=0 else "A/D 移动  W/S 攀梯  Alt 冲跑  Space 跳跃  J/K 攻击  Shift 翻滚  L 弹反  E 交互  Q 钩索  Tab 总览  M 地图  T 技能",15,MUTED)
+	text_at(Vector2(28,h-16),"摇杆 移动  A 二段跳  X/Y 攻击  B 闪避  LB 格挡  ↑ 交互  LT 钩索  RT 切人  右摇杆按下 换武器" if game.pad>=0 else "A/D 移动  W/S 攀梯  Alt 冲跑  Space 二段跳  J/K 攻击  Shift 翻滚  L 弹反  E 交互  V 换武器  Q 钩索  Tab 总览  M 地图  T 技能",15,MUTED)
 	if game.graphics.settings.show_fps:
 		text_at(Vector2(w*.46,30),"%d FPS"%Engine.get_frames_per_second(),16,MUTED)
 	if game.screen=="play":
@@ -79,7 +79,7 @@ func _draw() -> void:
 		text_at(Vector2(w*.13,h*.37),"裂界之心",38,TEXT)
 		text_at(Vector2(w*.13,h*.43),"ASHEN GEARS  /  HEART OF THE RIFT",18,MUTED)
 		text_at(Vector2(w*.13,h*.51),"一座以记忆为燃料的城。一份被伪造的名字。",23,TEXT)
-		text_at(Vector2(w*.13,h*.89),"灰闸囚厂 × 锈脊齿轮井   /   18 房间 · v0.4.2",17,MUTED)
+		text_at(Vector2(w*.13,h*.89),"灰闸囚厂 × 锈脊齿轮井   /   18 房间 · v0.4.3",17,MUTED)
 	elif game.screen=="story":
 		var lines: PackedStringArray=game.story.split("\n")
 		var top := h*.35
@@ -110,10 +110,10 @@ func _draw() -> void:
 		text_at(Vector2(w*.20,h*.55),"伊瑟救援："+("已完成" if game.flags.get("ranger",false) else "可回轴承台中层侧门完成"),20,GOLD)
 	elif game.screen=="skills":
 		text_at(Vector2(w*.18,h*.22),"招式工坊",40,GOLD)
-		text_at(Vector2(w*.18,h*.29),["凯恩 · 匕首","洛铆 · 机械重击","伊瑟 · 弓箭"][game.active_slot],24,TEXT)
+		text_at(Vector2(w*.18,h*.29),["凯恩 · "+game.weapon_name(),"洛铆 · 机械重击","伊瑟 · 弓箭"][game.active_slot],24,TEXT)
 		text_at(Vector2(w*.18,h*.35),"技能点 %d / 每招 1 点。Ctrl + J / K 攻击，Ctrl + Space 空中冲刺。"%game.skill_points,20,MUTED)
-		text_at(Vector2(w*.18,h*.70),"轻击 J 三连；重击 K 破势；L 完美弹反。",21,TEXT)
-		text_at(Vector2(w*.18,h*.76),"空中 K 下砸；蓝纹墙 + Space 蹬墙。",18,MUTED)
+		text_at(Vector2(w*.18,h*.70),"太刀 J 三连斩 / K 重劈；匕首快速连击；V 换武器。",21,TEXT)
+		text_at(Vector2(w*.18,h*.76),"初始 Space 二段跳；空中 K 下砸；蓝纹墙 + Space 蹬墙。",18,MUTED)
 	elif game.screen=="map":
 		text_at(Vector2(w*.14,h*.19),"灰炉城 · 已探索通道",38,GOLD)
 		for i in range(game.rooms.size()):
@@ -194,9 +194,10 @@ func build_preview(pos: Vector2,dimensions: Vector2) -> void:
 	var env:=WorldEnvironment.new();scene.add_child(env);env.environment=Environment.new();env.environment.background_mode=Environment.BG_COLOR;env.environment.background_color=Color(.035,.055,.065);env.environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;env.environment.ambient_light_energy=.8
 	var light:=DirectionalLight3D.new();scene.add_child(light);light.rotation_degrees=Vector3(-30,-35,0);light.light_energy=2
 	var camera:=Camera3D.new();scene.add_child(camera);camera.projection=Camera3D.PROJECTION_ORTHOGONAL;camera.size=2.6;camera.position=Vector3(1.8,1.2,4);camera.look_at(Vector3(0,1,0));camera.current=true
-	var actor: Node3D=load("res://assets/models/"+["kain_v04","luomao_v04","yise_v04"][game.active_slot]+".glb").instantiate();scene.add_child(actor)
+	var actor: Node3D=load("res://assets/models/"+game.actor_model(game.active_slot)+".glb").instantiate();scene.add_child(actor)
 	var animator: AnimationPlayer=actor.find_child("AnimationPlayer",true,false)
 	var clip: String="AirDash" if preview_slot==2 else "BowShot" if game.active_slot==2 else "MechLight" if game.active_slot==1 and preview_slot==0 else "MechHeavy" if game.active_slot==1 else "Dagger3" if preview_slot==0 else "Skill"
+	if game.active_slot==0 and game.equipped_weapon=="katana" and preview_slot!=2:clip="Katana3" if preview_slot==0 else "KatanaHeavy"
 	var anim: Animation=animator.get_animation(clip).duplicate();anim.loop_mode=Animation.LOOP_LINEAR;var library:=AnimationLibrary.new();library.add_animation("action",anim);animator.add_animation_library("preview",library);animator.play("preview/action")
 
 func graphics_option(items: Array, row: int, selected: int, changed: Callable) -> OptionButton:

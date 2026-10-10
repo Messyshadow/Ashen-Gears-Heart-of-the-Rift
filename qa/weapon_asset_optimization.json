@@ -1,0 +1,38 @@
+{
+  "files": [
+    {
+      "file": "kain_katana_v04.glb",
+      "original_bytes": 5384512,
+      "optimized_bytes": 3396516,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "kain_v04.glb",
+      "original_bytes": 5380584,
+      "optimized_bytes": 3392592,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "luomao_v04.glb",
+      "original_bytes": 5344276,
+      "optimized_bytes": 3356280,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    },
+    {
+      "file": "yise_v04.glb",
+      "original_bytes": 5484288,
+      "optimized_bytes": 3496296,
+      "texture_count": 10,
+      "preserved": "All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched."
+    }
+  ],
+  "original_glb_bytes": 21593660,
+  "optimized_glb_bytes": 13641684,
+  "embedded_texture_bytes": 7951972,
+  "unique_texture_bytes": 1987993,
+  "unique_textures": 10,
+  "quality": "No resizing, no texture recompression, no mesh simplification, no animation removal."
+}

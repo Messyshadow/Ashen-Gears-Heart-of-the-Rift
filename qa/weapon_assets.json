@@ -1,0 +1,12 @@
+{
+  "version": "0.4.3",
+  "weapon": "Blender curved steel katana, bone-bound hand equipment",
+  "clips": [
+    "Katana1",
+    "Katana2",
+    "Katana3",
+    "KatanaHeavy"
+  ],
+  "initial_mobility": "DoubleJump on all three actors",
+  "textures": "Shared without resampling"
+}

@@ -15,8 +15,9 @@ def build():
     def prop(r,kind,x,y,text):r['props'].append(dict(kind=kind,p=[x,y,0],text=text))
     # 0 Coal: immediate human encounter, optional upper stash, flat exit.
     r=room('R01-01','煤仓醒室','coal',[floor(-22,22,0),floor(-15,-3,4)],[-19,0,0],[20,0,0],1,[ladder(-6,0,4)],theme='coal')
-    r['story']='囚友：这把匕首，能替你拆开一条活路。\n凯恩：先找到送我妹妹下去的转运表。\n前方的巡逻守卫可以暗杀，金色门通向下一室。'
-    r['hint']='先走出煤仓：A/D 移动，S 潜行，背后 E 暗杀；金色出口在右侧。'
+    r['story']='囚友：拿上匕首，入口补给箱还藏着一把灰钢太刀。\n凯恩：先找到送我妹妹下去的转运表。\nSpace 连按两次二段跳；E 开箱，V 切换武器。'
+    r['hint']='开局匕首；入口补给箱 E 获得太刀，V 换武器；Space 二段跳。右侧金门前进。'
+    prop(r,'katana_chest',-15.5,0,'新手补给宝箱 · 灰钢太刀')
     enemy(r,'human',-8,face=1);prop(r,'chest',-11,4,'煤仓藏匣 · 铁屑 +20')
     r=room('R01-02','巡逻暗道','conveyor',[floor(-22,22,0),floor(-15,22,4)],[-19,0,0],[20,4,0],2,[ladder(-12,0,4)],theme='blue')
     enemy(r,'human',-6,face=1);enemy(r,'ranged',5,4);enemy(r,'hound',13,0)

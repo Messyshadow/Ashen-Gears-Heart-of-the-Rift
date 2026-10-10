@@ -1,0 +1,759 @@
+{
+  "checks": [
+    {
+      "check": "新游戏只持有开局匕首",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "太刀补给宝箱位于煤仓地面安全入口",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "入口宝箱进入真实交互范围",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "E 开箱获得并装备太刀且即时记录",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "Blender 太刀模型作为骨骼装备载入",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀宝箱不可重复领取",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "重访不刷新已领太刀宝箱",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "V 真实键盘事件切回匕首",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "V 切回太刀保留所有权",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "匕首短距离无法命中 2.7 米处目标",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "太刀独立首斩更慢且前摇不提前造成伤害",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana1",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀有效帧实际命中更远目标并造成首斩伤害",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana1",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀轻击缓冲衔接第二段上挑",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana2",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀轻击缓冲衔接第三段重斩",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana3",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀独立重劈、长攻击距离与 24 耐力消耗",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "KatanaHeavy",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "攻击收招前禁止换武器取消硬直",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "KatanaHeavy",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀重劈有效帧造成实际伤害",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "KatanaHeavy",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀耐力不足不会出刀或排入连击",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "初始二段跳真实第二次输入抬升并播放独立动作",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          2.95694375038147,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          7.86250257492065,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "二段跳无需学习且不消耗技能点或魔力",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          2.95694375038147,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          7.86250257492065,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "空中换武器保留二段跳使用状态",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          3.54215240478516,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.13333497941494,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "空中切角色不刷新二段跳且同伴具有该动作",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          3.54215240478516,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.13333497941494,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "第三次空中跳跃输入不会产生无限跳",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          3.51751351356506,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          -1.09083163738251,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "真实落地恢复一次额外空中跳跃",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 1,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.0100622028112411,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "落地后的同伴再次正常使用二段跳",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 2,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          1.74352741241455,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          11.279167175293,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "继续游戏恢复太刀、装备选择与旧同伴进度",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          0.0,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "旧存档默认匕首、保留 Boss 进度并可补领新太刀宝箱",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "旧存档无需重开就具有初始二段跳",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "四个太刀动作均为 Blender 导出的独立骨骼动画",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    }
+  ],
+  "version": "0.4.3"
+}

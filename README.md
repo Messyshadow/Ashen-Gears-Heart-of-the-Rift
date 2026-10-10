@@ -1,6 +1,6 @@
 # 灰烬齿轮：裂界之心
 
-Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0.4.2 · 灰闸囚厂与锈脊齿轮井**（2026-10-10）。
+Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0.4.3 · 双武器与初始二段跳**（2026-10-10）。
 
 ## 游戏截图
 
@@ -16,11 +16,19 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 
 ## 运行与发布
 
-发布目录：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.2\`。
+发布目录：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.3\`。
 
-压缩包：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.2-Windows.zip`。
+压缩包：`E:\Godot\release\灰烬齿轮-裂界之心-0.4.3-Windows.zip`。
 
 双击 `AshenGears.exe`，保持同目录 `AshenGears.pck`。开发时用 Godot 打开 `project.godot`。从标题选择“开始新的旅程”体验新布局；0.4 系列使用独立存档 `ashen_save_v04.json`，旧版本存档保留。
+
+## 0.4.3 武器与初始身法
+
+- 开局持有**裂影匕首**。煤仓醒室下层安全入口向右几步有**新手补给宝箱**，E 获得并装备**灰钢太刀**；V 或按下手柄右摇杆切换两把武器。
+- 匕首保留快速三连；太刀使用 Blender 制作的弧形钢刃、独立三连斩与重劈动画。出刀更慢，距离更长，轻斩消耗 8 耐力、重劈 24；支持轻击缓冲连段，收招前不能用换武器取消硬直。强化同时作用于两把武器。
+- **二段跳从开局开放**，Space / A 起跳后再次按下即可额外跳一次，无需学习或消耗魔力。三名角色都能使用；落地恢复次数，空中切人、换武器、蹬墙和钩索不刷新次数。
+- 宝箱与装备即时存档，0.4.0—0.4.2 进度可继续。旧档默认持有匕首，返回煤仓可领取新宝箱；原上层铁屑宝箱记录不影响太刀。旧档也自动具有二段跳。
+- 现有环境、角色动作、声音和高中低画面设置继续保留。详见 `docs/08_0.4.3武器与初始身法.md`。
 
 ## 0.4.2 性能、画面设置与章节终点
 
@@ -56,13 +64,14 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 | --- | --- | --- |
 | 移动 / 攀梯 | A D / W S，或方向键 | 左摇杆 |
 | 冲跑 / 蹲行 | Alt / 地面 S | 蹲行：摇杆向下 |
-| 跳跃 / 离梯 / 脱钩 / 蹬墙 / 翻越 | Space | A |
+| 跳跃 / 二段跳 / 离梯 / 脱钩 / 蹬墙 / 翻越 | Space；空中再按一次二段跳 | A；空中再按一次 |
 | 轻击 / 重击；空中下砸 | J K / 鼠标左右键；空中 K | X Y；空中 Y |
 | 翻滚 / 格挡 | Shift / L | B / LB |
 | 技能 / 空中冲刺 | Ctrl + J K / Ctrl + Space | RB + X Y / RB + A |
 | 交互 / 暗杀 / 休息 / 吊台 | E | 十字键上 |
 | 按住预选 / 松开发射钩索 | Q | LT |
 | 切换角色 | F 或 1 / 2 / 3 | RT |
+| 凯恩切换匕首 / 太刀 | V | 按下右摇杆 |
 | 使用药剂 | R | 十字键下 |
 | 地图 / 招式工坊 / 房间总览 | M / T / Tab | View / 暂停菜单 / — |
 | 暂停 / 全屏 | Esc / F11 | Menu / — |
@@ -73,7 +82,7 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 
 沿用参考 demo 的 **Godot 4.7.rc.custom_build.df6235838**、匹配 Windows 模板和 **Blender 4.2.9 LTS**。Forward+ / Vulkan；当前验证设备为 RTX 5070 Laptop GPU。
 
-`source/build_v04.py` 重建 0.4 的共享部件、三名角色、12 个新增骨骼动作和新敌人；`source/rooms_v04.py` 生成 18 房布局。可编辑 `.blend` 在 `source/`，嵌入 PBR 贴图的 GLB 在 `assets/models/`。`source/optimize_assets.py` 去除模型中重复的嵌入贴图（Blender 生成脚本结束时自动调用），外部共享贴图位于 `assets/textures/shared/`。原有 demo 源文件与三个设计文档保留。`source/build_audio.py` 用 NumPy 生成原创音频，有 ffmpeg 时生成循环 OGG。
+`source/build_v04.py` 重建共享部件、角色、原 12 个新增动作和敌人，再调用 `source/build_weapons.py` 添加太刀模型、四个斩击动作和全角色二段跳；`source/rooms_v04.py` 生成 18 房布局。可编辑 `.blend` 在 `source/`，GLB 在 `assets/models/`。`source/optimize_assets.py` 去除模型中重复的嵌入贴图（Blender 生成脚本结束时自动调用），外部共享贴图位于 `assets/textures/shared/`。原有 demo 源文件与三个设计文档保留。`source/build_audio.py` 用 NumPy 生成原创音频，有 ffmpeg 时生成循环 OGG。
 
 ```powershell
 & 'D:\Blender\blender-4.2.9-windows-x64\blender.exe' -b --python source/build_v04.py
@@ -82,7 +91,7 @@ Godot + Blender 制作的 2.5D 蒸汽暗黑动作探索游戏。当前版本 **0
 pwsh -File source/package.ps1
 ```
 
-模板路径见 `export_presets.cfg`；其他电脑需调整。QA 使用独立存档；检查结果在 `qa/runtime_tests.json`（96 项）；音频实际混音与事件记录在 `qa/audio_runtime.json`。测试组合使用 Godot 输入、物理运行和局部状态设置，覆盖路线、身法、战斗、奖励与保存；不是完整人工通关或实体手柄验收。打包脚本校验 EXE、PCK、文档、截图及 ZIP 内文件的 SHA256。
+模板路径见 `export_presets.cfg`；其他电脑需调整。QA 使用独立存档；检查结果在 `qa/runtime_tests.json`（125 项）；音频实际混音与事件记录在 `qa/audio_runtime.json`，双武器和二段跳见 `qa/weapons_runtime.json`。`source/validate_weapons.py` 比对 0.4.2 三角色的 34 个原动画采样与原共享贴图，结果在 `qa/weapon_asset_validation.json`。测试组合使用 Godot 输入、物理运行和局部状态设置，覆盖路线、身法、战斗、奖励与保存；不是完整人工通关或实体手柄验收。打包脚本校验 EXE、PCK、文档、截图及 ZIP 内文件的 SHA256。
 
 ## 实现范围
 

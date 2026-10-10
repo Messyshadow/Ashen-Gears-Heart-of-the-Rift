@@ -34,6 +34,8 @@ var active_slot := 0
 var magic := 100.0
 var scrap := 0
 var weapon_rank := 0
+var weapons: Dictionary={"dagger":true}
+var equipped_weapon := "dagger"
 var skill_points := 3
 var learned: Dictionary = {}
 var skill_cooldown := 0.0
@@ -81,7 +83,7 @@ func _ready() -> void:
 	if qa_mode:call_deferred("run_qa")
 
 func setup_input() -> void:
-	var actions := {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"light":[KEY_J],"heavy":[KEY_K],"dodge":[KEY_SHIFT],"guard":[KEY_L],"modifier":[KEY_CTRL],"grapple":[KEY_Q],"interact":[KEY_E],"switch":[KEY_F],"item":[KEY_R],"map":[KEY_M],"skills":[KEY_T],"pause":[KEY_ESCAPE],"run":[KEY_ALT],"overview":[KEY_TAB]}
+	var actions := {"left":[KEY_A,KEY_LEFT],"right":[KEY_D,KEY_RIGHT],"up":[KEY_W,KEY_UP],"down":[KEY_S,KEY_DOWN],"jump":[KEY_SPACE],"light":[KEY_J],"heavy":[KEY_K],"dodge":[KEY_SHIFT],"guard":[KEY_L],"modifier":[KEY_CTRL],"grapple":[KEY_Q],"interact":[KEY_E],"switch":[KEY_F],"weapon":[KEY_V],"item":[KEY_R],"map":[KEY_M],"skills":[KEY_T],"pause":[KEY_ESCAPE],"run":[KEY_ALT],"overview":[KEY_TAB]}
 	for action in actions:
 		InputMap.add_action(action)
 		for code in actions[action]:
@@ -90,6 +92,7 @@ func setup_input() -> void:
 		var b := InputEventJoypadButton.new();b.button_index=pair[1];InputMap.action_add_event(pair[0],b)
 	for pair in [["grapple",JOY_AXIS_TRIGGER_LEFT],["switch",JOY_AXIS_TRIGGER_RIGHT]]:
 		var b := InputEventJoypadMotion.new();b.axis=pair[1];b.axis_value=1;InputMap.action_add_event(pair[0],b)
+	var weapon_button:=InputEventJoypadButton.new();weapon_button.button_index=JOY_BUTTON_RIGHT_STICK;InputMap.action_add_event("weapon",weapon_button)
 	for pair in [["light",MOUSE_BUTTON_LEFT],["heavy",MOUSE_BUTTON_RIGHT]]:
 		var b := InputEventMouseButton.new();b.button_index=pair[1];InputMap.action_add_event(pair[0],b)
 
@@ -133,7 +136,7 @@ func load_room(number: int, spawn_override: Variant = null) -> void:
 		var enemy := Enemy.new();enemy.game=self;enemy.kind=spec.kind;enemy.uid=uid;enemy.position=vector(spec.p);enemy.facing=spec.face;world.add_child(enemy);enemies.append(enemy)
 	for spec in rooms[room].props:
 		var uid: String = rooms[room].id+":"+spec.kind
-		if opened.has(uid) and spec.kind in ["chest","rescue","grapple","manifest","recruit","completion"]:continue
+		if opened.has(uid) and spec.kind in ["chest","katana_chest","rescue","grapple","manifest","recruit","completion"]:continue
 		add_prop(spec.kind,vector(spec.p),spec.text,uid)
 	if rooms[room].has("checkpoint"):add_prop("save",vector(rooms[room].checkpoint),"休息灯 · 保存并恢复","")
 	add_prop("exit",vector(rooms[room].exit),"本章终点 · 查看完成情况" if room==16 else "回访 → 锈井入口" if room==11 else "通道 → "+rooms[int(rooms[room].next)].name,"")
@@ -247,6 +250,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if paused:return
 	if event.is_action_pressed("interact"):interact()
 	if event.is_action_pressed("switch"):switch_actor()
+	if event.is_action_pressed("weapon") and not event.is_echo():switch_weapon()
 	if event.is_action_pressed("item"):
 		if potion>0 and party_hp[active_slot]<max_hp():potion-=1;party_hp[active_slot]=minf(max_hp(),party_hp[active_slot]+45);toast("使用冷却药剂 · 恢复 45 生命")
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_1,KEY_2,KEY_3]:switch_actor(event.keycode-KEY_1)
@@ -259,6 +263,7 @@ func set_screen(value: String) -> void:
 
 func new_game() -> void:
 	flags={};visited={};defeated={};opened={};party_hp=[100.0,110.0,95.0];active_slot=0;magic=100;scrap=0;skill_points=3;learned={};potion=3;weapon_rank=0
+	weapons={"dagger":true};equipped_weapon="dagger"
 	gear=[true,false,false];water=[false,false,0,false];checkpoint_room=0;checkpoint_pos=Vector3(-19,0,0)
 	set_screen("play");load_room(0);save_game()
 
@@ -269,7 +274,7 @@ func interact() -> void:
 	if nearest.is_empty():return
 	var kind: String=nearest.kind
 	if kind=="assassinate":
-		nearest.enemy.hurt(999,player.facing);player.attack_clock=.8;player.attack_total=.8;player.attack_hit=true;player.attack_clip="Dagger3";player.invulnerable=.5;sound("hit_flesh_1");toast("暗杀成功 · 机械与 Boss 不能暗杀");return
+		nearest.enemy.hurt(999,player.facing);player.attack_clock=.8;player.attack_total=.8;player.attack_hit=true;player.attack_clip="Katana3" if active_slot==0 and equipped_weapon=="katana" else "Dagger3";player.invulnerable=.5;sound("hit_flesh_1");toast("暗杀成功 · 机械与 Boss 不能暗杀");return
 	if kind in ["exit","back","loop","hub","shortcut","side","rust_loop","rust_shortcut"]:
 		if kind=="exit":
 			var gate: String=rooms[room].get("gate","")
@@ -303,6 +308,10 @@ func interact() -> void:
 		if opened.has(nearest.uid):return
 		flags.slice_complete=true;skill_points+=1;opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;show_story("总井图纸交付。灰闸囚厂与锈脊齿轮井回环开放。\n接下来要修复雾肺水务区，寻找米菈的真实去向。\nR01 / R02 已完成。右侧终点查看章节完成情况；回访需主动选择。");save_game();return
 	if kind=="chest":scrap+=20;toast(nearest.text);sound("chest")
+	if kind=="katana_chest":
+		if opened.has(nearest.uid) or nearest.get("used",false):return
+		if not can_switch_weapon():toast("收招后再打开宝箱");return
+		weapons.katana=true;equip_weapon("katana");sound("chest");toast("获得灰钢太刀 · J 三连斩 / K 重劈 · V 切换匕首",5)
 	if kind=="rescue":
 		for enemy in enemies:
 			if is_instance_valid(enemy) and enemy.hp>0:toast("先击退囚门守卫");return
@@ -340,11 +349,29 @@ func interact() -> void:
 			if water[0] or not flags.get("water_stable",false):toast("先关闭排水，加水至中水位，再关加水阀");return
 			water[3]=true;toast("蒸汽旁路已开启 · 打开排水阀露出出口")
 		return
-	if kind in ["chest","rescue","grapple","manifest"]:
+	if kind in ["chest","katana_chest","rescue","grapple","manifest"]:
 		opened[nearest.uid]=true;nearest.used=true;nearest.label.visible=false;nearest.mesh.visible=false;save_game()
 
 func available_slots() -> Array:
 	return [0,1,2] if flags.get("ranger",false) else [0,1] if flags.get("rescued",false) else [0]
+
+func actor_model(slot: int) -> String:
+	return "kain_katana_v04" if slot==0 and equipped_weapon=="katana" else ["kain_v04","luomao_v04","yise_v04"][slot]
+
+func weapon_name() -> String:return "灰钢太刀" if equipped_weapon=="katana" else "裂影匕首"
+
+func can_switch_weapon() -> bool:
+	return player.attack_clock<=0 and player.hurt_clock<=0 and player.dodge_clock<=0 and player.dash_clock<=0 and player.motion!="vault" and not player.slamming
+
+func equip_weapon(value: String) -> void:
+	equipped_weapon=value;player.combo=0;player.combo_clock=0;player.queued_attack=false
+	if active_slot==0:player.set_actor(0)
+
+func switch_weapon() -> void:
+	if active_slot!=0:toast("匕首与太刀由凯恩使用");return
+	if not weapons.get("katana",false):toast("煤仓入口补给宝箱藏有灰钢太刀");return
+	if not can_switch_weapon():return
+	equip_weapon("dagger" if equipped_weapon=="katana" else "katana");sound("switch");save_game();toast("凯恩 · "+weapon_name())
 
 func switch_actor(slot: int = -1) -> void:
 	var slots: Array=available_slots()
@@ -352,7 +379,7 @@ func switch_actor(slot: int = -1) -> void:
 	if switch_cooldown>0 or player.hurt_clock>0 or player.attack_clock>0 or player.motion=="vault":return
 	var next: int=slots[(slots.find(active_slot)+1)%slots.size()] if slot<0 else slot
 	if not next in slots or party_hp[next]<=0 or next==active_slot:return
-	sound("switch");active_slot=next;switch_cooldown=1;player.set_actor(next);toast(["凯恩 · 匕首","洛铆 · 机械重击","伊瑟 · 弓箭"][next])
+	sound("switch");active_slot=next;switch_cooldown=1;player.set_actor(next);toast(["凯恩 · "+weapon_name(),"洛铆 · 机械重击","伊瑟 · 弓箭"][next])
 
 func menu_actor(slot: int) -> void:
 	if slot in available_slots():active_slot=slot;player.set_actor(slot);ui.rebuild_buttons()
@@ -393,7 +420,7 @@ func toast(value: String, duration: float = 2.5) -> void:status=value;toast_cloc
 func show_story(value: String, _unused: bool = false) -> void:story=value;set_screen("story")
 
 func save_game() -> bool:
-	var payload := {"schema":1,"room":checkpoint_room,"p":[checkpoint_pos.x,checkpoint_pos.y,checkpoint_pos.z],"flags":flags,"visited":visited,"defeated":defeated,"opened":opened,"party_hp":party_hp,"active":active_slot,"magic":magic,"scrap":scrap,"weapon_rank":weapon_rank,"skill_points":skill_points,"learned":learned,"potion":potion,"gear":gear,"water":water}
+	var payload := {"schema":1,"room":checkpoint_room,"p":[checkpoint_pos.x,checkpoint_pos.y,checkpoint_pos.z],"flags":flags,"visited":visited,"defeated":defeated,"opened":opened,"party_hp":party_hp,"active":active_slot,"magic":magic,"scrap":scrap,"weapon_rank":weapon_rank,"weapons":weapons,"equipped_weapon":equipped_weapon,"skill_points":skill_points,"learned":learned,"potion":potion,"gear":gear,"water":water}
 	var temp := save_path+".tmp";var file := FileAccess.open(temp,FileAccess.WRITE)
 	if not file:toast("保存失败 · 目录不可写");return false
 	file.store_string(JSON.stringify(payload));file.close()
@@ -414,6 +441,8 @@ func load_game() -> bool:
 				saved=candidate;break
 	if saved==null:toast("没有可用存档");return false
 	flags=saved.flags;visited=saved.visited;defeated=saved.defeated;opened=saved.opened;party_hp=saved.party_hp;active_slot=int(saved.active);magic=float(saved.magic);scrap=int(saved.scrap);weapon_rank=int(saved.weapon_rank);skill_points=int(saved.skill_points);learned=saved.learned;potion=int(saved.potion);gear=saved.gear;water=saved.water
+	weapons=saved.get("weapons",{"dagger":true});weapons.dagger=true
+	equipped_weapon="katana" if saved.get("equipped_weapon","dagger")=="katana" and weapons.get("katana",false) else "dagger"
 	checkpoint_room=int(saved.room);checkpoint_pos=vector(saved.p);set_screen("play");load_room(checkpoint_room,checkpoint_pos);return true
 
 func sound(kind: String,pos: Vector3=Vector3.INF) -> void:

@@ -1,0 +1,44 @@
+{
+  "version": "0.4.3",
+  "actors": [
+    {
+      "actor": "kain_v04",
+      "baseline": "c32d75a",
+      "original_clips": 34,
+      "new_clips": 39,
+      "original_animation_samples_byte_identical": true,
+      "original_mesh_count": 2,
+      "new_mesh_count": 2,
+      "original_shared_texture_uris_preserved": true
+    },
+    {
+      "actor": "luomao_v04",
+      "baseline": "c32d75a",
+      "original_clips": 34,
+      "new_clips": 35,
+      "original_animation_samples_byte_identical": true,
+      "original_mesh_count": 4,
+      "new_mesh_count": 4,
+      "original_shared_texture_uris_preserved": true
+    },
+    {
+      "actor": "yise_v04",
+      "baseline": "c32d75a",
+      "original_clips": 34,
+      "new_clips": 35,
+      "original_animation_samples_byte_identical": true,
+      "original_mesh_count": 2,
+      "new_mesh_count": 2,
+      "original_shared_texture_uris_preserved": true
+    }
+  ],
+  "katana_equipment_nodes": [
+    "Grey steel katana blade"
+  ],
+  "katana_clips": [
+    "Katana1",
+    "Katana2",
+    "Katana3",
+    "KatanaHeavy"
+  ]
+}

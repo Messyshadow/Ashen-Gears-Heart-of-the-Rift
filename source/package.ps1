@@ -5,7 +5,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$version = '0.4.2'
+$version = '0.4.3'
 $folderName = '灰烬齿轮-裂界之心-' + $version
 $stage = Join-Path $projectRoot ('build\package-' + $version)
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -39,18 +39,18 @@ Copy-Item -LiteralPath (Join-Path $projectRoot 'README.md') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'licenses\Godot-LICENSE.txt'),(Join-Path $projectRoot 'licenses\Godot-COPYRIGHT.txt') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\runtime_tests.json') -Destination $stage
 Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\audio_runtime.json'),(Join-Path $projectRoot 'qa\audio_assets.json') -Destination $stage
-foreach ($name in @('asset_validation.json','asset_optimization.json','performance_baseline.json','performance_high.json','performance_medium.json','performance_low.json','performance_compatibility.json')) {
+foreach ($name in @('asset_validation.json','asset_optimization.json','weapon_asset_optimization.json','weapon_asset_validation.json','weapon_assets.json','weapons_runtime.json','performance_baseline.json','performance_high.json','performance_medium.json','performance_low.json','performance_compatibility.json')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
 }
 @('@echo off','cd /d "%~dp0"','start "" "%~dp0AshenGears.exe" --rendering-method gl_compatibility -- --graphics-low') | Set-Content -LiteralPath (Join-Path $stage 'AshenGears-LowSpec.cmd') -Encoding ascii
 $images = Join-Path $stage 'qa\v04_screenshots'
 New-Item -ItemType Directory -Path $images -Force | Out-Null
-foreach ($name in @('05_gears.png','10_combat.png')) {
+foreach ($name in @('05_gears.png','10_combat.png','14_katana.png','15_double_jump.png')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\v04_screenshots\' + $name)) -Destination $images
 }
 $releaseDocs = Join-Path $stage 'docs'
 New-Item -ItemType Directory -Path $releaseDocs -Force | Out-Null
-foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md')) {
+foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $name)) -Destination $releaseDocs
 }
 $records = @()

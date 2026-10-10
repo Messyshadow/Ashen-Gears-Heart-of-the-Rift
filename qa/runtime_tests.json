@@ -6,7 +6,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -21,7 +23,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -30,7 +33,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -45,7 +50,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -54,7 +60,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageWalk",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -69,7 +77,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -78,7 +87,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "Run",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -93,7 +104,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -102,7 +114,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "Crouch",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -117,7 +131,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -126,7 +141,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageFall",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -141,7 +158,8 @@
           -1.22416663169861,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -150,7 +168,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -165,7 +185,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -174,7 +195,9 @@
       "room": 1,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageWalk",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -189,7 +212,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -198,7 +222,9 @@
       "room": 1,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageWalk",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -213,7 +239,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -222,7 +249,9 @@
       "room": 1,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
@@ -237,7 +266,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -246,13 +276,15 @@
       "room": 1,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageWalk",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          0.340000063180923,
-          -0.00922536104917526,
+          0.340000003576279,
+          -0.00920176133513451,
           0.0
         ],
         "vaults": 1,
@@ -261,7 +293,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -270,7 +303,9 @@
       "room": 2,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -285,7 +320,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -294,7 +330,9 @@
       "room": 3,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -309,7 +347,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -318,7 +357,9 @@
       "room": 3,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -333,7 +374,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -342,7 +384,9 @@
       "room": 3,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -357,7 +401,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -366,7 +411,9 @@
       "room": 3,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -381,7 +428,8 @@
           -2.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -390,7 +438,9 @@
       "room": 4,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -405,7 +455,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -414,7 +465,9 @@
       "room": 4,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -429,7 +482,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -438,7 +492,9 @@
       "room": 5,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -453,7 +509,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -462,7 +519,9 @@
       "room": 5,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -477,7 +536,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -486,7 +546,9 @@
       "room": 5,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -501,7 +563,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -510,7 +573,9 @@
       "room": 5,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -525,7 +590,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -534,7 +600,9 @@
       "room": 5,
       "state": {
         "air_dash_used": true,
+        "air_jump_used": false,
         "clip": "AirDash",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -549,7 +617,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -558,7 +627,9 @@
       "room": 5,
       "state": {
         "air_dash_used": true,
+        "air_jump_used": false,
         "clip": "Slam",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -573,7 +644,8 @@
           -22.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -582,7 +654,9 @@
       "room": 5,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -597,7 +671,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -606,7 +681,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -621,7 +698,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -630,7 +708,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "MechHeavy",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -645,7 +725,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -654,7 +735,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "MechHeavy",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -669,7 +752,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -678,7 +762,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "MechHeavy",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -693,7 +779,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -702,7 +789,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -717,7 +806,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -726,7 +816,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -741,7 +833,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -750,7 +843,9 @@
       "room": 6,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -765,7 +860,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -774,7 +870,9 @@
       "room": 7,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -789,7 +887,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -798,13 +897,15 @@
       "room": 8,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
           -2.0,
-          5.99008560180664,
+          5.99008512496948,
           0.0
         ],
         "vaults": 0,
@@ -813,7 +914,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -822,7 +924,9 @@
       "room": 9,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -837,7 +941,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -846,7 +951,9 @@
       "room": 9,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
@@ -861,7 +968,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -870,7 +978,9 @@
       "room": 9,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 8.02666666666669,
         "motion": "ground",
@@ -885,7 +995,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -894,7 +1005,9 @@
       "room": 9,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 8.02666666666669,
         "motion": "ground",
@@ -909,7 +1022,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -918,7 +1032,9 @@
       "room": 9,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 12.04,
         "motion": "ground",
@@ -933,7 +1049,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -942,7 +1059,9 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -957,7 +1076,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -966,7 +1086,9 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "WallHold",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -981,7 +1103,8 @@
           2.12500143051147,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -990,7 +1113,9 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageFall",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1005,7 +1130,8 @@
           -2.63083338737488,
           0.0
         ],
-        "wall_jumps": 1
+        "wall_jumps": 1,
+        "weapon": "dagger"
       }
     },
     {
@@ -1014,7 +1140,9 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
@@ -1029,7 +1157,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 1
+        "wall_jumps": 1,
+        "weapon": "dagger"
       }
     },
     {
@@ -1038,22 +1167,25 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageWalk",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          -4.65499496459961,
-          4.99083614349365,
+          -4.53749465942383,
+          4.99083423614502,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          6.05000019073486,
+          5.80000019073486,
           0.0,
           0.0
         ],
-        "wall_jumps": 1
+        "wall_jumps": 1,
+        "weapon": "dagger"
       }
     },
     {
@@ -1062,7 +1194,9 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageFall",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
@@ -1077,7 +1211,8 @@
           -1.22416663169861,
           0.0
         ],
-        "wall_jumps": 1
+        "wall_jumps": 1,
+        "weapon": "dagger"
       }
     },
     {
@@ -1086,22 +1221,25 @@
       "room": 10,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageWalk",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          6.07118988037109,
-          6.99082803726196,
+          6.15952301025391,
+          6.99082183837891,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.800000190734863,
+          0.550000190734863,
           0.0,
           0.0
         ],
-        "wall_jumps": 1
+        "wall_jumps": 1,
+        "weapon": "dagger"
       }
     },
     {
@@ -1110,7 +1248,9 @@
       "room": 17,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1125,7 +1265,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1134,7 +1275,9 @@
       "room": 17,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1149,7 +1292,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1158,7 +1302,9 @@
       "room": 14,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1173,7 +1319,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1182,13 +1329,15 @@
       "room": 14,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -9.21333408355713,
-          -0.0100123314186931,
+          -9.20000076293945,
+          -0.0100122159346938,
           0.0
         ],
         "vaults": 0,
@@ -1197,7 +1346,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1206,7 +1356,9 @@
       "room": 15,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1221,7 +1373,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1230,7 +1383,9 @@
       "room": 15,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1245,7 +1400,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1254,7 +1410,9 @@
       "room": 16,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1269,7 +1427,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1278,7 +1437,9 @@
       "room": 16,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1293,7 +1454,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1302,13 +1464,15 @@
       "room": 13,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "StairUp",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -18.0408515930176,
-          -0.00185462320223451,
+          -18.0408687591553,
+          -0.00186843192204833,
           0.0
         ],
         "vaults": 0,
@@ -1317,7 +1481,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1326,7 +1491,9 @@
       "room": 4,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1341,7 +1508,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1350,7 +1518,9 @@
       "room": 12,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1365,7 +1535,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1374,7 +1545,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1389,7 +1562,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1398,7 +1572,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1413,7 +1589,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1422,7 +1599,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1437,7 +1616,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1446,7 +1626,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1461,7 +1643,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1470,12 +1653,14 @@
       "room": 13,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          0.105108425021172,
+          0.105104818940163,
           5.99084043502808,
           0.0
         ],
@@ -1485,7 +1670,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1494,7 +1680,9 @@
       "room": 16,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": true,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1509,7 +1697,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1518,7 +1707,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1533,7 +1724,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1542,7 +1734,9 @@
       "room": 0,
       "state": {
         "air_dash_used": false,
+        "air_jump_used": false,
         "clip": "PassageIdle",
+        "double_jumps": 0,
         "floor": false,
         "ladder_travel": 0.0,
         "motion": "ground",
@@ -1557,7 +1751,8 @@
           0.0,
           0.0
         ],
-        "wall_jumps": 0
+        "wall_jumps": 0,
+        "weapon": "dagger"
       }
     },
     {
@@ -1570,34 +1765,34 @@
       "detail": {
         "frames": 18432,
         "peak": 0.160081475973129,
-        "rms": 0.0433425493663988
+        "rms": 0.0436447422319016
       },
       "pass": true
     },
     {
       "check": "攻击命中突进同时播放，有混音信号且不削波",
       "detail": {
-        "frames": 10752,
+        "frames": 10240,
         "peak": 0.912010848522186,
-        "rms": 0.19016571742728
+        "rms": 0.189968225467326
       },
       "pass": true
     },
     {
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
-        "frames": 9216,
-        "peak": 0.725461423397064,
-        "rms": 0.141658098205852
+        "frames": 8704,
+        "peak": 0.719147264957428,
+        "rms": 0.145603291664948
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 8192,
-        "peak": 0.392281889915466,
-        "rms": 0.084613274273417
+        "frames": 9216,
+        "peak": 0.4438336789608,
+        "rms": 0.103324309050717
       },
       "pass": true
     },
@@ -1605,8 +1800,8 @@
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
         "frames": 38912,
-        "peak": 0.780506372451782,
-        "rms": 0.114444242963266
+        "peak": 0.719190716743469,
+        "rms": 0.110884286345836
       },
       "pass": true
     },
@@ -1633,9 +1828,9 @@
     {
       "check": "附近战斗切入战斗音乐",
       "detail": {
-        "frames": 39424,
-        "peak": 0.772206962108612,
-        "rms": 0.102513402662067
+        "frames": 40960,
+        "peak": 0.746571838855743,
+        "rms": 0.101414397224306
       },
       "pass": true
     },
@@ -1723,13 +1918,767 @@
     {
       "check": "维修所回访门明确连接锈井入口",
       "pass": true
+    },
+    {
+      "check": "新游戏只持有开局匕首",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "太刀补给宝箱位于煤仓地面安全入口",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "入口宝箱进入真实交互范围",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "E 开箱获得并装备太刀且即时记录",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "Blender 太刀模型作为骨骼装备载入",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀宝箱不可重复领取",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -16.1000003814697,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "重访不刷新已领太刀宝箱",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "V 真实键盘事件切回匕首",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "V 切回太刀保留所有权",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "匕首短距离无法命中 2.7 米处目标",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "太刀独立首斩更慢且前摇不提前造成伤害",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana1",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀有效帧实际命中更远目标并造成首斩伤害",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana1",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀轻击缓冲衔接第二段上挑",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana2",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀轻击缓冲衔接第三段重斩",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "Katana3",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀独立重劈、长攻击距离与 24 耐力消耗",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "KatanaHeavy",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "攻击收招前禁止换武器取消硬直",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "KatanaHeavy",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀重劈有效帧造成实际伤害",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "KatanaHeavy",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "太刀耐力不足不会出刀或排入连击",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.00996093824505806,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "初始二段跳真实第二次输入抬升并播放独立动作",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          2.95694375038147,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          7.86250257492065,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "二段跳无需学习且不消耗技能点或魔力",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          2.95694375038147,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          7.86250257492065,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "空中换武器保留二段跳使用状态",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          3.54215240478516,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.13333497941494,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "空中切角色不刷新二段跳且同伴具有该动作",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          3.54215240478516,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.13333497941494,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "第三次空中跳跃输入不会产生无限跳",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 1,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          3.51751351356506,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          -1.09083163738251,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "真实落地恢复一次额外空中跳跃",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 1,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          -0.0100622028112411,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "落地后的同伴再次正常使用二段跳",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": true,
+        "clip": "DoubleJump",
+        "double_jumps": 2,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          10.0,
+          1.74352741241455,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          11.279167175293,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "继续游戏恢复太刀、装备选择与旧同伴进度",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": false,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          0.0,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "katana"
+      }
+    },
+    {
+      "check": "旧存档默认匕首、保留 Boss 进度并可补领新太刀宝箱",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "旧存档无需重开就具有初始二段跳",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
+    },
+    {
+      "check": "四个太刀动作均为 Blender 导出的独立骨骼动画",
+      "pass": true,
+      "state": {
+        "air_dash_used": false,
+        "air_jump_used": false,
+        "clip": "PassageIdle",
+        "double_jumps": 0,
+        "floor": true,
+        "ladder_travel": 0.0,
+        "motion": "ground",
+        "p": [
+          -19.0,
+          -0.0100752767175436,
+          0.0
+        ],
+        "vaults": 0,
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "wall_jumps": 0,
+        "weapon": "dagger"
+      }
     }
   ],
   "engine": "4.7-rc (custom_build)",
   "executable": "E:/Godot/test-project/Ashen-Gears-Heart-of-the-Rift/build/AshenGears.exe",
-  "executable_sha256": "7fb7cf3a00672bd2797090cfef2cf35f0ad369e9563898c1ab1a2eb3e0720477",
+  "executable_sha256": "e31adce2e36a97f57bfa111c0b81db20b00d47849ed564822d727228dad26c94",
   "failures": 0,
   "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
-  "pack_sha256": "83fee395214385821e4b3380bb81e84deb0bbf3a92ac000a66d282f67d6515f3",
-  "version": "0.4.2"
+  "pack_sha256": "f732e150f9132a3d6d1b07a4d60bf4e1b2bf662d6792b94c372ec9c39b66cf79",
+  "version": "0.4.3"
 }

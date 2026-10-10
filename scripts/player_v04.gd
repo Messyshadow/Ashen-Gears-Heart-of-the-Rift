@@ -25,6 +25,9 @@ var crouching := false
 var coyote := 0.0
 var buffer := 0.0
 var air_dash_used := false
+var air_jump_used := false
+var double_jump_clock := 0.0
+var double_jumps := 0
 var dash_clock := 0.0
 var dodge_clock := 0.0
 var dodge_elapsed := 0.0
@@ -57,10 +60,11 @@ func _ready() -> void:
 
 func set_actor(slot: int) -> void:
 	if is_instance_valid(visual):remove_child(visual);visual.queue_free()
-	visual=load("res://assets/models/"+["kain_v04","luomao_v04","yise_v04"][slot]+".glb").instantiate();add_child(visual)
+	visual=load("res://assets/models/"+game.actor_model(slot)+".glb").instantiate();add_child(visual)
 	visual.scale=Vector3.ONE*(1.1 if slot==1 else 1);animator=visual.find_child("AnimationPlayer",true,false)
 	for name in ["PassageIdle","PassageWalk","Run","Crouch","LadderUp","LadderDown","LadderIdle","WallHold","HookPull","StairUp","StairDown"]:
 		if animator.has_animation(name):animator.get_animation(name).loop_mode=Animation.LOOP_LINEAR
+	if not animator.has_animation(current_clip):current_clip="PassageIdle"
 	visual.rotation.y=facing*PI/2;animator.play(current_clip);set_animation_paused(game.paused)
 func set_animation_paused(value: bool) -> void:animator.speed_scale=0 if value else 1
 func clip(name: String, rate: float=1) -> void:
@@ -78,6 +82,7 @@ func vertical_axis() -> float:
 
 func _physics_process(dt: float) -> void:
 	if game.paused or game.hitstop>0:return
+	double_jump_clock=maxf(0,double_jump_clock-dt)
 	invulnerable=maxf(0,invulnerable-dt);stamina_delay=maxf(0,stamina_delay-dt);wall_sound_clock=maxf(0,wall_sound_clock-dt);wall_lock=maxf(0,wall_lock-dt);detach_clock=maxf(0,detach_clock-dt)
 	if stamina_delay<=0:stamina=minf(100,stamina+25*dt)
 	combo_clock=maxf(0,combo_clock-dt)
@@ -113,8 +118,9 @@ func _physics_process(dt: float) -> void:
 		return
 	if attack_clock>0:
 		attack_clock-=dt
-		if Input.is_action_just_pressed("light") and attack_clip.begins_with("Dagger"):queued_attack=true
-		velocity.x=move_toward(velocity.x,0,32*dt);velocity.y-=31.25*dt;move_with_sound();clip(attack_clip)
+		if Input.is_action_just_pressed("light") and (attack_clip.begins_with("Dagger") or (attack_clip.begins_with("Katana") and attack_clip!="KatanaHeavy")):queued_attack=true
+		velocity.x=move_toward(velocity.x,0,32*dt);velocity.y-=31.25*dt;move_with_sound()
+		clip(attack_clip,animator.get_animation(attack_clip).length/attack_total if attack_clip.begins_with("Katana") else 1.0)
 		if not attack_hit and attack_total-attack_clock>=hit_at:
 			attack_hit=true
 			if game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
@@ -144,7 +150,7 @@ func _physics_process(dt: float) -> void:
 			if absf(position.x-ladder.x)<1.0 and position.y>=float(ladder.low)-.3 and position.y<=float(ladder.high)+.25:
 				if (dy>0 and position.y<float(ladder.high)-.1) or (dy<0 and position.y>float(ladder.low)+.1):route=ladder;motion="ladder";position.x=ladder.x;velocity=Vector3.ZERO;return
 	var grounded:=is_on_floor()
-	if grounded:air_dash_used=false;wall_clock=0
+	if grounded:air_dash_used=false;air_jump_used=false;double_jump_clock=0;wall_clock=0
 	coyote=.1 if grounded else maxf(0,coyote-dt);buffer=.12 if jump else maxf(0,buffer-dt)
 	crouching=Input.is_action_pressed("down") and grounded;capsule.height=1.1 if crouching else 1.7;collider.position.y=.56 if crouching else .86
 	var wall_contact:=false
@@ -159,6 +165,9 @@ func _physics_process(dt: float) -> void:
 	if buffer>0 and coyote>0:
 		if try_vault():return
 		game.sound("jump",position);velocity.y=12.5;buffer=0;coyote=0;clip("PassageJump")
+	elif jump and not grounded and not air_jump_used:
+		air_jump_used=true;double_jumps+=1;double_jump_clock=.5;velocity.y=11.8;buffer=0;coyote=0
+		game.sound("jump",position);game.spawn_dust(position+Vector3(0,.3,0),.7);clip("DoubleJump")
 	else:
 		velocity.y-=(42.2 if velocity.y<0 else 31.25)*dt
 		if not Input.is_action_pressed("jump") and velocity.y>3:velocity.y-=20*dt
@@ -170,7 +179,7 @@ func _physics_process(dt: float) -> void:
 	visual.rotation.y=lerp_angle(visual.rotation.y,facing*PI/2,dt*16)
 	if not was_floor and is_on_floor():game.landing_count+=1;game.spawn_dust(position,1);clip("PassageLand",2.5)
 	elif wall_contact and wall_clock<.65:clip("WallHold")
-	elif not is_on_floor():clip("PassageJump" if velocity.y>1 else "PassageFall")
+	elif not is_on_floor():clip("DoubleJump" if double_jump_clock>0 else "PassageJump" if velocity.y>1 else "PassageFall")
 	elif absf(velocity.x)>.2:
 		var slope:=absf(get_floor_normal().x)>.08
 		clip("StairUp" if slope and velocity.x*(-get_floor_normal().x)>0 else "StairDown" if slope else "Crouch" if crouching else "Run" if speed>6 else "PassageWalk",maxf(absf(velocity.x)/2.2,.5))
@@ -184,12 +193,17 @@ func try_vault() -> bool:
 			vault_from=position;vault_to=Vector3(p.x+facing*1.1,position.y,0);vault_clock=.4;motion="vault";game.sound("vault",position);vaults+=1;buffer=0;return true
 	return false
 func begin_attack(heavy: bool) -> void:
-	if heavy and stamina<18:return
-	if heavy:stamina-=18;stamina_delay=.55
+	var katana: bool=game.active_slot==0 and game.equipped_weapon=="katana"
+	var cost: float=(24 if heavy else 8) if katana else 18 if heavy else 0
+	if stamina<cost:return
+	if cost>0:stamina-=cost;stamina_delay=.55
 	combo=(combo%3)+1 if not heavy else 0;combo_clock=.85
-	attack_clip="BowShot" if game.active_slot==2 else ("MechHeavy" if heavy else "MechLight") if game.active_slot==1 else "Heavy" if heavy else "Dagger%d"%combo
+	attack_clip=("KatanaHeavy" if heavy else "Katana%d"%combo) if katana else "BowShot" if game.active_slot==2 else ("MechHeavy" if heavy else "MechLight") if game.active_slot==1 else "Heavy" if heavy else "Dagger%d"%combo
 	attack_total=.86 if heavy else .34;hit_at=.36 if heavy else .10;attack_clock=attack_total
 	attack_power=(52 if game.active_slot==1 else 40) if heavy else 24 if game.active_slot==2 else 22;attack_reach=2.8 if heavy else 1.95;attack_hit=false
+	if katana:
+		attack_total=1.0 if heavy else [.50,.54,.65][combo-1];hit_at=.48 if heavy else [.19,.21,.26][combo-1]
+		attack_power=56 if heavy else [28,30,36][combo-1];attack_reach=3.65 if heavy else [3.0,3.2,3.4][combo-1];attack_clock=attack_total
 	animator.stop();clip(attack_clip);animator.play(attack_clip,.06,1);game.sound("bow_fire" if game.active_slot==2 else "whoosh_heavy" if heavy else "whoosh_light_%d"%randi_range(1,2),position)
 func begin_skill(slot: int) -> void:
 	if not game.learned.has("%d_%d"%[game.active_slot,slot]):game.toast("T 学习对应招式与身法");return
@@ -200,6 +214,7 @@ func begin_skill(slot: int) -> void:
 	game.magic-=18;game.skill_cooldown=4
 	if game.active_slot==1 and slot==0:game.party_hp[1]=minf(110,game.party_hp[1]+12)
 	attack_clip="BowShot" if game.active_slot==2 else "MechHeavy" if game.active_slot==1 else "Skill";attack_total=.7;attack_clock=.7;hit_at=.26;attack_power=55 if slot==0 else 42;attack_reach=3.2 if slot==0 else 4.4;attack_hit=false
+	if game.active_slot==0 and game.equipped_weapon=="katana":attack_clip="Katana3" if slot==0 else "KatanaHeavy"
 	animator.stop();clip(attack_clip);animator.play(attack_clip);game.sound("arc")
 func receive_damage(amount: float,direction: float,source: Node) -> void:
 	if invulnerable>0 or (dodge_clock>0 and dodge_elapsed>=.06 and dodge_elapsed<=.19):return
@@ -212,9 +227,10 @@ func receive_damage(amount: float,direction: float,source: Node) -> void:
 	game.party_hp[game.active_slot]=maxf(0,game.party_hp[game.active_slot]-amount);invulnerable=.55;hurt_clock=.23;attack_clock=0;grappling=false;slamming=false;velocity.x=direction*4;game.camera_impact=.16;game.sound("hit")
 	if game.party_hp[game.active_slot]<=0:game.actor_down()
 func snapshot() -> Dictionary:
-	return {"p":[position.x,position.y,position.z],"velocity":[velocity.x,velocity.y,velocity.z],"floor":is_on_floor(),"motion":motion,"clip":current_clip,"wall_jumps":wall_jumps,"vaults":vaults,"air_dash_used":air_dash_used,"ladder_travel":ladder_travel}
+	return {"p":[position.x,position.y,position.z],"velocity":[velocity.x,velocity.y,velocity.z],"floor":is_on_floor(),"motion":motion,"clip":current_clip,"wall_jumps":wall_jumps,"vaults":vaults,"air_dash_used":air_dash_used,"air_jump_used":air_jump_used,"double_jumps":double_jumps,"weapon":game.equipped_weapon,"ladder_travel":ladder_travel}
 
 func move_with_sound() -> void:
 	var on_ground:=is_on_floor();var fall_speed:=velocity.y
 	move_and_slide()
+	if is_on_floor():air_jump_used=false;double_jump_clock=0
 	if not on_ground and is_on_floor() and fall_speed < -2 and not slamming:game.sound("land_heavy" if fall_speed < -16 else "land_soft",position)

@@ -9,7 +9,7 @@ def decode(path):
     length,kind=struct.unpack_from('<II',data,offset)
     if kind!=0x004E4942:raise ValueError('Expected BIN chunk')
     return doc,data[offset+8:offset+8+length]
-def optimize():
+def optimize(report_name='asset_optimization.json'):
     target=ROOT/'assets/textures/shared';target.mkdir(parents=True,exist_ok=True)
     backups=ROOT/'build/embedded_texture_originals';backups.mkdir(parents=True,exist_ok=True)
     records=[];before_total=0;after_total=0;texture_total=0;unique={}
@@ -53,5 +53,5 @@ def optimize():
         records.append({'file':path.name,'original_bytes':(backups/path.name).stat().st_size,'optimized_bytes':len(result),'texture_count':len(images),'preserved':'All non-image buffer payloads byte-identical; all texture payloads byte-identical; animation, mesh topology and nodes untouched.'})
     if records:
         report={'files':records,'original_glb_bytes':before_total,'optimized_glb_bytes':after_total,'embedded_texture_bytes':texture_total,'unique_texture_bytes':sum(unique.values()),'unique_textures':len(unique),'quality':'No resizing, no texture recompression, no mesh simplification, no animation removal.'}
-        (ROOT/'qa/asset_optimization.json').write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report,indent=2))
+        (ROOT/'qa'/report_name).write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report,indent=2))
 if __name__=='__main__':optimize()

@@ -190,5 +190,5 @@ save('yise_v04',True)
 (ROOT/'qa/animation_v04.json').write_text(json.dumps(dict(version='0.4.0',new_clips=new,actors=['kain_v04','luomao_v04','yise_v04'],room_layouts=len(rooms)),indent=2),encoding='utf8')
 print('V04 BLENDER BUILD COMPLETE',flush=True)
 
-from optimize_assets import optimize
-optimize()
+from build_weapons import build_weapons
+build_weapons()
