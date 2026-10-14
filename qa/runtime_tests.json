@@ -1228,13 +1228,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          6.15952301025391,
-          6.99082183837891,
+          6.07118988037109,
+          6.99082803726196,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.550000190734863,
+          0.800000190734863,
           0.0,
           0.0
         ],
@@ -1687,8 +1687,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          2.68818640708923,
-          3.99084043502808,
+          2.67651700973511,
+          3.99082255363464,
           0.0
         ],
         "vaults": 0,
@@ -1763,18 +1763,18 @@
     {
       "check": "探索音乐与环境实际混音非静音",
       "detail": {
-        "frames": 18944,
-        "peak": 0.101147852838039,
-        "rms": 0.0356162309855639
+        "frames": 19968,
+        "peak": 0.139023438096046,
+        "rms": 0.0409837204740673
       },
       "pass": true
     },
     {
       "check": "攻击命中突进同时播放，有混音信号且不削波",
       "detail": {
-        "frames": 10752,
+        "frames": 10240,
         "peak": 0.912010848522186,
-        "rms": 0.188735024713971
+        "rms": 0.187595824819317
       },
       "pass": true
     },
@@ -1782,26 +1782,26 @@
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
         "frames": 9216,
-        "peak": 0.725949585437775,
-        "rms": 0.140012885696221
+        "peak": 0.719787836074829,
+        "rms": 0.140402827105587
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 7680,
-        "peak": 0.39682075381279,
-        "rms": 0.0821663283127434
+        "frames": 7168,
+        "peak": 0.395725190639496,
+        "rms": 0.0748674936348496
       },
       "pass": true
     },
     {
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
-        "frames": 38912,
-        "peak": 0.71875262260437,
-        "rms": 0.11308437604045
+        "frames": 39424,
+        "peak": 0.716134190559387,
+        "rms": 0.11165225307674
       },
       "pass": true
     },
@@ -1828,9 +1828,9 @@
     {
       "check": "附近战斗切入战斗音乐",
       "detail": {
-        "frames": 39936,
-        "peak": 0.734500229358673,
-        "rms": 0.0967078805231508
+        "frames": 40448,
+        "peak": 0.749366760253906,
+        "rms": 0.0973505371563962
       },
       "pass": true
     },
@@ -3046,15 +3046,15 @@
     {
       "check": "真实近战命中同时启动双方局部顿帧",
       "detail": {
-        "attacker": 4161185778523,
-        "camera_frame": 14910,
+        "attacker": 4161991085114,
+        "camera_frame": 14920,
         "duration": 0.07,
         "material": "flesh",
         "particles": 15,
         "point": "(7.65, 0.990086, 0.18)",
         "tier": "heavy",
-        "time_usec": 251220721,
-        "victim": 4162125303234
+        "time_usec": 253823774,
+        "victim": 4162930609267
       },
       "pass": true
     },
@@ -3098,7 +3098,7 @@
     },
     {
       "check": "叠加震屏与缩放受上限约束",
-      "detail": 0.552417944669724,
+      "detail": 0.550281456112862,
       "pass": true
     },
     {
@@ -3815,13 +3815,138 @@
       "check": "换房清理刀光、冲击圈和复用引用",
       "detail": null,
       "pass": true
+    },
+    {
+      "check": "匕首前摇结束时范围外目标不受伤",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "目标在有效窗口后半进入范围也会命中，修复瞬间漏判",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "单段持续重叠不重复扣血或刷共鸣",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "有效窗口结束后再进入不受旧挥击伤害",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "同段群攻每个目标分别命中一次，不按帧重复",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "三段技能分别开启新窗口，同目标正好三次伤害",
+      "detail": 931.69,
+      "pass": true
+    },
+    {
+      "check": "攻击结束清理本段命中记录",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重击前摇不允许翻滚取消",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "普通重击后半收招可用真实翻滚输入取消",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "多段技能不能借重击取消规则跳过末段",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "下砸接地有短促收招，期间不能切武器绕过",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "下砸收招期间快捷键换人同样被拒绝，不绕过控制锁",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "下砸落地只结算一次，不逐帧重复冲击",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "下砸收招限时结束，不粘住控制",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "下砸收招结束后正常换人，不永久锁住编队",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "格挡耗尽耐力进入 0.6 秒崩防并清理旧连招",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "崩防结束后恢复耐力与行动，不永久失控",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "血雾关闭不削减弹反的蓝色提示",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "血雾关闭不削减护甲阻挡火花",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "弹反已死亡的弹道来源不改写尸体状态",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "受伤立即关闭有效窗口，不在硬直后补发旧伤害",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "受伤中断后目标不再被残留窗口扣血",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "自动瞄准跳过近处尸体，锁定前方存活目标",
+      "detail": 0.477091878652573,
+      "pass": true
+    },
+    {
+      "check": "范围控制技能跳过尸体，不中断击杀收尾",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "持续有效窗口仍遵守遮挡，隔墙不造成近战伤害",
+      "detail": null,
+      "pass": true
     }
   ],
   "engine": "4.7-rc (custom_build)",
   "executable": "E:/Godot/test-project/Ashen-Gears-Heart-of-the-Rift/build/AshenGears.exe",
-  "executable_sha256": "89a1eae8080f8e0b12fbda9d004839fbbc566571b7b15c646834e38a8daebcad",
+  "executable_sha256": "d0ca0d367909a6c753c3f22d757c11ea3efef50b5d99f832141c148636e8e775",
   "failures": 0,
   "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
-  "pack_sha256": "3a539aa78e7072afc985dfcfac3820259d7b089526384c3cd0340056531f6230",
-  "version": "1.0.1"
+  "pack_sha256": "7c29cff27cf0ea6c908127eee7e4a79a87636baa0adf29e67de16cae51f98deb",
+  "version": "1.0.2"
 }

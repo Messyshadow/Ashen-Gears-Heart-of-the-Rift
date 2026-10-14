@@ -3,15 +3,15 @@
     {
       "check": "真实近战命中同时启动双方局部顿帧",
       "detail": {
-        "attacker": 89305123306,
+        "attacker": 89791662571,
         "camera_frame": 44,
         "duration": 0.07,
         "material": "flesh",
         "particles": 15,
         "point": "(7.65, 0.990086, 0.18)",
         "tier": "heavy",
-        "time_usec": 2536625,
-        "victim": 96167004521
+        "time_usec": 3386141,
+        "victim": 95177148782
       },
       "pass": true
     },
@@ -55,7 +55,7 @@
     },
     {
       "check": "叠加震屏与缩放受上限约束",
-      "detail": 0.55514841735363,
+      "detail": 0.552417944669724,
       "pass": true
     },
     {

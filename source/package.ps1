@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$version = '1.0.1'
+$version = '1.0.2'
 $folderName = '灰烬齿轮-裂界之心-' + $version
 $stage = Join-Path $projectRoot ('build\package-' + $version)
 New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -58,7 +58,7 @@ Copy-Item -LiteralPath (Join-Path $projectRoot 'qa\compatibility_v10.json') -Des
 foreach ($name in @('action_baseline_v061.json','actions_runtime_v061.json','performance_v061_high.json','performance_v061_medium.json','performance_v061_low.json')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
 }
-foreach ($name in @('art_v10.json','asset_validation_v10.json','asset_optimization_v10.json','audio_assets_v10.json','impact_audio_v101.json','impact_before_v101.json','impact_after_v101.json','performance_v10_high.json','performance_v10_medium.json','performance_v10_low.json')) {
+foreach ($name in @('art_v10.json','asset_validation_v10.json','asset_optimization_v10.json','audio_assets_v10.json','impact_audio_v101.json','combat_editor_v102.json','window_before_v102.json','window_after_v102.json','impact_before_v101.json','impact_after_v101.json','performance_v10_high.json','performance_v10_medium.json','performance_v10_low.json')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('qa\' + $name)) -Destination $stage
 }
 $stageQa = Join-Path $stage 'qa'
@@ -79,7 +79,7 @@ New-Item -ItemType Directory -Path $actionImages -Force | Out-Null
 Get-ChildItem -LiteralPath (Join-Path $projectRoot 'qa\action_screenshots') -Filter '*.png' | Copy-Item -Destination $actionImages
 $releaseDocs = Join-Path $stage 'docs'
 New-Item -ItemType Directory -Path $releaseDocs -Force | Out-Null
-foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md','09_0.6.0区域与同伴.md','10_0.6.1动作与打击反馈.md','11_1.0.0策划验收指南.md')) {
+foreach ($name in @('06_0.4.1音效修复.md','07_0.4.2性能与画面设置.md','08_0.4.3武器与初始身法.md','09_0.6.0区域与同伴.md','10_0.6.1动作与打击反馈.md','11_1.0.0策划验收指南.md','12_1.0.1打击感优化.md','13_1.0.2战斗窗口与收招.md')) {
     Copy-Item -LiteralPath (Join-Path $projectRoot ('docs\' + $name)) -Destination $releaseDocs
 }
 $records = @()

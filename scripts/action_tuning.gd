@@ -27,3 +27,5 @@ static func contact_pose(clip_name: String) -> float:
 	if clip_name in ["Heavy","MechHeavy"]:return .78
 	if clip_name in ["Katana3","KatanaHeavy"]:return .52
 	return CONTACT.katana_pose if clip_name.begins_with("Katana") else CONTACT.default_pose
+
+const RECOVERY={"heavy_dodge_fraction":.85,"slam_seconds":.24,"guard_break_seconds":.60,"guard_break_push":3.0}

@@ -3,6 +3,12 @@ const Tuning=preload("res://scripts/action_tuning.gd")
 var hit_pause := 0.0
 var pending_action := ""
 var pending_action_clock := 0.0
+var contact_targets: Dictionary={}
+var contact_window_end := -1.0
+var contact_power := 0.0
+var contact_tier := "light"
+var last_contact_time := -1.0
+var slam_recovery := 0.0
 var hit_confirmed := false
 var attack_light := false
 var attack_tier := "light"
@@ -110,6 +116,10 @@ func _physics_process(dt: float) -> void:
 	if combo_clock<=0:combo=0
 	if position.y < -3 or absf(position.x)>25:game.reset_player();return
 	var dx:=move_axis();var dy:=vertical_axis();var jump:=Input.is_action_just_pressed("jump")
+	if slam_recovery>0:
+		slam_recovery=maxf(0,slam_recovery-dt);velocity.x=move_toward(velocity.x,0,30*dt);velocity.y-=Tuning.MOVEMENT.gravity_up*dt;move_with_sound();clip("Slam",1.3)
+		if slam_recovery<=0:dispatch_action()
+		return
 	if hurt_clock>0:hurt_clock-=dt;velocity.y-=Tuning.MOVEMENT.gravity_up*dt;move_with_sound();clip("Hurt");return
 	if vault_clock>0:
 		vault_clock=maxf(0,vault_clock-dt);var t:=1-vault_clock/.4
@@ -135,36 +145,35 @@ func _physics_process(dt: float) -> void:
 	if dodge_clock>0:dodge_clock-=dt;dodge_elapsed+=dt;velocity.x=facing*10.7;velocity.y-=31.25*dt;move_with_sound();clip("Roll",2);return
 	if slamming:
 		velocity.x=dx*2;velocity.y=-22;move_with_sound();clip("Slam",1.3)
-		if is_on_floor():slamming=false;game.melee_hit(42,4.0,facing,true);game.spawn_dust(position,2);game.camera_impact=.2;game.sound("land_heavy",position)
+		if is_on_floor():slamming=false;slam_recovery=Tuning.RECOVERY.slam_seconds;game.melee_hit(42,4.0,facing,true,"heavy");game.spawn_dust(position,2);game.camera_impact=.2;game.sound("land_heavy",position)
 		return
 	if attack_clock>0:
 		attack_clock-=dt
 		velocity.x=move_toward(velocity.x,0,32*dt);velocity.y-=31.25*dt;move_with_sound()
 		sample_attack_pose(attack_total-attack_clock)
-		if not attack_hit and attack_total-attack_clock>=hit_at:
-			attack_hit=true
-			if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,attack_power,spell)
-			elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
-			else:
-				game.feedback.swing(self,attack_reach,attack_clip)
-				hit_confirmed=game.melee_hit(attack_power*(1+.15*game.weapon_rank),attack_reach,facing,attack_area,attack_tier)>0 or hit_confirmed
-		while extra_hit_index<extra_hits.size() and attack_total-attack_clock>=float(extra_hits[extra_hit_index]):
-			extra_hit_index+=1
-			if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,attack_power,spell)
-			elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
-			else:game.melee_hit(attack_power,attack_reach,facing,attack_area,"light")
-			game.sound("whoosh_light_1",position)
+		var contact_elapsed: float=attack_total-attack_clock
+		if not attack_hit and contact_elapsed>=hit_at:
+			attack_hit=true;open_contact_window(attack_power*(1+.15*game.weapon_rank) if spell.is_empty() and game.active_slot!=2 else attack_power,attack_tier,hit_at)
+		resolve_contact_window(contact_elapsed)
+		while extra_hit_index<extra_hits.size() and contact_elapsed>=float(extra_hits[extra_hit_index]):
+			var wave_time: float=float(extra_hits[extra_hit_index]);extra_hit_index+=1
+			open_contact_window(attack_power,"light",wave_time);resolve_contact_window(contact_elapsed);game.sound("whoosh_light_1",position)
 		var elapsed: float=attack_total-attack_clock
 		var final_contact: float=float(extra_hits[-1]) if not extra_hits.is_empty() else hit_at
 		var active_end: float=final_contact+float(Tuning.ACTIVE_SECONDS.get(attack_clip,.08))
-		var combo_boundary: float=maxf(active_end,final_contact+Tuning.CONTACT.combo_after_hit_seconds) if hit_confirmed else attack_total*Tuning.CONTACT.whiff_combo_fraction
+		var combo_boundary: float=maxf(active_end,last_contact_time+Tuning.CONTACT.combo_after_hit_seconds) if hit_confirmed else attack_total*Tuning.CONTACT.whiff_combo_fraction
 		if game.active_slot==2 or not spell.is_empty():combo_boundary=maxf(active_end,attack_total*Tuning.INPUT.combo_cancel_fraction)
 		if attack_light and elapsed>=combo_boundary and pending_action=="light":dispatch_action()
 		elif attack_light and elapsed>=maxf(active_end,attack_total*Tuning.INPUT.dodge_cancel_fraction) and pending_action=="dodge":dispatch_action()
-		elif attack_clock<=0:dispatch_action()
+		elif not attack_light and skill_variant.is_empty() and attack_tier!="critical" and elapsed>=maxf(active_end,attack_total*Tuning.RECOVERY.heavy_dodge_fraction) and pending_action=="dodge":dispatch_action()
+		elif attack_clock<=0:clear_contact_window();dispatch_action()
 		return
 	guarding=Input.is_action_pressed("guard") and is_on_floor() and stamina>0;guard_clock=guard_clock+dt if guarding else 0
-	if guarding:stamina=maxf(0,stamina-dt*8);stamina_delay=.55;velocity.x=0;velocity.y-=31.25*dt;move_with_sound();clip("Guard");return
+	if guarding:
+		stamina=maxf(0,stamina-dt*8);stamina_delay=.55;velocity.x=0;velocity.y-=31.25*dt;move_with_sound()
+		if stamina<=0:guarding=false;hurt_clock=Tuning.RECOVERY.guard_break_seconds;interrupt_for_hurt();game.toast("耐力耗尽 · 崩防");game.sound("guard",position)
+		else:clip("Guard")
+		return
 	if Input.is_action_pressed("modifier") and jump:begin_skill(2);return
 	if dispatch_action():return
 	if Input.is_action_just_released("grapple") and game.flags.get("grapple",false):
@@ -267,18 +276,22 @@ func begin_skill(slot: int) -> void:
 	configure_attack_timing(attack_clip)
 	animator.stop();clip(attack_clip);animator.play(attack_clip);game.sound("arc")
 func receive_damage(amount: float,direction: float,source: Node) -> void:
+	var guard_broken:=false
 	if invulnerable>0 or (dodge_clock>0 and dodge_elapsed>=.06 and dodge_elapsed<=.19):return
 	if guarding and facing*direction<0:
 		if guard_clock<=.10:
 			stamina=minf(100,stamina+10)
-			if is_instance_valid(source):source.posture+=50;source.enter_stun(.45);game.feedback.impact(source,-direction,"parry",self)
+			if is_instance_valid(source) and source.hp>0:source.posture+=50;source.enter_stun(.45);game.feedback.impact(source,-direction,"parry",self)
 			else:game.feedback.impact(self,direction,"parry")
 			game.toast("完美弹反");return
-		game.feedback.impact(self,direction,"block",source);stamina=maxf(0,stamina-amount);amount*=.25
+		stamina=maxf(0,stamina-amount);stamina_delay=.55;guard_broken=stamina<=0
+		if guard_broken:guarding=false;game.feedback.impact(self,direction,"heavy",source);game.toast("护架崩溃 · 重新恢复耐力")
+		else:game.feedback.impact(self,direction,"block",source)
+		amount*=.25
 	if shield_clock>0:amount*=.5
 	amount*=game.defense_multiplier()
-	game.party_hp[game.active_slot]=maxf(0,game.party_hp[game.active_slot]-amount);invulnerable=.55;hurt_clock=.23;velocity.x=direction*4
-	if not guarding:game.feedback.impact(self,direction,Tuning.tier_for_damage(amount),source)
+	game.party_hp[game.active_slot]=maxf(0,game.party_hp[game.active_slot]-amount);invulnerable=.55;hurt_clock=maxf(hurt_clock,Tuning.RECOVERY.guard_break_seconds if guard_broken else .23);velocity.x=direction*(Tuning.RECOVERY.guard_break_push if guard_broken else 4)
+	if not guarding and not guard_broken:game.feedback.impact(self,direction,Tuning.tier_for_damage(amount),source)
 	interrupt_for_hurt()
 	if game.party_hp[game.active_slot]<=0:game.actor_down()
 func snapshot() -> Dictionary:
@@ -308,12 +321,13 @@ func begin_companion_attack(heavy: bool) -> void:
 		6:attack_area=heavy;start_companion("ElectricBurst" if heavy else "ElectricPunch",.8 if heavy else .36,45 if heavy else 28,3.2 if heavy else 2.0,.32 if heavy else .13)
 
 func configure_attack_timing(key: String) -> void:
-	hit_confirmed=false
+	clear_contact_window();last_contact_time=-1;hit_confirmed=false
 	var timing: Array=Tuning.SKILL_TIMINGS.get(skill_variant,[.7,.26]) if not skill_variant.is_empty() else Tuning.ATTACK_TIMINGS.get(key,[attack_total,hit_at])
 	attack_total=float(timing[0]);hit_at=float(timing[1]);attack_clock=attack_total
 
 func clear_action_buffer() -> void:pending_action="";pending_action_clock=0;queued_attack=false
 func interrupt_for_hurt() -> void:
+	clear_contact_window();slam_recovery=0
 	attack_clock=0;attack_hit=true;extra_hits=[];extra_hit_index=0;spell="";combo=0;combo_clock=0;buffer=0;grappling=false;slamming=false;vault_clock=0;dodge_clock=0;dash_clock=0;motion="ground";clear_action_buffer()
 	if animator.has_animation("Hurt"):current_clip="Hurt";animation_rate=1;animator.play("Hurt",0);animator.advance(0);set_animation_paused(false)
 func capture_action_input(dt: float) -> void:
@@ -336,11 +350,11 @@ func dispatch_action() -> bool:
 		if not is_on_floor() and (not game.learned.has("%d_2"%game.active_slot) or air_dash_used):return false
 	clear_action_buffer()
 	if request=="dodge":
-		attack_clock=0;extra_hits=[];spell="";buffer=0
+		clear_contact_window();attack_clock=0;extra_hits=[];spell="";buffer=0
 		if is_on_floor():stamina-=20;stamina_delay=.55;dodge_clock=.3;dodge_elapsed=0;game.sound("roll",position);clip("Roll")
 		else:begin_skill(2)
 	elif request.begins_with("skill"):begin_skill(int(request[-1]))
-	elif request=="heavy" and not is_on_floor():slamming=true;clip("Slam")
+	elif request=="heavy" and not is_on_floor():clear_contact_window();slamming=true;clip("Slam")
 	else:begin_attack(request=="heavy")
 	return true
 func begin_companion_skill(slot: int) -> void:
@@ -367,3 +381,15 @@ func sample_attack_pose(elapsed: float) -> void:
 	var contact: float=Tuning.contact_pose(requested)
 	var fraction: float=contact*clampf(elapsed/maxf(.01,hit_at),0,1) if elapsed<=hit_at else lerpf(contact,1,clampf((elapsed-hit_at)/maxf(.01,attack_total-hit_at),0,1))
 	animation_rate=0;animator.speed_scale=0;animator.seek(animator.get_animation(requested).length*fraction,true)
+
+func clear_contact_window() -> void:contact_targets.clear();contact_window_end=-1
+func open_contact_window(power: float,tier: String,wave_time: float) -> void:
+	clear_contact_window()
+	if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,power,spell)
+	elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,power,true,null)
+	else:
+		contact_window_end=wave_time+float(Tuning.ACTIVE_SECONDS.get(attack_clip,.08));contact_power=power;contact_tier=tier;game.feedback.swing(self,attack_reach,attack_clip)
+func resolve_contact_window(elapsed: float) -> void:
+	if contact_window_end<0:return
+	if elapsed>contact_window_end:clear_contact_window();return
+	if game.melee_hit(contact_power,attack_reach,facing,attack_area,contact_tier,contact_targets)>0:hit_confirmed=true;last_contact_time=elapsed

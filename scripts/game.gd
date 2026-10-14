@@ -516,7 +516,7 @@ func phase_step() -> void:
 func weapon_name() -> String:return "灰钢太刀" if equipped_weapon=="katana" else "裂影匕首"
 
 func can_switch_weapon() -> bool:
-	return player.attack_clock<=0 and player.hurt_clock<=0 and player.dodge_clock<=0 and player.dash_clock<=0 and player.motion!="vault" and not player.slamming
+	return player.attack_clock<=0 and player.hurt_clock<=0 and player.dodge_clock<=0 and player.dash_clock<=0 and player.motion!="vault" and not player.slamming and player.slam_recovery<=0
 
 func equip_weapon(value: String) -> void:
 	equipped_weapon=value;inventory.equipment["0"]["weapon"]=value;player.combo=0;player.combo_clock=0;player.queued_attack=false
@@ -531,7 +531,7 @@ func switch_weapon() -> void:
 func switch_actor(slot: int = -1) -> void:
 	var slots: Array=field_slots()
 	if slots.size()==1:toast("救援后可以切换同伴");return
-	if switch_cooldown>0 or player.hurt_clock>0 or player.attack_clock>0 or player.motion=="vault":return
+	if switch_cooldown>0 or not can_switch_weapon():return
 	var next: int=slots[(slots.find(active_slot)+1)%slots.size()] if slot<0 else slot
 	if not next in slots or party_hp[next]<=0 or next==active_slot:return
 	sound("switch");active_slot=next;campaign.form_time=0;switch_cooldown=1;player.set_actor(next);toast(actor_label(next))
@@ -541,6 +541,7 @@ func menu_actor(slot: int) -> void:
 	else:toast("角色收招且存活时才能切换；休息灯可恢复全队")
 
 func actor_down() -> void:
+	player.clear_contact_window();player.slam_recovery=0
 	campaign.form_time=0
 	player.attack_clock=0;player.queued_attack=false;player.slamming=false;player.grappling=false;player.shield_clock=0
 	player.clear_action_buffer();player.buffer=0;player.hit_pause=0
@@ -685,10 +686,12 @@ func check_auto_exit() -> void:
 			var gate: String=rooms[room].get("gate","")
 			if gate.is_empty() or flags.get(gate,false):nearest=prop;transition_pending=true;interact()
 
-func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: String="") -> int:
+func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: String="",contact_targets: Variant=null) -> int:
 	amount*=damage_multiplier();var hits:=0
 	for enemy in enemies:
 		if not is_instance_valid(enemy) or enemy.hp<=0:continue
+		var target_id: int=enemy.get_instance_id()
+		if contact_targets is Dictionary and contact_targets.has(target_id):continue
 		var d: Vector3=enemy.position-player.position
 		if absf(d.x)>reach or absf(d.y)>1.7 or absf(d.z)>1.5 or (not area and direction*d.x<-.3):continue
 		var query:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),enemy.position+Vector3(0,1,0),1)
@@ -696,6 +699,7 @@ func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: Stri
 			var before: float=enemy.hp;var outward: float=signf(d.x) if area and absf(d.x)>.1 else direction
 			var point: Vector3=enemy.position+Vector3(clampf(-d.x,-.35,.35),clampf(1-d.y,.35,2.5),.18)
 			enemy.hurt(amount,outward,30 if amount>=35 else 12,tier,player,point);hits+=1
+			if contact_targets is Dictionary:contact_targets[target_id]=true
 			campaign.resonance=minf(100,campaign.resonance+8)
 			party_hp[active_slot]=minf(max_hp(),party_hp[active_slot]+minf(before,amount)*float(inventory.stats(active_slot).get("leech",0)))
 	return hits
@@ -707,7 +711,7 @@ func fire_projectile(pos: Vector3,direction: float,amount: float,friendly: bool,
 	if friendly:
 		var best:=12.0
 		for enemy in enemies:
-			if not is_instance_valid(enemy):continue
+			if not is_instance_valid(enemy) or enemy.hp<=0:continue
 			var diff: Vector3=enemy.position+Vector3(0,.9,0)-pos
 			if diff.x*direction>0 and absf(diff.y)<3 and diff.length()<best:best=diff.length();shot.travel=diff.normalized()
 	world.add_child(shot)
@@ -730,7 +734,7 @@ func fire_spell(pos: Vector3,direction: float,power: float,kind: String) -> void
 	var shot:=preload("res://scripts/spell_v06.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=power*damage_multiplier();shot.kind=kind;shot.owner_slot=active_slot;world.add_child(shot)
 func snare_nearby(reach: float) -> void:
 	for enemy in enemies:
-		if is_instance_valid(enemy) and enemy.position.distance_to(player.position)<reach:
+		if is_instance_valid(enemy) and enemy.hp>0 and enemy.position.distance_to(player.position)<reach:
 			var ray:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),enemy.position+Vector3(0,1,0),1)
 			if get_world_3d().direct_space_state.intersect_ray(ray).is_empty():enemy.state="stunned";enemy.clock=-.45;spawn_sparks(enemy.position+Vector3(0,1,0),false)
 

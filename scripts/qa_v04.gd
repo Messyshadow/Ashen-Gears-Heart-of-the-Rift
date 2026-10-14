@@ -135,6 +135,7 @@ func run(g: Node3D,path: String) -> int:
 	checks.append_array(await preload("res://scripts/qa_actions.gd").new().run(game,directory.get_base_dir().path_join("action_screenshots") if not directory.is_empty() else ""))
 	checks.append_array(await preload("res://scripts/qa_v10.gd").new().run(game,directory.get_base_dir().path_join("v10_screenshots") if not directory.is_empty() else ""))
 	checks.append_array(await preload("res://scripts/qa_impact_v101.gd").new().run(game,directory.get_base_dir().path_join("action_screenshots") if not directory.is_empty() else ""))
+	checks.append_array(await preload("res://scripts/qa_combat_v102.gd").new().run(game))
 	var failures:=0
 	for item in checks:
 		if not item.pass:failures+=1

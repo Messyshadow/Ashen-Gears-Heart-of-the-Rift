@@ -67,7 +67,7 @@ func impact(victim: Node,direction: float,tier: String,attacker: Node=null,play_
 	var material: String="flesh" if victim==game.player or victim.definition.get("human",false) else "soul" if victim.kind in ["wraith","specter","judge","elite6"] else "metal"
 	var col:=Color(.25,.65,1) if tier=="parry" else Color(1,.72,.25) if tier=="block" else Color(.48,.35,1) if material=="soul" else Color(.8,.12,.10) if material=="flesh" and setting("blood")>0 else Color(1,.55,.18)
 	var count: int=int(profile.particles)
-	if material=="flesh":count=maxi(3,roundi(count*setting("blood")))
+	if material=="flesh" and tier not in ["parry","block"]:count=maxi(3,roundi(count*setting("blood")))
 	game.particles(point,2,col,direction,count)
 	contact_cue(point,direction,tier,col)
 	var distance: float=point.distance_to(game.player.position)
