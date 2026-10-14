@@ -268,7 +268,7 @@ func _process(dt: float) -> void:
 		var view_aspect: float=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y
 		base_camera_size=lerpf(base_camera_size,maxf(46.0/view_aspect,float(rooms[room].bounds[3])+4) if overview else 12.5,1-exp(-dt*4))
 		camera.size=base_camera_size*(1 if overview else feedback.zoom_factor())
-		target=target.lerp(desired,1-exp(-dt*6));rig.position=target+Vector3(0,-camera_impact,0)+(Vector3.ZERO if overview else feedback.camera_offset())
+		target=target.lerp(desired,1-exp(-dt*6));rig.position=target+Vector3(0,-camera_impact*float(graphics.settings.get("shake",1)),0)+(Vector3.ZERO if overview else feedback.camera_offset())
 		camera_impact=move_toward(camera_impact,0,dt*.8)
 	hud_clock+=dt
 	if hud_clock>=1.0/30 or screen in ["graphics","graphics_confirm"]:
@@ -292,6 +292,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if screen=="graphics_confirm":
 		if event.is_action_pressed("pause"):graphics.revert()
 		return
+	if screen=="feedback" and event.is_action_pressed("pause"):set_screen("graphics");return
 	if screen in ["graphics","audio","controls"] and event.is_action_pressed("pause"):controls.capturing="";set_screen("settings");return
 	if screen=="settings" and event.is_action_pressed("pause"):set_screen(settings_return);return
 	if screen=="chapter_complete" and event.is_action_pressed("pause"):return
@@ -684,17 +685,20 @@ func check_auto_exit() -> void:
 			var gate: String=rooms[room].get("gate","")
 			if gate.is_empty() or flags.get(gate,false):nearest=prop;transition_pending=true;interact()
 
-func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: String="") -> void:
-	amount*=damage_multiplier()
+func melee_hit(amount: float,reach: float,direction: float,area: bool,tier: String="") -> int:
+	amount*=damage_multiplier();var hits:=0
 	for enemy in enemies:
-		if not is_instance_valid(enemy):continue
+		if not is_instance_valid(enemy) or enemy.hp<=0:continue
 		var d: Vector3=enemy.position-player.position
 		if absf(d.x)>reach or absf(d.y)>1.7 or absf(d.z)>1.5 or (not area and direction*d.x<-.3):continue
 		var query:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,1,0),enemy.position+Vector3(0,1,0),1)
 		if get_world_3d().direct_space_state.intersect_ray(query).is_empty():
-			var before: float=enemy.hp;enemy.hurt(amount,direction,30 if amount>=35 else 12,tier,player)
+			var before: float=enemy.hp;var outward: float=signf(d.x) if area and absf(d.x)>.1 else direction
+			var point: Vector3=enemy.position+Vector3(clampf(-d.x,-.35,.35),clampf(1-d.y,.35,2.5),.18)
+			enemy.hurt(amount,outward,30 if amount>=35 else 12,tier,player,point);hits+=1
 			campaign.resonance=minf(100,campaign.resonance+8)
 			party_hp[active_slot]=minf(max_hp(),party_hp[active_slot]+minf(before,amount)*float(inventory.stats(active_slot).get("leech",0)))
+	return hits
 
 func fire_projectile(pos: Vector3,direction: float,amount: float,friendly: bool,source: Node) -> void:
 	var shot:=preload("res://scripts/projectile.gd").new();shot.game=self;shot.position=pos;shot.direction=direction;shot.damage=amount*(damage_multiplier() if friendly else 1.0);shot.friendly=friendly;shot.source=source

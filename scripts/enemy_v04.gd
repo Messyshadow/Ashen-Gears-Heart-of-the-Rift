@@ -64,7 +64,7 @@ func _physics_process(dt: float) -> void:
 	if state=="patrol" and absf(diff.x)<(14 if ranged() or boss() else 8) and (same or flying()) and clear and (kind!="human" or diff.x*facing>0 or absf(diff.x)<(1.1 if p.crouching else 2.7)):
 		state="chase";clock=0
 	if state=="stunned":
-		velocity.x=move_toward(velocity.x,0,20*dt)
+		velocity.x=move_toward(velocity.x,0,Tuning.CONTACT.knockback_drag*dt)
 		if clock>stun_duration:state="chase";clock=0
 	elif state=="windup":
 		velocity.x=0;visual.rotation.z=-.12*facing*minf(clock/windup,1)
@@ -129,12 +129,14 @@ func can_assassinate() -> bool:
 	var ray:=PhysicsRayQueryParameters3D.create(p.position+Vector3(0,1,0),position+Vector3(0,1,0),1)
 	return get_world_3d().direct_space_state.intersect_ray(ray).is_empty()
 
-func hurt(amount: float,force: float,break_power: float=10,tier: String="",attacker: Node=null) -> void:
+func hurt(amount: float,force: float,break_power: float=10,tier: String="",attacker: Node=null,point: Vector3=Vector3.INF) -> void:
 	if hp<=0:return
-	if definition.get("shield",false) and force*facing<0 and state!="stunned" and amount<900:amount*=.30;game.sound("guard",position)
+	var blocked: bool=definition.get("shield",false) and force*facing<0 and state!="stunned" and amount<900
+	if blocked:amount*=.30;tier="block"
 	if tier.is_empty():tier=Tuning.tier_for_damage(amount)
 	hp=maxf(0,hp-amount);posture+=break_power;hit_flash=.15
-	var profile: Dictionary=game.feedback.impact(self,force,tier,attacker)
+	if hp<=0:tier="critical"
+	var profile: Dictionary=game.feedback.impact(self,force,tier,attacker,true,point)
 	if hp<=0:
 		game.inventory.loot(kind,uid)
 		if not game.defeated.has(uid):
@@ -147,7 +149,7 @@ func hurt(amount: float,force: float,break_power: float=10,tier: String="",attac
 			game.flags[definition.flag]=true
 			game.show_story("牛头督工倒下，总井图纸的转运锁解除了。" if kind=="minotaur" else "典刑机的链条停了。去出货厅找转运表。" if kind=="boss" else "首领已击败，区域联锁解除。
 继续沿右门前进；左门可返回寻找证物与同伴。")
-		game.save_game();queue_free()
+		game.save_game();death_reaction(force)
 	elif not boss() or posture>=80:
 		posture=0;enter_stun(float(profile.get("stun",.45)));velocity.x=force*float(profile.get("knockback",2.0))
 
@@ -169,3 +171,13 @@ func strike_extended(diff: Vector3, same: bool) -> void:
 			shot.travel=(game.player.position+Vector3(0,.9,0)-shot.position).normalized().rotated(Vector3.FORWARD,(i-(shots-1)*.5)*.15);shot.speed=10;game.world.add_child(shot)
 		game.sound("enemy_fire",position)
 	if same and absf(diff.x)<2.5:game.damage_player(20,facing,self)
+
+func death_reaction(direction: float) -> void:
+	state="dead";velocity=Vector3.ZERO;set_deferred("collision_layer",0);set_deferred("collision_mask",0)
+	for label in find_children("*","Label3D",false,false):label.visible=false
+	if animator and animator.has_animation("Hurt"):animator.play("Hurt",0);animator.advance(0)
+	var tween:=create_tween();tween.set_parallel(true)
+	tween.tween_property(visual,"rotation:z",direction*.65,Tuning.CONTACT.death_seconds).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(visual,"position",visual.position+Vector3(direction*.30,-.20,0),Tuning.CONTACT.death_seconds)
+	tween.tween_property(visual,"scale",Vector3.ONE*.55,Tuning.CONTACT.death_seconds)
+	tween.chain().tween_callback(queue_free)

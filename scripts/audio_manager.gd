@@ -1,5 +1,5 @@
 extends Node
-const CUE_NAMES = ["foot_stone_1", "foot_stone_2", "foot_stone_3", "foot_metal_1", "foot_metal_2", "foot_metal_3", "ladder_1", "hit_metal_1", "hit_flesh_1", "whoosh_light_1", "ladder_2", "hit_metal_2", "hit_flesh_2", "whoosh_light_2", "jump", "dash", "roll", "wall_jump", "vault", "whoosh_heavy", "boss_charge", "land_soft", "land_heavy", "player_hurt", "guard", "grapple_attach", "elevator_stop", "gear_latch", "press_hit", "boss_smash", "shockwave", "bow_fire", "grapple_launch", "skill", "parry", "enemy_fire", "enemy_windup", "press_warning", "boss_roar", "elevator_start", "gear_start", "chest", "save", "switch", "door", "ui", "amb_furnace", "amb_wind", "amb_gears", "amb_workshop", "music_explore", "music_combat", "music_boss","amb_water","amb_garden","amb_castle","amb_lab","amb_smelter","amb_bonecity","amb_archive","amb_rail","amb_rift","amb_crown"]
+const CUE_NAMES = ["hit_weight","foot_stone_1", "foot_stone_2", "foot_stone_3", "foot_metal_1", "foot_metal_2", "foot_metal_3", "ladder_1", "hit_metal_1", "hit_flesh_1", "whoosh_light_1", "ladder_2", "hit_metal_2", "hit_flesh_2", "whoosh_light_2", "jump", "dash", "roll", "wall_jump", "vault", "whoosh_heavy", "boss_charge", "land_soft", "land_heavy", "player_hurt", "guard", "grapple_attach", "elevator_stop", "gear_latch", "press_hit", "boss_smash", "shockwave", "bow_fire", "grapple_launch", "skill", "parry", "enemy_fire", "enemy_windup", "press_warning", "boss_roar", "elevator_start", "gear_start", "chest", "save", "switch", "door", "ui", "amb_furnace", "amb_wind", "amb_gears", "amb_workshop", "music_explore", "music_combat", "music_boss","amb_water","amb_garden","amb_castle","amb_lab","amb_smelter","amb_bonecity","amb_archive","amb_rail","amb_rift","amb_crown"]
 var game: Node3D
 var streams: Dictionary={}
 var voices: Array[AudioStreamPlayer]=[]
@@ -91,7 +91,7 @@ func _process(dt: float) -> void:
 		if audible and not voice.playing:voice.play()
 		# Vorbis loops keep the room beds continuous. No per-action PCM allocation.
 
-func play_event(kind: String,pos: Vector3=Vector3.INF) -> void:
+func play_event(kind: String,pos: Vector3=Vector3.INF,gain_offset: float=0.0) -> void:
 	var priority: int=0 if kind.begins_with("foot") or kind.begins_with("ladder") else 3 if kind in ["parry","boss_smash","press_hit","land_heavy"] else 2
 	if not streams.has(kind):push_error("Missing audio cue: "+kind);return
 	var chosen: AudioStreamPlayer=null;var oldest:=INF
@@ -104,7 +104,7 @@ func play_event(kind: String,pos: Vector3=Vector3.INF) -> void:
 	chosen.bus="UI" if kind=="ui" else "SFX";chosen.stream=streams[kind];chosen.pitch_scale=randf_range(.95,1.05) if priority<3 else 1.0
 	var gain: float=-8 if priority==0 else -7 if kind=="ui" else -2
 	if pos.is_finite() and is_instance_valid(game.player):gain+=linear_to_db(clampf(1-pos.distance_to(game.player.position)/28,.08,1))
-	chosen.volume_db=gain;chosen.set_meta("priority",priority);chosen.set_meta("started",Time.get_ticks_usec());chosen.play()
+	chosen.volume_db=gain+gain_offset;chosen.set_meta("priority",priority);chosen.set_meta("started",Time.get_ticks_usec());chosen.play()
 	if game.qa_mode:events[kind]=int(events.get(kind,0))+1
 
 func halt() -> void:

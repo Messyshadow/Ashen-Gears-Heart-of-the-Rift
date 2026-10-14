@@ -3,6 +3,7 @@ const Tuning=preload("res://scripts/action_tuning.gd")
 var hit_pause := 0.0
 var pending_action := ""
 var pending_action_clock := 0.0
+var hit_confirmed := false
 var attack_light := false
 var attack_tier := "light"
 var animation_rate := 1.0
@@ -139,13 +140,14 @@ func _physics_process(dt: float) -> void:
 	if attack_clock>0:
 		attack_clock-=dt
 		velocity.x=move_toward(velocity.x,0,32*dt);velocity.y-=31.25*dt;move_with_sound()
-		var requested: String=attack_clip if animator.has_animation(attack_clip) else "PassageIdle"
-		clip(requested,animator.get_animation(requested).length/maxf(attack_total,.01) if attack_clip.begins_with("Katana") or game.active_slot>=3 else 1.0)
+		sample_attack_pose(attack_total-attack_clock)
 		if not attack_hit and attack_total-attack_clock>=hit_at:
 			attack_hit=true
 			if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,attack_power,spell)
 			elif game.active_slot==2:game.fire_projectile(position+Vector3(facing*.6,1,0),facing,attack_power,true,null)
-			else:game.melee_hit(attack_power*(1+.15*game.weapon_rank),attack_reach,facing,attack_area,attack_tier)
+			else:
+				game.feedback.swing(self,attack_reach,attack_clip)
+				hit_confirmed=game.melee_hit(attack_power*(1+.15*game.weapon_rank),attack_reach,facing,attack_area,attack_tier)>0 or hit_confirmed
 		while extra_hit_index<extra_hits.size() and attack_total-attack_clock>=float(extra_hits[extra_hit_index]):
 			extra_hit_index+=1
 			if not spell.is_empty():game.fire_spell(position+Vector3(facing*.6,1,0),facing,attack_power,spell)
@@ -155,7 +157,9 @@ func _physics_process(dt: float) -> void:
 		var elapsed: float=attack_total-attack_clock
 		var final_contact: float=float(extra_hits[-1]) if not extra_hits.is_empty() else hit_at
 		var active_end: float=final_contact+float(Tuning.ACTIVE_SECONDS.get(attack_clip,.08))
-		if attack_light and elapsed>=maxf(active_end,attack_total*Tuning.INPUT.combo_cancel_fraction) and pending_action=="light":dispatch_action()
+		var combo_boundary: float=maxf(active_end,final_contact+Tuning.CONTACT.combo_after_hit_seconds) if hit_confirmed else attack_total*Tuning.CONTACT.whiff_combo_fraction
+		if game.active_slot==2 or not spell.is_empty():combo_boundary=maxf(active_end,attack_total*Tuning.INPUT.combo_cancel_fraction)
+		if attack_light and elapsed>=combo_boundary and pending_action=="light":dispatch_action()
 		elif attack_light and elapsed>=maxf(active_end,attack_total*Tuning.INPUT.dodge_cancel_fraction) and pending_action=="dodge":dispatch_action()
 		elif attack_clock<=0:dispatch_action()
 		return
@@ -230,6 +234,7 @@ func begin_attack(heavy: bool) -> void:
 		attack_total=1.0 if heavy else [.50,.54,.65][combo-1];hit_at=.48 if heavy else [.19,.21,.26][combo-1]
 		attack_power=56 if heavy else [28,30,36][combo-1];attack_reach=3.65 if heavy else [3.0,3.2,3.4][combo-1];attack_clock=attack_total
 		if not heavy:attack_tier="medium"
+	if game.active_slot==0 and not katana and combo==3 and not heavy:attack_tier="medium"
 	configure_attack_timing("BowShotHeavy" if heavy and game.active_slot==2 else attack_clip)
 	animator.stop();clip(attack_clip);animator.play(attack_clip,.06,1);game.sound("bow_fire" if game.active_slot==2 else "whoosh_heavy" if heavy else "whoosh_light_%d"%randi_range(1,2),position)
 func begin_skill(slot: int) -> void:
@@ -303,6 +308,7 @@ func begin_companion_attack(heavy: bool) -> void:
 		6:attack_area=heavy;start_companion("ElectricBurst" if heavy else "ElectricPunch",.8 if heavy else .36,45 if heavy else 28,3.2 if heavy else 2.0,.32 if heavy else .13)
 
 func configure_attack_timing(key: String) -> void:
+	hit_confirmed=false
 	var timing: Array=Tuning.SKILL_TIMINGS.get(skill_variant,[.7,.26]) if not skill_variant.is_empty() else Tuning.ATTACK_TIMINGS.get(key,[attack_total,hit_at])
 	attack_total=float(timing[0]);hit_at=float(timing[1]);attack_clock=attack_total
 
@@ -354,3 +360,10 @@ func begin_companion_skill(slot: int) -> void:
 			attack_area=true
 			if slot==0:game.snare_nearby(4);start_companion("ElectricBurst",.8,50,4,.3)
 			else:shield_clock=3;game.spawn_sparks(position+Vector3(0,1,0),true);start_companion("ElectricBurst",.65,25,2.4,.25);game.toast("绝缘护盾 · 3 秒减伤 50%")
+
+func sample_attack_pose(elapsed: float) -> void:
+	var requested: String=attack_clip if animator.has_animation(attack_clip) else "PassageIdle"
+	if current_clip!=requested:current_clip=requested;animator.play(requested,0)
+	var contact: float=Tuning.contact_pose(requested)
+	var fraction: float=contact*clampf(elapsed/maxf(.01,hit_at),0,1) if elapsed<=hit_at else lerpf(contact,1,clampf((elapsed-hit_at)/maxf(.01,attack_total-hit_at),0,1))
+	animation_rate=0;animator.speed_scale=0;animator.seek(animator.get_animation(requested).length*fraction,true)

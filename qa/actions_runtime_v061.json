@@ -3,12 +3,15 @@
     {
       "check": "真实近战命中同时启动双方局部顿帧",
       "detail": {
-        "attacker": 82208360871,
-        "duration": 0.05,
-        "particles": 7,
-        "tier": "light",
-        "time_usec": 2837600,
-        "victim": 88449485098
+        "attacker": 89305123306,
+        "camera_frame": 44,
+        "duration": 0.07,
+        "material": "flesh",
+        "particles": 15,
+        "point": "(7.65, 0.990086, 0.18)",
+        "tier": "heavy",
+        "time_usec": 2536625,
+        "victim": 96167004521
       },
       "pass": true
     },
@@ -40,19 +43,19 @@
     {
       "check": "重击相对轻击有更长顿帧及更多定向火花",
       "detail": {
-        "heavy": 0.11,
+        "heavy": 0.07,
         "light": 0.05
       },
       "pass": true
     },
     {
       "check": "连续命中缩短顿帧，时长取最大值不累加",
-      "detail": 0.088,
+      "detail": 0.056,
       "pass": true
     },
     {
       "check": "叠加震屏与缩放受上限约束",
-      "detail": 0.8,
+      "detail": 0.55514841735363,
       "pass": true
     },
     {

@@ -19,16 +19,16 @@ func _physics_process(dt: float) -> void:
 	var query:=PhysicsRayQueryParameters3D.create(global_position,next,1)
 	if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():game.spawn_sparks(position,true);queue_free();return
 	for enemy in game.enemies:
-		if not is_instance_valid(enemy) or hit_targets.has(enemy.get_instance_id()):continue
+		if not is_instance_valid(enemy) or enemy.hp<=0 or hit_targets.has(enemy.get_instance_id()):continue
 		if absf(enemy.position.x-next.x)>.65 or absf(enemy.position.y+1-next.y)>1.25:continue
-		var uid: int=enemy.get_instance_id();hit_targets[uid]=true;enemy.hurt(damage,direction,20)
+		var uid: int=enemy.get_instance_id();hit_targets[uid]=true;enemy.hurt(damage,direction,20,"medium" if kind in ["cannon","flame"] else "light",null,next)
 		game.campaign.resonance=minf(100,game.campaign.resonance+8)
-		if kind in ["ink","soul"] and is_instance_valid(enemy):enemy.enter_stun(.75)
+		if kind in ["ink","soul"] and is_instance_valid(enemy) and enemy.hp>0:enemy.enter_stun(.75)
 		if kind=="leech" and not healed:game.party_hp[owner_slot]=minf(game.Content.ROSTER[owner_slot].hp,game.party_hp[owner_slot]+8);healed=true;game.toast("血瓶命中 · 恢复 8 生命")
 		if kind in ["blood_burst","cannon","flame"]:
 			for other in game.enemies:
-				if is_instance_valid(other) and other!=enemy and other.position.distance_to(enemy.position)<2.6:
+				if is_instance_valid(other) and other.hp>0 and other!=enemy and other.position.distance_to(enemy.position)<2.6:
 					var ray:=PhysicsRayQueryParameters3D.create(next,other.position+Vector3(0,1,0),1)
 					if get_world_3d().direct_space_state.intersect_ray(ray).is_empty():other.hurt(damage*.6,direction,25)
-		if kind not in ["bone","rifle","star"]:game.spawn_sparks(next,false);queue_free();return
+		if kind not in ["bone","rifle","star"]:queue_free();return
 	position=next

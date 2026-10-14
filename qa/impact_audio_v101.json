@@ -1,0 +1,10 @@
+{
+  "version": "1.0.1",
+  "cue": "hit_weight",
+  "original_synthesis": true,
+  "seconds": 0.2,
+  "sample_rate": 44100,
+  "rms": 0.11011276688048671,
+  "total_resources": 64,
+  "layer_gain_db": -8
+}

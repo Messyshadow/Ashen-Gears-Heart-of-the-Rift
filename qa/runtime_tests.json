@@ -67,8 +67,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -16.0333213806152,
-          -0.00916592124849558,
+          -15.9366540908813,
+          -0.00917733833193779,
           0.0
         ],
         "vaults": 0,
@@ -94,8 +94,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -12.0533180236816,
-          -0.00918944831937551,
+          -11.9566478729248,
+          -0.00918372813612223,
           0.0
         ],
         "vaults": 0,
@@ -121,13 +121,13 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -11.1216497421265,
-          -0.00918342545628548,
+          -11.0116481781006,
+          -0.00917159020900726,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          1.30000019073486,
+          0.800000190734863,
           0.0,
           0.0
         ],
@@ -391,8 +391,8 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          3.46642684936523,
-          4.99082851409912,
+          3.49268102645874,
+          4.99083423614502,
           0.0
         ],
         "vaults": 0,
@@ -1120,14 +1120,14 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          -6.17093801498413,
-          2.32850050926208,
+          -6.05427122116089,
+          2.38406991958618,
           0.0
         ],
         "vaults": 0,
         "velocity": [
           -7.0,
-          -3.33416676521301,
+          -2.63083338737488,
           0.0
         ],
         "wall_jumps": 1,
@@ -1174,13 +1174,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          -4.65499496459961,
-          4.99083614349365,
+          -4.53749465942383,
+          4.99083423614502,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          6.05000019073486,
+          5.80000019073486,
           0.0,
           0.0
         ],
@@ -1228,13 +1228,13 @@
         "ladder_travel": 4.01333333333334,
         "motion": "ground",
         "p": [
-          6.07118988037109,
-          6.99082803726196,
+          6.15952301025391,
+          6.99082183837891,
           0.0
         ],
         "vaults": 0,
         "velocity": [
-          0.800000190734863,
+          0.550000190734863,
           0.0,
           0.0
         ],
@@ -1660,7 +1660,7 @@
         "ladder_travel": 0.0,
         "motion": "ground",
         "p": [
-          0.105104818940163,
+          0.105108425021172,
           5.99084043502808,
           0.0
         ],
@@ -1756,7 +1756,7 @@
       }
     },
     {
-      "check": "63 个声音资源加载，20 路并发播放器",
+      "check": "64 个声音资源加载，20 路并发播放器",
       "detail": {},
       "pass": true
     },
@@ -1764,8 +1764,8 @@
       "check": "探索音乐与环境实际混音非静音",
       "detail": {
         "frames": 18944,
-        "peak": 0.154296725988388,
-        "rms": 0.0424395203434718
+        "peak": 0.101147852838039,
+        "rms": 0.0356162309855639
       },
       "pass": true
     },
@@ -1774,34 +1774,34 @@
       "detail": {
         "frames": 10752,
         "peak": 0.912010848522186,
-        "rms": 0.191055847194754
+        "rms": 0.188735024713971
       },
       "pass": true
     },
     {
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
-        "frames": 8704,
-        "peak": 0.625667691230774,
-        "rms": 0.132338039251272
+        "frames": 9216,
+        "peak": 0.725949585437775,
+        "rms": 0.140012885696221
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 9728,
-        "peak": 0.723745226860046,
-        "rms": 0.124248431265348
+        "frames": 7680,
+        "peak": 0.39682075381279,
+        "rms": 0.0821663283127434
       },
       "pass": true
     },
     {
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
-        "frames": 39424,
-        "peak": 0.711163997650146,
-        "rms": 0.113780132724699
+        "frames": 38912,
+        "peak": 0.71875262260437,
+        "rms": 0.11308437604045
       },
       "pass": true
     },
@@ -1828,9 +1828,9 @@
     {
       "check": "附近战斗切入战斗音乐",
       "detail": {
-        "frames": 40448,
-        "peak": 0.740039169788361,
-        "rms": 0.0964727543913796
+        "frames": 39936,
+        "peak": 0.734500229358673,
+        "rms": 0.0967078805231508
       },
       "pass": true
     },
@@ -3046,12 +3046,15 @@
     {
       "check": "真实近战命中同时启动双方局部顿帧",
       "detail": {
-        "attacker": 4277552548898,
-        "duration": 0.05,
-        "particles": 7,
-        "tier": "light",
-        "time_usec": 251821196,
-        "victim": 4278659844986
+        "attacker": 4161185778523,
+        "camera_frame": 14910,
+        "duration": 0.07,
+        "material": "flesh",
+        "particles": 15,
+        "point": "(7.65, 0.990086, 0.18)",
+        "tier": "heavy",
+        "time_usec": 251220721,
+        "victim": 4162125303234
       },
       "pass": true
     },
@@ -3083,19 +3086,19 @@
     {
       "check": "重击相对轻击有更长顿帧及更多定向火花",
       "detail": {
-        "heavy": 0.11,
+        "heavy": 0.07,
         "light": 0.05
       },
       "pass": true
     },
     {
       "check": "连续命中缩短顿帧，时长取最大值不累加",
-      "detail": 0.088,
+      "detail": 0.056,
       "pass": true
     },
     {
       "check": "叠加震屏与缩放受上限约束",
-      "detail": 0.8,
+      "detail": 0.552417944669724,
       "pass": true
     },
     {
@@ -3702,13 +3705,123 @@
       "check": "通关存档载入保留多个结局与探索状态",
       "detail": null,
       "pass": true
+    },
+    {
+      "check": "匕首实际命中同步接触姿势，告别动画未挥到先扣血",
+      "detail": 0.522727272727273,
+      "pass": true
+    },
+    {
+      "check": "冲击特效位于真实目标接触点",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "有效帧刀光与血肉命中圈实际渲染",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "命中确认后 80ms 可衔接下一刀，无需等全部收招",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "挥空保留更晚取消边界，不能刷无风险连击",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "重击产生可见实体后退并保留碰撞支撑",
+      "detail": 1.09499835968018,
+      "pass": true
+    },
+    {
+      "check": "同物理帧群攻只取最大震屏和顿帧，不按人数累加",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "远处命中不强行震动玩家镜头",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "关闭震屏与缩放立即生效",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "关闭闪光后原材质保持可见",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "关闭血雾仍保留中性方向提示与命中音",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "反馈强度保存在原画面配置，旧配置默认补齐",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "五项独立反馈设置实际存在并可交互",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "盾牌阻挡使用独立护甲声和阻挡提示，真实减伤不变",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "亡灵显示魂裂色而非机械火花",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "强化视觉反馈不破坏首领轻击霸体",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "高频冲击圈同时最多十二个，无无限节点增长",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "冲击圈结束后复用同一节点与材质",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "击杀保留短促倒下收尾，奖励已提交且尸体不能再受击",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "尸体不重复发命中资源、吸血或掉落",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "击杀收尾限时释放，不滞留碰撞体",
+      "detail": null,
+      "pass": true
+    },
+    {
+      "check": "换房清理刀光、冲击圈和复用引用",
+      "detail": null,
+      "pass": true
     }
   ],
   "engine": "4.7-rc (custom_build)",
   "executable": "E:/Godot/test-project/Ashen-Gears-Heart-of-the-Rift/build/AshenGears.exe",
-  "executable_sha256": "a873efd730bbda24d7fe7478ac9b8ca8ad012f40b5de7cb907662af5e3e4b3a0",
+  "executable_sha256": "89a1eae8080f8e0b12fbda9d004839fbbc566571b7b15c646834e38a8daebcad",
   "failures": 0,
   "input": "Godot input actions and isolated physics acceptance; no physical controller or full human playthrough",
-  "pack_sha256": "689e3dcfa62d89e4cbcdfc236065d374f7961e21a0e5d60e6410c5a79669629f",
-  "version": "1.0.0"
+  "pack_sha256": "3a539aa78e7072afc985dfcfac3820259d7b089526384c3cd0340056531f6230",
+  "version": "1.0.1"
 }

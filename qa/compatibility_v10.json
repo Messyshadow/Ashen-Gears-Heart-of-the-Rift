@@ -1,7 +1,7 @@
 {
-  "executable_sha256": "a873efd730bbda24d7fe7478ac9b8ca8ad012f40b5de7cb907662af5e3e4b3a0",
+  "executable_sha256": "89a1eae8080f8e0b12fbda9d004839fbbc566571b7b15c646834e38a8daebcad",
   "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
-  "pack_sha256": "689e3dcfa62d89e4cbcdfc236065d374f7961e21a0e5d60e6410c5a79669629f",
+  "pack_sha256": "3a539aa78e7072afc985dfcfac3820259d7b089526384c3cd0340056531f6230",
   "renderer": "gl_compatibility",
   "rooms": [
     {
@@ -83,5 +83,5 @@
       "slot": 15
     }
   ],
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

@@ -7,7 +7,7 @@ names={}
 for line in doc.splitlines():
  if re.match(r'\| R\d\d-(\d\d|H[12]) \|',line):
   c=[x.strip() for x in line.split('|')[1:-1]];names[c[0]]=c[1]
-p=ROOT/'scripts/content_v06.gd';s=json.loads((ROOT/'source/baseline_v06.json').read_text(encoding='utf-8'))['content'].replace('0.6.1','1.0.0')
+p=ROOT/'scripts/content_v06.gd';s=json.loads((ROOT/'source/baseline_v06.json').read_text(encoding='utf-8'))['content'].replace('0.6.1','1.0.1')
 roster=json.loads(re.search(r'const ROSTER=(\[.*?\])\nconst ENEMIES=',s,re.S)[1])
 assert len(roster)==7,'Pinned baseline must have seven roles'
 new=[
@@ -129,5 +129,5 @@ for r in rooms:
  r['map']=[o[0]+x,o[1]+y,60,50+(r['bounds'][3]-8)*2]
 assert len(rooms)==126 and len({r['id'] for r in rooms})==126
 (ROOT/'data/rooms.json').write_text(json.dumps(rooms,ensure_ascii=False,indent=2),encoding='utf-8')
-(ROOT/'data/campaign_v10.json').write_text(json.dumps({'version':'1.0.0','rooms':126,'roles':17,'main_bosses':12,'elites':8,'side_indices':{f'{k[0]}:{k[1]}':v for k,v in side_indices.items()}},indent=2),encoding='utf-8')
+(ROOT/'data/campaign_v10.json').write_text(json.dumps({'version':'1.0.1','rooms':126,'roles':17,'main_bosses':12,'elites':8,'side_indices':{f'{k[0]}:{k[1]}':v for k,v in side_indices.items()}},indent=2),encoding='utf-8')
 print('126 rooms, 17 playable actors, 12 main bosses, 8 elites; old indices retained.')

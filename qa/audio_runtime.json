@@ -1,7 +1,7 @@
 {
   "checks": [
     {
-      "check": "63 个声音资源加载，20 路并发播放器",
+      "check": "64 个声音资源加载，20 路并发播放器",
       "detail": {},
       "pass": true
     },
@@ -9,8 +9,8 @@
       "check": "探索音乐与环境实际混音非静音",
       "detail": {
         "frames": 18944,
-        "peak": 0.154296725988388,
-        "rms": 0.0424395203434718
+        "peak": 0.101147852838039,
+        "rms": 0.0356162309855639
       },
       "pass": true
     },
@@ -19,34 +19,34 @@
       "detail": {
         "frames": 10752,
         "peak": 0.912010848522186,
-        "rms": 0.191055847194754
+        "rms": 0.188735024713971
       },
       "pass": true
     },
     {
       "check": "实际跳跃输入触发可测起跳音效",
       "detail": {
-        "frames": 8704,
-        "peak": 0.625667691230774,
-        "rms": 0.132338039251272
+        "frames": 9216,
+        "peak": 0.725949585437775,
+        "rms": 0.140012885696221
       },
       "pass": true
     },
     {
       "check": "实际空冲输入触发可测突进音效",
       "detail": {
-        "frames": 9728,
-        "peak": 0.723745226860046,
-        "rms": 0.124248431265348
+        "frames": 7680,
+        "peak": 0.39682075381279,
+        "rms": 0.0821663283127434
       },
       "pass": true
     },
     {
       "check": "跳跃及突进后的接地触发物理落地音效",
       "detail": {
-        "frames": 39424,
-        "peak": 0.711163997650146,
-        "rms": 0.113780132724699
+        "frames": 38912,
+        "peak": 0.71875262260437,
+        "rms": 0.11308437604045
       },
       "pass": true
     },
@@ -73,9 +73,9 @@
     {
       "check": "附近战斗切入战斗音乐",
       "detail": {
-        "frames": 40448,
-        "peak": 0.740039169788361,
-        "rms": 0.0964727543913796
+        "frames": 39936,
+        "peak": 0.734500229358673,
+        "rms": 0.0967078805231508
       },
       "pass": true
     },
@@ -114,23 +114,24 @@
     "elevator_start": 1,
     "elevator_stop": 1,
     "enemy_windup": 3,
-    "foot_metal_1": 29,
-    "foot_metal_2": 32,
-    "foot_metal_3": 29,
-    "foot_stone_1": 7,
-    "foot_stone_2": 3,
-    "foot_stone_3": 9,
+    "foot_metal_1": 31,
+    "foot_metal_2": 27,
+    "foot_metal_3": 32,
+    "foot_stone_1": 4,
+    "foot_stone_2": 9,
+    "foot_stone_3": 6,
     "gear_latch": 4,
     "gear_start": 1,
     "grapple_attach": 4,
     "grapple_launch": 3,
-    "hit_flesh_1": 20,
-    "hit_flesh_2": 12,
-    "hit_metal_1": 16,
-    "hit_metal_2": 16,
+    "hit_flesh_1": 14,
+    "hit_flesh_2": 18,
+    "hit_metal_1": 18,
+    "hit_metal_2": 14,
+    "hit_weight": 30,
     "jump": 7,
-    "ladder_1": 13,
-    "ladder_2": 24,
+    "ladder_1": 22,
+    "ladder_2": 15,
     "land_heavy": 1,
     "land_soft": 8,
     "parry": 1,

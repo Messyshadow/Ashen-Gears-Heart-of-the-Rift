@@ -11,7 +11,7 @@ var light_clock := 0.0
 func defaults() -> Dictionary:
 	var gpu:=RenderingServer.get_video_adapter_name().to_lower()
 	var quality: String="low" if "intel" in gpu or "uhd" in gpu or "iris" in gpu or "radeon graphics" in gpu else "high" if "rtx 50" in gpu or "rtx 40" in gpu or "rtx 30" in gpu else "medium"
-	return {"quality":quality,"resolution":0,"mode":1,"fps":60,"vsync":true,"scale":.67 if quality=="low" else .85 if quality=="medium" else 1.0,"shadows":quality!="low","show_fps":false,"fog":true,"glow":true,"brightness":1.0}
+	return {"quality":quality,"resolution":0,"mode":1,"fps":60,"vsync":true,"scale":.67 if quality=="low" else .85 if quality=="medium" else 1.0,"shadows":quality!="low","show_fps":false,"fog":true,"glow":true,"brightness":1.0,"shake":1.0,"flash":1.0,"zoom":1.0,"blood":1.0,"rumble":1.0}
 func _ready() -> void:
 	if game.qa_mode:config_path="user://qa_graphics_settings.cfg"
 	settings=defaults();load_settings()
@@ -28,6 +28,7 @@ func sanitize() -> void:
 	settings.resolution=clampi(int(settings.resolution),0,RESOLUTIONS.size()-1);settings.mode=clampi(int(settings.mode),0,1)
 	if int(settings.fps) not in FPS_LIMITS:settings.fps=60
 	settings.scale=clampf(float(settings.scale),.5,1);settings.vsync=bool(settings.vsync);settings.shadows=bool(settings.shadows);settings.show_fps=bool(settings.show_fps);settings.fog=bool(settings.get("fog",true));settings.glow=bool(settings.get("glow",true));settings.brightness=clampf(float(settings.get("brightness",1)),.75,1.5)
+	for key in ["shake","flash","zoom","blood","rumble"]:settings[key]=clampf(float(settings.get(key,1)),0,1)
 func save_settings() -> void:
 	var cfg:=ConfigFile.new()
 	for key in settings:cfg.set_value("graphics",key,settings[key])
@@ -80,3 +81,7 @@ func confirm() -> void:
 func revert() -> void:
 	if previous.is_empty():return
 	settings=previous.duplicate(true);previous.clear();confirmation_time=0;apply_settings();game.set_screen("graphics")
+
+func reset_feedback() -> void:
+	for key in ["shake","flash","zoom","blood","rumble"]:settings[key]=1.0
+	save_settings()

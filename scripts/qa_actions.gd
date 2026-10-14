@@ -22,7 +22,7 @@ func run(app: Node3D,directory: String="") -> Array:
 	game=app;game.new_game();game.load_room(11);game.set_screen("play");game.overview=false;idle(Vector3(6.5,.04,0));await wait(.15)
 	var enemy: Node=target();var bystander: Node=target("human",Vector3(16,0,0));await wait(.2)
 	var shot: Node=preload("res://scripts/projectile.gd").new();shot.game=game;shot.position=Vector3(-15,2.5,0);shot.speed=2;game.world.add_child(shot)
-	game.player.facing=1;game.player.begin_attack(false)
+	game.player.facing=1;game.player.begin_attack(true)
 	var deadline: float=game.main_clock+.8
 	while enemy.hp==1000 and game.main_clock<deadline:await step()
 	var animation_before: float=game.player.animator.current_animation_position;var attack_before: float=game.player.attack_clock;var victim_clock: float=enemy.clock;var other_clock: float=bystander.clock;var shot_x: float=shot.position.x

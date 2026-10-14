@@ -71,7 +71,7 @@ func _draw() -> void:
 				draw_arc(p,21,0,TAU,36,Color(.23,.7,1),2)
 				draw_line(game.camera.unproject_position(game.player.position+Vector3(0,1,0)),p,Color(.23,.7,1,.55),1)
 		for enemy in game.enemies:
-			if not is_instance_valid(enemy):continue
+			if not is_instance_valid(enemy) or enemy.hp<=0:continue
 			var p: Vector2=game.camera.unproject_position(enemy.position+Vector3(0,3.7 if enemy.boss() else 2.1,0))
 			bar(p-Vector2(30,0),60,enemy.hp,enemy.max_hp,Color(.75,.24,.1))
 			if enemy.state=="windup":text_at(p+Vector2(-40,-12),enemy.pattern+"！",19,GOLD)
@@ -105,6 +105,10 @@ func _draw() -> void:
 		text_at(Vector2(w*.23,h*.28),"总音量、动作音效、环境与音乐分别调整，自动保存。",20,MUTED)
 		for i in range(4):text_at(Vector2(w*.23,h*(.38+i*.09)),["总音量","动作 / 战斗音效","背景音乐","环境 / 机械底噪"][i],21,TEXT)
 		text_at(Vector2(w*.23,h*.91),"试听：攻击、命中、突进、跳跃落地与机关声音。",18,MUTED)
+	elif game.screen=="feedback":
+		text_at(Vector2(w*.20,h*.14),"战斗反馈",38,GOLD)
+		text_at(Vector2(w*.20,h*.21),"调整震屏、闪光与震动；命中声音和伤害判定保持。",19,MUTED)
+		for i in range(5):text_at(Vector2(w*.20,h*(.25+i*.09)),["镜头震动","命中闪光","镜头缩放","血雾强度","手柄震动"][i],22,TEXT)
 	elif game.screen=="graphics":
 		text_at(Vector2(w*.20,h*.14),"氛围与画面",38,GOLD)
 		text_at(Vector2(w*.20,h*.21),"高 / 中 / 低画质；默认使用当前屏幕分辨率。",20,MUTED)
@@ -165,6 +169,13 @@ func rebuild_buttons() -> void:
 	if game.screen=="ending":
 		for i in range(3):add_button(["共同分离 · 余烬黎明","停止献祭 · 封炉长夜","接管炉心 · 灰冠继承"][i],Vector2(w*.24,h*(.44+i*.105)),game.campaign.complete_ending.bind(i+1),w*.5)
 		add_button("返回修复城市锚点",Vector2(w*.24,h*.79),game.chapter_return.bind(102),w*.5)
+	if game.screen=="feedback":
+		for i in range(5):
+			var key: String=["shake","flash","zoom","blood","rumble"][i]
+			var option:=graphics_option(["关闭","25%","50%","100%"],i, [.0,.25,.5,1.0].find(float(game.graphics.settings.get(key,1))),func(j):game.graphics.settings[key]=[.0,.25,.5,1.0][j];game.graphics.save_settings())
+			option.position.y=size.y*(.226+i*.09)
+		add_button("恢复标准",Vector2(w*.20,h*.78),func():game.graphics.reset_feedback();rebuild_buttons(),220)
+		add_button("返回",Vector2(w*.60,h*.78),func():game.set_screen("graphics"),200)
 	if game.screen=="graphics":build_graphics()
 	if game.screen=="graphics_confirm":
 		add_button("保留设置",Vector2(w*.24,h*.56),game.graphics.confirm,240)
@@ -246,9 +257,10 @@ func build_graphics() -> void:
 	graphics_option(["关闭","开启（高档 Forward+）"],9,int(graphics_draft.glow),func(i):graphics_draft.glow=i==1)
 	graphics_option(["柔暗 75%","标准 100%","明亮 125%","辅助 150%"],10,clampi(roundi((float(graphics_draft.brightness)-.75)/.25),0,3),func(i):graphics_draft.brightness=.75+i*.25)
 	quality.item_selected.connect(func(i):graphics_draft.scale=scales[i+1];graphics_draft.shadows=i!=0;scale.select(i+1);shadow.select(int(i!=0)))
-	add_button("应用",Vector2(size.x*.20,size.y*.86),func():game.graphics.begin_apply(graphics_draft),200)
-	add_button("恢复推荐",Vector2(size.x*.40,size.y*.86),func():game.graphics.begin_apply(game.graphics.defaults()),220)
-	add_button("返回",Vector2(size.x*.62,size.y*.86),func():game.set_screen(game.graphics.return_screen),200)
+	add_button("应用",Vector2(size.x*.14,size.y*.86),func():game.graphics.begin_apply(graphics_draft),size.x*.15)
+	add_button("恢复推荐",Vector2(size.x*.33,size.y*.86),func():game.graphics.begin_apply(game.graphics.defaults()),size.x*.15)
+	add_button("返回",Vector2(size.x*.52,size.y*.86),func():game.set_screen(game.graphics.return_screen),size.x*.15)
+	add_button("战斗反馈",Vector2(size.x*.71,size.y*.86),func():game.set_screen("feedback"),size.x*.15)
 
 func keyboard_hint() -> String:
 	var c: Node=game.controls
